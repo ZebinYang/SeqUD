@@ -67,8 +67,8 @@ class SMACSklearn():
     >>> from SeqMM.pyBayOpt.sksmac import SMACSklearn
     >>> from sklearn.model_selection import KFold
     >>> iris = datasets.load_iris()
-    >>> ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'wrapper': np.exp2}, 
-               'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'wrapper': np.exp2}}
+    >>> ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
+               'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=0, shuffle=True)
     >>> clf = SMACSklearn(estimator, cv, ParaSpace, refit = True, verbose = True)

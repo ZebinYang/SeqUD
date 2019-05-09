@@ -64,8 +64,8 @@ class SeqUDSklearn(BaseSeqUD):
     >>> from pySeqUD.search import SeqUDSklearn
     >>> from sklearn.model_selection import KFold
     >>> iris = datasets.load_iris()
-    >>> ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'wrapper': np.exp2}, 
-               'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'wrapper': np.exp2}}
+    >>> ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
+               'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
     >>> Level_Number = 20
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=1, shuffle=True)

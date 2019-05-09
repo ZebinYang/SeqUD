@@ -59,8 +59,8 @@ class SeqUDOptimizer(BaseSeqUD):
     >>>     term2 = -0.5*(x2+0.03*x1**2-3)**2
     >>>     y = np.exp(term1 + term2)
     >>>     return  y
-    >>> ParaSpace =  {'x1': {'Type': 'continuous', 'Range': [-20,20], 'wrapper': lambda x: x}, 
-    >>>           'x2': {'Type': 'continuous', 'Range': [-10,5], 'wrapper': lambda x: x}}
+    >>> ParaSpace =  {'x1': {'Type': 'continuous', 'Range': [-20,20], 'Wrapper': lambda x: x}, 
+    >>>           'x2': {'Type': 'continuous', 'Range': [-10,5], 'Wrapper': lambda x: x}}
     >>> Level_Number = 20
     >>> clf = SeqUDOptimizer(cliff, ParaSpace, Level_Number, n_jobs = 10, verbose = True)
     >>> clf.search()
