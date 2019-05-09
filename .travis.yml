@@ -22,4 +22,5 @@ install:
          
 # command to run tests
 script:
-  - pytest
+  - source activate testenv
+  - python -m pytest
