@@ -42,7 +42,7 @@ class TestSeqMM(unittest.TestCase):
         Level_Number = 20
         try: 
             clf = SeqUDSklearn(estimator, cv, ParaSpace, Level_Number, max_runs = 10, 
-                         scoring = score_metric, n_jobs = 1, refit = True, verbose = True)
+                         scoring = score_metric, n_jobs = 1, refit = True, verbose = False)
             clf.fit(x, y)
             succeed = True
         except:
@@ -66,7 +66,7 @@ class TestSeqMM(unittest.TestCase):
                  'x2': {'Type': 'continuous', 'Range': [-10,5], 'Wrapper': lambda x: x}}
         try: 
             clf = SeqUDOptimizer(cliff, ParaSpace, Level_Number, 
-                          max_runs = 10, n_jobs = 1, verbose = True)
+                          max_runs = 10, n_jobs = 1, verbose = False)
             clf.search()    
             succeed = True
         except:
@@ -92,7 +92,6 @@ class TestSeqMM(unittest.TestCase):
             clf.fit(x,y)    
             succeed = True
         except:
-            print(clf)
             succeed = False
         self.assertTrue(succeed)
         
@@ -101,7 +100,6 @@ class TestSeqMM(unittest.TestCase):
         try: 
             clf = TPESklearn(estimator, cv, ParaSpace, 
                         max_runs = 10, refit = True, verbose = False)
-            print(clf)
             clf.fit(x,y)    
             succeed = True
         except:
