@@ -2,7 +2,7 @@ import time
 import numpy as np
 import pandas as pd 
 
-from base import BaseSeqUD
+from .base import BaseSeqUD
 from sklearn.model_selection import cross_val_score
 
 class SeqUDSklearn(BaseSeqUD):

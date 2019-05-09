@@ -1,4 +1,4 @@
-from base import BaseSeqUD
+from .base import BaseSeqUD
 
 class SeqUDOptimizer(BaseSeqUD):
     """
