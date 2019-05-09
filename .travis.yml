@@ -13,7 +13,7 @@ before_install:
   - if [[ `which conda` ]]; then echo 'Conda installation successful'; else exit 1; fi
   - conda install -y swig
   - conda install -y numpy
-  - conda install -y scikit-learn
+  - pip install -U scikit-learn
   
 # command to install dependencies
 install:
