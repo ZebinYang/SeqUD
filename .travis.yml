@@ -9,7 +9,5 @@ install:
   - python setup.py bdist_wheel
   - python setup.py install
          
-         # command to run tests
-script:
- - pytest
-           
+# command to run tests
+          
