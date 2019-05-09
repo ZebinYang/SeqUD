@@ -265,8 +265,6 @@ class BaseSeqUD(object):
         """
         self.stage = 1
         self.logs = pd.DataFrame()
-        self.pbar = tqdm(total=self.max_runs) 
-
         search_start_time = time.time()
         para_set_ud = self._generate_init_design()
         self._evaluate_runs(obj_func, para_set_ud)
