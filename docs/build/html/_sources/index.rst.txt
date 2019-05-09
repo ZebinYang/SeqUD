@@ -12,5 +12,6 @@ Contents:
    :maxdepth: 2
 
    Installation.rst
-   Usage.rst
-   Example.rst
+   pySeqUD.rst
+   pyBayOpt.rst
+   APIs.rst

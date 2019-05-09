@@ -11,7 +11,10 @@ EPS = 10**(-10)
 
 class BaseSeqUD(object):
     
-    """Base class for sequential uniform design."""
+    """
+    Base class for sequential uniform design.
+    
+    """
     
     def __init__(self, para_space, level_number, max_runs, max_search_iter = 100, n_jobs=None, rand_seed = 0, verbose = False):
 
@@ -39,6 +42,10 @@ class BaseSeqUD(object):
         self.extend_factor_number = sum(self.variable_number)  
     
     def plot_scores(self):
+        """
+        Visualize the scores history.
+        """
+
         if self.logs.shape[0]>0:
             cum_best_score = self.logs["score"].cummax()
             fig = plt.figure(figsize = (6,4))

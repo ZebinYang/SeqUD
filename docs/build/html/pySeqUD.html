@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to SeqMM’s documentation! &mdash; SeqMM  documentation</title>
+  <title>pySeqUD &mdash; SeqMM  documentation</title>
   
 
   
@@ -35,7 +35,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Installation" href="Installation.html" /> 
+    <link rel="next" title="SeqUDSklearn" href="skSeqUD.html" />
+    <link rel="prev" title="Installation" href="Installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -49,7 +50,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> SeqMM
+            <a href="index.html" class="icon icon-home"> SeqMM
           
 
           
@@ -79,9 +80,13 @@
               
             
             
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pySeqUD.html">pySeqUD</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pySeqUD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="skSeqUD.html">SeqUDSklearn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optSeqUD.html">SeqUDOptimizer</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="pyBayOpt.html">pyBayOpt</a></li>
 <li class="toctree-l1"><a class="reference internal" href="APIs.html">APIs</a></li>
 </ul>
@@ -98,7 +103,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">SeqMM</a>
+          <a href="index.html">SeqMM</a>
         
       </nav>
 
@@ -127,15 +132,15 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="#">Docs</a> &raquo;</li>
+      <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Welcome to SeqMM’s documentation!</li>
+      <li>pySeqUD</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/pySeqUD.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -148,27 +153,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-seqmm-s-documentation">
-<h1>Welcome to SeqMM’s documentation!<a class="headerlink" href="#welcome-to-seqmm-s-documentation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="pysequd">
+<h1>pySeqUD<a class="headerlink" href="#pysequd" title="Permalink to this headline">¶</a></h1>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Installation.html#install-via-github">Install via github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="skSeqUD.html">SeqUDSklearn</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="skSeqUD.html#example-1-svm-for-classification">Example 1: SVM for Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="skSeqUD.html#example-2-xgboost-for-regression">Example 2: Xgboost for Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="skSeqUD.html#example-3-kmeans-for-unsupervised-clustering">Example 3: Kmeans for Unsupervised Clustering</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pySeqUD.html">pySeqUD</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="skSeqUD.html">SeqUDSklearn</a></li>
-<li class="toctree-l2"><a class="reference internal" href="optSeqUD.html">SeqUDOptimizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optSeqUD.html">SeqUDOptimizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="optSeqUD.html#example-1-cliff-shaped-function">Example 1: Cliff-Shaped function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optSeqUD.html#example-2-octopus-shaped-function">Example 2: Octopus-Shaped function</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pyBayOpt.html">pyBayOpt</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="skGPEI.html">GPEISklearn</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sksmac.html">SMACSklearn</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sktpe.html">TPESklearn</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="APIs.html">APIs</a></li>
 </ul>
 </div>
 </div>
@@ -181,8 +181,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="skSeqUD.html" class="btn btn-neutral float-right" title="SeqUDSklearn" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
+      
+        <a href="Installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

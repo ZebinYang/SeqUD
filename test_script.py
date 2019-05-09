@@ -12,7 +12,6 @@ from SeqMM.pyBayOpt.skGPEI import GPEISklearn
 from SeqMM.pyBayOpt.sksmac import SMACSklearn
 from SeqMM.pyBayOpt.sktpe import TPESklearn
 
-
 sx = MinMaxScaler()
 dt = datasets.load_breast_cancer()
 x = sx.fit_transform(dt.data)
