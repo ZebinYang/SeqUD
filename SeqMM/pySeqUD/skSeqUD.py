@@ -105,8 +105,7 @@ class SeqUDSklearn(BaseSeqUD):
             
             logs_aug = parameters
             logs_aug.update({"score":score})
-            logs_aug = pd.DataFrame(logs_aug, index = [self.iteration])
-            logs_aug["stage"] = self.stage
+            logs_aug = pd.DataFrame(logs_aug, index = [self.stage])
             self.logs = pd.concat([self.logs, logs_aug]).reset_index(drop=True)
 
             return score
