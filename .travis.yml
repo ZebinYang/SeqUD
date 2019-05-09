@@ -11,7 +11,7 @@ before_install:
   - bash miniconda.sh -b -p $HOME/miniconda
   - export PATH="$HOME/miniconda/bin:$PATH"
   - if [[ `which conda` ]]; then echo 'Conda installation successful'; else exit 1; fi
-  - conda -y install swig
+  - conda install -y swig
 
 # command to install dependencies
 install:
