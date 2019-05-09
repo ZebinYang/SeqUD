@@ -2,3 +2,7 @@ build/*
 dist/*
 examples/.ipynb_checkpoints/*
 example/temp/*
+__pycache__/*
+SeqMM/__pycache__/*
+SeqMM/pySeqUD/__pycache__/*
+SeqMM/pyBayOpt/__pycache__/*
