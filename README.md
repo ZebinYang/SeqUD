@@ -2,14 +2,6 @@
 
 [![Build Status](https://travis-ci.com/ZebinYang/SeqMM.svg?branch=master)](https://travis-ci.org/joerick/cibuildwheel)
 
-# Benchmark Methods:
-
-Spearmint: https://github.com/JasperSnoek/spearmint
-
-Hyperopt: https://github.com/hyperopt/hyperopt
-
-SMAC: https://github.com/automl/SMAC3
-
 # Installation
 
 pip install git+https://github.com/ZebinYang/SeqMM.git
@@ -28,5 +20,14 @@ cv = KFold(n_splits=5, random_state=1, shuffle=True)
 clf = SeqUDSklearn(estimator, cv, ParaSpace, Level_Number, n_jobs = 10, refit = True, verbose = True)
 ```
 
-Reference:
+# Benchmark Methods:
+
+Spearmint: https://github.com/JasperSnoek/spearmint
+
+Hyperopt: https://github.com/hyperopt/hyperopt
+
+SMAC: https://github.com/automl/SMAC3
+
+
+# Reference:
 Zebin Yang, Aijun Zhang and Ji Zhu. (2019) Hyperparameter Optimization via Sequential Uniform Designs. Submitted. 
