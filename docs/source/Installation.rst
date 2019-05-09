@@ -1,0 +1,12 @@
+Installation
+================================
+
+Install via github
+-----------------------------
+Currently, we only support installation from our github repository. You can install the package by the following console command:
+
+.. code-block::
+    :linenos:
+
+    pip install git+http://github.com/ZebinYang/SeqMM.git
+        

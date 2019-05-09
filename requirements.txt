@@ -1,0 +1,13 @@
+### Dependencies        
+### To install, run:    
+### $ pip install -r requirements.txt   
+
+numpy>=1.15.2
+pandas
+scikit-learn>0.20.1
+joblib
+smac==0.8.0
+hyperopt
+
+git+https://github.com/ZebinYang/pyUniDOE.git
+git+https://github.com/ZebinYang/spearmint-lite.git
