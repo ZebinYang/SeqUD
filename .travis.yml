@@ -4,7 +4,7 @@ python:
 
 addons:
   apt_packages:
-    - swig
+    - swig-3.0
   
 # command to install dependencies
 install:
