@@ -2,5 +2,5 @@ build/*
 dist/*
 *.pyc
 */.ipynb_checkpoints/*
-example/temp/*
+examples/temp/*
 
