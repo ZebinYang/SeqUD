@@ -6,6 +6,7 @@ import pyUniDOE as pydoe
 from joblib import Parallel
 from joblib import delayed
 from matplotlib import pylab as plt
+from tqdm import tqdm_notebook as tqdm
 
 EPS = 10**(-10)
 
@@ -76,6 +77,10 @@ class BaseSeqUD(object):
                              self.logs.loc[:,self.para_names].iloc[self.best_index_,j] 
                               for j in range(self.logs.loc[:,self.para_names].shape[1])}
         self.best_score_ = self.logs.loc[:,"score"].iloc[self.best_index_]
+        
+        self.pbar.update(logs_aug.shape[0])
+        self.pbar.set_description("Stage %d:" %self.stage)
+        self.pbar.set_postfix_str("Current Best Score = %.5f"% (self.logs.loc[:,"score"].max()))
         if self.verbose:
             print("Stage %d completed (%d/%d) with best score: %.5f."
                 %(self.stage, self.logs.shape[0], self.max_runs, self.best_score_))
@@ -267,6 +272,9 @@ class BaseSeqUD(object):
                output the corresponding scores.  
         """
         self.stage = 1
+        self.logs = pd.DataFrame()
+        self.pbar = tqdm(total=self.max_runs) 
+
         search_start_time = time.time()
         para_set_ud = self._generate_init_design()
         self._evaluate_runs(obj_func, para_set_ud)
@@ -277,10 +285,11 @@ class BaseSeqUD(object):
                 self._evaluate_runs(obj_func, para_set_ud)
             else:
                 break
-
         search_end_time = time.time()
         self.search_time_consumed_ = search_end_time - search_start_time
-    
+
+        self.pbar.close()
+
         if self.verbose:
             print("Search completed in %.2f seconds."%self.search_time_consumed_)
             print("The best score is: %.5f."%self.best_score_)
