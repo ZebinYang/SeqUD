@@ -92,6 +92,7 @@ class TestSeqMM(unittest.TestCase):
             clf.fit(x,y)    
             succeed = True
         except:
+            print(clf)
             succeed = False
         self.assertTrue(succeed)
         
@@ -100,6 +101,7 @@ class TestSeqMM(unittest.TestCase):
         try: 
             clf = TPESklearn(estimator, cv, ParaSpace, 
                         max_runs = 10, refit = True, verbose = True)
+            print(clf)
             clf.fit(x,y)    
             succeed = True
         except:
