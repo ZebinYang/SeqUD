@@ -51,7 +51,7 @@ class SeqUDOptimizer(BaseSeqUD):
     Examples
     ----------
     >>> from sklearn import svm
-    >>> from pySeqUD.skSeqUD import SeqUDSklearn
+    >>> from pySeqUD.optSeqUD import SeqUDSklearn
     >>> def cliff(parameters):
     >>>     x1 = parameters['x1']
     >>>     x2 = parameters['x2']

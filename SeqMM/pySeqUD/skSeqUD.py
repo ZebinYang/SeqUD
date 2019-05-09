@@ -61,7 +61,7 @@ class SeqUDSklearn(BaseSeqUD):
     ----------
     >>> from sklearn import svm
     >>> from sklearn import datasets
-    >>> from pySeqUD.search import SeqUDSklearn
+    >>> from pySeqUD.skSeqUD import SeqUDSklearn
     >>> from sklearn.model_selection import KFold
     >>> iris = datasets.load_iris()
     >>> ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
