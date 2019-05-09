@@ -4,7 +4,11 @@
 
 # Installation
 
+- Enviroment: Linux + Python 3
+
+```sheel
 pip install git+https://github.com/ZebinYang/SeqMM.git
+```
 
 # Example
 ```python
