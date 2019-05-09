@@ -3,8 +3,11 @@
 [![Build Status](https://travis-ci.com/ZebinYang/SeqMM.svg?branch=master)](https://travis-ci.org/joerick/cibuildwheel)
 
 # Benchmark Methods:
+
 Spearmint: https://github.com/JasperSnoek/spearmint
+
 Hyperopt: https://github.com/hyperopt/hyperopt
+
 SMAC: https://github.com/automl/SMAC3
 
 # Installation
@@ -12,7 +15,7 @@ SMAC: https://github.com/automl/SMAC3
 pip install git+https://github.com/ZebinYang/SeqMM.git
 
 # Example
-···python
+```python
 from sklearn import svm
 from pySeqUD.search import SeqUDSklearn
 from sklearn.model_selection import KFold
