@@ -167,7 +167,8 @@
 <div class="section" id="example-1-svm-for-classification">
 <h2>Example 1: SVM for Classification<a class="headerlink" href="#example-1-svm-for-classification" title="Permalink to this headline">¶</a></h2>
 <p>Hyperparameter optimization based on GP-EI and Sklearn SVM interface:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
 <span class="kn">from</span> <span class="nn">SeqMM.pyBayOpt.skGPEI</span> <span class="k">import</span> <span class="n">GPEISklearn</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">accuracy_score</span>
@@ -192,7 +193,8 @@
 <div class="section" id="example-2-xgboost-for-regression">
 <h2>Example 2: Xgboost for Regression<a class="headerlink" href="#example-2-xgboost-for-regression" title="Permalink to this headline">¶</a></h2>
 <p>Hyperparameter optimization based on GP-EI and Sklearn Xgboost interface:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
 <span class="kn">from</span> <span class="nn">SeqMM.pyBayOpt.skGPEI</span> <span class="k">import</span> <span class="n">GPEISklearn</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">mean_squared_error</span>
@@ -224,7 +226,8 @@
 <div class="section" id="example-3-kmeans-for-unsupervised-clustering">
 <h2>Example 3: Kmeans for Unsupervised Clustering<a class="headerlink" href="#example-3-kmeans-for-unsupervised-clustering" title="Permalink to this headline">¶</a></h2>
 <p>Hyperparameter optimization based on GP-EI and Sklearn Kmeans interface:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="k">import</span> <span class="n">exp10</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="k">import</span> <span class="n">exp10</span>
 <span class="kn">from</span> <span class="nn">SeqMM.pyBayOpt.skGPEI</span> <span class="k">import</span> <span class="n">GPEISklearn</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
 <span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">KMeans</span>

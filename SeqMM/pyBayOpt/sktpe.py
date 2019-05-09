@@ -53,6 +53,7 @@ class TPESklearn():
 
     Examples
     ----------
+    >>> import numpy as np
     >>> from sklearn import svm
     >>> from sklearn import datasets
     >>> from SeqMM.pyBayOpt.sktpe import TPESklearn

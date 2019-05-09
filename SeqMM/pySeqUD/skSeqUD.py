@@ -59,6 +59,7 @@ class SeqUDSklearn(BaseSeqUD):
 
     Examples   
     ----------
+    >>> import numpy as np
     >>> from sklearn import svm
     >>> from sklearn import datasets
     >>> from pySeqUD.skSeqUD import SeqUDSklearn

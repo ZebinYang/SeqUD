@@ -7,6 +7,7 @@ Example 1: SVM for Classification
 ------------------------------------------------
 Hyperparameter optimization based on GP-EI and Sklearn SVM interface::
 
+        import numpy as np
         from sklearn import svm
         from SeqMM.pyBayOpt.sktpe import TPESklearn
         from sklearn.model_selection import KFold
@@ -32,6 +33,7 @@ Example 2: Xgboost for Regression
 ------------------------------------------------
 Hyperparameter optimization based on GP-EI and Sklearn Xgboost interface::
 
+        import numpy as np
         import xgboost as xgb
         from SeqMM.pyBayOpt.sktpe import TPESklearn
         from sklearn.model_selection import KFold
@@ -64,6 +66,7 @@ Example 3: Kmeans for Unsupervised Clustering
 ------------------------------------------------
 Hyperparameter optimization based on GP-EI and Sklearn Kmeans interface::
 
+        import numpy as np
         from scipy.special import exp10
         from SeqMM.pyBayOpt.sktpe import TPESklearn
         from sklearn.model_selection import KFold

@@ -57,6 +57,7 @@ class SobolSklearn():
 
     Examples
     ----------
+    >>> import numpy as np
     >>> from sklearn import svm
     >>> from sklearn import datasets
     >>> from SeqMM.pybatdoe.skSobol import SobolSklearn
