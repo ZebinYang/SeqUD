@@ -272,25 +272,28 @@ class GPEISklearn():
             logs_aug = pd.DataFrame(logs_aug, index = [self.iteration])
             self.logs = pd.concat([self.logs, logs_aug]).reset_index(drop=True)
 
-            self.pbar.update(1)
-            self.iteration += 1
-            self.pbar.set_description("Iteration %d:" %self.iteration)
-            self.pbar.set_postfix_str("Current Best Score = %.5f"% (self.logs.loc[:,"score"].max()))
+            if self.verbose:
+                self.pbar.update(1)
+                self.iteration += 1
+                self.pbar.set_description("Iteration %d:" %self.iteration)
+                self.pbar.set_postfix_str("Current Best Score = %.5f"% (self.logs.loc[:,"score"].max()))
             return self.logs.loc[:,"score"].values.tolist()
         
+        if self.verbose:
+            self.pbar = tqdm(total=self.max_runs) 
+
         self.iteration = 0
         self.logs = pd.DataFrame()
-        self.pbar = tqdm(total=self.max_runs) 
-
         search_start_time = time.time()
         self._para_mapping()
         self._spearmint_run(obj_func)
+        self._summary()
         search_end_time = time.time()
         self.search_time_consumed_ = search_end_time - search_start_time
-
-        self.pbar.close()
-        self._summary()
         
+        if self.verbose:
+            self.pbar.close()
+
         if self.refit:
             self.best_estimator_ = self.estimator.set_params(**self.best_params_)
             refit_start_time = time.time()

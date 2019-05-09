@@ -77,7 +77,7 @@ class TestSeqMM(unittest.TestCase):
         """ Test GPEISklearn. """
         try: 
             clf = GPEISklearn(estimator, cv, ParaSpace, max_runs = 10, 
-                        time_out = 10, refit = True, verbose = True)
+                        time_out = 10, refit = True, verbose = False)
             clf.fit(x, y)
             succeed = True
         except:
@@ -88,7 +88,7 @@ class TestSeqMM(unittest.TestCase):
         """ Test SMACSklearn. """
         try: 
             clf = SMACSklearn(estimator, cv, ParaSpace, 
-                        max_runs = 10, refit = True, verbose = True)
+                        max_runs = 10, refit = True, verbose = False)
             clf.fit(x,y)    
             succeed = True
         except:
@@ -100,7 +100,7 @@ class TestSeqMM(unittest.TestCase):
         """ Test TPESklearn. """
         try: 
             clf = TPESklearn(estimator, cv, ParaSpace, 
-                        max_runs = 10, refit = True, verbose = True)
+                        max_runs = 10, refit = True, verbose = False)
             print(clf)
             clf.fit(x,y)    
             succeed = True
