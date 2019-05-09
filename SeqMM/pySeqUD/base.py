@@ -248,9 +248,10 @@ class BaseSeqUD(object):
                              for j in range(para_set.shape[1])} 
                             for i in range(para_set.shape[0])] 
         out = Parallel(n_jobs=self.n_jobs)(delayed(obj_func)(parameters)
-                                    for parameters in tqdm(candidate_params, 
-                                                   desc = "Stage %d:" %self.stage, 
-                                                   postfix = "Current Best Score = %.5f"% (self.logs.loc[:,"score"].max())))
+                                for parameters in tqdm(candidate_params, 
+                                   desc = "Stage %d:" %self.stage, 
+                                   postfix = "Current Best Score = %.5f"% 0 if self.logs.shape[0]==0 else \
+                                                       (self.logs.loc[:,"score"].max())))
         self.stage += 1
         
     def _run_search(self, obj_func):
