@@ -64,27 +64,18 @@ class BaseSeqUD(object):
         score: A numpy vector, which contains the evaluated scores of trial points in para_set.
         
         """
-
-        logs_aug = para_set_ud.to_dict()
-        logs_aug.update(para_set.to_dict())
-        logs_aug.update(pd.DataFrame(score, columns = ["score"]).to_dict())
-        logs_aug = pd.DataFrame(logs_aug)
-        logs_aug["Stage"] = self.stage
-        self.logs = pd.concat([self.logs, logs_aug]).reset_index(drop=True)
-
         self.best_index_ = self.logs.loc[:,"score"].idxmax()
         self.best_params_ = {self.logs.loc[:,self.para_names].columns[j]:\
                              self.logs.loc[:,self.para_names].iloc[self.best_index_,j] 
                               for j in range(self.logs.loc[:,self.para_names].shape[1])}
         self.best_score_ = self.logs.loc[:,"score"].iloc[self.best_index_]
-        
-        self.pbar.update(logs_aug.shape[0])
-        self.pbar.set_description("Stage %d:" %self.stage)
-        self.pbar.set_postfix_str("Current Best Score = %.5f"% (self.logs.loc[:,"score"].max()))
         if self.verbose:
-            print("Stage %d completed (%d/%d) with best score: %.5f."
-                %(self.stage, self.logs.shape[0], self.max_runs, self.best_score_))
-               
+            print("Search completed in %.2f seconds."%self.search_time_consumed_)
+            print("The best score is: %.5f."%self.best_score_)
+            print("The best configurations are:")
+            print("\n".join("%-20s: %s"%(k, v if self.para_space[k]['Type']=="categorical" else round(v, 5))
+                            for k, v in self.best_params_.items()))
+             
     def _para_mapping(self, para_set_ud):
         
         """
@@ -257,9 +248,9 @@ class BaseSeqUD(object):
                              for j in range(para_set.shape[1])} 
                             for i in range(para_set.shape[0])] 
         out = Parallel(n_jobs=self.n_jobs)(delayed(obj_func)(parameters)
-                                            for parameters in candidate_params)
-        score = np.vstack(out)[:,0:1]
-        self._summary(para_set_ud, para_set, score)
+                                    for parameters in tqdm(candidate_params, 
+                                                   desc = "Stage %d:" %self.stage, 
+                                                   postfix = "Current Best Score = %.5f"% (self.logs.loc[:,"score"].max())))
         self.stage += 1
         
     def _run_search(self, obj_func):
@@ -286,15 +277,5 @@ class BaseSeqUD(object):
             else:
                 break
         search_end_time = time.time()
-        self.search_time_consumed_ = search_end_time - search_start_time
-
-        self.pbar.close()
-
-        if self.verbose:
-            print("Search completed in %.2f seconds."%self.search_time_consumed_)
-            print("The best score is: %.5f."%self.best_score_)
-            print("The best configurations are:")
-            print("\n".join("%-20s: %s"%(k, v if self.para_space[k]['Type']=="categorical" else round(v, 5))
-                            for k, v in self.best_params_.items()))
-        
+        self.search_time_consumed_ = search_end_time - search_start_time        
         

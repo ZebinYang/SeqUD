@@ -102,6 +102,13 @@ class SeqUDSklearn(BaseSeqUD):
             self.estimator.set_params(**parameters)
             out = cross_val_score(self.estimator, x, y, cv = self.cv, scoring = self.scoring)
             score = np.mean(out)
+            
+            logs_aug = parameters
+            logs_aug.update({"score":score})
+            logs_aug = pd.DataFrame(logs_aug, index = [self.iteration])
+            logs_aug["Stage"] = self.stage
+            self.logs = pd.concat([self.logs, logs_aug]).reset_index(drop=True)
+
             return score
 
         self._run_search(obj_func)

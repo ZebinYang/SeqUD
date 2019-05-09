@@ -71,10 +71,17 @@ class SeqUDOptimizer(BaseSeqUD):
         super(SeqUDOptimizer,self).__init__(para_space,level_number,max_runs,max_search_iter,n_jobs,rand_seed,verbose)
         self.obj_func = obj_func
         
+        
     def search(self):
         """ A search wrappper function. """
-        def obj_func_wrapper(parameters):
+        def obj_func_wrap(parameters):
             score = self.obj_func(parameters)
+            logs_aug = parameters
+            logs_aug.update({"score":score})
+            logs_aug = pd.DataFrame(logs_aug, index = [self.iteration])
+            logs_aug["Stage"] = self.stage
+            self.logs = pd.concat([self.logs, logs_aug]).reset_index(drop=True)
             return score
-        self._run_search(obj_func_wrapper)
+        
+        self._run_search(obj_func_wrap)
 
