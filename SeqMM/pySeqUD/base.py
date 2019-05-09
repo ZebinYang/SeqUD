@@ -6,7 +6,6 @@ import pyUniDOE as pydoe
 from joblib import Parallel
 from joblib import delayed
 from matplotlib import pylab as plt
-from tqdm import tqdm_notebook as tqdm
 
 EPS = 10**(-10)
 
@@ -52,7 +51,7 @@ class BaseSeqUD(object):
         else:
             print("No available logs!")
 
-    def _summary(self, para_set_ud, para_set, score):
+    def _summary(self):
         """
         This function summarizes the evaluation results and makes records. 
         
@@ -248,13 +247,18 @@ class BaseSeqUD(object):
                              for j in range(para_set.shape[1])} 
                             for i in range(para_set.shape[0])] 
         out = Parallel(n_jobs=self.n_jobs)(delayed(obj_func)(parameters)
-                                for parameters in tqdm(candidate_params, 
-                                   desc = "Stage %d:" %self.stage, 
-                                   postfix = "Current Best Score = %.5f"% 0 if self.logs.shape[0]==0 else \
-                                                       (self.logs.loc[:,"score"].max())))
-        self.stage += 1
-        
-    def _run_search(self, obj_func):
+                                for parameters in candidate_params)
+        logs_aug = para_set_ud.to_dict()
+        logs_aug.update(para_set)
+        logs_aug.update(pd.DataFrame(out, columns = ["score"]))
+        logs_aug = pd.DataFrame(logs_aug)
+        logs_aug["stage"] = self.stage
+        self.logs = pd.concat([self.logs, logs_aug]).reset_index(drop=True)
+        if self.verbose:
+            print("Stage %d completed (%d/%d) with best score: %.5f."
+                %(self.stage, self.logs.shape[0], self.max_runs, self.logs["score"].max()))
+
+    def _run(self, obj_func):
         """
         This function controls the procedures for implementing the sequential uniform design method. 
         
@@ -268,13 +272,15 @@ class BaseSeqUD(object):
         search_start_time = time.time()
         para_set_ud = self._generate_init_design()
         self._evaluate_runs(obj_func, para_set_ud)
+        self.stage += 1
         while (True):
             ud_center = self.logs.sort_values("score", ascending = False).loc[:,self.para_ud_names].values[0,:] 
             para_set_ud = self._generate_augment_design(ud_center)
             if not self.stop_flag:
                 self._evaluate_runs(obj_func, para_set_ud)
+                self.stage += 1
             else:
                 break
         search_end_time = time.time()
-        self.search_time_consumed_ = search_end_time - search_start_time        
-        
+        self.search_time_consumed_ = search_end_time - search_start_time
+        self._summary()

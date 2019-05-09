@@ -8,5 +8,5 @@ Currently, we only support installation from our github repository. You can inst
 .. code-block::
     :linenos:
 
-    pip install git+http://github.com/ZebinYang/pySeqUD.git
+    pip install git+http://github.com/ZebinYang/SeqMM.git
         

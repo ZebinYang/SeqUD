@@ -7,7 +7,7 @@ Example 1: Cliff-Shaped function
 Optimization for Cliff-Shaped function based on Sequential Uniform Design::
 
 		from sklearn import svm
-		from pySeqUD.search import SeqUDSklearn
+		from pySeqUD.optSeqUD import SeqUDOptimizer
 		def cliff(parameters):
 			x1 = parameters['x1']
 			x2 = parameters['x2']
@@ -26,7 +26,7 @@ Example 2: Octopus-Shaped function
 Optimization for Octopus-Shaped function based on Sequential Uniform Design::
 
 		from sklearn import svm
-		from pySeqUD.search import SeqUDSklearn
+		from pySeqUD.optSeqUD import SeqUDOptimizer
 		def octopus(parameters):
 			x1 = parameters['x1']
 			x2 = parameters['x2']
@@ -44,7 +44,7 @@ Example 3: SVM for Classification
 Hyperparameter optimization based on Sequential Uniform Design and Sklearn SVM interface::
 
 		from sklearn import svm
-		from pySeqUD.search import SeqUDSklearn
+		from pySeqUD.skSeqUD import SeqUDSklearn
 		from sklearn.model_selection import KFold
 		from sklearn.metrics import make_scorer, accuracy_score
 		iris = datasets.load_iris()
@@ -64,7 +64,7 @@ Example 4: Xgboost for Regression
 ------------------------------------------------
 Hyperparameter optimization based on Sequential Uniform Design and Sklearn Xgboost interface::
 
-		from pySeqUD.search import SeqUDSklearn
+		from pySeqUD.skSeqUD import SeqUDSklearn
 		from sklearn.model_selection import KFold
 		from sklearn.metrics import make_scorer, mean_squared_error
 		import xgboost as xgb
@@ -95,7 +95,7 @@ Example 5: Kmeans for Unsupervised Clustering
 Hyperparameter optimization based on Sequential Uniform Design and Sklearn Kmeans interface::
 
 		from scipy.special import exp10
-		from pySeqUD.search import SeqUDSklearn
+		from pySeqUD.skSeqUD import SeqUDSklearn
 		from sklearn.model_selection import KFold
 		from sklearn.metrics import make_scorer, mean_squared_error
 		from sklearn.cluster import silhouette_score
