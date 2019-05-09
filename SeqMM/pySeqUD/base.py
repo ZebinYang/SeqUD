@@ -5,6 +5,7 @@ import pandas as pd
 import pyUniDOE as pydoe 
 from joblib import Parallel
 from joblib import delayed
+from matplotlib import pylab as plt
 
 EPS = 10**(-10)
 
