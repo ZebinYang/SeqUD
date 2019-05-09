@@ -2,9 +2,9 @@ import os
 import time
 import signal
 import shutil
-import collections
 import numpy as np
 import pandas as pd
+from collections import OrderedDict
 from matplotlib import pylab as plt
 from tqdm import tqdm_notebook as tqdm
 
@@ -160,19 +160,19 @@ class GPEISklearn():
         self.variables = {}
         for items, values in self.para_space.items():
             if (values['Type']=="continuous"):
-                self.variables[items] =  collections.OrderedDict({'name': items, 
+                self.variables[items] =  OrderedDict({'name': items, 
                                  'type':'float',
                                  'min': values['Range'][0],
                                  'max': values['Range'][1],
                                  'size': 1})
             elif (values['Type']=="integer"):
-                self.variables[items] = collections.OrderedDict({'name': items, 
+                self.variables[items] = OrderedDict({'name': items, 
                                  'type':'int',
                                  'min': min(values['Mapping']),
                                  'max': max(values['Mapping']),
                                  'size': 1})
             elif (values['Type']=="categorical"):
-                self.variables[items] = collections.OrderedDict({'name': items, 
+                self.variables[items] = OrderedDict({'name': items, 
                                  'type':'enum',
                                  'options': values['Mapping'],
                                  'size': 1}) 
