@@ -60,6 +60,7 @@ class SeqUDSklearn(BaseSeqUD):
     Examples   
     ----------
     >>> from sklearn import svm
+    >>> from sklearn import datasets
     >>> from pySeqUD.search import SeqUDSklearn
     >>> from sklearn.model_selection import KFold
     >>> iris = datasets.load_iris()

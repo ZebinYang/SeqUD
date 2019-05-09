@@ -3,4 +3,4 @@ dist/*
 *.pyc
 */.ipynb_checkpoints/*
 examples/temp/*
-
+spearmint/*

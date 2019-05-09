@@ -111,7 +111,7 @@ class BaseSeqUD(object):
                 for j in range(1,len(temp)):
                     para_set.loc[(para_set_ud[items+"_UD"]>=temp[j-1])&(para_set_ud[items+"_UD"]<temp[j]),items] = values['Mapping'][j-1]
                 para_set.loc[para_set_ud[items+"_UD"]==1,items] = values['Mapping'][-1]
-                para_set[items] = para_set[items].astype(int)
+                para_set[items] = para_set[items].round().astype(int)
             elif (values['Type'] == "categorical"):
                 column_bool = [items in para_name for para_name in self.para_ud_names]
                 col_index = np.argmax(para_set_ud.loc[:,column_bool].values, axis = 1).tolist()
@@ -196,7 +196,7 @@ class BaseSeqUD(object):
             for j in range(x0.shape[1]):
                 x0[i,j] = (np.where(abs(x0[i,j]-ud_space[:,j])<=EPS)[0][0] + 1)
         
-        x0 = x0.astype(int)
+        x0 = np.round(x0).astype(int)
         # 3. Delete existing UD points on the same levels grids
         for i in range(self.extend_factor_number):
             keep_list = []

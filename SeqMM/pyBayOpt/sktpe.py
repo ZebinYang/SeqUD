@@ -54,6 +54,7 @@ class TPESklearn():
     Examples
     ----------
     >>> from sklearn import svm
+    >>> from sklearn import datasets
     >>> from SeqMM.pyBayOpt.sktpe import TPESklearn
     >>> from sklearn.model_selection import KFold
     >>> iris = datasets.load_iris()
@@ -182,9 +183,9 @@ class TPESklearn():
             parameters = {}
             for items, values in self.para_space.items():
                 if (values['Type']=="continuous"):
-                    parameters[items] = float(values['Wrapper'](float(next_params[items].iloc[0])))
+                    parameters[items] = values['Wrapper'](float(next_params[items].iloc[0]))
                 elif (values['Type']=="integer"):
-                    parameters[items] = int(next_params[items].iloc[0]) 
+                    parameters[items] = int(next_params[items].iloc[0])
                 elif (values['Type']=="categorical"):
                     parameters[items] = values['Mapping'][next_params[items].iloc[0]]
                     
@@ -212,10 +213,10 @@ class TPESklearn():
         search_start_time = time.time()
         self._para_mapping()
         self._hyperopt_run(obj_func)
-        self._summary()
         search_end_time = time.time()
         self.search_time_consumed_ = search_end_time - search_start_time
-        
+       
+        self._summary()
         if self.verbose:
             self.pbar.close()
                 

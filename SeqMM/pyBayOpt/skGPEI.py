@@ -77,6 +77,7 @@ class GPEISklearn():
     Examples
     ----------
     >>> from sklearn import svm
+    >>> from sklearn import datasets
     >>> from SeqMM.pyBayOpt.skGPEI import GPEISklearn
     >>> from sklearn.model_selection import KFold
     >>> iris = datasets.load_iris()
@@ -84,7 +85,7 @@ class GPEISklearn():
                'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'wrapper': np.exp2}}
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=0, shuffle=True)
-    >>> clf = GPEISklearn(estimator, cv, ParaSpace, refit = True, verbose = True)
+    >>> clf = GPEISklearn(estimator, cv, ParaSpace, max_runs = 100, refit = True, verbose = True)
     >>> clf.fit(iris.data, iris.target)
 
     Attributes
@@ -258,9 +259,9 @@ class GPEISklearn():
             parameters = {}
             for items, values in self.para_space.items():
                 if (values['Type']=="continuous"):
-                    parameters[items] = values['Wrapper'](float(next_params[items]))
+                    parameters[items] = values['Wrapper'](float(next_params[items].iloc[0]))
                 elif (values['Type']=="integer"):
-                    parameters[items] = int(next_params[items]) 
+                    parameters[items] = int(next_params[items].iloc[0]) 
                 elif (values['Type']=="categorical"):
                     parameters[items] = next_params[items][0]
             self.estimator.set_params(**parameters)
@@ -287,10 +288,10 @@ class GPEISklearn():
         search_start_time = time.time()
         self._para_mapping()
         self._spearmint_run(obj_func)
-        self._summary()
         search_end_time = time.time()
         self.search_time_consumed_ = search_end_time - search_start_time
         
+        self._summary()
         if self.verbose:
             self.pbar.close()
 
