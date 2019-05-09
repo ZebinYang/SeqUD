@@ -1,11 +1,13 @@
 language: python
 python:
   - "3.6"  
+
+addons:
+  apt_packages:
+    - swig
   
 # command to install dependencies
 install:
-  - pip install brew 
-  - brew install swig
   - pip install -r requirements.txt
   - python setup.py bdist_wheel
   - python setup.py install
