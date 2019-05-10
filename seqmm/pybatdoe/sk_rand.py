@@ -110,8 +110,12 @@ class RandSklearn(BatchSklearn):
         candidate_params = [{para_set.columns[j]: para_set.iloc[i,j] 
                              for j in range(para_set.shape[1])} 
                             for i in range(para_set.shape[0])] 
-        out = Parallel(n_jobs=self.n_jobs)(delayed(obj_func)(parameters)
+        if self.verbose:
+            out = Parallel(n_jobs=self.n_jobs)(delayed(obj_func)(parameters)
                                 for parameters in tqdm(candidate_params))
+        else:
+            out = Parallel(n_jobs=self.n_jobs)(delayed(obj_func)(parameters)
+                                for parameters in candidate_params)
         self.logs = para_set.to_dict()
         self.logs.update(pd.DataFrame(out, columns = ["score"]))
         self.logs = pd.DataFrame(self.logs).reset_index(drop=True)

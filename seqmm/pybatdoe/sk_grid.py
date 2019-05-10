@@ -110,9 +110,7 @@ class GridSklearn(BatchSklearn):
                 discrete_runs = discrete_runs * len(values['Mapping'])
                 discrete_count = discrete_count + 1
         
-        grid_number = np.ceil((self.max_runs/discrete_runs)**(1/(self.factor_number-discrete_count)))
-        if (grid_number<=1): return;
-        
+        grid_number = np.ceil((self.max_runs/discrete_runs)**(1/(self.factor_number-discrete_count)))        
         for item, values in self.para_space.items():
             if (values['Type']=="continuous"):
                 grid_para[item] = values['Wrapper'](np.linspace(values['Range'][0],values['Range'][1], grid_number))
@@ -120,11 +118,17 @@ class GridSklearn(BatchSklearn):
                 grid_para[item] = np.round(np.linspace(min(values['Mapping']),max(values['Mapping']),grid_number)).astype(int)
         # generate grid
         para_set = pd.DataFrame([item for item in product(*grid_para.values())], columns = self.para_names)
+        para_set = para_set.iloc[:self.max_runs,:]
         candidate_params = [{para_set.columns[j]: para_set.iloc[i,j] 
                              for j in range(para_set.shape[1])} 
                             for i in range(para_set.shape[0])] 
-        out = Parallel(n_jobs=self.n_jobs)(delayed(obj_func)(parameters)
+        if self.verbose:
+            out = Parallel(n_jobs=self.n_jobs)(delayed(obj_func)(parameters)
                                 for parameters in tqdm(candidate_params))
+        else:
+            out = Parallel(n_jobs=self.n_jobs)(delayed(obj_func)(parameters)
+                                for parameters in candidate_params)
+
         self.logs = para_set.to_dict()
         self.logs.update(pd.DataFrame(out, columns = ["score"]))
         self.logs = pd.DataFrame(self.logs).reset_index(drop=True)
