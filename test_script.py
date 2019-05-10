@@ -6,11 +6,11 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import KFold
 from sklearn.metrics import make_scorer, accuracy_score
 
-from seqmm.pysequd import SeqUDSklearn
-from seqmm.pysequd import SeqUDOptimizer
-from seqmm.pybatopt import GPEISklearn
-from seqmm.pybatopt import SMACSklearn
-from seqmm.pybatopt import TPESklearn
+from seqmm import SeqUDSklearn
+from seqmm import SeqUDOptimizer
+from seqmm import GPEISklearn
+from seqmm import SMACSklearn
+from seqmm import TPESklearn
 
 sx = MinMaxScaler()
 dt = datasets.load_breast_cancer()
