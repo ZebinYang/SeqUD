@@ -146,14 +146,14 @@ class TPESklearn():
         
         """
         self.space = []
-        for items, values in self.para_space.items():
+        for item, values in self.para_space.items():
             if values['Type'] == "continuous":
-                self.space.append(hp.uniform(items, values['Range'][0], values['Range'][1])) 
+                self.space.append(hp.uniform(item, values['Range'][0], values['Range'][1])) 
             elif values['Type'] == "integer":
-                self.space.append(hp.quniform(items, min(values['Mapping']), max(values['Mapping']), 
+                self.space.append(hp.quniform(item, min(values['Mapping']), max(values['Mapping']), 
                                                 values['Mapping'][1]-values['Mapping'][0])) 
             elif values['Type'] == "categorical":
-                self.space.append(hp.randint(items, len(values['Mapping']))) 
+                self.space.append(hp.randint(item, len(values['Mapping']))) 
 
     def _hyperopt_run(self, obj_func):
         """
@@ -182,13 +182,13 @@ class TPESklearn():
         def obj_func(cfg):
             next_params = pd.DataFrame([cfg], columns = self.para_names, index = [0])
             parameters = {}
-            for items, values in self.para_space.items():
+            for item, values in self.para_space.items():
                 if (values['Type']=="continuous"):
-                    parameters[items] = values['Wrapper'](float(next_params[items].iloc[0]))
+                    parameters[item] = values['Wrapper'](float(next_params[item].iloc[0]))
                 elif (values['Type']=="integer"):
-                    parameters[items] = int(next_params[items].iloc[0])
+                    parameters[item] = int(next_params[item].iloc[0])
                 elif (values['Type']=="categorical"):
-                    parameters[items] = values['Mapping'][next_params[items].iloc[0]]
+                    parameters[item] = values['Mapping'][next_params[item].iloc[0]]
                     
             self.estimator.set_params(**parameters)
             out = cross_val_score(self.estimator, x, y,cv=self.cv, scoring = self.scoring)

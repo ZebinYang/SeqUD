@@ -171,21 +171,21 @@ class GPEISklearn():
         """
 
         self.variables = {}
-        for items, values in self.para_space.items():
+        for item, values in self.para_space.items():
             if (values['Type']=="continuous"):
-                self.variables[items] =  OrderedDict({'name': items, 
+                self.variables[item] =  OrderedDict({'name': item, 
                                  'type':'float',
                                  'min': values['Range'][0],
                                  'max': values['Range'][1],
                                  'size': 1})
             elif (values['Type']=="integer"):
-                self.variables[items] = OrderedDict({'name': items, 
+                self.variables[item] = OrderedDict({'name': item, 
                                  'type':'int',
                                  'min': min(values['Mapping']),
                                  'max': max(values['Mapping']),
                                  'size': 1})
             elif (values['Type']=="categorical"):
-                self.variables[items] = OrderedDict({'name': items, 
+                self.variables[item] = OrderedDict({'name': item, 
                                  'type':'enum',
                                  'options': values['Mapping'],
                                  'size': 1}) 
@@ -258,13 +258,13 @@ class GPEISklearn():
         def obj_func(cfg):
             next_params = pd.DataFrame(np.array([cfg]), columns = self.para_names)
             parameters = {}
-            for items, values in self.para_space.items():
+            for item, values in self.para_space.items():
                 if (values['Type']=="continuous"):
-                    parameters[items] = values['Wrapper'](float(next_params[items].iloc[0]))
+                    parameters[item] = values['Wrapper'](float(next_params[item].iloc[0]))
                 elif (values['Type']=="integer"):
-                    parameters[items] = int(next_params[items].iloc[0]) 
+                    parameters[item] = int(next_params[item].iloc[0]) 
                 elif (values['Type']=="categorical"):
-                    parameters[items] = next_params[items][0]
+                    parameters[item] = next_params[item][0]
             self.estimator.set_params(**parameters)
             out = cross_val_score(self.estimator, x, y, cv = self.cv, scoring = self.scoring)
             score = np.mean(out)

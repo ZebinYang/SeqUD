@@ -157,13 +157,13 @@ class SMACSklearn():
         """
 
         self.cs = ConfigurationSpace()
-        for items, values in self.para_space.items():
+        for item, values in self.para_space.items():
             if values['Type'] =="continuous":
-                para = UniformFloatHyperparameter(items, values['Range'][0], values['Range'][1])
+                para = UniformFloatHyperparameter(item, values['Range'][0], values['Range'][1])
             elif values['Type'] =="integer":
-                para = UniformIntegerHyperparameter(items, min(values['Mapping']), max(values['Mapping']))
+                para = UniformIntegerHyperparameter(item, min(values['Mapping']), max(values['Mapping']))
             elif values['Type'] =="categorical":
-                para = CategoricalHyperparameter(items, values['Mapping'])
+                para = CategoricalHyperparameter(item, values['Mapping'])
             self.cs.add_hyperparameter(para)
 
     def _smac_run(self, obj_func):
@@ -204,13 +204,13 @@ class SMACSklearn():
             cfg = {k : cfg[k] for k in cfg}
             next_params = pd.DataFrame(cfg, columns = self.para_names, index = [0])
             parameters = {}
-            for items, values in self.para_space.items():
+            for item, values in self.para_space.items():
                 if (values['Type']=="continuous"):
-                    parameters[items] = values['Wrapper'](float(next_params[items].iloc[0]))
+                    parameters[item] = values['Wrapper'](float(next_params[item].iloc[0]))
                 elif (values['Type']=="integer"):
-                    parameters[items] = int(next_params[items].iloc[0])
+                    parameters[item] = int(next_params[item].iloc[0])
                 elif (values['Type']=="categorical"):
-                    parameters[items] = next_params[items].iloc[0]
+                    parameters[item] = next_params[item].iloc[0]
 
             self.estimator.set_params(**parameters)
             out = cross_val_score(self.estimator, x, y, cv=self.cv, scoring = self.scoring)

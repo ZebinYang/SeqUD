@@ -104,19 +104,19 @@ class BaseSeqUD(object):
         """
         
         para_set = pd.DataFrame(np.zeros((para_set_ud.shape[0],self.factor_number)), columns = self.para_names) 
-        for items, values in self.para_space.items():
+        for item, values in self.para_space.items():
             if (values['Type']=="continuous"):
-                para_set[items] = values['Wrapper'](para_set_ud[items+"_UD"]*(values['Range'][1]-values['Range'][0])+values['Range'][0])
+                para_set[item] = values['Wrapper'](para_set_ud[item+"_UD"]*(values['Range'][1]-values['Range'][0])+values['Range'][0])
             elif (values['Type'] == "integer"):
                 temp = np.linspace(0, 1, len(values['Mapping'])+1)
                 for j in range(1,len(temp)):
-                    para_set.loc[(para_set_ud[items+"_UD"]>=temp[j-1])&(para_set_ud[items+"_UD"]<temp[j]),items] = values['Mapping'][j-1]
-                para_set.loc[para_set_ud[items+"_UD"]==1,items] = values['Mapping'][-1]
-                para_set[items] = para_set[items].round().astype(int)
+                    para_set.loc[(para_set_ud[item+"_UD"]>=temp[j-1])&(para_set_ud[item+"_UD"]<temp[j]),item] = values['Mapping'][j-1]
+                para_set.loc[para_set_ud[item+"_UD"]==1,item] = values['Mapping'][-1]
+                para_set[item] = para_set[item].round().astype(int)
             elif (values['Type'] == "categorical"):
-                column_bool = [items in para_name for para_name in self.para_ud_names]
+                column_bool = [item in para_name for para_name in self.para_ud_names]
                 col_index = np.argmax(para_set_ud.loc[:,column_bool].values, axis = 1).tolist()
-                para_set[items] = np.array(values['Mapping'])[col_index]
+                para_set[item] = np.array(values['Mapping'])[col_index]
         return para_set  
     
     def _generate_init_design(self):

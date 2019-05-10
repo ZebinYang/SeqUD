@@ -104,7 +104,7 @@ class GridSklearn(BatchSklearn):
         discrete_runs = 1
         discrete_count = 0
         grid_para = {}
-        for items, values in self.para_space.items():
+        for item, values in self.para_space.items():
             if (values['Type']=="categorical"):
                 grid_para[item] = values['Mapping']
                 discrete_runs = discrete_runs * len(values['Mapping'])
@@ -113,11 +113,11 @@ class GridSklearn(BatchSklearn):
         grid_number = np.ceil((self.max_runs/discrete_runs)**(1/(self.factor_number-discrete_count)))
         if (grid_number<=1): return;
         
-        for items, values in self.para_space.items():
+        for item, values in self.para_space.items():
             if (values['Type']=="continuous"):
-                grid_para[items] = values['Wrapper'](np.linspace(values['Range'][0],values['Range'][1], grid_number))
+                grid_para[item] = values['Wrapper'](np.linspace(values['Range'][0],values['Range'][1], grid_number))
             if (values['Type']=="integer"):
-                grid_para[items] = np.round(np.linspace(min(values['Mapping']),max(values['Mapping']),grid_number)).astype(int)
+                grid_para[item] = np.round(np.linspace(min(values['Mapping']),max(values['Mapping']),grid_number)).astype(int)
         # generate grid
         para_set = pd.DataFrame([item for item in product(*grid_para.values())], columns = self.para_names)
         candidate_params = [{para_set.columns[j]: para_set.iloc[i,j] 

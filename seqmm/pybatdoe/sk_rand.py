@@ -101,11 +101,11 @@ class RandSklearn(BatchSklearn):
         
         """  
         para_set = pd.DataFrame()
-        for items, values in self.para_space.items():
+        for item, values in self.para_space.items():
             if ((values['Type']=="integer") or (values['Type']=="categorical")):
-                para_set[items] = [np.random.choice(values['Mapping']) for i in range(self.max_runs)]
+                para_set[item] = [np.random.choice(values['Mapping']) for i in range(self.max_runs)]
             elif (values['Type'] == "continuous"):
-                para_set[items] = values['Wrapper'](np.random.uniform(values['Range'][0],values['Range'][1],self.max_runs))
+                para_set[item] = values['Wrapper'](np.random.uniform(values['Range'][0],values['Range'][1],self.max_runs))
                 
         candidate_params = [{para_set.columns[j]: para_set.iloc[i,j] 
                              for j in range(para_set.shape[1])} 
