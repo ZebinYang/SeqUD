@@ -153,7 +153,7 @@
 <span id="apis"></span><h1>APIs<a class="headerlink" href="#module-pysequd.func_sequd" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="pysequd.func_sequd.SeqUDOptimizer">
-<em class="property">class </em><code class="descclassname">pysequd.func_sequd.</code><code class="descname">SeqUDOptimizer</code><span class="sig-paren">(</span><em>obj_func</em>, <em>para_space</em>, <em>level_number</em>, <em>max_runs=100</em>, <em>max_search_iter=100</em>, <em>n_jobs=10</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pysequd.func_sequd.SeqUDOptimizer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pysequd.func_sequd.</code><code class="descname">SeqUDOptimizer</code><span class="sig-paren">(</span><em>obj_func</em>, <em>para_space</em>, <em>level_number=20</em>, <em>max_runs=100</em>, <em>max_search_iter=100</em>, <em>n_jobs=10</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pysequd.func_sequd.SeqUDOptimizer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Optimization based on Sequential Uniform Design.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -171,13 +171,13 @@
 </dd>
 </dl>
 </p></li>
-<li><p><strong>level_number</strong> (<em>int</em>) – The positive integer which represent the number of levels in generating uniform design.</p></li>
-<li><p><strong>max_runs</strong> (<em>int</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+<li><p><strong>level_number</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 20</em>) – The positive integer which represent the number of levels in generating uniform design.</p></li>
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
 then the algorithm will stop.</p></li>
-<li><p><strong>max_search_iter</strong> (<em>int</em>) – The maximum number of iterations used to generate uniform design or augmented uniform design.</p></li>
-<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default: None</em>) – A sklearn type scoring function. 
+<li><p><strong>max_search_iter</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of iterations used to generate uniform design or augmented uniform design.</p></li>
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
 If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
-<li><p><strong>n_jobs</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – Number of jobs to run in parallel.
+<li><p><strong>n_jobs</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – Number of jobs to run in parallel.
 If -1 all CPUs are used. If 1 is given, no parallel computing code
 is used at all, which is useful for debugging. See the package <cite>joblib</cite> for details.</p></li>
 <li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=0</em>) – The random seed for optimization.</p></li>
@@ -223,7 +223,7 @@ Seconds used for whole searching procedure.</p></li>
 
 <span class="target" id="module-pysequd.sk_sequd"></span><dl class="class">
 <dt id="pysequd.sk_sequd.SeqUDSklearn">
-<em class="property">class </em><code class="descclassname">pysequd.sk_sequd.</code><code class="descname">SeqUDSklearn</code><span class="sig-paren">(</span><em>estimator</em>, <em>cv</em>, <em>para_space</em>, <em>level_number</em>, <em>max_runs=100</em>, <em>max_search_iter=100</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pysequd.sk_sequd.SeqUDSklearn" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pysequd.sk_sequd.</code><code class="descname">SeqUDSklearn</code><span class="sig-paren">(</span><em>estimator</em>, <em>cv</em>, <em>para_space</em>, <em>level_number=20</em>, <em>max_runs=100</em>, <em>max_search_iter=100</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pysequd.sk_sequd.SeqUDSklearn" title="Permalink to this definition">¶</a></dt>
 <dd><p>Hyperparameter optimization based on Sequential Uniform Design and Sklearn interface.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -241,16 +241,16 @@ Seconds used for whole searching procedure.</p></li>
 </dd>
 </dl>
 </p></li>
-<li><p><strong>level_number</strong> (<em>int</em>) – The positive integer which represent the number of levels in generating uniform design.</p></li>
-<li><p><strong>max_runs</strong> (<em>int</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+<li><p><strong>level_number</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 20</em>) – The positive integer which represent the number of levels in generating uniform design.</p></li>
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
 then the algorithm will stop.</p></li>
-<li><p><strong>max_search_iter</strong> (<em>int</em>) – The maximum number of iterations used to generate uniform design or augmented uniform design.</p></li>
-<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default: None</em>) – A sklearn type scoring function. 
+<li><p><strong>max_search_iter</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of iterations used to generate uniform design or augmented uniform design.</p></li>
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
 If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
-<li><p><strong>n_jobs</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – Number of jobs to run in parallel.
+<li><p><strong>n_jobs</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – Number of jobs to run in parallel.
 If -1 all CPUs are used. If 1 is given, no parallel computing code
 is used at all, which is useful for debugging. See the package <cite>joblib</cite> for details.</p></li>
-<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default=True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
+<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
 <li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=0</em>) – The random seed for optimization.</p></li>
 <li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
 </ul>
@@ -324,13 +324,13 @@ Not available if <cite>refit=False</cite>.</p></li>
 </dd>
 </dl>
 </p></li>
-<li><p><strong>max_runs</strong> (<em>int</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
 then the algorithm will stop.</p></li>
 <li><p><strong>time_out</strong> (<em>float</em><em>, </em><em>optional</em><em>, </em><em>default = 10</em>) – The time out threshold (in seconds) for generating the next run.</p></li>
-<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default: None</em>) – A sklearn type scoring function. 
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
 If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
-<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default=True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
-<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=0</em>) – The random seed for optimization.</p></li>
+<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
+<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 0</em>) – The random seed for optimization.</p></li>
 <li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
 </ul>
 </dd>
@@ -408,12 +408,12 @@ Not available if <cite>refit=False</cite>.</p></li>
 </dd>
 </dl>
 </p></li>
-<li><p><strong>max_runs</strong> (<em>int</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
 then the algorithm will stop.</p></li>
-<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default: None</em>) – A sklearn type scoring function. 
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
 If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
-<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default=True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
-<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=0</em>) – The random seed for optimization.</p></li>
+<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
+<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 0</em>) – The random seed for optimization.</p></li>
 <li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
 </ul>
 </dd>
@@ -491,12 +491,12 @@ Not available if <cite>refit=False</cite>.</p></li>
 </dd>
 </dl>
 </p></li>
-<li><p><strong>max_runs</strong> (<em>int</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
 then the algorithm will stop.</p></li>
-<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default: None</em>) – A sklearn type scoring function. 
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
 If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
-<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default=True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
-<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=0</em>) – The random seed for optimization.</p></li>
+<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
+<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 0</em>) – The random seed for optimization.</p></li>
 <li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
 </ul>
 </dd>
@@ -574,12 +574,12 @@ Not available if <cite>refit=False</cite>.</p></li>
 </dd>
 </dl>
 </p></li>
-<li><p><strong>max_runs</strong> (<em>int</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
 then the algorithm will stop.</p></li>
-<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default: None</em>) – A sklearn type scoring function. 
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
 If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
-<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default=True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
-<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=0</em>) – The random seed for optimization.</p></li>
+<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
+<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 0</em>) – The random seed for optimization.</p></li>
 <li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
 </ul>
 </dd>
@@ -637,12 +637,12 @@ Not available if <cite>refit=False</cite>.</p></li>
 </dd>
 </dl>
 </p></li>
-<li><p><strong>max_runs</strong> (<em>int</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
 then the algorithm will stop.</p></li>
-<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default: None</em>) – A sklearn type scoring function. 
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
 If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
-<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default=True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
-<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=0</em>) – The random seed for optimization.</p></li>
+<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
+<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 0</em>) – The random seed for optimization.</p></li>
 <li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
 </ul>
 </dd>
@@ -700,12 +700,12 @@ Not available if <cite>refit=False</cite>.</p></li>
 </dd>
 </dl>
 </p></li>
-<li><p><strong>max_runs</strong> (<em>int</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
 then the algorithm will stop.</p></li>
-<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default: None</em>) – A sklearn type scoring function. 
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
 If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
-<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default=True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
-<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=0</em>) – The random seed for optimization.</p></li>
+<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
+<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 0</em>) – The random seed for optimization.</p></li>
 <li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
 </ul>
 </dd>
@@ -763,12 +763,12 @@ Not available if <cite>refit=False</cite>.</p></li>
 </dd>
 </dl>
 </p></li>
-<li><p><strong>max_runs</strong> (<em>int</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
 then the algorithm will stop.</p></li>
-<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default: None</em>) – A sklearn type scoring function. 
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
 If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
-<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default=True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
-<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=0</em>) – The random seed for optimization.</p></li>
+<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
+<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 0</em>) – The random seed for optimization.</p></li>
 <li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
 </ul>
 </dd>
@@ -826,12 +826,12 @@ Not available if <cite>refit=False</cite>.</p></li>
 </dd>
 </dl>
 </p></li>
-<li><p><strong>max_runs</strong> (<em>int</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
 then the algorithm will stop.</p></li>
-<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default: None</em>) – A sklearn type scoring function. 
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
 If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
-<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default=True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
-<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=0</em>) – The random seed for optimization.</p></li>
+<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
+<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 0</em>) – The random seed for optimization.</p></li>
 <li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
 </ul>
 </dd>

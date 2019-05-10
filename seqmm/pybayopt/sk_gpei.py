@@ -53,21 +53,21 @@ class GPEISklearn():
         Categorical:
             Specify `Type` as `categorical`, and include the keys of `Mapping` (a list with all the possible categories).
     
-    :type max_runs: int
+    :type max_runs: int, optional, default = 100
     :param max_runs: The maximum number of trials to be evaluated. When this values is reached, 
         then the algorithm will stop. 
     
     :type time_out: float, optional, default = 10
     :param time_out: The time out threshold (in seconds) for generating the next run. 
     
-    :type scoring: string, callable, list/tuple, dict or None, optional, default: None
+    :type scoring: string, callable, list/tuple, dict or None, optional, default = None
     :param scoring: A sklearn type scoring function. 
         If None, the estimator's default scorer (if available) is used. See the package `sklearn` for details.
     
-    :type refit: boolean, or string, optional, default=True
+    :type refit: boolean, or string, optional, default = True
     :param refit: It controls whether to refit an estimator using the best found parameters on the whole dataset.
     
-    :type rand_seed: int, optional, default=0
+    :type rand_seed: int, optional, default = 0
     :param rand_seed: The random seed for optimization.
     
     :type verbose: boolean, optional, default = False
@@ -110,7 +110,7 @@ class GPEISklearn():
     """    
 
     def __init__(self, estimator, cv, para_space, max_runs = 100, time_out = 10,
-                 scoring=None, refit=False, rand_seed = 0, verbose=False):
+                 scoring=None, refit=False, rand_seed = 0, verbose = False):
 
         self.estimator = estimator        
         self.cv = cv
