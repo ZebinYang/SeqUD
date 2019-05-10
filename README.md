@@ -12,8 +12,9 @@ pip install git+https://github.com/ZebinYang/SeqMM.git
 
 # Example
 ```python
+import numpy as np
 from sklearn import svm
-from pySeqUD.search import SeqUDSklearn
+from seqmm.pysequd import SeqUDSklearn
 from sklearn.model_selection import KFold
 iris = datasets.load_iris()
 ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'wrapper': np.exp2}, 
