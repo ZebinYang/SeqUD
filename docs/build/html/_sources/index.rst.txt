@@ -12,6 +12,7 @@ Contents:
    :maxdepth: 2
 
    Installation.rst
-   pySeqUD.rst
-   pyBayOpt.rst
+   pybatdoe.rst
+   pysequd.rst
+   pybayopt.rst
    APIs.rst

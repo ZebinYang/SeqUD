@@ -1,20 +1,32 @@
 APIs
 ================================
 
-.. automodule:: pySeqUD.base
+.. automodule:: pysequd.func_sequd
   :members:
 
-.. automodule:: pySeqUD.optSeqUD
+.. automodule:: pysequd.sk_sequd
   :members:
 
-.. automodule:: pySeqUD.skSeqUD
+.. automodule:: pybayopt.sk_gpei
   :members:
 
-.. automodule:: pyBayOpt.skGPEI
+.. automodule:: pybayopt.sk_smac
   :members:
 
-.. automodule:: pyBayOpt.sksmac
+.. automodule:: pybayopt.sk_tpe
   :members:
 
-.. automodule:: pyBayOpt.sktpe
+.. automodule:: pybatdoe.sk_grid
+  :members:
+
+.. automodule:: pybatdoe.sk_rand
+  :members:
+
+.. automodule:: pybatdoe.sk_lhs
+  :members:
+
+.. automodule:: pybatdoe.sk_sobol
+  :members:
+
+.. automodule:: pybatdoe.sk_ud
   :members:
