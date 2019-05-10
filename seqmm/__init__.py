@@ -1,5 +1,6 @@
-from .pySeqUD import *
-from .pyBayOpt import *
-from .pyBatDOE import *
+from .pysequd import *
+from .pybayopt import *
+from .pybatdoe import *
 
-__all__ =  ["SeqUDSklearn", "SeqUDOptimizer", "GPEISklearn", "SMACSklearn", "TPESklearn", "LHSSklearn", "SobolSklearn"]
+__all__ =  ["SeqUDSklearn", "SeqUDOptimizer", "GPEISklearn", 
+        "SMACSklearn", "TPESklearn", "GridSklearn", "RandSklearn", "LHSSklearn", "SobolSklearn", "UDSklearn"]
