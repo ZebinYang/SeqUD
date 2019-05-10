@@ -104,7 +104,7 @@ class RandSklearn(BatchSklearn):
         for item, values in self.para_space.items():
             if (values['Type']=="categorical"):
                 para_set[item] = [np.random.choice(values['Mapping']) for i in range(self.max_runs)]
-            elif (values['Type']=="integer")：
+            elif (values['Type']=="integer"):
                 para_set[item] = [np.round(np.random.choice(values['Mapping'])).astype(int) for i in range(self.max_runs)]
             elif (values['Type'] == "continuous"):
                 para_set[item] = values['Wrapper'](np.random.uniform(values['Range'][0],values['Range'][1],self.max_runs))
