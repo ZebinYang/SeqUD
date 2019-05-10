@@ -93,7 +93,7 @@ class UDSklearn(BatchSklearn):
     def __init__(self, estimator, cv, para_space, level_number = 20, max_runs = 100, max_search_iter = 100, 
                  scoring=None, n_jobs=None, refit=False, rand_seed = 0, verbose=False):
 
-        super(UDSklearn,self).__init__(estimator, para_space, cv, max_runs, scoring, 
+        super(UDSklearn,self).__init__(estimator, cv, para_space, max_runs, scoring, 
                                n_jobs, refit, rand_seed, verbose)
         
         self.level_number = level_number
