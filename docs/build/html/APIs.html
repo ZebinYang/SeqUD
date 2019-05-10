@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="TPESklearn" href="pybayopt_sk_tpe.html" /> 
+    <link rel="prev" title="SeqRandSklearn" href="pyseqrand.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,6 +84,7 @@
 <li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">Batch Designs (One-shot)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pysequd.html">pySeqUD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pybayopt.html">pyBayOpt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyseqrand.html">SeqRandSklearn</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">APIs</a></li>
 </ul>
 
@@ -869,6 +870,32 @@ Not available if <cite>refit=False</cite>.</p></li>
 </dl>
 </dd></dl>
 
+<span class="target" id="module-sk_seqrand"></span><dl class="class">
+<dt id="sk_seqrand.SeqRandSklearn">
+<em class="property">class </em><code class="descclassname">sk_seqrand.</code><code class="descname">SeqRandSklearn</code><span class="sig-paren">(</span><em>estimator</em>, <em>cv</em>, <em>para_space</em>, <em>n_iter_per_stage=20</em>, <em>max_runs=100</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=True</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sk_seqrand.SeqRandSklearn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for sequential uniform design.</p>
+<dl class="method">
+<dt id="sk_seqrand.SeqRandSklearn.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>x</em>, <em>y=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sk_seqrand.SeqRandSklearn.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run fit with all sets of parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – input variales.</p></li>
+<li><p><strong>y</strong> (<em>array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>] or </em><em>[</em><em>n_samples</em><em>, </em><em>n_output</em><em>]</em><em>, </em><em>optional</em>) – target variable.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="sk_seqrand.SeqRandSklearn.plot_scores">
+<code class="descname">plot_scores</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sk_seqrand.SeqRandSklearn.plot_scores" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visualize the scores history.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -880,7 +907,7 @@ Not available if <cite>refit=False</cite>.</p></li>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="pybayopt_sk_tpe.html" class="btn btn-neutral float-left" title="TPESklearn" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="pyseqrand.html" class="btn btn-neutral float-left" title="SeqRandSklearn" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

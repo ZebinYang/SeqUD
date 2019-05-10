@@ -30,3 +30,6 @@ APIs
 
 .. automodule:: pybatdoe.sk_ud
   :members:
+  
+.. automodule:: sk_seqrand
+  :members:  

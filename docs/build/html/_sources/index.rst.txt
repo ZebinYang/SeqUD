@@ -15,4 +15,5 @@ Contents:
    pybatdoe.rst
    pysequd.rst
    pybayopt.rst
+   pyseqrand.rst
    APIs.rst
