@@ -7,7 +7,7 @@ setup(name='SeqMM',
       author_email='yangzb2010@hku.hk',
       license='GPL',
       packages=['seqmm','seqmm.pybayopt','seqmm.pysequd', 'seqmm.pybatdoe'],
-      install_requires=['joblib', 'numpy', 'pandas', 'scikit-learn', 'tqdm', 'hyperopt','smac==0.8.0', 'pyDOE', 'sobol_seq',
+      install_requires=['joblib', 'numpy', 'pandas', 'scikit-learn', 'tqdm', 'hyperopt','smac', 'pyDOE', 'sobol_seq',
                    'pyUniDOE @ git+https://github.com/ZebinYang/pyUniDOE.git',
                    'spearmint @ git+https://github.com/ZebinYang/spearmint-lite.git'],
       zip_safe=False)
