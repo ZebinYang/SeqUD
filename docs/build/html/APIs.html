@@ -1,0 +1,947 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>APIs &mdash; SeqMM  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="Examples.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> SeqMM
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">Batch Designs (One-shot)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">pyBayOpt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysequd.html">pySeqUD</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">APIs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SeqMM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>APIs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/APIs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-pysequd.func_sequd">
+<span id="apis"></span><h1>APIs<a class="headerlink" href="#module-pysequd.func_sequd" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pysequd.func_sequd.SeqUDOptimizer">
+<em class="property">class </em><code class="descclassname">pysequd.func_sequd.</code><code class="descname">SeqUDOptimizer</code><span class="sig-paren">(</span><em>obj_func</em>, <em>para_space</em>, <em>level_number=20</em>, <em>max_runs=100</em>, <em>max_search_iter=100</em>, <em>n_jobs=10</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pysequd.func_sequd.SeqUDOptimizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimization based on Sequential Uniform Design.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj_func</strong> (<em>a callable function</em>) – This is the objective function to be estimated.</p></li>
+<li><p><strong>cv</strong> (<em>cross-validation method</em><em>, </em><em>an sklearn object.</em>) – e.g., <cite>StratifiedKFold</cite> and KFold` is used.</p></li>
+<li><p><strong>para_space</strong> (<em>dict</em><em> or </em><em>list of dictionaries</em>) – <p>It has three types:</p>
+<dl class="simple">
+<dt>Continuous: </dt><dd><p>Specify <cite>Type</cite> as <cite>continuous</cite>, and include the keys of <cite>Range</cite> (a list with lower-upper elements pair) and
+<cite>Wrapper</cite>, a callable function for wrapping the values.</p>
+</dd>
+<dt>Integer:</dt><dd><p>Specify <cite>Type</cite> as <cite>integer</cite>, and include the keys of <cite>Mapping</cite> (a list with all the sortted integer elements).</p>
+</dd>
+<dt>Categorical:</dt><dd><p>Specify <cite>Type</cite> as <cite>categorical</cite>, and include the keys of <cite>Mapping</cite> (a list with all the possible categories).</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>level_number</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 20</em>) – The positive integer which represent the number of levels in generating uniform design.</p></li>
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+then the algorithm will stop.</p></li>
+<li><p><strong>max_search_iter</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of iterations used to generate uniform design or augmented uniform design.</p></li>
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
+If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – Number of jobs to run in parallel.
+If -1 all CPUs are used. If 1 is given, no parallel computing code
+is used at all, which is useful for debugging. See the package <cite>joblib</cite> for details.</p></li>
+<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=0</em>) – The random seed for optimization.</p></li>
+<li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmm.pysequd</span> <span class="k">import</span> <span class="n">SeqUDSklearn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">cliff</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">x1</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">x2</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;x2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">term1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="n">x1</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">100</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">term2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">x2</span><span class="o">+</span><span class="mf">0.03</span><span class="o">*</span><span class="n">x1</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">term1</span> <span class="o">+</span> <span class="n">term2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">return</span>  <span class="n">y</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span>  <span class="p">{</span><span class="s1">&#39;x1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">},</span> 
+<span class="gp">&gt;&gt;&gt; </span>          <span class="s1">&#39;x2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Level_Number</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">SeqUDOptimizer</span><span class="p">(</span><span class="n">cliff</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">Level_Number</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">search</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>best_score</strong> – float
+The best average cv score among the evaluated trials.</p></li>
+<li><p><strong>best_params</strong> – dict
+Parameters that reaches <cite>best_score_</cite>.</p></li>
+<li><p><strong>search_time_consumed</strong> – float
+Seconds used for whole searching procedure.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="pysequd.func_sequd.SeqUDOptimizer.search">
+<code class="descname">search</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pysequd.func_sequd.SeqUDOptimizer.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>A search wrappper function.</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-pysequd.sk_sequd"></span><dl class="class">
+<dt id="pysequd.sk_sequd.SeqUDSklearn">
+<em class="property">class </em><code class="descclassname">pysequd.sk_sequd.</code><code class="descname">SeqUDSklearn</code><span class="sig-paren">(</span><em>estimator</em>, <em>cv</em>, <em>para_space</em>, <em>level_number=20</em>, <em>max_runs=100</em>, <em>max_search_iter=100</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pysequd.sk_sequd.SeqUDSklearn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hyperparameter optimization based on Sequential Uniform Design and Sklearn interface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>estimator</strong> (<em>estimator object</em>) – This is assumed to implement the scikit-learn estimator interface.</p></li>
+<li><p><strong>cv</strong> (<em>cross-validation method</em><em>, </em><em>an sklearn object.</em>) – e.g., <cite>StratifiedKFold</cite> and KFold` is used.</p></li>
+<li><p><strong>para_space</strong> (<em>dict</em><em> or </em><em>list of dictionaries</em>) – <p>It has three types:</p>
+<dl class="simple">
+<dt>Continuous: </dt><dd><p>Specify <cite>Type</cite> as <cite>continuous</cite>, and include the keys of <cite>Range</cite> (a list with lower-upper elements pair) and
+<cite>Wrapper</cite>, a callable function for wrapping the values.</p>
+</dd>
+<dt>Integer:</dt><dd><p>Specify <cite>Type</cite> as <cite>integer</cite>, and include the keys of <cite>Mapping</cite> (a list with all the sortted integer elements).</p>
+</dd>
+<dt>Categorical:</dt><dd><p>Specify <cite>Type</cite> as <cite>categorical</cite>, and include the keys of <cite>Mapping</cite> (a list with all the possible categories).</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>level_number</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 20</em>) – The positive integer which represent the number of levels in generating uniform design.</p></li>
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+then the algorithm will stop.</p></li>
+<li><p><strong>max_search_iter</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of iterations used to generate uniform design or augmented uniform design.</p></li>
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
+If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – Number of jobs to run in parallel.
+If -1 all CPUs are used. If 1 is given, no parallel computing code
+is used at all, which is useful for debugging. See the package <cite>joblib</cite> for details.</p></li>
+<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
+<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=0</em>) – The random seed for optimization.</p></li>
+<li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmm.pysequd</span> <span class="k">import</span> <span class="n">SeqUDSklearn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span> 
+<span class="go">           &#39;gamma&#39;: {&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-16, 6], &#39;Wrapper&#39;: np.exp2}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Level_Number</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">SeqUDSklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">Level_Number</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>best_score</strong> – float
+The best average cv score among the evaluated trials.</p></li>
+<li><p><strong>best_params</strong> – dict
+Parameters that reaches <cite>best_score_</cite>.</p></li>
+<li><p><strong>best_estimator</strong> – The estimator refitted based on the <cite>best_params_</cite>. 
+Not available if <cite>refit=False</cite>.</p></li>
+<li><p><strong>search_time_consumed</strong> – float
+Seconds used for whole searching procedure.</p></li>
+<li><p><strong>refit_time</strong> – float
+Seconds used for refitting the best model on the whole dataset.
+Not available if <cite>refit=False</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="pysequd.sk_sequd.SeqUDSklearn.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>x</em>, <em>y=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pysequd.sk_sequd.SeqUDSklearn.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run fit with all sets of parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – input variales.</p></li>
+<li><p><strong>y</strong> (<em>array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>] or </em><em>[</em><em>n_samples</em><em>, </em><em>n_output</em><em>]</em><em>, </em><em>optional</em>) – target variable.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-pybayopt.sk_gpei"></span><dl class="class">
+<dt id="pybayopt.sk_gpei.GPEISklearn">
+<em class="property">class </em><code class="descclassname">pybayopt.sk_gpei.</code><code class="descname">GPEISklearn</code><span class="sig-paren">(</span><em>estimator</em>, <em>cv</em>, <em>para_space</em>, <em>max_runs=100</em>, <em>time_out=10</em>, <em>scoring=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pybayopt.sk_gpei.GPEISklearn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sklearn Hyperparameter optimization interface based on Gaussian Process - Expected Improvement (Bayesian Optimization).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>estimator</strong> (<em>estimator object</em>) – This is assumed to implement the scikit-learn estimator interface.</p></li>
+<li><p><strong>cv</strong> (<em>cross-validation method</em><em>, </em><em>an sklearn object.</em>) – e.g., <cite>StratifiedKFold</cite> and KFold` is used.</p></li>
+<li><p><strong>para_space</strong> (<em>dict</em><em> or </em><em>list of dictionaries</em>) – <p>It has three types:</p>
+<dl class="simple">
+<dt>Continuous: </dt><dd><p>Specify <cite>Type</cite> as <cite>continuous</cite>, and include the keys of <cite>Range</cite> (a list with lower-upper elements pair) and
+<cite>Wrapper</cite>, a callable function for wrapping the values.</p>
+</dd>
+<dt>Integer:</dt><dd><p>Specify <cite>Type</cite> as <cite>integer</cite>, and include the keys of <cite>Mapping</cite> (a list with all the sortted integer elements).</p>
+</dd>
+<dt>Categorical:</dt><dd><p>Specify <cite>Type</cite> as <cite>categorical</cite>, and include the keys of <cite>Mapping</cite> (a list with all the possible categories).</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+then the algorithm will stop.</p></li>
+<li><p><strong>time_out</strong> (<em>float</em><em>, </em><em>optional</em><em>, </em><em>default = 10</em>) – The time out threshold (in seconds) for generating the next run.</p></li>
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
+If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
+<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
+<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 0</em>) – The random seed for optimization.</p></li>
+<li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmm.pybayopt</span> <span class="k">import</span> <span class="n">GPEISklearn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span> 
+<span class="go">           &#39;gamma&#39;: {&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-16, 6], &#39;Wrapper&#39;: np.exp2}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">GPEISklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>best_score</strong> – float
+The best average cv score among the evaluated trials.</p></li>
+<li><p><strong>best_params</strong> – dict
+Parameters that reaches <cite>best_score_</cite>.</p></li>
+<li><p><strong>best_estimator</strong> – The estimator refitted based on the <cite>best_params_</cite>. 
+Not available if <cite>refit=False</cite>.</p></li>
+<li><p><strong>search_time_consumed</strong> – float
+Seconds used for whole searching procedure.</p></li>
+<li><p><strong>refit_time</strong> – float
+Seconds used for refitting the best model on the whole dataset.
+Not available if <cite>refit=False</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="pybayopt.sk_gpei.GPEISklearn.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>x</em>, <em>y=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pybayopt.sk_gpei.GPEISklearn.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run fit with all sets of parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – input variales.</p></li>
+<li><p><strong>y</strong> (<em>array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>] or </em><em>[</em><em>n_samples</em><em>, </em><em>n_output</em><em>]</em><em>, </em><em>optional</em>) – target variable.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pybayopt.sk_gpei.GPEISklearn.plot_scores">
+<code class="descname">plot_scores</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pybayopt.sk_gpei.GPEISklearn.plot_scores" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visualize the scores history.</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-pybayopt.sk_smac"></span><dl class="class">
+<dt id="pybayopt.sk_smac.SMACSklearn">
+<em class="property">class </em><code class="descclassname">pybayopt.sk_smac.</code><code class="descname">SMACSklearn</code><span class="sig-paren">(</span><em>estimator</em>, <em>cv</em>, <em>para_space</em>, <em>max_runs=100</em>, <em>scoring=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pybayopt.sk_smac.SMACSklearn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sklearn Hyperparameter optimization interface based on SMAC (Bayesian Optimization).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>estimator</strong> (<em>estimator object</em>) – This is assumed to implement the scikit-learn estimator interface.</p></li>
+<li><p><strong>cv</strong> (<em>cross-validation method</em><em>, </em><em>an sklearn object.</em>) – e.g., <cite>StratifiedKFold</cite> and KFold` is used.</p></li>
+<li><p><strong>para_space</strong> (<em>dict</em><em> or </em><em>list of dictionaries</em>) – <p>It has three types:</p>
+<dl class="simple">
+<dt>Continuous: </dt><dd><p>Specify <cite>Type</cite> as <cite>continuous</cite>, and include the keys of <cite>Range</cite> (a list with lower-upper elements pair) and
+<cite>Wrapper</cite>, a callable function for wrapping the values.</p>
+</dd>
+<dt>Integer:</dt><dd><p>Specify <cite>Type</cite> as <cite>integer</cite>, and include the keys of <cite>Mapping</cite> (a list with all the sortted integer elements).</p>
+</dd>
+<dt>Categorical:</dt><dd><p>Specify <cite>Type</cite> as <cite>categorical</cite>, and include the keys of <cite>Mapping</cite> (a list with all the possible categories).</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+then the algorithm will stop.</p></li>
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
+If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
+<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
+<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 0</em>) – The random seed for optimization.</p></li>
+<li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmm.pybayopt</span> <span class="k">import</span> <span class="n">SMACSklearn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span> 
+<span class="go">           &#39;gamma&#39;: {&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-16, 6], &#39;Wrapper&#39;: np.exp2}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">SMACSklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>best_score</strong> – float
+The best average cv score among the evaluated trials.</p></li>
+<li><p><strong>best_params</strong> – dict
+Parameters that reaches <cite>best_score_</cite>.</p></li>
+<li><p><strong>best_estimator</strong> – The estimator refitted based on the <cite>best_params_</cite>. 
+Not available if <cite>refit=False</cite>.</p></li>
+<li><p><strong>search_time_consumed</strong> – float
+Seconds used for whole searching procedure.</p></li>
+<li><p><strong>refit_time</strong> – float
+Seconds used for refitting the best model on the whole dataset.
+Not available if <cite>refit=False</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="pybayopt.sk_smac.SMACSklearn.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>x</em>, <em>y=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pybayopt.sk_smac.SMACSklearn.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run fit with all sets of parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – input variales.</p></li>
+<li><p><strong>y</strong> (<em>array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>] or </em><em>[</em><em>n_samples</em><em>, </em><em>n_output</em><em>]</em><em>, </em><em>optional</em>) – target variable.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pybayopt.sk_smac.SMACSklearn.plot_scores">
+<code class="descname">plot_scores</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pybayopt.sk_smac.SMACSklearn.plot_scores" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visualize the scores history.</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-pybayopt.sk_tpe"></span><dl class="class">
+<dt id="pybayopt.sk_tpe.TPESklearn">
+<em class="property">class </em><code class="descclassname">pybayopt.sk_tpe.</code><code class="descname">TPESklearn</code><span class="sig-paren">(</span><em>estimator</em>, <em>cv</em>, <em>para_space</em>, <em>max_runs=100</em>, <em>scoring=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pybayopt.sk_tpe.TPESklearn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sklearn Hyperparameter optimization interface based on TPE (Bayesian Optimization).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>estimator</strong> (<em>estimator object</em>) – This is assumed to implement the scikit-learn estimator interface.</p></li>
+<li><p><strong>cv</strong> (<em>cross-validation method</em><em>, </em><em>an sklearn object.</em>) – e.g., <cite>StratifiedKFold</cite> and KFold` is used.</p></li>
+<li><p><strong>para_space</strong> (<em>dict</em><em> or </em><em>list of dictionaries</em>) – <p>It has three types:</p>
+<dl class="simple">
+<dt>Continuous: </dt><dd><p>Specify <cite>Type</cite> as <cite>continuous</cite>, and include the keys of <cite>Range</cite> (a list with lower-upper elements pair) and
+<cite>Wrapper</cite>, a callable function for wrapping the values.</p>
+</dd>
+<dt>Integer:</dt><dd><p>Specify <cite>Type</cite> as <cite>integer</cite>, and include the keys of <cite>Mapping</cite> (a list with all the sortted integer elements).</p>
+</dd>
+<dt>Categorical:</dt><dd><p>Specify <cite>Type</cite> as <cite>categorical</cite>, and include the keys of <cite>Mapping</cite> (a list with all the possible categories).</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+then the algorithm will stop.</p></li>
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
+If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
+<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
+<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 0</em>) – The random seed for optimization.</p></li>
+<li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmm.pybayopt</span> <span class="k">import</span> <span class="n">TPESklearn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span> 
+<span class="go">           &#39;gamma&#39;: {&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-16, 6], &#39;Wrapper&#39;: np.exp2}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">TPESklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>best_score</strong> – float
+The best average cv score among the evaluated trials.</p></li>
+<li><p><strong>best_params</strong> – dict
+Parameters that reaches <cite>best_score_</cite>.</p></li>
+<li><p><strong>best_estimator</strong> – The estimator refitted based on the <cite>best_params_</cite>. 
+Not available if <cite>refit=False</cite>.</p></li>
+<li><p><strong>search_time_consumed</strong> – float
+Seconds used for whole searching procedure.</p></li>
+<li><p><strong>refit_time</strong> – float
+Seconds used for refitting the best model on the whole dataset.
+Not available if <cite>refit=False</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="pybayopt.sk_tpe.TPESklearn.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>x</em>, <em>y=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pybayopt.sk_tpe.TPESklearn.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run fit with all sets of parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – input variales.</p></li>
+<li><p><strong>y</strong> (<em>array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>] or </em><em>[</em><em>n_samples</em><em>, </em><em>n_output</em><em>]</em><em>, </em><em>optional</em>) – target variable.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pybayopt.sk_tpe.TPESklearn.plot_scores">
+<code class="descname">plot_scores</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pybayopt.sk_tpe.TPESklearn.plot_scores" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visualize the scores history.</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-pybatdoe.sk_grid"></span><dl class="class">
+<dt id="pybatdoe.sk_grid.GridSklearn">
+<em class="property">class </em><code class="descclassname">pybatdoe.sk_grid.</code><code class="descname">GridSklearn</code><span class="sig-paren">(</span><em>estimator</em>, <em>cv</em>, <em>para_space</em>, <em>max_runs=100</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pybatdoe.sk_grid.GridSklearn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sklearn Hyperparameter optimization interface based on Random Search.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>estimator</strong> (<em>estimator object</em>) – This is assumed to implement the scikit-learn estimator interface.</p></li>
+<li><p><strong>cv</strong> (<em>cross-validation method</em><em>, </em><em>an sklearn object.</em>) – e.g., <cite>StratifiedKFold</cite> and KFold` is used.</p></li>
+<li><p><strong>para_space</strong> (<em>dict</em><em> or </em><em>list of dictionaries</em>) – <p>It has three types:</p>
+<dl class="simple">
+<dt>Continuous: </dt><dd><p>Specify <cite>Type</cite> as <cite>continuous</cite>, and include the keys of <cite>Range</cite> (a list with lower-upper elements pair) and
+<cite>Wrapper</cite>, a callable function for wrapping the values.</p>
+</dd>
+<dt>Integer:</dt><dd><p>Specify <cite>Type</cite> as <cite>integer</cite>, and include the keys of <cite>Mapping</cite> (a list with all the sortted integer elements).</p>
+</dd>
+<dt>Categorical:</dt><dd><p>Specify <cite>Type</cite> as <cite>categorical</cite>, and include the keys of <cite>Mapping</cite> (a list with all the possible categories).</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+then the algorithm will stop.</p></li>
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
+If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
+<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
+<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 0</em>) – The random seed for optimization.</p></li>
+<li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmm.pybatdoe</span> <span class="k">import</span> <span class="n">GridSklearn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span> 
+<span class="go">           &#39;gamma&#39;: {&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-16, 6], &#39;Wrapper&#39;: np.exp2}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">GridSklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>best_score</strong> – float
+The best average cv score among the evaluated trials.</p></li>
+<li><p><strong>best_params</strong> – dict
+Parameters that reaches <cite>best_score_</cite>.</p></li>
+<li><p><strong>best_estimator</strong> – The estimator refitted based on the <cite>best_params_</cite>. 
+Not available if <cite>refit=False</cite>.</p></li>
+<li><p><strong>search_time_consumed</strong> – float
+Seconds used for whole searching procedure.</p></li>
+<li><p><strong>refit_time</strong> – float
+Seconds used for refitting the best model on the whole dataset.
+Not available if <cite>refit=False</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-pybatdoe.sk_rand"></span><dl class="class">
+<dt id="pybatdoe.sk_rand.RandSklearn">
+<em class="property">class </em><code class="descclassname">pybatdoe.sk_rand.</code><code class="descname">RandSklearn</code><span class="sig-paren">(</span><em>estimator</em>, <em>cv</em>, <em>para_space</em>, <em>max_runs=100</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pybatdoe.sk_rand.RandSklearn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sklearn Hyperparameter optimization interface based on Random Search.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>estimator</strong> (<em>estimator object</em>) – This is assumed to implement the scikit-learn estimator interface.</p></li>
+<li><p><strong>cv</strong> (<em>cross-validation method</em><em>, </em><em>an sklearn object.</em>) – e.g., <cite>StratifiedKFold</cite> and KFold` is used.</p></li>
+<li><p><strong>para_space</strong> (<em>dict</em><em> or </em><em>list of dictionaries</em>) – <p>It has three types:</p>
+<dl class="simple">
+<dt>Continuous: </dt><dd><p>Specify <cite>Type</cite> as <cite>continuous</cite>, and include the keys of <cite>Range</cite> (a list with lower-upper elements pair) and
+<cite>Wrapper</cite>, a callable function for wrapping the values.</p>
+</dd>
+<dt>Integer:</dt><dd><p>Specify <cite>Type</cite> as <cite>integer</cite>, and include the keys of <cite>Mapping</cite> (a list with all the sortted integer elements).</p>
+</dd>
+<dt>Categorical:</dt><dd><p>Specify <cite>Type</cite> as <cite>categorical</cite>, and include the keys of <cite>Mapping</cite> (a list with all the possible categories).</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+then the algorithm will stop.</p></li>
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
+If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
+<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
+<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 0</em>) – The random seed for optimization.</p></li>
+<li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmm.pybatdoe</span> <span class="k">import</span> <span class="n">RandSklearn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span> 
+<span class="go">           &#39;gamma&#39;: {&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-16, 6], &#39;Wrapper&#39;: np.exp2}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">RandSklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>best_score</strong> – float
+The best average cv score among the evaluated trials.</p></li>
+<li><p><strong>best_params</strong> – dict
+Parameters that reaches <cite>best_score_</cite>.</p></li>
+<li><p><strong>best_estimator</strong> – The estimator refitted based on the <cite>best_params_</cite>. 
+Not available if <cite>refit=False</cite>.</p></li>
+<li><p><strong>search_time_consumed</strong> – float
+Seconds used for whole searching procedure.</p></li>
+<li><p><strong>refit_time</strong> – float
+Seconds used for refitting the best model on the whole dataset.
+Not available if <cite>refit=False</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-pybatdoe.sk_lhs"></span><dl class="class">
+<dt id="pybatdoe.sk_lhs.LHSSklearn">
+<em class="property">class </em><code class="descclassname">pybatdoe.sk_lhs.</code><code class="descname">LHSSklearn</code><span class="sig-paren">(</span><em>estimator</em>, <em>cv</em>, <em>para_space</em>, <em>max_runs=100</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pybatdoe.sk_lhs.LHSSklearn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sklearn Hyperparameter optimization interface based on Latin Hypercube Sampling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>estimator</strong> (<em>estimator object</em>) – This is assumed to implement the scikit-learn estimator interface.</p></li>
+<li><p><strong>cv</strong> (<em>cross-validation method</em><em>, </em><em>an sklearn object.</em>) – e.g., <cite>StratifiedKFold</cite> and KFold` is used.</p></li>
+<li><p><strong>para_space</strong> (<em>dict</em><em> or </em><em>list of dictionaries</em>) – <p>It has three types:</p>
+<dl class="simple">
+<dt>Continuous: </dt><dd><p>Specify <cite>Type</cite> as <cite>continuous</cite>, and include the keys of <cite>Range</cite> (a list with lower-upper elements pair) and
+<cite>Wrapper</cite>, a callable function for wrapping the values.</p>
+</dd>
+<dt>Integer:</dt><dd><p>Specify <cite>Type</cite> as <cite>integer</cite>, and include the keys of <cite>Mapping</cite> (a list with all the sortted integer elements).</p>
+</dd>
+<dt>Categorical:</dt><dd><p>Specify <cite>Type</cite> as <cite>categorical</cite>, and include the keys of <cite>Mapping</cite> (a list with all the possible categories).</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+then the algorithm will stop.</p></li>
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
+If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
+<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
+<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 0</em>) – The random seed for optimization.</p></li>
+<li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmm.pybatdoe</span> <span class="k">import</span> <span class="n">LHSSklearn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span> 
+<span class="go">           &#39;gamma&#39;: {&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-16, 6], &#39;Wrapper&#39;: np.exp2}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">LHSSklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>best_score</strong> – float
+The best average cv score among the evaluated trials.</p></li>
+<li><p><strong>best_params</strong> – dict
+Parameters that reaches <cite>best_score_</cite>.</p></li>
+<li><p><strong>best_estimator</strong> – The estimator refitted based on the <cite>best_params_</cite>. 
+Not available if <cite>refit=False</cite>.</p></li>
+<li><p><strong>search_time_consumed</strong> – float
+Seconds used for whole searching procedure.</p></li>
+<li><p><strong>refit_time</strong> – float
+Seconds used for refitting the best model on the whole dataset.
+Not available if <cite>refit=False</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-pybatdoe.sk_sobol"></span><dl class="class">
+<dt id="pybatdoe.sk_sobol.SobolSklearn">
+<em class="property">class </em><code class="descclassname">pybatdoe.sk_sobol.</code><code class="descname">SobolSklearn</code><span class="sig-paren">(</span><em>estimator</em>, <em>cv</em>, <em>para_space</em>, <em>max_runs=100</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pybatdoe.sk_sobol.SobolSklearn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sklearn Hyperparameter optimization interface based on Sobol Sequence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>estimator</strong> (<em>estimator object</em>) – This is assumed to implement the scikit-learn estimator interface.</p></li>
+<li><p><strong>cv</strong> (<em>cross-validation method</em><em>, </em><em>an sklearn object.</em>) – e.g., <cite>StratifiedKFold</cite> and KFold` is used.</p></li>
+<li><p><strong>para_space</strong> (<em>dict</em><em> or </em><em>list of dictionaries</em>) – <p>It has three types:</p>
+<dl class="simple">
+<dt>Continuous: </dt><dd><p>Specify <cite>Type</cite> as <cite>continuous</cite>, and include the keys of <cite>Range</cite> (a list with lower-upper elements pair) and
+<cite>Wrapper</cite>, a callable function for wrapping the values.</p>
+</dd>
+<dt>Integer:</dt><dd><p>Specify <cite>Type</cite> as <cite>integer</cite>, and include the keys of <cite>Mapping</cite> (a list with all the sortted integer elements).</p>
+</dd>
+<dt>Categorical:</dt><dd><p>Specify <cite>Type</cite> as <cite>categorical</cite>, and include the keys of <cite>Mapping</cite> (a list with all the possible categories).</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+then the algorithm will stop.</p></li>
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
+If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
+<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
+<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 0</em>) – The random seed for optimization.</p></li>
+<li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmm.pybatdoe</span> <span class="k">import</span> <span class="n">SobolSklearn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span> 
+<span class="go">           &#39;gamma&#39;: {&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-16, 6], &#39;Wrapper&#39;: np.exp2}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">SobolSklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>best_score</strong> – float
+The best average cv score among the evaluated trials.</p></li>
+<li><p><strong>best_params</strong> – dict
+Parameters that reaches <cite>best_score_</cite>.</p></li>
+<li><p><strong>best_estimator</strong> – The estimator refitted based on the <cite>best_params_</cite>. 
+Not available if <cite>refit=False</cite>.</p></li>
+<li><p><strong>search_time_consumed</strong> – float
+Seconds used for whole searching procedure.</p></li>
+<li><p><strong>refit_time</strong> – float
+Seconds used for refitting the best model on the whole dataset.
+Not available if <cite>refit=False</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-pybatdoe.sk_ud"></span><dl class="class">
+<dt id="pybatdoe.sk_ud.UDSklearn">
+<em class="property">class </em><code class="descclassname">pybatdoe.sk_ud.</code><code class="descname">UDSklearn</code><span class="sig-paren">(</span><em>estimator</em>, <em>cv</em>, <em>para_space</em>, <em>level_number=20</em>, <em>max_runs=100</em>, <em>max_search_iter=100</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pybatdoe.sk_ud.UDSklearn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sklearn Hyperparameter optimization interface based on UD.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>estimator</strong> (<em>estimator object</em>) – This is assumed to implement the scikit-learn estimator interface.</p></li>
+<li><p><strong>cv</strong> (<em>cross-validation method</em><em>, </em><em>an sklearn object.</em>) – e.g., <cite>StratifiedKFold</cite> and KFold` is used.</p></li>
+<li><p><strong>para_space</strong> (<em>dict</em><em> or </em><em>list of dictionaries</em>) – <p>It has three types:</p>
+<dl class="simple">
+<dt>Continuous: </dt><dd><p>Specify <cite>Type</cite> as <cite>continuous</cite>, and include the keys of <cite>Range</cite> (a list with lower-upper elements pair) and
+<cite>Wrapper</cite>, a callable function for wrapping the values.</p>
+</dd>
+<dt>Integer:</dt><dd><p>Specify <cite>Type</cite> as <cite>integer</cite>, and include the keys of <cite>Mapping</cite> (a list with all the sortted integer elements).</p>
+</dd>
+<dt>Categorical:</dt><dd><p>Specify <cite>Type</cite> as <cite>categorical</cite>, and include the keys of <cite>Mapping</cite> (a list with all the possible categories).</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>max_runs</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 100</em>) – The maximum number of trials to be evaluated. When this values is reached, 
+then the algorithm will stop.</p></li>
+<li><p><strong>scoring</strong> (<em>string</em><em>, </em><em>callable</em><em>, </em><em>list/tuple</em><em>, </em><em>dict</em><em> or </em><em>None</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – A sklearn type scoring function. 
+If None, the estimator’s default scorer (if available) is used. See the package <cite>sklearn</cite> for details.</p></li>
+<li><p><strong>refit</strong> (<em>boolean</em><em>, or </em><em>string</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – It controls whether to refit an estimator using the best found parameters on the whole dataset.</p></li>
+<li><p><strong>rand_seed</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = 0</em>) – The random seed for optimization.</p></li>
+<li><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – It controls whether the searching history will be printed.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmm.pybatdoe</span> <span class="k">import</span> <span class="n">UDSklearn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span> 
+<span class="go">           &#39;gamma&#39;: {&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-16, 6], &#39;Wrapper&#39;: np.exp2}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">UDSklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>best_score</strong> – float
+The best average cv score among the evaluated trials.</p></li>
+<li><p><strong>best_params</strong> – dict
+Parameters that reaches <cite>best_score_</cite>.</p></li>
+<li><p><strong>best_estimator</strong> – The estimator refitted based on the <cite>best_params_</cite>. 
+Not available if <cite>refit=False</cite>.</p></li>
+<li><p><strong>search_time_consumed</strong> – float
+Seconds used for whole searching procedure.</p></li>
+<li><p><strong>refit_time</strong> – float
+Seconds used for refitting the best model on the whole dataset.
+Not available if <cite>refit=False</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-sk_seqrand"></span><dl class="class">
+<dt id="sk_seqrand.SeqRandSklearn">
+<em class="property">class </em><code class="descclassname">sk_seqrand.</code><code class="descname">SeqRandSklearn</code><span class="sig-paren">(</span><em>estimator</em>, <em>cv</em>, <em>para_space</em>, <em>n_iter_per_stage=20</em>, <em>max_runs=100</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=True</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sk_seqrand.SeqRandSklearn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for sequential uniform design.</p>
+<dl class="method">
+<dt id="sk_seqrand.SeqRandSklearn.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>x</em>, <em>y=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sk_seqrand.SeqRandSklearn.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run fit with all sets of parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>, </em><em>n_features</em><em>]</em>) – input variales.</p></li>
+<li><p><strong>y</strong> (<em>array</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>] or </em><em>[</em><em>n_samples</em><em>, </em><em>n_output</em><em>]</em><em>, </em><em>optional</em>) – target variable.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="sk_seqrand.SeqRandSklearn.plot_scores">
+<code class="descname">plot_scores</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sk_seqrand.SeqRandSklearn.plot_scores" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visualize the scores history.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="Examples.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Zebin Yang, yangzebin2010@gmail.com
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
