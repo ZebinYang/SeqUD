@@ -1,11 +1,47 @@
-Batch Designs (One-shot)
+One-shot Batch Designs
 ==============================
-In contrast to sequential methods, batch designs can generate all the trials before conducting any experiments.
+
+Batch designs can generate all the experimental trials before conducting any experiments.
 Here, we introduce five simple strategies.
+
+- Grid Search: exhaustive search over grid combinations
+
+- Random Search:  more flexible than grid experiments, when not all hyperparameters are equally important. Furthermore, new trials can be added without adjustment and the experiments can also be stopped any time.  ([Bergstra2012]_)
+
+- Latin Hypercube Sampling: 
+
+- Sobol Sequence: 
+
+- Uniform designs: exhaustive search over grid combinations (Huang et al., 2007) 
+
+
+|pic1| |pic2| |pic3| |pic4|
+
+.. |pic1| image::  ./images/Demo_Grid.png 
+   :width: 45%
+
+.. |pic2| image::  ./images/Demo_Random.png 
+   :width: 45%
+
+
+.. |pic3| image::  ./images/Demo_LHS.png
+   :width: 45%
+
+.. |pic4| image::  ./images/Demo_Sobol.png
+   :width: 45%
+
+
+Advantage and Disadvantage of One Shot Batch Designs.
+
+- Easy to be paralleled, trials can be generated without too much burden. 
+
+- However, the information of existing experiments is not utilized, which is not very efficient. 
+
+
 
 Grid Search 
 ------------------------------------------------
-Hyperparameter optimization based on GP-EI and Sklearn SVM interface::
+Grid Search and Sklearn SVM interface::
 
         import numpy as np 
         from sklearn import svm
@@ -25,8 +61,7 @@ Hyperparameter optimization based on GP-EI and Sklearn SVM interface::
 
 Random Search
 ------------------------------------------------
-Hyperparameter optimization based on GP-EI and Sklearn Xgboost interface::
-
+::
         import numpy as np 
         from sklearn import svm
         from sklearn import datasets
@@ -45,8 +80,7 @@ Hyperparameter optimization based on GP-EI and Sklearn Xgboost interface::
 
 Latin Hypercube Sampling
 ------------------------------------------------
-Hyperparameter optimization based on GP-EI and Sklearn Kmeans interface::
-
+::
         import numpy as np 
         from sklearn import svm
         from sklearn import datasets
@@ -65,8 +99,7 @@ Hyperparameter optimization based on GP-EI and Sklearn Kmeans interface::
         
 Sobol Sequence
 ------------------------------------------------
-Hyperparameter optimization based on GP-EI and Sklearn Kmeans interface::
-
+::
         import numpy as np 
         from sklearn import svm
         from sklearn import datasets
@@ -82,22 +115,9 @@ Hyperparameter optimization based on GP-EI and Sklearn Kmeans interface::
         clf.fit(iris.data, iris.target)
         clf.plot_scores()        
 
-Uniform Design
-------------------------------------------------
-Hyperparameter optimization based on GP-EI and Sklearn Kmeans interface::
+        
+Reference list 
+_______________
 
-        import numpy as np 
-        from sklearn import svm
-        from sklearn import datasets
-        from sklearn.model_selection import KFold
-        from seqmm.pybatdoe import UDSklearn
-
-        iris = datasets.load_iris()
-        ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
-               'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
-        estimator = svm.SVC()
-        cv = KFold(n_splits=5, random_state=1, shuffle=True)
-        clf = UDSklearn(estimator, cv, ParaSpace, level_number = 20, max_runs = 100, max_search_iter = 30, n_jobs = 10, 
-                        refit = True, verbose = True)
-        clf.fit(iris.data, iris.target)
-        clf.plot_scores()
+.. [Bergstra2012] James Bergstra and Yoshua Bengio. Random search for hyper-parameter optimization. Journal of Machine Learning Research, 13(Feb):281–305, 2012.
+.. [Zhang2019] Hyperparameter Tuning Methods in Automated Machine Learning. (In Chinese) Submitted.

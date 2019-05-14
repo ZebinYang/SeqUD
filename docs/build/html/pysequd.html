@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pySeqUD &mdash; SeqMM  documentation</title>
+  <title>Sequential Uniform Design &mdash; SeqMM  documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
         <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -35,8 +36,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="SeqUDOptimizer" href="pysequd_func.html" />
-    <link rel="prev" title="TPESklearn" href="pybayopt_sk_tpe.html" /> 
+    <link rel="next" title="More Examples" href="Examples.html" />
+    <link rel="prev" title="Bayesian Optimization" href="pybayopt.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -82,13 +83,19 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">Batch Designs (One-shot)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">pyBayOpt</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">pySeqUD</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pysequd_func.html">SeqUDOptimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pysequd_sk.html">SeqUDSklearn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">One-shot Batch Designs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sequential Uniform Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#algorithm">Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-simple-demo">A Simple Demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#code-examples">Code Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reference-list">Reference list</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">More Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="APIs.html">APIs</a></li>
 </ul>
 
@@ -135,7 +142,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>pySeqUD</li>
+      <li>Sequential Uniform Design</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -154,23 +161,170 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="pysequd">
-<h1>pySeqUD<a class="headerlink" href="#pysequd" title="Permalink to this headline">¶</a></h1>
-<p>Contents:</p>
-<div class="toctree-wrapper compound">
+  <div class="section" id="sequential-uniform-design">
+<h1>Sequential Uniform Design<a class="headerlink" href="#sequential-uniform-design" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>We advocate to reformulate AutoML as a kind of Computer Experiment for the purpose of maximizing ML prediction accuracy.
+Within CompExp framework, we propose a novel SeqUD approach for algorithm selection and optimal hyperparameter configuration.</p>
+<p>Fang and Wang (1990) proposed an SNTO method using NT-nets for global/blackbox optimization; see Fang and Wang (1994; Chapter 3)</p>
+</div>
+<div class="section" id="algorithm">
+<h2>Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Define the search space by converting individual hyperparameters (upon necessary transformation) into unit hypercube $[0,1]^d$: linear mapping if continuous/integer-valued, one-hot encoding if categorical.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}(a + b)^2 = a^2 + 2ab + b^2\\(a - b)^2 = a^2 - 2ab + b^2\end{aligned}\end{align} \]</div>
+<div class="math notranslate nohighlight">
+\begin{eqnarray}
+   y    &amp; = &amp; ax^2 + bx + c \\
+   f(x) &amp; = &amp; x^2 + 2xy + y^2
+\end{eqnarray}</div><div class="math notranslate nohighlight">
+\[\theta \in \mbox{UD}\]</div>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="pysequd_func.html">SeqUDOptimizer</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pysequd_func.html#example-1-cliff-shaped-function">Example 1: Cliff-Shaped function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pysequd_func.html#example-2-octopus-shaped-function">Example 2: Octopus-Shaped function</a></li>
+<li><p>Start with <span class="math notranslate nohighlight">\(\theta \in \UD\)</span> to train ML algorithm; obtain CV scores; fit GP model for $CV(thth)$; find $hatthth_0^*$ from $UD$ and $GP$-evaluated QMC samples.</p></li>
+<li><p>Sequential refining strategy: for iterative step $t=1,2,ldots,T_{max}$</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Centered at $hatthth^*_{t-1}$, define the search subspacefootnote{scriptsize SeqUD can be easily extended to multi-subspace implementation per iteration.}  with reduced range and increased granularity;</p></li>
+<li><p>Find augmented UD in the subspace; train ML algorithm with new $thth$ samples and obtain CV scores;</p></li>
+<li><p>Collect all trained ${thth, CV(thth)}$, refit GP model, then find $hatthth_t^{*}$.</p></li>
 </ul>
+</div></blockquote>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pysequd_sk.html">SeqUDSklearn</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pysequd_sk.html#example-1-svm-for-classification">Example 1: SVM for Classification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pysequd_sk.html#example-2-xgboost-for-regression">Example 2: Xgboost for Regression</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pysequd_sk.html#example-3-kmeans-for-unsupervised-clustering">Example 3: Kmeans for Unsupervised Clustering</a></li>
+<li><p>Output the optimal $thth^*$ from all trained    ${thth, CV(thth)}$.</p></li>
 </ul>
-</li>
+</div>
+<div class="section" id="a-simple-demo">
+<h2>A Simple Demo<a class="headerlink" href="#a-simple-demo" title="Permalink to this headline">¶</a></h2>
+<p>The figure below shows a two-stage example of the SeqUDHO approach in a 2-D space. The circle points represent the initial uniform design via $U_{20}(20^{2})$. The surrounding box serves as the subspace of interest centered on the optimal trial $x^{*}_{1}$ at the first stage, which is denoted by a square point in green. At the second stage, new trial points are augmented to form a $U_{20}(20^{2})$, denoted by the blue triangle points.</p>
+<a class="reference internal image-reference" href="_images/Demo_SeqUD.png"><img alt="_images/Demo_SeqUD.png" class="align-center" src="_images/Demo_SeqUD.png" style="width: 50%;" /></a>
+<p>The proposed approach is advantageous over the Bayesian optimization methods.</p>
+<ul class="simple">
+<li><p>Uniformly distributed trials can have a better exploration;</p></li>
+<li><p>It is free from the meta-modeling and acquisition optimization;</p></li>
+<li><p>At each stage, the algorithm could be conducted in parallel.</p></li>
 </ul>
+</div>
+<div class="section" id="code-examples">
+<h2>Code Examples<a class="headerlink" href="#code-examples" title="Permalink to this headline">¶</a></h2>
+<p>Uniform Design:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">seqmm.pybatdoe</span> <span class="k">import</span> <span class="n">UDSklearn</span>
+
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
+       <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">}}</span>
+<span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">UDSklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">level_number</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">max_search_iter</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>SVM for Classification:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pylab</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">seqmm.pysequd</span> <span class="k">import</span> <span class="n">SeqUDSklearn</span>
+
+<span class="n">sx</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_breast_cancer</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sx</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">target</span>
+
+<span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span>     <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
+             <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">}}</span>
+
+<span class="n">Level_Number</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="n">score_metric</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SeqUDSklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">Level_Number</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="n">score_metric</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Xgboost for Regression:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">mean_squared_error</span>
+<span class="kn">from</span> <span class="nn">seqmm.pysequd</span> <span class="k">import</span> <span class="n">SeqUDSklearn</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">()</span>
+<span class="n">sx</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">sy</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sx</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+
+<span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;booster&#39;</span><span class="p">:</span>          <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;categorical&#39;</span><span class="p">,</span> <span class="s1">&#39;Mapping&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;gbtree&#39;</span><span class="p">,</span> <span class="s1">&#39;gblinear&#39;</span><span class="p">]},</span>
+             <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span>        <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>     <span class="s1">&#39;Mapping&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">9</span><span class="p">)},</span>
+             <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span>     <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>     <span class="s1">&#39;Mapping&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">500</span><span class="p">,</span><span class="mi">401</span><span class="p">)},</span>
+             <span class="s1">&#39;min_child_weight&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>     <span class="s1">&#39;Mapping&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)},</span>
+             <span class="s1">&#39;subsample&#39;</span><span class="p">:</span>        <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">},</span>
+             <span class="s1">&#39;colsample_bytree&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">},</span>
+             <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span>    <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">10</span><span class="o">**</span><span class="n">x</span><span class="p">},</span>
+             <span class="s1">&#39;gamma&#39;</span><span class="p">:</span>            <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">10</span><span class="o">**</span><span class="n">x</span><span class="p">},</span>
+             <span class="s1">&#39;reg_lambda&#39;</span><span class="p">:</span>       <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">10</span><span class="o">**</span><span class="n">x</span><span class="p">},</span>
+             <span class="s1">&#39;reg_alpha&#39;</span><span class="p">:</span>         <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">10</span><span class="o">**</span><span class="n">x</span><span class="p">}}</span>
+
+<span class="n">Level_Number</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">estimator</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">()</span>
+<span class="n">score_metric</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SeqUDSklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">Level_Number</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="n">score_metric</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Kmeans for Unsupervised Clustering:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span> <span class="nn">seqmm.pysequd</span> <span class="k">import</span> <span class="n">SeqUDSklearn</span>
+
+<span class="n">sx</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sx</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;n_clusters&#39;</span><span class="p">:</span>  <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>    <span class="s1">&#39;Mapping&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span><span class="p">)},</span>
+             <span class="s1">&#39;tol&#39;</span><span class="p">:</span>         <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">10</span><span class="o">**</span><span class="n">x</span><span class="p">}}</span>
+
+<span class="n">Level_Number</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">estimator</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">()</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SeqUDSklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">Level_Number</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="reference-list">
+<h3>Reference list<a class="headerlink" href="#reference-list" title="Permalink to this headline">¶</a></h3>
+<dl class="citation">
+<dt class="label" id="yang2019"><span class="brackets">Yang2019</span></dt>
+<dd><p>Zebin Yang, Aijun Zhang and Ji Zhu. (2019) Hyperparameter Optimization via Sequential Uniform Designs. Submitted.</p>
+</dd>
+</dl>
+</div>
 </div>
 </div>
 
@@ -182,10 +336,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="pysequd_func.html" class="btn btn-neutral float-right" title="SeqUDOptimizer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Examples.html" class="btn btn-neutral float-right" title="More Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="pybayopt_sk_tpe.html" class="btn btn-neutral float-left" title="TPESklearn" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="pybayopt.html" class="btn btn-neutral float-left" title="Bayesian Optimization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

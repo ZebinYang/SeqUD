@@ -25,6 +25,7 @@
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
         <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -81,9 +82,10 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">Batch Designs (One-shot)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">pyBayOpt</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pysequd.html">pySeqUD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">One-shot Batch Designs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">More Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="APIs.html">APIs</a></li>
 </ul>
 
@@ -151,34 +153,61 @@
             
   <div class="section" id="welcome-to-seqmm-s-documentation">
 <h1>Welcome to SeqMM’s documentation!<a class="headerlink" href="#welcome-to-seqmm-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Contents:</p>
+<img alt="_images/AutoML_v1.png" src="_images/AutoML_v1.png" />
+<p>This is an open-source python package developed for automated machine learning, in particular for hyperparameter optimization problems. We provide an alternative approach to the well known Bayesian optimization methods, i.g., sequential uniform design-based hyperparameter optimization method.</p>
+<ul class="simple">
+<li><p>AutoML is to perform Automated Machine Learning model/algorithm selection and hyperparameter tuning.</p></li>
+<li><p>It also targets progressive automation of data preprocessing, feature extraction/transformation, postprocessing and interpretation.</p></li>
+<li><p>Hyperparameter optimization, a.k.a. (hyper) paramater tuning, plays a central role in AutoML pipelines.</p></li>
+</ul>
+<div class="section" id="however-it-is-not-easy">
+<h2>However, it is not easy.<a class="headerlink" href="#however-it-is-not-easy" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Hyperparameters can be continuous, integer-valued or categorical,  e.g. regularization parameters, kernel bandwidths, learning rate, tree depth, batch size, number of layers, type of activation.</p></li>
+<li><p>Hyperparameter Optimization is of combinatorial nature, therefore a challenging problem with curse of dimensionality.</p></li>
+<li><p>There is limited understanding about tunability of ML hyperparameters (Probst et al., 2018). There are mostly empirical evidences.</p></li>
+<li><p>Robustness and reproducibility of optimal hyperparameters depend not only on the specific algorithm, but also on the specific dataset.</p></li>
+</ul>
+</div>
+<div class="section" id="contents">
+<h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="Installation.html#prerequisite">Prerequisite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Installation.html#github-installation">Github installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Installation.html#manual-installation">Manual installation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">Batch Designs (One-shot)</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">One-shot Batch Designs</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="pybatdoe.html#grid-search">Grid Search</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pybatdoe.html#random-search">Random Search</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pybatdoe.html#latin-hypercube-sampling">Latin Hypercube Sampling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pybatdoe.html#sobol-sequence">Sobol Sequence</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pybatdoe.html#uniform-design">Uniform Design</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">pyBayOpt</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt_sk_gpei.html">GPEISklearn</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt_sk_smac.html">SMACSklearn</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt_sk_tpe.html">TPESklearn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pybayopt.html#smac-example-xgboost-for-regression">SMAC Example: Xgboost for Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pybayopt.html#tpe-example-xgboost-for-regression">TPE Example: Xgboost for Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pybayopt.html#reference-list">Reference list</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pysequd.html">pySeqUD</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pysequd_func.html">SeqUDOptimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pysequd_sk.html">SeqUDSklearn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pysequd.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pysequd.html#algorithm">Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pysequd.html#a-simple-demo">A Simple Demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pysequd.html#code-examples">Code Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">More Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#sequd-for-function-optimization">SeqUD for function optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#working-with-scikit-learn-pipeline">Working with Scikit-learn Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#methods-comparison">Methods Comparison</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="APIs.html">APIs</a></li>
 </ul>
+</div>
 </div>
 </div>
 

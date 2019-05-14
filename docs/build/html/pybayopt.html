@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pyBayOpt &mdash; SeqMM  documentation</title>
+  <title>Bayesian Optimization &mdash; SeqMM  documentation</title>
   
 
   
@@ -25,6 +25,7 @@
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
         <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -35,8 +36,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="GPEISklearn" href="pybayopt_sk_gpei.html" />
-    <link rel="prev" title="Batch Designs (One-shot)" href="pybatdoe.html" /> 
+    <link rel="next" title="Sequential Uniform Design" href="pysequd.html" />
+    <link rel="prev" title="One-shot Batch Designs" href="pybatdoe.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -82,14 +83,15 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">Batch Designs (One-shot)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">pyBayOpt</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt_sk_gpei.html">GPEISklearn</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt_sk_smac.html">SMACSklearn</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt_sk_tpe.html">TPESklearn</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">One-shot Batch Designs</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Bayesian Optimization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#smac-example-xgboost-for-regression">SMAC Example: Xgboost for Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tpe-example-xgboost-for-regression">TPE Example: Xgboost for Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reference-list">Reference list</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pysequd.html">pySeqUD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">More Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="APIs.html">APIs</a></li>
 </ul>
 
@@ -136,7 +138,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>pyBayOpt</li>
+      <li>Bayesian Optimization</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -155,30 +157,137 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="pybayopt">
-<h1>pyBayOpt<a class="headerlink" href="#pybayopt" title="Permalink to this headline">¶</a></h1>
-<p>Contents:</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="pybayopt_sk_gpei.html">GPEISklearn</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt_sk_gpei.html#example-1-svm-for-classification">Example 1: SVM for Classification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt_sk_gpei.html#example-2-xgboost-for-regression">Example 2: Xgboost for Regression</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt_sk_gpei.html#example-3-kmeans-for-unsupervised-clustering">Example 3: Kmeans for Unsupervised Clustering</a></li>
+  <div class="section" id="bayesian-optimization">
+<h1>Bayesian Optimization<a class="headerlink" href="#bayesian-optimization" title="Permalink to this headline">¶</a></h1>
+<p>In classical Bayesian optimization, trials points are sequentially sampled one-point-at-a-time through
+maximizing the expected improvement. Let’s see a univariate example.</p>
+<a class="reference internal image-reference" href="_images/Demo_BO_eng.png"><img alt="_images/Demo_BO_eng.png" src="_images/Demo_BO_eng.png" style="width: 80%;" /></a>
+<p>The following three Bayesian optimization methods are most popular in AutoML area.</p>
+<ul class="simple">
+<li><p>GP-EI (<a class="reference internal" href="#snoek2012" id="id1"><span>[Snoek2012]</span></a>): Gaussian process and expected improvement</p></li>
+<li><p>SMAC (<a class="reference internal" href="#hutter2011" id="id2"><span>[Hutter2011]</span></a>): It use random forest as surrogote model and EI and acquisition function.</p></li>
+<li><p>TPE (<a class="reference internal" href="#bergstra2011" id="id3"><span>[Bergstra2011]</span></a>): Tree-structured Parzen Estimator. It use non parametric method to model $p(x|y)$ and $p(y)$ (the prior is not of interest actually) instead of $p(y|x)$.</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pybayopt_sk_smac.html">SMACSklearn</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt_sk_smac.html#example-1-svm-for-classification">Example 1: SVM for Classification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt_sk_smac.html#example-2-xgboost-for-regression">Example 2: Xgboost for Regression</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt_sk_smac.html#example-3-kmeans-for-unsupervised-clustering">Example 3: Kmeans for Unsupervised Clustering</a></li>
+<p>Their corresponding python implementations can be found here.</p>
+<ul class="simple">
+<li><p>Spearmint (GP-EI) : <a class="reference external" href="https://github.com/JasperSnoek/spearmint">https://github.com/JasperSnoek/spearmint</a></p></li>
+<li><p>Hyperopt (TPE): <a class="reference external" href="https://github.com/hyperopt/hyperopt">https://github.com/hyperopt/hyperopt</a></p></li>
+<li><p>SMAC: <a class="reference external" href="https://github.com/automl/SMAC3">https://github.com/automl/SMAC3</a></p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pybayopt_sk_tpe.html">TPESklearn</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt_sk_tpe.html#example-1-svm-for-classification">Example 1: SVM for Classification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt_sk_tpe.html#example-2-xgboost-for-regression">Example 2: Xgboost for Regression</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt_sk_tpe.html#example-3-kmeans-for-unsupervised-clustering">Example 3: Kmeans for Unsupervised Clustering</a></li>
+<p>Potential limitations of Bayesian optimization:</p>
+<ul class="simple">
+<li><p>The meta-modeling and acquisition function optimization are difficult for high-dimentional problems.</p></li>
+<li><p>Lack uniformality considerations: algorithm can be trapped into local areas if without a good initialization.</p></li>
+<li><p>Bayesian optimization are designed to select trials one-by-one, which is unnatural to perform parallelization.</p></li>
 </ul>
-</li>
-</ul>
+<p>GP-EI Example: Xgboost for Regression</p>
+<hr class="docutils" />
+<dl>
+<dt>::</dt><dd><p>import numpy as np
+import xgboost as xgb
+from sklearn import datasets
+from sklearn.model_selection import KFold
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import make_scorer, mean_squared_error
+from seqmm.pybayopt import SMACSklearn
+dt = datasets.load_diabetes()
+sx = MinMaxScaler()
+sy = MinMaxScaler()
+x = sx.fit_transform(dt.data)
+y = sy.fit_transform(dt.target.reshape([-1,1]))
+ParaSpace = {‘booster’:          {‘Type’: ‘categorical’, ‘Mapping’: [‘gbtree’, ‘gblinear’]},</p>
+<blockquote>
+<div><p>‘max_depth’:        {‘Type’: ‘integer’,     ‘Mapping’: np.linspace(2,10,9)},
+‘n_estimators’:     {‘Type’: ‘integer’,     ‘Mapping’: np.linspace(100,500,401)},
+‘min_child_weight’: {‘Type’: ‘integer’,     ‘Mapping’: np.linspace(1,100,100)},
+‘subsample’:        {‘Type’: ‘continuous’,  ‘Range’: [0, 1],  ‘Wrapper’: lambda x:x},
+‘colsample_bytree’: {‘Type’: ‘continuous’,  ‘Range’: [0, 1],  ‘Wrapper’: lambda x:x},
+‘learning_rate’:    {‘Type’: ‘continuous’,  ‘Range’: [-5, 0], ‘Wrapper’: lambda x: 10**x},
+‘gamma’:            {‘Type’: ‘continuous’,  ‘Range’: [-5, 0], ‘Wrapper’: lambda x: 10**x},
+‘reg_lambda’:       {‘Type’: ‘continuous’,  ‘Range’: [-5, 0], ‘Wrapper’: lambda x: 10**x},
+‘reg_alpha’:         {‘Type’: ‘continuous’,  ‘Range’: [-5, 0], ‘Wrapper’: lambda x: 10**x}}</p>
+</div></blockquote>
+<p>estimator = xgb.XGBRegressor()
+score_metric = make_scorer(mean_squared_error, False)
+cv = KFold(n_splits=5, random_state=0, shuffle=True)</p>
+<p>clf = SMACSklearn(estimator, cv, ParaSpace, max_runs = 100, refit = True, scoring = score_metric, verbose = True)
+clf.fit(x, y)
+clf.plot_scores()</p>
+</dd>
+</dl>
+<div class="section" id="smac-example-xgboost-for-regression">
+<h2>SMAC Example: Xgboost for Regression<a class="headerlink" href="#smac-example-xgboost-for-regression" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pylab</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">seqmm.pybayopt</span> <span class="k">import</span> <span class="n">GPEISklearn</span>
+
+<span class="n">sx</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_breast_cancer</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sx</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">target</span>
+
+<span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span>     <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
+             <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">}}</span>
+
+<span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="n">score_metric</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">GPEISklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">time_out</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tpe-example-xgboost-for-regression">
+<h2>TPE Example: Xgboost for Regression<a class="headerlink" href="#tpe-example-xgboost-for-regression" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pylab</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">seqmm.pybayopt</span> <span class="k">import</span> <span class="n">GPEISklearn</span>
+
+<span class="n">sx</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_breast_cancer</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sx</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">target</span>
+
+<span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span>     <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
+             <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">}}</span>
+
+<span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="n">score_metric</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">GPEISklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">time_out</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reference-list">
+<h2>Reference list<a class="headerlink" href="#reference-list" title="Permalink to this headline">¶</a></h2>
+<dl class="citation">
+<dt class="label" id="snoek2012"><span class="brackets"><a class="fn-backref" href="#id1">Snoek2012</a></span></dt>
+<dd><p>Jasper Snoek, Hugo Larochelle, and Ryan P Adams. Practical bayesian optimization of machine learning algorithms. In Advances in Neural Information Processing Systems, pages 2951–2959, 2012.</p>
+</dd>
+<dt class="label" id="hutter2011"><span class="brackets"><a class="fn-backref" href="#id2">Hutter2011</a></span></dt>
+<dd><p>Frank Hutter, Holger H Hoos, and Kevin Leyton-Brown. Sequential model-based optimization for general algorithm configuration. In International Conference on Learning and Intelligent Optimization, pages 507–523. Springer, 2011.</p>
+</dd>
+<dt class="label" id="bergstra2011"><span class="brackets"><a class="fn-backref" href="#id3">Bergstra2011</a></span></dt>
+<dd><p>James S Bergstra, Rémi Bardenet, Yoshua Bengio, and Balázs Kégl. Algorithms for hyper-parameter optimization. In Advances in Neural Information Processing Systems, pages 2546–2554, 2011.</p>
+</dd>
+</dl>
 </div>
 </div>
 
@@ -190,10 +299,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="pybayopt_sk_gpei.html" class="btn btn-neutral float-right" title="GPEISklearn" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="pysequd.html" class="btn btn-neutral float-right" title="Sequential Uniform Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="pybatdoe.html" class="btn btn-neutral float-left" title="Batch Designs (One-shot)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="pybatdoe.html" class="btn btn-neutral float-left" title="One-shot Batch Designs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

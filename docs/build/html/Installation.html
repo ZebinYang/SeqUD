@@ -25,6 +25,7 @@
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
         <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -35,7 +36,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Batch Designs (One-shot)" href="pybatdoe.html" />
+    <link rel="next" title="One-shot Batch Designs" href="pybatdoe.html" />
     <link rel="prev" title="Welcome to SeqMM’s documentation!" href="index.html" /> 
 </head>
 
@@ -82,16 +83,15 @@
             
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#prerequisite">Prerequisite</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#github-installation">github installation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#manual-installation">manual installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisite">Prerequisite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#github-installation">Github installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#manual-installation">Manual installation</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">Batch Designs (One-shot)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">pyBayOpt</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pysequd.html">pySeqUD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">One-shot Batch Designs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">More Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="APIs.html">APIs</a></li>
 </ul>
 
@@ -162,31 +162,46 @@
 <div class="section" id="prerequisite">
 <h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this headline">¶</a></h2>
 <p>The required environment for SeqMM package:</p>
-<p>Python 3
-C++ compiler (with C++11 supports) and SWIG (version 3.0 or later)</p>
+<ul class="simple">
+<li><p>Python 3</p></li>
+<li><p>SWIG &gt;= 3.0</p></li>
+<li><p>C++ compiler</p></li>
+</ul>
+<p>For different platform, the following commands may be helpful for installing the C++ compiler:</p>
 <ul class="simple">
 <li><p>For Linux</p></li>
-<li><p>For Mac or Windows</p></li>
 </ul>
-<p>For successful compilation, Microsoft Visual Studio 14.0 is required.</p>
-<div class="section" id="github-installation">
-<h3>github installation<a class="headerlink" href="#github-installation" title="Permalink to this headline">¶</a></h3>
-<p>Currently, we only support installation from our github repository. You can install the package by the following console command:</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ZebinYang</span><span class="o">/</span><span class="n">SeqMM</span><span class="o">.</span><span class="n">git</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">gxx_linux</span><span class="o">-</span><span class="mi">64</span> <span class="n">gcc_linux</span><span class="o">-</span><span class="mi">64</span> <span class="n">swig</span>
 </pre></div>
-</td></tr></table></div>
+</div>
+<ul class="simple">
+<li><p>For Mac</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">open</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Developer</span><span class="o">/</span><span class="n">CommandLineTools</span><span class="o">/</span><span class="n">Packages</span><span class="o">/</span><span class="n">macOS_SDK_headers_for_macOS_10</span><span class="o">.</span><span class="mf">14.</span><span class="n">pkg</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>For Windows</p></li>
+</ul>
+<p>Microsoft Visual Studio 14.0 is required, see <a class="reference external" href="https://wiki.python.org/moin/WindowsCompilers#Microsoft_Visual_C.2B-.2B-_14.0_with_Visual_Studio_2015_.28x86.2C_x64.2C_ARM.29">a link</a> for details.</p>
+</div>
+<div class="section" id="github-installation">
+<h2>Github installation<a class="headerlink" href="#github-installation" title="Permalink to this headline">¶</a></h2>
+<p>Currently, we only support installation from our github repository. You can install the package by the following console command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ZebinYang</span><span class="o">/</span><span class="n">SeqMM</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="manual-installation">
-<h3>manual installation<a class="headerlink" href="#manual-installation" title="Permalink to this headline">¶</a></h3>
+<h2>Manual installation<a class="headerlink" href="#manual-installation" title="Permalink to this headline">¶</a></h2>
 <p>Currently, we only support installation from our github repository. You can install the package by the following console command:</p>
-<p>First, download the source codes from <a class="reference external" href="http://github.com/ZebinYang/SeqMM.git">http://github.com/ZebinYang/SeqMM.git</a>, unzip and switch to the folder.</p>
-<p>Then, run the following shell commands to finish installation.
-.. code-block:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="n">linenos</span><span class="p">:</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+<ul class="simple">
+<li><p>First, download the source codes from <a class="reference external" href="http://github.com/ZebinYang/SeqMM.git">http://github.com/ZebinYang/SeqMM.git</a>, unzip and switch to the root folder.</p></li>
+<li><p>Then, run the following shell commands to finish installation.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
 <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
 </pre></div>
-</div>
 </div>
 </div>
 </div>
@@ -199,7 +214,7 @@ C++ compiler (with C++11 supports) and SWIG (version 3.0 or later)</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="pybatdoe.html" class="btn btn-neutral float-right" title="Batch Designs (One-shot)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="pybatdoe.html" class="btn btn-neutral float-right" title="One-shot Batch Designs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral float-left" title="Welcome to SeqMM’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

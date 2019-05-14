@@ -11,9 +11,9 @@ from tqdm import tqdm_notebook as tqdm
 from spearmint.ExperimentGrid import GridMap
 from spearmint.chooser import GPEIOptChooser as module
 from sklearn.model_selection import cross_val_score
+from .bayopt_base import BayoptBase
 
-grid_seed = 1 # the number of initial points to skip
-grid_size = 1000
+grid_size = 20000
 
 def set_timeout(func):
     def handle(signum, frame): 
@@ -27,12 +27,12 @@ def set_timeout(func):
             signal.alarm(0)   
             return r
         except RuntimeError as e:
-            print("Time out!")
+            raise Exception()
     return to_do
     
-class GPEISklearn():
+class GPEI(BayoptBase):
     """ 
-    Sklearn Hyperparameter optimization interface based on Gaussian Process - Expected Improvement (Bayesian Optimization). 
+    Interface of Gaussian Process - Expected Improvement (Bayesian Optimization). 
 
     Parameters
     ----------
@@ -79,14 +79,14 @@ class GPEISklearn():
     >>> import numpy as np
     >>> from sklearn import svm
     >>> from sklearn import datasets
-    >>> from seqmm.pybayopt import GPEISklearn
+    >>> from seqmm import GPEI
     >>> from sklearn.model_selection import KFold
     >>> iris = datasets.load_iris()
     >>> ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
                'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=0, shuffle=True)
-    >>> clf = GPEISklearn(estimator, cv, ParaSpace, max_runs = 100, refit = True, verbose = True)
+    >>> clf = GPEI(estimator, cv, ParaSpace, max_runs = 100, refit = True, verbose = True)
     >>> clf.fit(iris.data, iris.target)
 
     Attributes
@@ -112,57 +112,11 @@ class GPEISklearn():
     def __init__(self, estimator, cv, para_space, max_runs = 100, time_out = 10,
                  scoring=None, refit=False, rand_seed = 0, verbose = False):
 
-        self.estimator = estimator        
-        self.cv = cv
-        
-        self.para_space = para_space
-        self.rand_seed = rand_seed
-        self.max_runs = max_runs
+        super(GPEI,self).__init__(estimator, cv, para_space, max_runs, scoring, 
+                       n_jobs, refit, rand_seed, verbose)
 
         self.time_out = time_out
-        self.refit = refit
-        self.scoring = scoring
-        self.verbose = verbose
-        self.factor_number = len(self.para_space)
-        self.para_names = list(self.para_space.keys())
-        self.iteration = 0
-        self.logs = pd.DataFrame()
         
-    def plot_scores(self):
-        """
-        Visualize the scores history.
-        """
-        if self.logs.shape[0]>0:
-            cum_best_score = self.logs["score"].cummax()
-            fig = plt.figure(figsize = (6,4))
-            plt.plot(cum_best_score)
-            plt.xlabel('# of Runs')
-            plt.ylabel('Best Scores')
-            plt.title('The best found scores during optimization')
-            plt.grid(True)
-            plt.show()
-        else:
-            print("No available logs!")
-            
-    def _summary(self):
-        """
-        This function summarizes the evaluation results and makes records. 
-        
-        """
-
-        self.best_index_ = self.logs.loc[:,"score"].idxmax()
-        self.best_params_ = {self.logs.loc[:,self.para_names].columns[j]:\
-                             self.logs.loc[:,self.para_names].iloc[self.best_index_,j] 
-                              for j in range(self.logs.loc[:,self.para_names].shape[1])}
-        
-        self.best_score_ = self.logs.loc[:,"score"].iloc[self.best_index_]
-
-        if self.verbose:
-            print("Search completed in %.2f seconds."%self.search_time_consumed_)
-            print("The best score is: %.5f."%self.best_score_)
-            print("The best configurations are:")
-            print("\n".join("%-20s: %s"%(k, v if self.para_space[k]['Type']=="categorical" else round(v, 5))
-                            for k, v in self.best_params_.items()))
 
     def _para_mapping(self):
         """
@@ -190,38 +144,18 @@ class GPEISklearn():
                                  'options': values['Mapping'],
                                  'size': 1}) 
     
-    @set_timeout  
-    def _spmint_opt(self, params, values, variables, file_dir):
-        """
-        Interface for generating next run based on spearmint. 
+    @set_timeout 
+    def _spmint_opt(self, chooser, grid, values, grid_status):
 
-        """
-        chooser = module.init(file_dir, "mcmc_iters=10")
-        vkeys = [k for k in variables]
-
-        #vkeys.sort()
-        gmap = GridMap([variables[k] for k in vkeys], grid_size)
-        candidates = gmap.hypercube_grid(grid_size, grid_seed+params.shape[0])
-        if (params.shape[0] > 0):
-            grid = np.vstack((params, candidates))
-        else:
-            grid = candidates
-        grid = np.asarray(grid)
-        grid_idx = np.hstack((np.zeros(params.shape[0]),
-                              np.ones(candidates.shape[0])))
+        ## The status of jobs, 0 - candidate, 1 - pending, 2 - complete. 
+        ## Here we only have two status: 0 or 2 available. 
         job_id = chooser.next(grid, np.squeeze(values), [],
-                              np.nonzero(grid_idx == 1)[0],
-                              np.nonzero(grid_idx == 2)[0],
-                              np.nonzero(grid_idx == 0)[0])
+                              np.nonzero(grid_status == 0)[0],
+                              np.nonzero(grid_status == 1)[0],
+                              np.nonzero(grid_status == 2)[0])
+        return job_id
 
-        if isinstance(job_id, tuple):
-            (job_id, candidate) = job_id
-        else:
-            candidate = grid[job_id,:]
-        next_params = gmap.unit_to_list(candidate)
-        return candidate, next_params
-
-    def _spearmint_run(self, obj_func):
+    def _run(self, obj_func):
         """
         Main loop for searching the best hyperparameters. 
         
@@ -231,77 +165,31 @@ class GPEISklearn():
         file_dir = "./temp/" + str(time.time()) + str(np.random.rand(1)[0]) + "/"
         os.makedirs(file_dir)
         np.random.seed(self.rand_seed)
-        for i in range(self.max_runs):
+        
+        chooser = module.init(file_dir, "mcmc_iters=10")
+        vkeys = [k for k in self.variables]
+        gmap = GridMap([self.variables[k] for k in vkeys], grid_size)
+        grid = np.asarray(gmap.hypercube_grid(grid_size, 1)) 
+        values = np.zeros(grid_size) + np.nan
+        grid_status = np.zeros(grid.shape[0])
+        for i in range(np.int(self.max_runs)):
             try:
-                candidate, next_params = self._spmint_opt(np.array(param_unit), -np.array(scores), self.variables, file_dir)
-                scores = obj_func(next_params)
-                param_unit.append(candidate)
+                job_id = self._spmint_opt(chooser, grid, values, grid_status)
             except:
-                print("Early Stop!")
+                print('Time Out, Spearmint Early Stop!')
                 break
+            print(i)
+            if isinstance(job_id, tuple):
+                (job_id, candidate) = job_id
+                grid = np.vstack((grid, candidate))
+                grid_status = np.append(grid_status, 2)
+                values = np.append(values, np.zeros(1)+np.nan)
+                job_id = grid.shape[0]-1
+            else:
+                candidate = grid[job_id,:]
+                grid_status[job_id] = 2
+
+            next_params = gmap.unit_to_list(candidate)
+            values[job_id] = obj_func(next_params)
 
         shutil.rmtree(file_dir)
-            
-    def fit(self, x, y = None):
-        """
-        Run fit with all sets of parameters.
-
-        Parameters
-        ----------
-        :type x: array, shape = [n_samples, n_features] 
-        :param x: input variales.
-        
-        :type y: array, shape = [n_samples] or [n_samples, n_output], optional
-        :param y: target variable.
-        """
-        
-        def obj_func(cfg):
-            next_params = pd.DataFrame(np.array([cfg]), columns = self.para_names)
-            parameters = {}
-            for item, values in self.para_space.items():
-                if (values['Type']=="continuous"):
-                    parameters[item] = values['Wrapper'](float(next_params[item].iloc[0]))
-                elif (values['Type']=="integer"):
-                    parameters[item] = int(next_params[item].iloc[0]) 
-                elif (values['Type']=="categorical"):
-                    parameters[item] = next_params[item][0]
-            self.estimator.set_params(**parameters)
-            out = cross_val_score(self.estimator, x, y, cv = self.cv, scoring = self.scoring)
-            score = np.mean(out)
-
-            logs_aug = parameters
-            logs_aug.update({"score":score})
-            logs_aug = pd.DataFrame(logs_aug, index = [self.iteration])
-            self.logs = pd.concat([self.logs, logs_aug]).reset_index(drop=True)
-
-            if self.verbose:
-                self.pbar.update(1)
-                self.iteration += 1
-                self.pbar.set_description("Iteration %d:" %self.iteration)
-                self.pbar.set_postfix_str("Current Best Score = %.5f"% (self.logs.loc[:,"score"].max()))
-            return self.logs.loc[:,"score"].values.tolist()
-        
-        if self.verbose:
-            self.pbar = tqdm(total=self.max_runs) 
-
-        self.iteration = 0
-        self.logs = pd.DataFrame()
-        search_start_time = time.time()
-        self._para_mapping()
-        self._spearmint_run(obj_func)
-        search_end_time = time.time()
-        self.search_time_consumed_ = search_end_time - search_start_time
-        
-        self._summary()
-        if self.verbose:
-            self.pbar.close()
-
-        if self.refit:
-            self.best_estimator_ = self.estimator.set_params(**self.best_params_)
-            refit_start_time = time.time()
-            if y is not None:
-                self.best_estimator_.fit(x, y)
-            else:
-                self.best_estimator_.fit(x)
-            refit_end_time = time.time()
-            self.refit_time_ = refit_end_time - refit_start_time

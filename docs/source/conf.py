@@ -18,3 +18,5 @@ exclude_patterns = ['_build']
 pygments_style = 'sphinx'
 html_theme = 'sphinx_rtd_theme'
 autoclass_content = "both"
+
+
