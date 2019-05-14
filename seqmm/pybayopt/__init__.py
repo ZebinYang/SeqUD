@@ -1,5 +1,5 @@
-from .sk_gpei import GPEISklearn
-from .sk_smac import SMACSklearn
-from .sk_tpe import TPESklearn
+from .sk_gpei import GPEI
+from .sk_smac import SMAC
+from .sk_tpe import TPE
 
-__all__ =  ["GPEISklearn", "SMACSklearn", "TPESklearn"]
+__all__ =  ["GPEI", "SMAC", "TPE"]
