@@ -30,7 +30,7 @@ def set_timeout(func):
             raise Exception()
     return to_do
     
-class GPEI(BayoptBase):
+class GPEIOPT(BayoptBase):
     """ 
     Interface of Gaussian Process - Expected Improvement (Bayesian Optimization). 
 
@@ -79,14 +79,14 @@ class GPEI(BayoptBase):
     >>> import numpy as np
     >>> from sklearn import svm
     >>> from sklearn import datasets
-    >>> from seqmm import GPEI
+    >>> from seqmm import GPEIOPT
     >>> from sklearn.model_selection import KFold
     >>> iris = datasets.load_iris()
     >>> ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
                'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=0, shuffle=True)
-    >>> clf = GPEI(estimator, cv, ParaSpace, max_runs = 100, refit = True, verbose = True)
+    >>> clf = GPEIOPT(estimator, cv, ParaSpace, max_runs = 100, refit = True, verbose = True)
     >>> clf.fit(iris.data, iris.target)
 
     Attributes
@@ -112,7 +112,7 @@ class GPEI(BayoptBase):
     def __init__(self, estimator, cv, para_space, max_runs = 100, time_out = 10,
                  scoring=None, refit=False, rand_seed = 0, verbose = False):
 
-        super(GPEI,self).__init__(estimator, cv, para_space, max_runs, scoring, 
+        super(GPEIOPT,self).__init__(estimator, cv, para_space, max_runs, scoring, 
                        refit, rand_seed, verbose)
 
         self.time_out = time_out

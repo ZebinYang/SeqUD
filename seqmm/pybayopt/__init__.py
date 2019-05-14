@@ -1,5 +1,5 @@
-from .sk_gpei import GPEI
-from .sk_smac import SMAC
-from .sk_tpe import TPE
+from .sk_gpei import GPEIOPT
+from .sk_smac import SMACOPT
+from .sk_tpe import TPEOPT
 
-__all__ =  ["GPEI", "SMAC", "TPE"]
+__all__ =  ["GPEIOPT", "SMACOPT", "TPEOPT"]

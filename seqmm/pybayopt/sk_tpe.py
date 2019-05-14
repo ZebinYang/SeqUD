@@ -13,7 +13,7 @@ from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
 
 from .bayopt_base import BayoptBase
 
-class TPE(BayoptBase):
+class TPEOPT(BayoptBase):
     """ 
     Interface of TPE (Bayesian Optimization). 
 
@@ -58,14 +58,14 @@ class TPE(BayoptBase):
     >>> import numpy as np
     >>> from sklearn import svm
     >>> from sklearn import datasets
-    >>> from seqmm.pybayopt import TPE
+    >>> from seqmm.pybayopt import TPEOPT
     >>> from sklearn.model_selection import KFold
     >>> iris = datasets.load_iris()
     >>> ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
                'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=0, shuffle=True)
-    >>> clf = TPE(estimator, cv, ParaSpace, refit = True, verbose = True)
+    >>> clf = TPEOPT(estimator, cv, ParaSpace, refit = True, verbose = True)
     >>> clf.fit(iris.data, iris.target)
 
     Attributes

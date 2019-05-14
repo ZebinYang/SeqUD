@@ -21,7 +21,7 @@ from smac.facade.smac_facade import SMAC
 
 from .bayopt_base import BayoptBase
 
-class SMAC(BayoptBase):
+class SMACOPT(BayoptBase):
     """ 
     Sklearn Hyperparameter optimization interface based on SMAC (Bayesian Optimization). 
     
@@ -67,14 +67,14 @@ class SMAC(BayoptBase):
     >>> import numpy as np
     >>> from sklearn import svm
     >>> from sklearn import datasets
-    >>> from seqmm.pybayopt import SMAC
+    >>> from seqmm.pybayopt import SMACOPT
     >>> from sklearn.model_selection import KFold
     >>> iris = datasets.load_iris()
     >>> ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
                'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=0, shuffle=True)
-    >>> clf = SMAC(estimator, cv, ParaSpace, refit = True, verbose = True)
+    >>> clf = SMACOPT(estimator, cv, ParaSpace, refit = True, verbose = True)
     >>> clf.fit(iris.data, iris.target)
 
     Attributes
@@ -100,7 +100,7 @@ class SMAC(BayoptBase):
     def __init__(self, estimator, cv, para_space, max_runs = 100, 
                  scoring=None, refit=False, rand_seed = 0, verbose = False):
 
-        super(SMAC,self).__init__(estimator, cv, para_space, max_runs, scoring, 
+        super(SMACOPT,self).__init__(estimator, cv, para_space, max_runs, scoring, 
                        refit, rand_seed, verbose)
         
 
