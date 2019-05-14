@@ -225,7 +225,7 @@ class SeqUD(object):
                              self.extend_factor_number, axis=1)
 
         base_ud = pydoe.design_query(n = self.level_number, s = self.extend_factor_number,
-                          q = self.level_number, crit = "CD2", ShowCrit=False)
+                          q = self.level_number, crit = "CD2", show_crit=False)
         if base_ud is None:
             base_ud = pydoe.gen_ud_ms(n = self.level_number, s = self.extend_factor_number, q = self.level_number, crit="CD2", 
                             maxiter = self.max_search_iter, rand_seed = self.rand_seed, nshoot = 10)
