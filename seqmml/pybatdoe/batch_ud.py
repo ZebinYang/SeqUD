@@ -126,7 +126,7 @@ class UDSearch(BatchBase):
                           q = self.level_number, crit = "CD2", show_crit=False)
         if base_ud is None:
             base_ud = pydoe.gen_ud_ms(n = self.max_runs, s = self.extend_factor_number, q = self.level_number, crit="CD2", 
-                            maxiter = self.max_search_iter, rand_seed = self.rand_seed, nshoot = 10)
+                            maxiter = self.max_search_iter, rand_seed = self.rand_seed, nshoot = 5)
            
         if (not isinstance(base_ud, np.ndarray)):
             raise ValueError('Uniform design is not correctly constructed!')
