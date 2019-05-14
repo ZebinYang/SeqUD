@@ -18,7 +18,7 @@ from sklearn import datasets
 from sklearn.model_selection import KFold 
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import make_scorer, accuracy_score
-from seqmm.pysequd import SeqUDSklearn
+from seqmm import SeqUD
 
 sx = MinMaxScaler()
 dt = datasets.load_breast_cancer()
@@ -28,12 +28,11 @@ y = dt.target
 ParaSpace = {'C':     {'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
              'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
 
-Level_Number = 20
 estimator = svm.SVC()
 score_metric = make_scorer(accuracy_score, True)
 cv = KFold(n_splits=5, random_state=0, shuffle=True)
 
-clf = SeqUDSklearn(estimator, cv, ParaSpace, Level_Number, scoring = score_metric, n_jobs = 2, refit = True, verbose = True)
+clf = SeqUD(ParaSpace, level_number = 20, n_jobs = 2, estimator = estimator, cv = cv, scoring = score_metric, refit = True, verbose = True)
 clf.fit(x, y)
 clf.plot_scores()
 ```
