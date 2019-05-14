@@ -12,7 +12,7 @@ from matplotlib import pylab as plt
 from tqdm import tqdm_notebook as tqdm
 from sklearn.model_selection import cross_val_score
 
-import pyUniDOE as pydoe 
+import pyunidoe as pydoe 
 from .batch_base import BatchBase
 
 class UDSearch(BatchBase):
