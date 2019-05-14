@@ -84,10 +84,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">One-shot Batch Designs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#grid-search">Grid Search</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#random-search">Random Search</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#latin-hypercube-sampling">Latin Hypercube Sampling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#sobol-sequence">Sobol Sequence</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#code-examples">Code Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#reference-list">Reference list</a></li>
 </ul>
 </li>
@@ -168,109 +165,104 @@ Here, we introduce five simple strategies.</p>
 <ul class="simple">
 <li><p>Grid Search: exhaustive search over grid combinations</p></li>
 <li><p>Random Search:  more flexible than grid experiments, when not all hyperparameters are equally important. Furthermore, new trials can be added without adjustment and the experiments can also be stopped any time.  (<a class="reference internal" href="#bergstra2012" id="id1"><span>[Bergstra2012]</span></a>)</p></li>
-<li><p>Latin Hypercube Sampling:</p></li>
-<li><p>Sobol Sequence:</p></li>
-<li><p>Uniform designs: exhaustive search over grid combinations (Huang et al., 2007)</p></li>
+<li><p>Latin Hypercube Sampling: near-random sample (LHS; <a class="reference internal" href="#mckay1978" id="id2"><span>[McKay1978]</span></a>)</p></li>
+<li><p>Sobol Sequence: quasi-random low-discrepancy sequence (<a class="reference internal" href="#sobol967" id="id3"><span>[Sobol967]</span></a>)</p></li>
 </ul>
+<p>The figures below make a simple comparison of the four mentioned sampling approach (<a class="reference internal" href="#zhang2019" id="id4"><span>[Zhang2019]</span></a>).</p>
 <p><a class="reference internal" href="_images/Demo_Grid.png"><img alt="pic1" src="_images/Demo_Grid.png" style="width: 45%;" /></a> <a class="reference internal" href="_images/Demo_Random.png"><img alt="pic2" src="_images/Demo_Random.png" style="width: 45%;" /></a> <a class="reference internal" href="_images/Demo_LHS.png"><img alt="pic3" src="_images/Demo_LHS.png" style="width: 45%;" /></a> <a class="reference internal" href="_images/Demo_Sobol.png"><img alt="pic4" src="_images/Demo_Sobol.png" style="width: 45%;" /></a></p>
 <p>Advantage and Disadvantage of One Shot Batch Designs.</p>
 <ul class="simple">
 <li><p>Easy to be paralleled, trials can be generated without too much burden.</p></li>
 <li><p>However, the information of existing experiments is not utilized, which is not very efficient.</p></li>
+<li><p>To select an appropriate number of design points is always difficult, with potential over-sampling and under-sampling problems.</p></li>
 </ul>
-<div class="section" id="grid-search">
-<h2>Grid Search<a class="headerlink" href="#grid-search" title="Permalink to this headline">¶</a></h2>
-<p>Grid Search and Sklearn SVM interface:</p>
+<div class="section" id="code-examples">
+<h2>Code Examples<a class="headerlink" href="#code-examples" title="Permalink to this headline">¶</a></h2>
+<p>Grid Search:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
-<span class="kn">from</span> <span class="nn">seqmm.pybatdoe</span> <span class="k">import</span> <span class="n">GridSklearn</span>
+<span class="kn">from</span> <span class="nn">seqmm</span> <span class="k">import</span> <span class="n">GridSearch</span>
 
 <span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 <span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
        <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">}}</span>
 <span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
 <span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">clf</span> <span class="o">=</span> <span class="n">GridSklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-                <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">GridSearch</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
 </div>
+<p>Random Search:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">seqmm.pybatdoe</span> <span class="k">import</span> <span class="n">RandSearch</span>
+
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
+       <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">}}</span>
+<span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">RandSearch</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
+</pre></div>
 </div>
-<div class="section" id="random-search">
-<h2>Random Search<a class="headerlink" href="#random-search" title="Permalink to this headline">¶</a></h2>
-<dl>
-<dt>::</dt><dd><p>import numpy as np
-from sklearn import svm
-from sklearn import datasets
-from sklearn.model_selection import KFold
-from seqmm.pybatdoe import RandSklearn</p>
-<p>iris = datasets.load_iris()
-ParaSpace = {‘C’:{‘Type’: ‘continuous’, ‘Range’: [-6, 16], ‘Wrapper’: np.exp2},</p>
-<blockquote>
-<div><p>‘gamma’: {‘Type’: ‘continuous’, ‘Range’: [-16, 6], ‘Wrapper’: np.exp2}}</p>
-</div></blockquote>
-<p>estimator = svm.SVC()
-cv = KFold(n_splits=5, random_state=1, shuffle=True)
-clf = RandSklearn(estimator, cv, ParaSpace, max_runs = 100, n_jobs = 10,</p>
-<blockquote>
-<div><p>refit = True, verbose = True)</p>
-</div></blockquote>
-<p>clf.fit(iris.data, iris.target)
-clf.plot_scores()</p>
-</dd>
-</dl>
+<p>Latin Hypercube Sampling:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">seqmm</span> <span class="k">import</span> <span class="n">LHSSearch</span>
+
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
+       <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">}}</span>
+<span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">LHSSearch</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
+</pre></div>
 </div>
-<div class="section" id="latin-hypercube-sampling">
-<h2>Latin Hypercube Sampling<a class="headerlink" href="#latin-hypercube-sampling" title="Permalink to this headline">¶</a></h2>
-<dl>
-<dt>::</dt><dd><p>import numpy as np
-from sklearn import svm
-from sklearn import datasets
-from sklearn.model_selection import KFold
-from seqmm.pybatdoe import LHSSklearn</p>
-<p>iris = datasets.load_iris()
-ParaSpace = {‘C’:{‘Type’: ‘continuous’, ‘Range’: [-6, 16], ‘Wrapper’: np.exp2},</p>
-<blockquote>
-<div><p>‘gamma’: {‘Type’: ‘continuous’, ‘Range’: [-16, 6], ‘Wrapper’: np.exp2}}</p>
-</div></blockquote>
-<p>estimator = svm.SVC()
-cv = KFold(n_splits=5, random_state=1, shuffle=True)
-clf = LHSSklearn(estimator, cv, ParaSpace, max_runs = 100, n_jobs = 10, refit = True, verbose = True)
-clf.fit(iris.data, iris.target)
-clf.plot_scores()</p>
-</dd>
-</dl>
+<p>Sobol Sequence:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">seqmm</span> <span class="k">import</span> <span class="n">SobolSearch</span>
+
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
+       <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">}}</span>
+<span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SobolSearch</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
+</pre></div>
 </div>
-<div class="section" id="sobol-sequence">
-<h2>Sobol Sequence<a class="headerlink" href="#sobol-sequence" title="Permalink to this headline">¶</a></h2>
-<dl>
-<dt>::</dt><dd><p>import numpy as np
-from sklearn import svm
-from sklearn import datasets
-from sklearn.model_selection import KFold
-from seqmm.pybatdoe import LHSSklearn</p>
-<p>iris = datasets.load_iris()
-ParaSpace = {‘C’:{‘Type’: ‘continuous’, ‘Range’: [-6, 16], ‘Wrapper’: np.exp2},</p>
-<blockquote>
-<div><p>‘gamma’: {‘Type’: ‘continuous’, ‘Range’: [-16, 6], ‘Wrapper’: np.exp2}}</p>
-</div></blockquote>
-<p>estimator = svm.SVC()
-cv = KFold(n_splits=5, random_state=1, shuffle=True)
-clf = LHSSklearn(estimator, cv, ParaSpace, max_runs = 100, n_jobs = 10, refit = True, verbose = True)
-clf.fit(iris.data, iris.target)
-clf.plot_scores()</p>
-</dd>
-</dl>
 <div class="section" id="reference-list">
 <h3>Reference list<a class="headerlink" href="#reference-list" title="Permalink to this headline">¶</a></h3>
 <dl class="citation">
+<dt class="label" id="sobol967"><span class="brackets"><a class="fn-backref" href="#id3">Sobol967</a></span></dt>
+<dd><p>Sobol,I.M. (1967), “Distribution of points in a cube and approximate evaluation of integrals”. Zh. Vych. Mat. Mat. Fiz. 7: 784–802 (in Russian); U.S.S.R Comput. Maths. Math. Phys. 7: 86–112 (in English)</p>
+</dd>
+<dt class="label" id="mckay1978"><span class="brackets"><a class="fn-backref" href="#id2">McKay1978</a></span></dt>
+<dd><p>McKay, M.D., Beckman, R.J. and Conover, W.J., 1979. Comparison of three methods for selecting values of input variables in the analysis of output from a computer code. Technometrics, 21(2), pp.239-245.</p>
+</dd>
 <dt class="label" id="bergstra2012"><span class="brackets"><a class="fn-backref" href="#id1">Bergstra2012</a></span></dt>
 <dd><p>James Bergstra and Yoshua Bengio. Random search for hyper-parameter optimization. Journal of Machine Learning Research, 13(Feb):281–305, 2012.</p>
 </dd>
-<dt class="label" id="zhang2019"><span class="brackets">Zhang2019</span></dt>
+<dt class="label" id="zhang2019"><span class="brackets"><a class="fn-backref" href="#id4">Zhang2019</a></span></dt>
 <dd><p>Hyperparameter Tuning Methods in Automated Machine Learning. (In Chinese) Submitted.</p>
 </dd>
 </dl>

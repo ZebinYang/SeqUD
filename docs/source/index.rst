@@ -24,8 +24,6 @@ However, it is not easy.
 
 -  Hyperparameter Optimization is of combinatorial nature, therefore a challenging problem with curse of dimensionality.
 
-- There is limited understanding about tunability of ML hyperparameters (Probst et al., 2018). There are mostly empirical evidences.
-
 - Robustness and reproducibility of optimal hyperparameters depend not only on the specific algorithm, but also on the specific dataset.
 
 

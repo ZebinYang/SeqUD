@@ -8,12 +8,11 @@ Here, we introduce five simple strategies.
 
 - Random Search:  more flexible than grid experiments, when not all hyperparameters are equally important. Furthermore, new trials can be added without adjustment and the experiments can also be stopped any time.  ([Bergstra2012]_)
 
-- Latin Hypercube Sampling: 
+- Latin Hypercube Sampling: near-random sample (LHS; [McKay1978]_)
 
-- Sobol Sequence: 
+- Sobol Sequence: quasi-random low-discrepancy sequence ([Sobol967]_)
 
-- Uniform designs: exhaustive search over grid combinations (Huang et al., 2007) 
-
+The figures below make a simple comparison of the four mentioned sampling approach ([Zhang2019]_).
 
 |pic1| |pic2| |pic3| |pic4|
 
@@ -37,81 +36,81 @@ Advantage and Disadvantage of One Shot Batch Designs.
 
 - However, the information of existing experiments is not utilized, which is not very efficient. 
 
+- To select an appropriate number of design points is always difficult, with potential over-sampling and under-sampling problems.
 
+Code Examples 
+--------------
 
-Grid Search 
-------------------------------------------------
-Grid Search and Sklearn SVM interface::
+Grid Search::
 
         import numpy as np 
         from sklearn import svm
         from sklearn import datasets
         from sklearn.model_selection import KFold
-        from seqmm.pybatdoe import GridSklearn
+        from seqmm import GridSearch
 
         iris = datasets.load_iris()
         ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
                'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
         estimator = svm.SVC()
         cv = KFold(n_splits=5, random_state=1, shuffle=True)
-        clf = GridSklearn(estimator, cv, ParaSpace, max_runs = 100, n_jobs = 10, 
-                        refit = True, verbose = True)
+        clf = GridSearch(ParaSpace, max_runs = 100, n_jobs = 10, 
+                    estimator = estimator, cv = cv, refit = True, verbose = True)
         clf.fit(iris.data, iris.target)
         clf.plot_scores()
 
-Random Search
-------------------------------------------------
-::
+Random Search::
+
         import numpy as np 
         from sklearn import svm
         from sklearn import datasets
         from sklearn.model_selection import KFold
-        from seqmm.pybatdoe import RandSklearn
+        from seqmm.pybatdoe import RandSearch
 
         iris = datasets.load_iris()
         ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
                'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
         estimator = svm.SVC()
         cv = KFold(n_splits=5, random_state=1, shuffle=True)
-        clf = RandSklearn(estimator, cv, ParaSpace, max_runs = 100, n_jobs = 10, 
-                        refit = True, verbose = True)
+        clf = RandSearch(ParaSpace, max_runs = 100, n_jobs = 10, 
+                    estimator = estimator, cv = cv, refit = True, verbose = True)
         clf.fit(iris.data, iris.target)
         clf.plot_scores()
 
-Latin Hypercube Sampling
-------------------------------------------------
-::
+Latin Hypercube Sampling::
+
         import numpy as np 
         from sklearn import svm
         from sklearn import datasets
         from sklearn.model_selection import KFold
-        from seqmm.pybatdoe import LHSSklearn
+        from seqmm import LHSSearch
 
         iris = datasets.load_iris()
         ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
                'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
         estimator = svm.SVC()
         cv = KFold(n_splits=5, random_state=1, shuffle=True)
-        clf = LHSSklearn(estimator, cv, ParaSpace, max_runs = 100, n_jobs = 10, refit = True, verbose = True)
+        clf = LHSSearch(ParaSpace, max_runs = 100, n_jobs = 10, 
+                    estimator = estimator, cv = cv, refit = True, verbose = True)
         clf.fit(iris.data, iris.target)
         clf.plot_scores()
         
         
-Sobol Sequence
-------------------------------------------------
-::
+Sobol Sequence::
+
         import numpy as np 
         from sklearn import svm
         from sklearn import datasets
         from sklearn.model_selection import KFold
-        from seqmm.pybatdoe import LHSSklearn
+        from seqmm import SobolSearch
 
         iris = datasets.load_iris()
         ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
                'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
         estimator = svm.SVC()
         cv = KFold(n_splits=5, random_state=1, shuffle=True)
-        clf = LHSSklearn(estimator, cv, ParaSpace, max_runs = 100, n_jobs = 10, refit = True, verbose = True)
+        clf = SobolSearch(ParaSpace, max_runs = 100, n_jobs = 10, 
+                    estimator = estimator, cv = cv, refit = True, verbose = True)
         clf.fit(iris.data, iris.target)
         clf.plot_scores()        
 
@@ -119,5 +118,11 @@ Sobol Sequence
 Reference list 
 _______________
 
+
+.. [Sobol967] Sobol,I.M. (1967), "Distribution of points in a cube and approximate evaluation of integrals". Zh. Vych. Mat. Mat. Fiz. 7: 784–802 (in Russian); U.S.S.R Comput. Maths. Math. Phys. 7: 86–112 (in English)
+
+.. [McKay1978] McKay, M.D., Beckman, R.J. and Conover, W.J., 1979. Comparison of three methods for selecting values of input variables in the analysis of output from a computer code. Technometrics, 21(2), pp.239-245.
+
 .. [Bergstra2012] James Bergstra and Yoshua Bengio. Random search for hyper-parameter optimization. Journal of Machine Learning Research, 13(Feb):281–305, 2012.
+
 .. [Zhang2019] Hyperparameter Tuning Methods in Automated Machine Learning. (In Chinese) Submitted.

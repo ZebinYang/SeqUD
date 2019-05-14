@@ -165,40 +165,32 @@
 <h1>Sequential Uniform Design<a class="headerlink" href="#sequential-uniform-design" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>We advocate to reformulate AutoML as a kind of Computer Experiment for the purpose of maximizing ML prediction accuracy.
-Within CompExp framework, we propose a novel SeqUD approach for algorithm selection and optimal hyperparameter configuration.</p>
-<p>Fang and Wang (1990) proposed an SNTO method using NT-nets for global/blackbox optimization; see Fang and Wang (1994; Chapter 3)</p>
+<p>We advocate to reformulate AutoML as a kind of Computer Experiment for the purpose of maximizing ML prediction accuracy (<a class="reference internal" href="#yang2019" id="id1"><span>[Yang2019]</span></a>).
+Within CompExp framework, we propose a novel SeqUD approach for algorithm selection and optimal hyperparameter configuration.
+Uniform designs is a frequently used spacefilling design method, first proposed in the 1980s by Prof. Fang and Prof. Yuan. It aims at covering the search space uniformly, as shown in the figure below.</p>
+<a class="reference internal image-reference" href="_images/Demo_UD.png"><img alt="_images/Demo_UD.png" src="_images/Demo_UD.png" style="width: 80%;" /></a>
+<p>However, it is still an one-shot design method, which has similar limitations as grid search and random search. Therefore, we develop a sequential uniform design method, which enjoys the advantage of batch design and sequential strategy.</p>
 </div>
 <div class="section" id="algorithm">
 <h2>Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Define the search space by converting individual hyperparameters (upon necessary transformation) into unit hypercube $[0,1]^d$: linear mapping if continuous/integer-valued, one-hot encoding if categorical.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}(a + b)^2 = a^2 + 2ab + b^2\\(a - b)^2 = a^2 - 2ab + b^2\end{aligned}\end{align} \]</div>
-<div class="math notranslate nohighlight">
-\begin{eqnarray}
-   y    &amp; = &amp; ax^2 + bx + c \\
-   f(x) &amp; = &amp; x^2 + 2xy + y^2
-\end{eqnarray}</div><div class="math notranslate nohighlight">
-\[\theta \in \mbox{UD}\]</div>
 <ul>
-<li><p>Start with <span class="math notranslate nohighlight">\(\theta \in \UD\)</span> to train ML algorithm; obtain CV scores; fit GP model for $CV(thth)$; find $hatthth_0^*$ from $UD$ and $GP$-evaluated QMC samples.</p></li>
-<li><p>Sequential refining strategy: for iterative step $t=1,2,ldots,T_{max}$</p>
+<li><p>Define the search space by converting individual hyperparameters (upon necessary transformation) into unit hypercube <span class="math notranslate nohighlight">\([0,1]^d\)</span>: linear mapping if continuous/integer-valued, one-hot encoding if categorical.</p></li>
+<li><p>Start with <span class="math notranslate nohighlight">\(\theta \in \mbox{UD}\)</span> to train ML algorithm; obtain CV scores;  find <span class="math notranslate nohighlight">\(\hat\theta_0^*\)</span> from <span class="math notranslate nohighlight">\(\mbox{UD}\)</span></p></li>
+<li><p>Sequential refining strategy: for iterative step <span class="math notranslate nohighlight">\(t=1,2,\ldots,T_{\max}\)</span></p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Centered at $hatthth^*_{t-1}$, define the search subspacefootnote{scriptsize SeqUD can be easily extended to multi-subspace implementation per iteration.}  with reduced range and increased granularity;</p></li>
-<li><p>Find augmented UD in the subspace; train ML algorithm with new $thth$ samples and obtain CV scores;</p></li>
-<li><p>Collect all trained ${thth, CV(thth)}$, refit GP model, then find $hatthth_t^{*}$.</p></li>
+<li><p>Centered at <span class="math notranslate nohighlight">\(\hat\theta^*_{t-1}\)</span>, define the search subspace with reduced range and increased granularity;</p></li>
+<li><p>Find augmented UD in the subspace; train ML algorithm with new <span class="math notranslate nohighlight">\(\theta\)</span> samples and obtain CV scores;</p></li>
+<li><p>Collect all trained <span class="math notranslate nohighlight">\(\{\theta, \mbox{CV}(\theta)\}\)</span>, and find <span class="math notranslate nohighlight">\(\hat\theta_t^{*}\)</span>.</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p>Output the optimal $thth^*$ from all trained    ${thth, CV(thth)}$.</p></li>
+<li><p>Output the optimal <span class="math notranslate nohighlight">\(\theta^*\)</span> from all trained    <span class="math notranslate nohighlight">\(\{\theta, \mbox{CV}(\theta)\}\)</span>.</p></li>
 </ul>
 </div>
 <div class="section" id="a-simple-demo">
 <h2>A Simple Demo<a class="headerlink" href="#a-simple-demo" title="Permalink to this headline">¶</a></h2>
-<p>The figure below shows a two-stage example of the SeqUDHO approach in a 2-D space. The circle points represent the initial uniform design via $U_{20}(20^{2})$. The surrounding box serves as the subspace of interest centered on the optimal trial $x^{*}_{1}$ at the first stage, which is denoted by a square point in green. At the second stage, new trial points are augmented to form a $U_{20}(20^{2})$, denoted by the blue triangle points.</p>
+<p>The figure below shows a two-stage example of the SeqUDHO approach in a 2-D space. The circle points represent the initial uniform design via <span class="math notranslate nohighlight">\(U_{20}(20^{2})\)</span>. The surrounding box serves as the subspace of interest centered on the optimal trial <span class="math notranslate nohighlight">\(\x^{*}_{1}\)</span> at the first stage, which is denoted by a square point in green. At the second stage, new trial points are augmented to form a <span class="math notranslate nohighlight">\(U_{20}(20^{2})\)</span>, denoted by the blue triangle points.</p>
 <a class="reference internal image-reference" href="_images/Demo_SeqUD.png"><img alt="_images/Demo_SeqUD.png" class="align-center" src="_images/Demo_SeqUD.png" style="width: 50%;" /></a>
 <p>The proposed approach is advantageous over the Bayesian optimization methods.</p>
 <ul class="simple">
@@ -214,15 +206,15 @@ Within CompExp framework, we propose a novel SeqUD approach for algorithm select
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
-<span class="kn">from</span> <span class="nn">seqmm.pybatdoe</span> <span class="k">import</span> <span class="n">UDSklearn</span>
+<span class="kn">from</span> <span class="nn">seqmm</span> <span class="k">import</span> <span class="n">UDSearch</span>
 
 <span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 <span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
        <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">}}</span>
 <span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
 <span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">clf</span> <span class="o">=</span> <span class="n">UDSklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">level_number</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">max_search_iter</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-                <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">UDSearch</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">level_number</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">max_search_iter</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+          <span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
@@ -246,12 +238,12 @@ Within CompExp framework, we propose a novel SeqUD approach for algorithm select
 <span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span>     <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
              <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">}}</span>
 
-<span class="n">Level_Number</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
 <span class="n">score_metric</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">clf</span> <span class="o">=</span> <span class="n">SeqUDSklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">Level_Number</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="n">score_metric</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SeqUD</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">level_number</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">max_search_iter</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+          <span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
@@ -287,7 +279,8 @@ Within CompExp framework, we propose a novel SeqUD approach for algorithm select
 <span class="n">score_metric</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">clf</span> <span class="o">=</span> <span class="n">SeqUDSklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">Level_Number</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="n">score_metric</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SeqUD</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">level_number</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">max_search_iter</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+          <span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
@@ -312,7 +305,8 @@ Within CompExp framework, we propose a novel SeqUD approach for algorithm select
 <span class="n">estimator</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">()</span>
 <span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">clf</span> <span class="o">=</span> <span class="n">SeqUDSklearn</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">Level_Number</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SeqUD</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">level_number</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">max_search_iter</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+          <span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
@@ -320,7 +314,7 @@ Within CompExp framework, we propose a novel SeqUD approach for algorithm select
 <div class="section" id="reference-list">
 <h3>Reference list<a class="headerlink" href="#reference-list" title="Permalink to this headline">¶</a></h3>
 <dl class="citation">
-<dt class="label" id="yang2019"><span class="brackets">Yang2019</span></dt>
+<dt class="label" id="yang2019"><span class="brackets"><a class="fn-backref" href="#id1">Yang2019</a></span></dt>
 <dd><p>Zebin Yang, Aijun Zhang and Ji Zhu. (2019) Hyperparameter Optimization via Sequential Uniform Designs. Submitted.</p>
 </dd>
 </dl>

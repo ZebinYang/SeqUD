@@ -13,7 +13,7 @@ The following three Bayesian optimization methods are most popular in AutoML are
 
 - SMAC ([Hutter2011]_): It use random forest as surrogote model and EI and acquisition function.
 
-- TPE ([Bergstra2011]_): Tree-structured Parzen Estimator. It use non parametric method to model $p(x|y)$ and $p(y)$ (the prior is not of interest actually) instead of $p(y|x)$.
+- TPE ([Bergstra2011]_): Tree-structured Parzen Estimator. It use non parametric method to model :math:`p(x|y)` and :math:`p(y)` (the prior is not of interest actually) instead of :math:`p(y|x)`.
 
 
 Their corresponding python implementations can be found here. 
@@ -34,18 +34,19 @@ Potential limitations of Bayesian optimization:
 - Bayesian optimization are designed to select trials one-by-one, which is unnatural to perform parallelization.
 
 
-GP-EI Example: Xgboost for Regression
 
+Code Examples 
 ---------------------------------------
 
-::
+GP-EI Xgboost::
+
         import numpy as np
         import xgboost as xgb
         from sklearn import datasets
         from sklearn.model_selection import KFold 
         from sklearn.preprocessing import MinMaxScaler
         from sklearn.metrics import make_scorer, mean_squared_error
-        from seqmm.pybayopt import SMACSklearn
+        from seqmm import SMACOPT
         dt = datasets.load_diabetes()
         sx = MinMaxScaler()
         sy = MinMaxScaler()
@@ -65,15 +66,12 @@ GP-EI Example: Xgboost for Regression
         score_metric = make_scorer(mean_squared_error, False)
         cv = KFold(n_splits=5, random_state=0, shuffle=True)
 
-        clf = SMACSklearn(estimator, cv, ParaSpace, max_runs = 100, refit = True, scoring = score_metric, verbose = True)
+        clf = SMACOPT(ParaSpace, max_runs = 100, estimator = estimator, cv = cv, refit = True, scoring = score_metric, verbose = True)
         clf.fit(x, y)
         clf.plot_scores()        
         
 
-SMAC Example: Xgboost for Regression
----------------------------------------
-
-::
+SMAC::
   
         import numpy as np
         from sklearn import svm
@@ -83,7 +81,7 @@ SMAC Example: Xgboost for Regression
         from sklearn.preprocessing import MinMaxScaler
         from sklearn.model_selection import cross_val_score
         from sklearn.metrics import make_scorer, accuracy_score
-        from seqmm.pybayopt import GPEISklearn
+        from seqmm import GPEIOPT
 
         sx = MinMaxScaler()
         dt = datasets.load_breast_cancer()
@@ -97,16 +95,13 @@ SMAC Example: Xgboost for Regression
         score_metric = make_scorer(accuracy_score, True)
         cv = KFold(n_splits=5, random_state=0, shuffle=True)
 
-        clf = GPEISklearn(estimator, cv, ParaSpace, max_runs = 100, time_out = 10, refit = True, verbose = True)
+        clf = GPEIOPT(ParaSpace, max_runs = 100, estimator = estimator, cv = cv, refit = True, scoring = score_metric, verbose = True)
         clf.fit(x, y)
         clf.plot_scores()
         
         
         
-TPE Example: Xgboost for Regression
----------------------------------------
-
-::
+TPE::
 
         import numpy as np
         from sklearn import svm
@@ -116,7 +111,7 @@ TPE Example: Xgboost for Regression
         from sklearn.preprocessing import MinMaxScaler
         from sklearn.model_selection import cross_val_score
         from sklearn.metrics import make_scorer, accuracy_score
-        from seqmm.pybayopt import GPEISklearn
+        from seqmm import GPEIOPT
 
         sx = MinMaxScaler()
         dt = datasets.load_breast_cancer()
@@ -130,7 +125,7 @@ TPE Example: Xgboost for Regression
         score_metric = make_scorer(accuracy_score, True)
         cv = KFold(n_splits=5, random_state=0, shuffle=True)
 
-        clf = GPEISklearn(estimator, cv, ParaSpace, max_runs = 100, time_out = 10, refit = True, verbose = True)
+        clf = GPEIOPT(ParaSpace, max_runs = 100, estimator = estimator, cv = cv, refit = True, scoring = score_metric, verbose = True)
         clf.fit(x, y)
         clf.plot_scores()
         

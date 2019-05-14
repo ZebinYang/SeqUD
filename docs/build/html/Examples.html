@@ -167,7 +167,7 @@
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pylab</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">seqmm.pysequd</span> <span class="k">import</span> <span class="n">SeqUDOptimizer</span>
+<span class="kn">from</span> <span class="nn">seqmm</span> <span class="k">import</span> <span class="n">SeqUD</span>
 
 <span class="k">def</span> <span class="nf">cliff</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
     <span class="n">x1</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">]</span>
@@ -180,28 +180,8 @@
 <span class="n">Level_Number</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">},</span>
              <span class="s1">&#39;x2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">}}</span>
-<span class="n">clf</span> <span class="o">=</span> <span class="n">SeqUDOptimizer</span><span class="p">(</span><span class="n">cliff</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">Level_Number</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">clf</span><span class="o">.</span><span class="n">search</span><span class="p">()</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Example 2: Octopus-Shaped function</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pylab</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">seqmm.pysequd</span> <span class="k">import</span> <span class="n">SeqUDOptimizer</span>
-
-<span class="k">def</span> <span class="nf">octopus</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
-    <span class="n">x1</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">]</span>
-    <span class="n">x2</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;x2&#39;</span><span class="p">]</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="n">x1</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="n">x2</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="n">x1</span><span class="o">*</span><span class="n">x2</span><span class="p">)</span>
-    <span class="k">return</span>  <span class="n">y</span>
-
-<span class="n">Level_Number</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">},</span>
-             <span class="s1">&#39;x2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">}}</span>
-<span class="n">clf</span> <span class="o">=</span> <span class="n">SeqUDOptimizer</span><span class="p">(</span><span class="n">octopus</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">Level_Number</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">clf</span><span class="o">.</span><span class="n">search</span><span class="p">()</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SeqUD</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fmin</span><span class="p">(</span><span class="n">cliff</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -216,7 +196,7 @@
 <span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="k">import</span> <span class="n">f_regression</span>
 <span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="k">import</span> <span class="n">Pipeline</span>
 
-<span class="kn">from</span> <span class="nn">seqmm</span> <span class="k">import</span> <span class="n">SeqUDSklearn</span>
+<span class="kn">from</span> <span class="nn">seqmm</span> <span class="k">import</span> <span class="n">SeqUD</span>
 
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">samples_generator</span><span class="o">.</span><span class="n">make_classification</span><span class="p">(</span>
     <span class="n">n_informative</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
@@ -231,7 +211,7 @@
             <span class="p">}</span>
 
 <span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">clf</span> <span class="o">=</span> <span class="n">SeqUDSklearn</span><span class="p">(</span><span class="n">anova_svm</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span><span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SeqUD</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">estimator</span> <span class="o">=</span> <span class="n">anova_svm</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -245,8 +225,8 @@
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">mean_squared_error</span>
-<span class="kn">from</span> <span class="nn">seqmm</span> <span class="k">import</span> <span class="n">SeqUDSklearn</span><span class="p">,</span> <span class="n">SeqUDOptimizer</span><span class="p">,</span> <span class="n">GPEISklearn</span><span class="p">,</span> <span class="n">SeqRandSklearn</span><span class="p">,</span> \
-        <span class="n">SMACSklearn</span><span class="p">,</span> <span class="n">TPESklearn</span><span class="p">,</span> <span class="n">GridSklearn</span><span class="p">,</span> <span class="n">RandSklearn</span><span class="p">,</span> <span class="n">LHSSklearn</span><span class="p">,</span> <span class="n">SobolSklearn</span><span class="p">,</span> <span class="n">UDSklearn</span>
+<span class="kn">from</span> <span class="nn">seqmm</span> <span class="k">import</span> <span class="n">SeqUD</span><span class="p">,</span> <span class="n">SeqRand</span><span class="p">,</span> <span class="n">GPEIOPT</span><span class="p">,</span> <span class="n">SMACOPT</span><span class="p">,</span> <span class="n">TPEOPT</span><span class="p">,</span>\
+            <span class="n">GridSearch</span><span class="p">,</span> <span class="n">RandSearch</span><span class="p">,</span> <span class="n">LHSSearch</span><span class="p">,</span> <span class="n">SobolSearch</span><span class="p">,</span> <span class="n">UDSearch</span>
 
 <span class="n">dt</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">()</span>
 <span class="n">sx</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
@@ -269,14 +249,14 @@
 <span class="n">score_metric</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">seq_model_zoo</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;SeqUD&quot;</span><span class="p">:</span> <span class="n">SeqUDSklearn</span><span class="p">,</span>
-                 <span class="s2">&quot;SeqRand&quot;</span><span class="p">:</span> <span class="n">SeqRandSklearn</span><span class="p">,</span>
-                  <span class="s2">&quot;GPEI&quot;</span><span class="p">:</span> <span class="n">GPEISklearn</span><span class="p">,</span>
-                  <span class="s2">&quot;SMAC&quot;</span><span class="p">:</span> <span class="n">SMACSklearn</span><span class="p">,</span>
-                  <span class="s2">&quot;TPE&quot;</span><span class="p">:</span> <span class="n">TPESklearn</span><span class="p">}</span>
+<span class="n">seq_model_zoo</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;SeqUD&quot;</span><span class="p">:</span> <span class="n">SeqUD</span><span class="p">,</span>
+         <span class="s2">&quot;SeqRand&quot;</span><span class="p">:</span> <span class="n">SeqRand</span><span class="p">,</span>
+          <span class="s2">&quot;GPEI&quot;</span><span class="p">:</span> <span class="n">GPEIOPT</span><span class="p">,</span>
+          <span class="s2">&quot;SMAC&quot;</span><span class="p">:</span> <span class="n">SMACOPT</span><span class="p">,</span>
+          <span class="s2">&quot;TPE&quot;</span><span class="p">:</span> <span class="n">TPEOPT</span><span class="p">}</span>
 <span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">seq_model_zoo</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fitting model: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span> <span class="n">item</span><span class="p">)</span>
-    <span class="n">clf</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span>  <span class="n">score_metric</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">clf</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span>  <span class="n">score_metric</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
     <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The best score is </span><span class="si">%0.5f</span><span class="s2">: ,time cost: </span><span class="si">%0.2f</span><span class="s2">:&quot;</span><span class="o">%</span> <span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">best_score_</span><span class="p">,</span><span class="n">clf</span><span class="o">.</span><span class="n">search_time_consumed_</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cummax</span><span class="p">())</span>

@@ -12,7 +12,7 @@ _________________________________
 
         import numpy as np 
         from matplotlib import pylab as plt
-        from seqmm.pysequd import SeqUDOptimizer
+        from seqmm import SeqUD
 
         def cliff(parameters):
             x1 = parameters['x1']
@@ -25,30 +25,9 @@ _________________________________
         Level_Number = 20
         ParaSpace = {'x1': {'Type': 'continuous', 'Range': [-20,20], 'Wrapper': lambda x: x}, 
                      'x2': {'Type': 'continuous', 'Range': [-10,5], 'Wrapper': lambda x: x}}
-        clf = SeqUDOptimizer(cliff, ParaSpace, Level_Number, n_jobs = 1, verbose = True)
-        clf.search()
+        clf = SeqUD(ParaSpace, max_runs = 100, verbose = True)
+        clf.fmin(cliff)
 
-
-- Example 2: Octopus-Shaped function
-
-.. code-block::
-
-        import numpy as np 
-        from matplotlib import pylab as plt
-        from seqmm.pysequd import SeqUDOptimizer
-
-        def octopus(parameters):
-            x1 = parameters['x1']
-            x2 = parameters['x2']
-            y = 2*np.cos(10*x1)*np.sin(10*x2)+np.sin(10*x1*x2)
-            return  y
-
-        Level_Number = 20
-        ParaSpace = {'x1': {'Type': 'continuous', 'Range': [0,1], 'Wrapper': lambda x: x}, 
-                     'x2': {'Type': 'continuous', 'Range': [0,1], 'Wrapper': lambda x: x}}
-        clf = SeqUDOptimizer(octopus, ParaSpace, Level_Number, n_jobs = 10, verbose = True)
-        clf.search()
-        
 
 Working with Scikit-learn Pipeline
 ___________________________________
@@ -64,7 +43,7 @@ ___________________________________
         from sklearn.feature_selection import f_regression
         from sklearn.pipeline import Pipeline
 
-        from seqmm import SeqUDSklearn
+        from seqmm import SeqUD
 
         X, y = samples_generator.make_classification(
             n_informative=5, n_redundant=0, random_state=42)
@@ -79,9 +58,8 @@ ___________________________________
                     }
 
         cv = KFold(n_splits=5, random_state=0, shuffle=True)
-        clf = SeqUDSklearn(anova_svm, cv, ParaSpace,verbose = True)
+        clf = SeqUD(ParaSpace, estimator = anova_svm, cv = cv, verbose = True)
         clf.fit(X, y)
-
 
 Methods Comparison 
 _________________________
@@ -95,8 +73,8 @@ _________________________
         from sklearn.model_selection import KFold 
         from sklearn.preprocessing import MinMaxScaler
         from sklearn.metrics import make_scorer, mean_squared_error
-        from seqmm import SeqUDSklearn, SeqUDOptimizer, GPEISklearn, SeqRandSklearn, \
-                SMACSklearn, TPESklearn, GridSklearn, RandSklearn, LHSSklearn, SobolSklearn, UDSklearn
+        from seqmm import SeqUD, SeqRand, GPEIOPT, SMACOPT, TPEOPT,\
+                    GridSearch, RandSearch, LHSSearch, SobolSearch, UDSearch
 
         dt = datasets.load_diabetes()
         sx = MinMaxScaler()
@@ -119,14 +97,14 @@ _________________________
         score_metric = make_scorer(mean_squared_error, False)
         cv = KFold(n_splits=5, random_state=0, shuffle=True)
 
-        seq_model_zoo = {"SeqUD": SeqUDSklearn, 
-                         "SeqRand": SeqRandSklearn,
-                          "GPEI": GPEISklearn, 
-                          "SMAC": SMACSklearn, 
-                          "TPE": TPESklearn}
+        seq_model_zoo = {"SeqUD": SeqUD, 
+                 "SeqRand": SeqRand,
+                  "GPEI": GPEIOPT, 
+                  "SMAC": SMACOPT, 
+                  "TPE": TPEOPT}
         for item, model in seq_model_zoo.items():
             print("Fitting model: %s"% item)
-            clf = model(estimator, cv, ParaSpace, max_runs = 100, scoring =  score_metric, refit = True, verbose = False)
+            clf = model(ParaSpace, max_runs = 100, estimator = estimator, cv = cv, scoring =  score_metric, refit = True, verbose = False)
             clf.fit(x, y)
             print("The best score is %0.5f: ,time cost: %0.2f:"% (clf.best_score_,clf.search_time_consumed_))
             plt.plot(clf.logs["score"].cummax()) 

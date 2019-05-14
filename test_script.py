@@ -35,12 +35,12 @@ class TestSeqMM(unittest.TestCase):
         """ Clean up test suite - no-op. """
         pass
 
-    def test_SeqUDSklearn(self):
+    def test_SeqUD(self):
         """ Test SeqUDSklearn. """
         
         Level_Number = 20
         try: 
-            clf = SeqUDSklearn(ParaSpace, Level_Number, max_runs = 10, estimator = estimator, cv = cv, 
+            clf = SeqUD(ParaSpace, Level_Number, max_runs = 10, estimator = estimator, cv = cv, 
                          scoring = score_metric, n_jobs = 1, refit = True, verbose = False)
             clf.fit(x, y)
             succeed = True
@@ -48,30 +48,30 @@ class TestSeqMM(unittest.TestCase):
             succeed = False
         self.assertTrue(succeed)
 
-    def test_GPEISklearn(self):
-        """ Test GPEISklearn. """
+    def test_GPEI(self):
+        """ Test GPEI. """
         try: 
-            clf = GPEISklearn(ParaSpace, max_runs = 10, time_out = 10, estimator = estimator, cv = cv, refit = True, verbose = False)
+            clf = GPEIOPT(ParaSpace, max_runs = 10, time_out = 10, estimator = estimator, cv = cv, refit = True, verbose = False)
             clf.fit(x, y)
             succeed = True
         except:
             succeed = False
         self.assertTrue(succeed)
         
-    def test_SMACSklearn(self):
-        """ Test SMACSklearn. """
+    def test_SMAC(self):
+        """ Test SMAC. """
         try: 
-            clf = SMACSklearn(ParaSpace, max_runs = 10, estimator = estimator, cv = cv, refit = True, verbose = False)
+            clf = SMACOPT(ParaSpace, max_runs = 10, estimator = estimator, cv = cv, refit = True, verbose = False)
             clf.fit(x,y)    
             succeed = True
         except:
             succeed = False
         self.assertTrue(succeed)
         
-    def test_TPESklearn(self):
-        """ Test TPESklearn. """
+    def test_TPE(self):
+        """ Test TPE. """
         try: 
-            clf = TPESklearn(ParaSpace, max_runs = 10, estimator = estimator, cv = cv, refit = True, verbose = False)
+            clf = TPEOPT(ParaSpace, max_runs = 10, estimator = estimator, cv = cv, refit = True, verbose = False)
             clf.fit(x,y)    
             succeed = True
         except:
