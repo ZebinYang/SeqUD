@@ -113,7 +113,6 @@ class LHSSearch(BatchBase):
         Main loop for searching the best hyperparameters. 
         
         """     
-        np.rand.seed(self.rand_seed)
         para_set_ud = lhs(n = self.extend_factor_number, samples = self.max_runs, criterion='centermaximin')
         para_set_ud = pd.DataFrame(para_set_ud, columns = self.para_ud_names)
         para_set = self._para_mapping(para_set_ud)

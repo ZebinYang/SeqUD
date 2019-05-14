@@ -3,7 +3,7 @@ Bayesian Optimization
 
 
 Introduction 
----------------------------------------
+------------------
 
 In classical Bayesian optimization, trials points are sequentially sampled one-point-at-a-time through
 maximizing the expected improvement. Let's see a univariate example. 
@@ -136,7 +136,7 @@ TPE::
         
         
 Reference list 
---------------------
+________________
 
 .. [Snoek2012] Jasper Snoek, Hugo Larochelle, and Ryan P Adams. Practical bayesian optimization of machine learning algorithms. In Advances in Neural Information Processing Systems, pages 2951–2959, 2012.
 

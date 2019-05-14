@@ -111,7 +111,6 @@ class RandSearch(BatchBase):
         Main loop for searching the best hyperparameters. 
         
         """  
-        np.rand.seed(self.rand_seed)
         para_set = pd.DataFrame()
         for item, values in self.para_space.items():
             if (values['Type']=="categorical"):

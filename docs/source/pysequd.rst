@@ -35,7 +35,7 @@ Algorithm
 A Simple Demo 
 ----------------
 
-The figure below shows a two-stage example of the SeqUDHO approach in a 2-D space. The circle points represent the initial uniform design via :math:`U_{20}(20^{2})`. The surrounding box serves as the subspace of interest centered on the optimal trial :math:`\x^{*}_{1}` at the first stage, which is denoted by a square point in green. At the second stage, new trial points are augmented to form a :math:`U_{20}(20^{2})`, denoted by the blue triangle points.
+The figure below shows a two-stage example of the SeqUDHO approach in a 2-D space. The circle points represent the initial uniform design via :math:`U_{20}(20^{2})`. The surrounding box serves as the subspace of interest centered on the optimal trial :math:`x^{*}_{1}` at the first stage, which is denoted by a square point in green. At the second stage, new trial points are augmented to form a :math:`U_{20}(20^{2})`, denoted by the blue triangle points.
 
 .. image:: ./images/Demo_SeqUD.png
     :width: 50%

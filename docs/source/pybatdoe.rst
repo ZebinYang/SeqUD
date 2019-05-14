@@ -1,6 +1,9 @@
 One-shot Batch Designs
 ==============================
 
+
+Introduction 
+------------------
 Batch designs can generate all the experimental trials before conducting any experiments.
 Here, we introduce five simple strategies.
 

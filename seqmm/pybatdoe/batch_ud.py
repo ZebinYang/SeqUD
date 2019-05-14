@@ -145,7 +145,6 @@ class UDSearch(BatchBase):
         Main loop for searching the best hyperparameters. 
         
         """     
-        np.rand.seed(self.rand_seed)
         para_set_ud = self._generate_init_design()
         para_set = self._para_mapping(para_set_ud)
         para_set_ud.columns = self.para_ud_names

@@ -112,7 +112,6 @@ class SobolSearch(BatchBase):
         Main loop for searching the best hyperparameters. 
         
         """        
-        np.rand.seed(self.rand_seed)
         para_set_ud = sobol_seq.i4_sobol_generate(self.extend_factor_number, self.max_runs) 
         para_set_ud = pd.DataFrame(para_set_ud, columns = self.para_ud_names)
         para_set = self._para_mapping(para_set_ud)
