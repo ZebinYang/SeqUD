@@ -6,11 +6,10 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import KFold
 from sklearn.metrics import make_scorer, accuracy_score
 
-from seqmm import SeqUDSklearn
-from seqmm import SeqUDOptimizer
-from seqmm import GPEISklearn
-from seqmm import SMACSklearn
-from seqmm import TPESklearn
+from seqmm import SeqUD
+from seqmm import GPEIOPT
+from seqmm import SMACOPT
+from seqmm import TPEOPT
 
 sx = MinMaxScaler()
 dt = datasets.load_breast_cancer()
@@ -41,33 +40,9 @@ class TestSeqMM(unittest.TestCase):
         
         Level_Number = 20
         try: 
-            clf = SeqUDSklearn(estimator, cv, ParaSpace, Level_Number, max_runs = 10, 
+            clf = SeqUDSklearn(ParaSpace, Level_Number, max_runs = 10, estimator = estimator, cv = cv, 
                          scoring = score_metric, n_jobs = 1, refit = True, verbose = False)
             clf.fit(x, y)
-            succeed = True
-        except:
-            succeed = False
-        self.assertTrue(succeed)
-    
-    def test_SeqUDOptimizer(self):
-        """ Test SeqUDOptimizer. """
-        
-        def cliff(parameters):
-            x1 = parameters['x1']
-            x2 = parameters['x2']
-
-            term1 = -0.5*x1**2/100
-            term2 = -0.5*(x2+0.03*x1**2-3)**2
-            y = np.exp(term1 + term2)
-            return  y
-        
-        Level_Number = 20
-        ParaSpace = {'x1': {'Type': 'continuous', 'Range': [-20,20], 'Wrapper': lambda x: x}, 
-                 'x2': {'Type': 'continuous', 'Range': [-10,5], 'Wrapper': lambda x: x}}
-        try: 
-            clf = SeqUDOptimizer(cliff, ParaSpace, Level_Number, 
-                          max_runs = 10, n_jobs = 1, verbose = False)
-            clf.search()    
             succeed = True
         except:
             succeed = False
@@ -76,8 +51,7 @@ class TestSeqMM(unittest.TestCase):
     def test_GPEISklearn(self):
         """ Test GPEISklearn. """
         try: 
-            clf = GPEISklearn(estimator, cv, ParaSpace, max_runs = 10, 
-                        time_out = 10, refit = True, verbose = False)
+            clf = GPEISklearn(ParaSpace, max_runs = 10, time_out = 10, estimator = estimator, cv = cv, refit = True, verbose = False)
             clf.fit(x, y)
             succeed = True
         except:
@@ -87,8 +61,7 @@ class TestSeqMM(unittest.TestCase):
     def test_SMACSklearn(self):
         """ Test SMACSklearn. """
         try: 
-            clf = SMACSklearn(estimator, cv, ParaSpace, 
-                        max_runs = 10, refit = True, verbose = False)
+            clf = SMACSklearn(ParaSpace, max_runs = 10, estimator = estimator, cv = cv, refit = True, verbose = False)
             clf.fit(x,y)    
             succeed = True
         except:
@@ -98,8 +71,7 @@ class TestSeqMM(unittest.TestCase):
     def test_TPESklearn(self):
         """ Test TPESklearn. """
         try: 
-            clf = TPESklearn(estimator, cv, ParaSpace, 
-                        max_runs = 10, refit = True, verbose = False)
+            clf = TPESklearn(ParaSpace, max_runs = 10, estimator = estimator, cv = cv, refit = True, verbose = False)
             clf.fit(x,y)    
             succeed = True
         except:

@@ -182,7 +182,6 @@ class GPEIOPT(BayoptBase):
         Main loop for searching the best hyperparameters. 
         
         """      
-        np.random.seed(self.rand_seed)
         scores = []
         param_unit = []
         file_dir = "./temp/" + str(time.time()) + str(np.random.rand(1)[0]) + "/"
