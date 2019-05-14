@@ -85,6 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">One-shot Batch Designs</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Bayesian Optimization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#code-examples">Code Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#reference-list">Reference list</a></li>
 </ul>
@@ -158,9 +159,11 @@
             
   <div class="section" id="bayesian-optimization">
 <h1>Bayesian Optimization<a class="headerlink" href="#bayesian-optimization" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>In classical Bayesian optimization, trials points are sequentially sampled one-point-at-a-time through
 maximizing the expected improvement. Let’s see a univariate example.</p>
-<a class="reference internal image-reference" href="_images/Demo_BO_eng.png"><img alt="_images/Demo_BO_eng.png" src="_images/Demo_BO_eng.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="_images/Demo_BO_eng.png"><img alt="_images/Demo_BO_eng.png" class="align-center" src="_images/Demo_BO_eng.png" style="width: 80%;" /></a>
 <p>The following three Bayesian optimization methods are most popular in AutoML area.</p>
 <ul class="simple">
 <li><p>GP-EI (<a class="reference internal" href="#snoek2012" id="id1"><span>[Snoek2012]</span></a>): Gaussian process and expected improvement</p></li>
@@ -179,6 +182,7 @@ maximizing the expected improvement. Let’s see a univariate example.</p>
 <li><p>Lack uniformality considerations: algorithm can be trapped into local areas if without a good initialization.</p></li>
 <li><p>Bayesian optimization are designed to select trials one-by-one, which is unnatural to perform parallelization.</p></li>
 </ul>
+</div>
 <div class="section" id="code-examples">
 <h2>Code Examples<a class="headerlink" href="#code-examples" title="Permalink to this headline">¶</a></h2>
 <p>GP-EI Xgboost:</p>

@@ -12,7 +12,7 @@ Here, we introduce five simple strategies.
 
 - Sobol Sequence: quasi-random low-discrepancy sequence ([Sobol967]_)
 
-The figures below make a simple comparison of the four mentioned sampling approach ([Zhang2019]_).
+The figures (derived from [Zhang2019]_) present a demo of the four mentioned sampling approach, including Grid search (top left), Random search (top right), Latin hypercube (bottom left) and Sobol Sequence (bottom right).
 
 |pic1| |pic2| |pic3| |pic4|
 

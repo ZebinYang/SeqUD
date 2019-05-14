@@ -18,12 +18,6 @@ class SeqUD(object):
     
     Parameters
     ----------
-    :type  estimator: estimator object
-    :param estimator: This is assumed to implement the scikit-learn estimator interface.
-    
-    :type  cv: cross-validation method, an sklearn object.
-    :param cv: e.g., `StratifiedKFold` and KFold` is used.
-    
     :type  para_space: dict or list of dictionaries
     :param para_space: It has three types:
     
@@ -45,15 +39,21 @@ class SeqUD(object):
     :type max_search_iter: int, optional, default = 100 
     :param max_search_iter: The maximum number of iterations used to generate uniform design or augmented uniform design.
     
-    :type scoring: string, callable, list/tuple, dict or None, optional, default = None
-    :param scoring: A sklearn type scoring function. 
-        If None, the estimator's default scorer (if available) is used. See the package `sklearn` for details.
-    
     :type n_jobs: int or None, optional, optional, default = None
     :param n_jobs: Number of jobs to run in parallel.
         If -1 all CPUs are used. If 1 is given, no parallel computing code
         is used at all, which is useful for debugging. See the package `joblib` for details.
+
+    :type  estimator: estimator object
+    :param estimator: This is assumed to implement the scikit-learn estimator interface.
     
+    :type  cv: cross-validation method, an sklearn object.
+    :param cv: e.g., `StratifiedKFold` and KFold` is used.
+    
+    :type scoring: string, callable, list/tuple, dict or None, optional, default = None
+    :param scoring: A sklearn type scoring function. 
+        If None, the estimator's default scorer (if available) is used. See the package `sklearn` for details.
+        
     :type refit: boolean, or string, optional, default = True
     :param refit: It controls whether to refit an estimator using the best found parameters on the whole dataset.
     

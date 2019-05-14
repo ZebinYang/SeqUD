@@ -1,12 +1,17 @@
 Bayesian Optimization
 ==========================================
 
+
+Introduction 
+---------------------------------------
+
 In classical Bayesian optimization, trials points are sequentially sampled one-point-at-a-time through
 maximizing the expected improvement. Let's see a univariate example. 
 
 .. image:: ./images/Demo_BO_eng.png
-     :width: 80%
-
+    :width: 80%
+    :align: center
+    
 The following three Bayesian optimization methods are most popular in AutoML area.
 
 - GP-EI ([Snoek2012]_): Gaussian process and expected improvement

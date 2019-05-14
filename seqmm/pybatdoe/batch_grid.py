@@ -21,12 +21,6 @@ class GridSearch(BatchBase):
 
     Parameters
     ----------
-    :type  estimator: estimator object
-    :param estimator: This is assumed to implement the scikit-learn estimator interface.
-    
-    :type  cv: cross-validation method, an sklearn object.
-    :param cv: e.g., `StratifiedKFold` and KFold` is used.
-    
     :type  para_space: dict or list of dictionaries
     :param para_space: It has three types:
     
@@ -42,6 +36,17 @@ class GridSearch(BatchBase):
     :param max_runs: The maximum number of trials to be evaluated. When this values is reached, 
         then the algorithm will stop. 
         
+    :type n_jobs: int or None, optional, optional, default = None
+    :param n_jobs: Number of jobs to run in parallel.
+        If -1 all CPUs are used. If 1 is given, no parallel computing code
+        is used at all, which is useful for debugging. See the package `joblib` for details.
+
+    :type  estimator: estimator object
+    :param estimator: This is assumed to implement the scikit-learn estimator interface.
+    
+    :type  cv: cross-validation method, an sklearn object.
+    :param cv: e.g., `StratifiedKFold` and KFold` is used.
+    
     :type scoring: string, callable, list/tuple, dict or None, optional, default = None
     :param scoring: A sklearn type scoring function. 
         If None, the estimator's default scorer (if available) is used. See the package `sklearn` for details.
@@ -68,7 +73,7 @@ class GridSearch(BatchBase):
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=0, shuffle=True)
     >>> clf = GridSearch(ParaSpace, max_runs = 100, estimator = estimator, cv = cv, 
-                 scoring=None, n_job = None, refit=False, rand_seed = 0, verbose = False)
+                 scoring=None, n_jobs = None, refit=False, rand_seed = 0, verbose = False)
     >>> clf.fit(iris.data, iris.target)
 
     Attributes
@@ -92,9 +97,9 @@ class GridSearch(BatchBase):
     """    
 
     def __init__(self, para_space, max_runs = 100, estimator = None, cv = None, 
-                 scoring=None, n_job = None, refit=False, rand_seed = 0, verbose = False):
+                 scoring=None, n_jobs = None, refit=False, rand_seed = 0, verbose = False):
 
-        super(GridSearch,self).__init__(para_space, max_runs, n_job, verbose)
+        super(GridSearch,self).__init__(para_space, max_runs, n_jobs, verbose)
 
         self.cv = cv
         self.refit = refit

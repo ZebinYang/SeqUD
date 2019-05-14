@@ -19,12 +19,6 @@ class TPEOPT(BayoptBase):
 
     Parameters
     ----------
-    :type  estimator: estimator object
-    :param estimator: This is assumed to implement the scikit-learn estimator interface.
-    
-    :type  cv: cross-validation method, an sklearn object.
-    :param cv: e.g., `StratifiedKFold` and KFold` is used.
-    
     :type  para_space: dict or list of dictionaries
     :param para_space: It has three types:
     
@@ -40,6 +34,12 @@ class TPEOPT(BayoptBase):
     :param max_runs: The maximum number of trials to be evaluated. When this values is reached, 
         then the algorithm will stop. 
         
+    :type  estimator: estimator object
+    :param estimator: This is assumed to implement the scikit-learn estimator interface.
+    
+    :type  cv: cross-validation method, an sklearn object.
+    :param cv: e.g., `StratifiedKFold` and KFold` is used.
+    
     :type scoring: string, callable, list/tuple, dict or None, optional, default = None
     :param scoring: A sklearn type scoring function. 
         If None, the estimator's default scorer (if available) is used. See the package `sklearn` for details.
@@ -65,8 +65,7 @@ class TPEOPT(BayoptBase):
                'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=0, shuffle=True)
-    >>> clf = TPEOPT(ParaSpace, max_runs = 100, 
-                estimator = estimator, cv = cv, scoring = None, refit = None, rand_seed = 0, verbose = False)
+    >>> clf = TPEOPT(ParaSpace, max_runs = 100, estimator = estimator, cv = cv, scoring = None, refit = None, rand_seed = 0, verbose = False)
     >>> clf.fit(iris.data, iris.target)
 
     Attributes

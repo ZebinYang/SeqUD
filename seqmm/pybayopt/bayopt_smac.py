@@ -27,13 +27,7 @@ class SMACOPT(BayoptBase):
     Sklearn Hyperparameter optimization interface based on SMAC (Bayesian Optimization). 
     
     Parameters
-    ----------
-    :type  estimator: estimator object
-    :param estimator: This is assumed to implement the scikit-learn estimator interface.
-    
-    :type  cv: cross-validation method, an sklearn object.
-    :param cv: e.g., `StratifiedKFold` and KFold` is used.
-    
+    ----------    
     :type  para_space: dict or list of dictionaries
     :param para_space: It has three types:
     
@@ -48,7 +42,13 @@ class SMACOPT(BayoptBase):
     :type max_runs: int, optional, default = 100
     :param max_runs: The maximum number of trials to be evaluated. When this values is reached, 
         then the algorithm will stop. 
-        
+       
+    :type  estimator: estimator object
+    :param estimator: This is assumed to implement the scikit-learn estimator interface.
+    
+    :type  cv: cross-validation method, an sklearn object.
+    :param cv: e.g., `StratifiedKFold` and KFold` is used.
+
     :type scoring: string, callable, list/tuple, dict or None, optional, default = None
     :param scoring: A sklearn type scoring function. 
         If None, the estimator's default scorer (if available) is used. See the package `sklearn` for details.

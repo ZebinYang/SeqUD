@@ -36,12 +36,6 @@ class GPEIOPT(BayoptBase):
 
     Parameters
     ----------
-    :type  estimator: estimator object
-    :param estimator: This is assumed to implement the scikit-learn estimator interface.
-    
-    :type  cv: cross-validation method, an sklearn object.
-    :param cv: e.g., `StratifiedKFold` and KFold` is used.
-    
     :type  para_space: dict or list of dictionaries
     :param para_space: It has three types:
     
@@ -59,6 +53,12 @@ class GPEIOPT(BayoptBase):
     
     :type time_out: float, optional, default = 10
     :param time_out: The time out threshold (in seconds) for generating the next run. 
+    
+    :type  estimator: estimator object
+    :param estimator: This is assumed to implement the scikit-learn estimator interface.
+    
+    :type  cv: cross-validation method, an sklearn object.
+    :param cv: e.g., `StratifiedKFold` and KFold` is used.
     
     :type scoring: string, callable, list/tuple, dict or None, optional, default = None
     :param scoring: A sklearn type scoring function. 

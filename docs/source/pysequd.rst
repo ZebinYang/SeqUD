@@ -9,7 +9,8 @@ Within CompExp framework, we propose a novel SeqUD approach for algorithm select
 Uniform designs is a frequently used spacefilling design method, first proposed in the 1980s by Prof. Fang and Prof. Yuan. It aims at covering the search space uniformly, as shown in the figure below. 
 
 .. image:: ./images/Demo_UD.png
-     :width: 40%
+    :width: 40%
+    :align: center
 
 However, it is still an one-shot design method, which has similar limitations as grid search and random search. Therefore, we develop a sequential uniform design method, which enjoys the advantage of batch design and sequential strategy. 
 
