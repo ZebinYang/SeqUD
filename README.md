@@ -7,7 +7,7 @@
 - Enviroment: Linux + Python 3
 
 ```sheel
-pip install git+https://github.com/ZebinYang/SeqMM.git
+pip install git+https://github.com/ZebinYang/seqmml.git
 ```
 
 # Example
@@ -18,7 +18,7 @@ from sklearn import datasets
 from sklearn.model_selection import KFold 
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import make_scorer, accuracy_score
-from seqmm import SeqUD
+from seqmml import SeqUD
 
 sx = MinMaxScaler()
 dt = datasets.load_breast_cancer()
@@ -32,7 +32,7 @@ estimator = svm.SVC()
 score_metric = make_scorer(accuracy_score, True)
 cv = KFold(n_splits=5, random_state=0, shuffle=True)
 
-clf = SeqUD(ParaSpace, level_number = 20, n_jobs = 2, estimator = estimator, cv = cv, scoring = score_metric, refit = True, verbose = True)
+clf = SeqUD(ParaSpace, level_number = 20, n_jobs = 10, estimator = estimator, cv = cv, scoring = score_metric, refit = True, verbose = True)
 clf.fit(x, y)
 clf.plot_scores()
 ```
