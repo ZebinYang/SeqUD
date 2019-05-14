@@ -133,7 +133,7 @@ class SMACOPT(BayoptBase):
             elif (values['Type']=="categorical"):
                 parameters[item] = next_params[item].iloc[0]
         
-        score = self.obj_wrapper(parameters)
+        score = self.wrapper_func(parameters)
         logs_aug = parameters
         logs_aug.update({"score":score})
         logs_aug = pd.DataFrame(logs_aug, index = [self.iteration])

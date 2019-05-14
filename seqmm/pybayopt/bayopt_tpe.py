@@ -120,7 +120,7 @@ class TPEOPT(BayoptBase):
             elif (values['Type']=="categorical"):
                 parameters[item] = values['Mapping'][next_params[item].iloc[0]]
 
-        score = self.obj_wrapper(parameters)
+        score = self.wrapper_func(parameters)
 
         logs_aug = parameters
         logs_aug.update({"score":score})

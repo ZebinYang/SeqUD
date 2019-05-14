@@ -164,7 +164,7 @@ class GPEIOPT(BayoptBase):
             elif (values['Type']=="categorical"):
                 parameters[item] = next_params[item][0]
                 
-        score = self.obj_wrapper(parameters)
+        score = self.wrapper_func(parameters)
         logs_aug = parameters
         logs_aug.update({"score":score})
         logs_aug = pd.DataFrame(logs_aug, index = [self.iteration])
@@ -186,7 +186,6 @@ class GPEIOPT(BayoptBase):
         param_unit = []
         file_dir = "./temp/" + str(time.time()) + str(np.random.rand(1)[0]) + "/"
         os.makedirs(file_dir)
-        np.random.seed(self.rand_seed)
         
         self.wrapper_func = wrapper_func
         chooser = module.init(file_dir, "mcmc_iters=10")
