@@ -92,7 +92,7 @@ class TPE(BayoptBase):
                  scoring=None, refit=False, rand_seed = 0, verbose = False):
 
         super(TPE,self).__init__(estimator, cv, para_space, max_runs, scoring, 
-                       n_jobs, refit, rand_seed, verbose)
+                       refit, rand_seed, verbose)
 
     def _para_mapping(self):
         """
