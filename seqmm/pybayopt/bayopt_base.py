@@ -4,6 +4,7 @@ warnings.filterwarnings("ignore")
 import os
 import time
 import shutil
+import ConfigSpace
 import numpy as np
 import pandas as pd
 from joblib import Parallel
@@ -19,20 +20,12 @@ class BayoptBase():
 
     """    
 
-    def __init__(self, estimator, cv, para_space, max_runs = 100, 
-                 scoring=None, n_jobs=None, refit=False, rand_seed = 0, verbose=False):
+    def __init__(self, para_space, max_runs = 100, verbose=False):
 
-        self.estimator = estimator        
-        self.cv = cv
         self.para_space = para_space
         self.max_runs = max_runs
-        self.scoring = scoring
-
-        self.n_jobs = n_jobs
-        self.refit = refit
-        self.rand_seed = rand_seed
         self.verbose = verbose
-
+    
         self.factor_number = len(self.para_space)
         self.para_names = list(self.para_space.keys())
         self.iteration = 0
@@ -73,22 +66,40 @@ class BayoptBase():
             print("The best configurations are:")
             print("\n".join("%-20s: %s"%(k, v if self.para_space[k]['Type']=="categorical" else round(v, 5))
                             for k, v in self.best_params_.items()))
-
-    def _para_mapping(self, para_set_ud):
         
-        """
-        This function maps trials points to required forms. 
-        """
-        raise NotImplementedError  
-
-        
-    def _run(self, obj_func):
+    def _run(self):
         """
         Main loop for searching the best hyperparameters. 
         
         """        
         raise NotImplementedError
+                    
+            
+    def fmin(self, wrapper_func):
+        """
+        Search the optimal value of a function. 
         
+        Parameters
+        ----------
+        :type func: callable function
+        :param func: the function to be optimized.
+         
+        """  
+        np.random.seed(self.rand_seed)
+        self.iteration = 0
+        self.logs = pd.DataFrame()
+        if self.verbose:
+            self.pbar = tqdm(total=self.max_runs) 
+
+        search_start_time = time.time()
+        self._run(wrapper_func)
+        search_end_time = time.time()
+        self.search_time_consumed_ = search_end_time - search_start_time
+        
+        self._summary()
+        if self.verbose:
+            self.pbar.close()
+
         
     def fit(self, x, y = None):
         """
@@ -102,41 +113,21 @@ class BayoptBase():
         :type y: array, shape = [n_samples] or [n_samples, n_output], optional
         :param y: target variable.
         """
-        
-        def obj_func(cfg):
-            next_params = pd.DataFrame(np.array([cfg]), columns = self.para_names)
-            parameters = {}
-            for item, values in self.para_space.items():
-                if (values['Type']=="continuous"):
-                    parameters[item] = values['Wrapper'](float(next_params[item].iloc[0]))
-                elif (values['Type']=="integer"):
-                    parameters[item] = int(next_params[item].iloc[0]) 
-                elif (values['Type']=="categorical"):
-                    parameters[item] = next_params[item][0]
+
+        def sklearn_wrapper(parameters):
             self.estimator.set_params(**parameters)
             out = cross_val_score(self.estimator, x, y, cv = self.cv, scoring = self.scoring)
             score = np.mean(out)
-
-            logs_aug = parameters
-            logs_aug.update({"score":score})
-            logs_aug = pd.DataFrame(logs_aug, index = [self.iteration])
-            self.logs = pd.concat([self.logs, logs_aug]).reset_index(drop=True)
-
-            if self.verbose:
-                self.pbar.update(1)
-                self.iteration += 1
-                self.pbar.set_description("Iteration %d:" %self.iteration)
-                self.pbar.set_postfix_str("Current Best Score = %.5f"% (self.logs.loc[:,"score"].max()))
-            return -score
+            return score
         
         if self.verbose:
             self.pbar = tqdm(total=self.max_runs) 
 
+        np.random.seed(self.rand_seed)
         self.iteration = 0
         self.logs = pd.DataFrame()
         search_start_time = time.time()
-        self._para_mapping()
-        self._run(obj_func)
+        self._run(sklearn_wrapper)
         search_end_time = time.time()
         self.search_time_consumed_ = search_end_time - search_start_time
         

@@ -1,5 +1,4 @@
-from .sk_sequd import SeqUDSklearn
-from .func_sequd import SeqUDOptimizer
-from .sk_seqrand import *
+from .sequd import SeqUD
+from .seqrand import *
 
-__all__ =  ["SeqUDSklearn", "SeqUDOptimizer", "SeqRandSklearn"]
+__all__ =  ["SeqUD", "SeqRand"]

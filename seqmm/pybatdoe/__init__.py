@@ -1,7 +1,7 @@
-from .sk_grid import GridSklearn
-from .sk_rand import RandSklearn
-from .sk_lhs import LHSSklearn
-from .sk_sobol import SobolSklearn
-from .sk_ud import UDSklearn
+from .batch_grid import GridSearch
+from .batch_rand import RandSearch
+from .batch_lhs import LHSSearch
+from .batch_sobol import SobolSearch
+from .batch_ud import UDSearch
 
-__all__ =  ["GridSklearn", "RandSklearn", "LHSSklearn", "SobolSklearn", "UDSklearn"]
+__all__ =  ["GridSearch", "RandSearch", "LHSSearch", "SobolSearch", "UDSearch"]

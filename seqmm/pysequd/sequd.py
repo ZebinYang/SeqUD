@@ -11,28 +11,113 @@ import pyUniDOE as pydoe
 
 EPS = 10**(-10)
 
-class SeqRandSklearn(object):
+class SeqUD(object):
     
-    """
-    Base class for sequential uniform design.
+    """ 
+    Sequential Uniform Design. 
     
-    """
+    Parameters
+    ----------
+    :type  estimator: estimator object
+    :param estimator: This is assumed to implement the scikit-learn estimator interface.
     
-    def __init__(self, estimator, cv, para_space, n_iter_per_stage = 20, max_runs = 100, scoring = None, 
-                 n_jobs=None, refit = True, rand_seed = 0, verbose = False):
+    :type  cv: cross-validation method, an sklearn object.
+    :param cv: e.g., `StratifiedKFold` and KFold` is used.
+    
+    :type  para_space: dict or list of dictionaries
+    :param para_space: It has three types:
+    
+        Continuous: 
+            Specify `Type` as `continuous`, and include the keys of `Range` (a list with lower-upper elements pair) and
+            `Wrapper`, a callable function for wrapping the values.  
+        Integer:
+            Specify `Type` as `integer`, and include the keys of `Mapping` (a list with all the sortted integer elements).
+        Categorical:
+            Specify `Type` as `categorical`, and include the keys of `Mapping` (a list with all the possible categories).
+    
+    :type level_number: int, optional, default = 20
+    :param level_number: The positive integer which represent the number of levels in generating uniform design. 
+    
+    :type max_runs: int, optional, default = 100
+    :param max_runs: The maximum number of trials to be evaluated. When this values is reached, 
+        then the algorithm will stop. 
+    
+    :type max_search_iter: int, optional, default = 100 
+    :param max_search_iter: The maximum number of iterations used to generate uniform design or augmented uniform design.
+    
+    :type scoring: string, callable, list/tuple, dict or None, optional, default = None
+    :param scoring: A sklearn type scoring function. 
+        If None, the estimator's default scorer (if available) is used. See the package `sklearn` for details.
+    
+    :type n_jobs: int or None, optional, optional, default = None
+    :param n_jobs: Number of jobs to run in parallel.
+        If -1 all CPUs are used. If 1 is given, no parallel computing code
+        is used at all, which is useful for debugging. See the package `joblib` for details.
+    
+    :type refit: boolean, or string, optional, default = True
+    :param refit: It controls whether to refit an estimator using the best found parameters on the whole dataset.
+    
+    :type rand_seed: int, optional, default=0
+    :param rand_seed: The random seed for optimization.
+    
+    :type verbose: boolean, optional, default = False
+    :param verbose: It controls whether the searching history will be printed. 
 
-        self.cv = cv
-        self.estimator = estimator        
+
+    Examples   
+    ----------
+    >>> import numpy as np
+    >>> from sklearn import svm
+    >>> from sklearn import datasets
+    >>> from seqmm import SeqUD
+    >>> from sklearn.model_selection import KFold
+    >>> iris = datasets.load_iris()
+    >>> ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
+               'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
+    >>> Level_Number = 20
+    >>> estimator = svm.SVC()
+    >>> cv = KFold(n_splits=5, random_state=1, shuffle=True)
+    >>> clf = SeqUD(ParaSpace, level_number = 20, max_runs = 100, max_search_iter = 100, n_jobs=None, 
+                 estimator = None, cv = None, scoring = None, refit = None, rand_seed = 0, verbose = False)
+    >>> clf.fit(iris.data, iris.target)
+
+    Attributes
+    ----------
+    :ivar best_score_: float
+        The best average cv score among the evaluated trials.  
+
+    :ivar best_params_: dict
+        Parameters that reaches `best_score_`.
+
+    :ivar best_estimator_: 
+        The estimator refitted based on the `best_params_`. 
+        Not available if `refit=False`.
+
+    :ivar search_time_consumed_: float
+        Seconds used for whole searching procedure.
+
+    :ivar refit_time_: float
+        Seconds used for refitting the best model on the whole dataset.
+        Not available if `refit=False`.
+    """    
+
+    
+    def __init__(self, para_space, level_number = 20, max_runs = 100, max_search_iter = 100, n_jobs=None, 
+                 estimator = None, cv = None, scoring = None, refit = None, rand_seed = 0, verbose = False):
+
         self.para_space = para_space
+        self.level_number = level_number
         self.max_runs = max_runs
-        self.n_iter_per_stage = n_iter_per_stage
-        
-        self.scoring = scoring
+        self.max_search_iter = max_search_iter
         self.n_jobs = n_jobs
-        self.refit = refit
         self.rand_seed = rand_seed
         self.verbose = verbose
-        
+            
+        self.cv = cv
+        self.refit = refit
+        self.scoring = scoring
+        self.estimator = estimator        
+
         self.stage = 0
         self.stop_flag = False
         self.para_ud_names = []
@@ -136,13 +221,24 @@ class SeqRandSklearn(object):
         """
         
         self.logs = pd.DataFrame()
-        ud_space = np.repeat(np.linspace(1/(2*self.n_iter_per_stage), 1-1/(2*self.n_iter_per_stage), self.n_iter_per_stage).reshape([-1,1]),
+        ud_space = np.repeat(np.linspace(1/(2*self.level_number), 1-1/(2*self.level_number), self.level_number).reshape([-1,1]),
                              self.extend_factor_number, axis=1)
 
-        para_set_ud = np.zeros((self.n_iter_per_stage, self.extend_factor_number))
-        for i in range(self.extend_factor_number):
-            para_set_ud[:,i] = np.random.uniform(0, 1, self.n_iter_per_stage)
-            
+        BaseUD = pydoe.DesignQuery(n = self.level_number, s = self.extend_factor_number,
+                          q = self.level_number, crit = "CD2", ShowCrit=False)
+        if BaseUD is None:
+            BaseUD = pydoe.GenUD_MS(n = self.level_number, s = self.extend_factor_number, q = self.level_number, crit="CD2", 
+                            maxiter = self.max_search_iter, rand_seed = self.rand_seed, nshoot = 10)
+           
+        if (not isinstance(BaseUD, np.ndarray)):
+            raise ValueError('Uniform design is not correctly constructed!')
+
+        para_set_ud = np.zeros((self.level_number, self.extend_factor_number))
+        for i in range(self.factor_number):
+            loc_min = np.sum(self.variable_number[:(i+1)])
+            loc_max = np.sum(self.variable_number[:(i+2)])
+            for k in range(int(loc_min), int(loc_max)):
+                para_set_ud[:,k] = ud_space[BaseUD[:,k]-1,k]
         para_set_ud = pd.DataFrame(para_set_ud, columns = self.para_ud_names)
         return para_set_ud
     
@@ -165,9 +261,10 @@ class SeqRandSklearn(object):
 
         
         # 1. Transform the existing Parameters to Standardized Horizon (0-1)
-        left_radius = 1.0/(2**(self.stage-1))
-        right_radius = 1.0/(2**(self.stage-1))
-        para_set_ud = np.zeros((self.n_iter_per_stage, self.extend_factor_number))
+        ud_space = np.zeros((self.level_number,self.extend_factor_number))
+        ud_grid_size = 1.0/(self.level_number*2**(self.stage-1))
+        left_radius = np.floor((self.level_number-1)/2) * ud_grid_size
+        right_radius = (self.level_number - np.floor((self.level_number-1)/2) -1) * ud_grid_size
         for i in range(self.extend_factor_number):
             if ((ud_center[i]-left_radius)<0):
                 lb = 0
@@ -178,7 +275,56 @@ class SeqRandSklearn(object):
             else:
                 lb = max(ud_center[i]-left_radius,0)
                 ub = min(ud_center[i]+right_radius,1)
-            para_set_ud[:,i] = np.linspace(lb, ub, self.n_iter_per_stage)
+            ud_space[:,i] = np.linspace(lb, ub, self.level_number)
+
+        # 2. Map existing Runs' Parameters to UD Levels "x0" (1 - level_number)
+        flag = True
+        for i in range(self.extend_factor_number):
+            flag = flag & (self.logs.loc[:,self.para_ud_names].iloc[:,i]>=(ud_space[0,i]-EPS)) 
+            flag = flag & (self.logs.loc[:,self.para_ud_names].iloc[:,i]<=(ud_space[-1,i]+EPS))
+        x0 = self.logs.loc[flag,self.para_ud_names].values
+        
+        for i in range(x0.shape[0]):
+            for j in range(x0.shape[1]):
+                x0[i,j] = (np.where(abs(x0[i,j]-ud_space[:,j])<=EPS)[0][0] + 1)
+        
+        x0 = np.round(x0).astype(int)
+        # 3. Delete existing UD points on the same levels grids
+        for i in range(self.extend_factor_number):
+            keep_list = []
+            unique = np.unique(x0[:,i])
+            for j in range(len(unique)):
+                xx_loc=np.where(x0[:,i]==unique[j])[0].tolist()
+                keep_list.extend(random.sample(xx_loc, 1))
+            x0 = x0[keep_list,:].reshape([-1,self.extend_factor_number])
+
+        # Return if the maximum run has reached.
+        if ((self.logs.shape[0] + self.level_number - x0.shape[0])>self.max_runs):
+            self.stop_flag = True
+            if self.verbose:
+                print("Maximum number of runs reached, stop!")
+            return
+        
+        if (x0.shape[0]>=self.level_number):
+            self.stop_flag = True
+            if self.verbose:
+                print("Search space already full, stop!")
+            return
+        
+        # 4. Generate Sequential UD
+        BaseUD = pydoe.GenAUD_MS(x0, n = self.level_number, s = self.extend_factor_number, q = self.level_number, crit="CD2",
+                         maxiter = self.max_search_iter, rand_seed = self.rand_seed, nshoot = 10)
+        if (not isinstance(BaseUD, np.ndarray)):
+            raise ValueError('Uniform design is not correctly constructed!')
+
+        BaseUD_Aug = BaseUD[(1+x0.shape[0]):BaseUD.shape[0],:].reshape([-1, self.extend_factor_number])
+
+        para_set_ud = np.zeros((BaseUD_Aug.shape[0], self.extend_factor_number))
+        for i in range(self.factor_number):
+            loc_min = np.sum(self.variable_number[:(i+1)])
+            loc_max = np.sum(self.variable_number[:(i+2)])
+            for k in range(int(loc_min), int(loc_max)):
+                para_set_ud[:,k] = ud_space[BaseUD_Aug[:,k]-1,k]
         para_set_ud = pd.DataFrame(para_set_ud, columns = self.para_ud_names)
         return para_set_ud
     
@@ -199,14 +345,6 @@ class SeqRandSklearn(object):
         candidate_params = [{para_set.columns[j]: para_set.iloc[i,j] 
                              for j in range(para_set.shape[1])} 
                             for i in range(para_set.shape[0])] 
-        
-        # Return if the maximum run has reached.
-        if ((self.logs.shape[0] + self.n_iter_per_stage)>self.max_runs):
-            self.stop_flag = True
-            if self.verbose:
-                print("Maximum number of runs reached, stop!")
-            return
-
         out = Parallel(n_jobs=self.n_jobs)(delayed(obj_func)(parameters)
                                 for parameters in candidate_params)
         logs_aug = para_set_ud.to_dict()
@@ -218,8 +356,7 @@ class SeqRandSklearn(object):
         if self.verbose:
             print("Stage %d completed (%d/%d) with best score: %.5f."
                 %(self.stage, self.logs.shape[0], self.max_runs, self.logs["score"].max()))
-        
-        
+
     def _run(self, obj_func):
         """
         This function controls the procedures for implementing the sequential uniform design method. 
@@ -229,9 +366,9 @@ class SeqRandSklearn(object):
         obj_func: A callable function. It takes the values stored in each trial as input parameters, and  
                output the corresponding scores.  
         """
+        np.random.seed(self.rand_seed)
         self.stage = 1
         self.logs = pd.DataFrame()
-        search_start_time = time.time()
         para_set_ud = self._generate_init_design()
         self._evaluate_runs(obj_func, para_set_ud)
         self.stage += 1
@@ -243,10 +380,24 @@ class SeqRandSklearn(object):
                 self.stage += 1
             else:
                 break
+        
+        
+    def fmin(self, wrapper_func):
+        """
+        Search the optimal value of a function. 
+        
+        Parameters
+        ----------
+        :type func: callable function
+        :param func: the function to be optimized.
+         
+        """  
+        search_start_time = time.time()
+        self._run(wrapper_func)
         search_end_time = time.time()
         self.search_time_consumed_ = search_end_time - search_start_time
         self._summary()
-        
+
     def fit(self, x, y = None):
         """
         Run fit with all sets of parameters.
@@ -260,13 +411,17 @@ class SeqRandSklearn(object):
         :param y: target variable.
         
         """
-        def obj_func(parameters):
+        def sklearn_wrapper(parameters):
             self.estimator.set_params(**parameters)
             out = cross_val_score(self.estimator, x, y, cv = self.cv, scoring = self.scoring)
             score = np.mean(out)
             return score
 
-        self._run(obj_func)
+        search_start_time = time.time()
+        self._run(sklearn_wrapper)
+        search_end_time = time.time()
+        self.search_time_consumed_ = search_end_time - search_start_time
+        self._summary()
 
         if self.refit:
             self.best_estimator_ = self.estimator.set_params(**self.best_params_)

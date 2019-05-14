@@ -15,29 +15,19 @@ from sklearn.model_selection import cross_val_score
 
 from pyDOE import lhs
 
-class BatchSklearn():
+class BatchBase():
     """ 
     Abstract Batch design class for Sklearn Hyperparameter optimization. 
 
     """    
 
-    def __init__(self, estimator, cv, para_space, max_runs = 100, 
-                 scoring=None, n_jobs=None, refit=False, rand_seed = 0, verbose=False):
+    def __init__(self, para_space, max_runs = 100, n_jobs = None, verbose=False):
 
-        self.estimator = estimator        
-        self.cv = cv
         self.para_space = para_space
         self.max_runs = max_runs
-        self.scoring = scoring
-
         self.n_jobs = n_jobs
-        self.refit = refit
-        self.rand_seed = rand_seed
         self.verbose = verbose
-
-        self.iteration = 0
-        self.logs = pd.DataFrame()
-        
+    
         self.para_ud_names = []
         self.variable_number = [0]
         self.factor_number = len(self.para_space)
@@ -129,8 +119,24 @@ class BatchSklearn():
         
         """        
         raise NotImplementedError
+
+    def fmin(self, wrapper_func):
+        """
+        Search the optimal value of a function. 
         
-        
+        Parameters
+        ----------
+        :type func: callable function
+        :param func: the function to be optimized.
+         
+        """   
+        np.random.seed(self.rand_seed)
+        search_start_time = time.time()
+        self._run(wrapper_func)
+        search_end_time = time.time()
+        self.search_time_consumed_ = search_end_time - search_start_time
+
+
     def fit(self, x, y = None):
         """
         Run fit with all sets of parameters.
@@ -143,14 +149,15 @@ class BatchSklearn():
         :type y: array, shape = [n_samples] or [n_samples, n_output], optional
         :param y: target variable.
         """
-        def obj_func(parameters):
+        def sklearn_wrapper(parameters):
             self.estimator.set_params(**parameters)
             out = cross_val_score(self.estimator, x, y, cv = self.cv, scoring = self.scoring)
             score = np.mean(out)
             return score 
         
+        np.random.seed(self.rand_seed)
         search_start_time = time.time()
-        self._run(obj_func)
+        self._run(sklearn_wrapper)
         search_end_time = time.time()
         self.search_time_consumed_ = search_end_time - search_start_time
        
