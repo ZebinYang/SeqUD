@@ -86,8 +86,10 @@
 <li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">One-shot Batch Designs</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Bayesian Optimization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#code-examples">Code Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#reference-list">Reference list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#code-examples">Code Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reference-list">Reference list</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design</a></li>
@@ -192,7 +194,7 @@ maximizing the expected improvement. Let’s see a univariate example.</p>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">mean_squared_error</span>
-<span class="kn">from</span> <span class="nn">seqmm</span> <span class="k">import</span> <span class="n">SMACOPT</span>
+<span class="kn">from</span> <span class="nn">seqmml</span> <span class="k">import</span> <span class="n">SMACOPT</span>
 <span class="n">dt</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">()</span>
 <span class="n">sx</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
 <span class="n">sy</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
@@ -226,7 +228,7 @@ maximizing the expected improvement. Let’s see a univariate example.</p>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">accuracy_score</span>
-<span class="kn">from</span> <span class="nn">seqmm</span> <span class="k">import</span> <span class="n">GPEIOPT</span>
+<span class="kn">from</span> <span class="nn">seqmml</span> <span class="k">import</span> <span class="n">GPEIOPT</span>
 
 <span class="n">sx</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
 <span class="n">dt</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_breast_cancer</span><span class="p">()</span>
@@ -254,7 +256,7 @@ maximizing the expected improvement. Let’s see a univariate example.</p>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">accuracy_score</span>
-<span class="kn">from</span> <span class="nn">seqmm</span> <span class="k">import</span> <span class="n">GPEIOPT</span>
+<span class="kn">from</span> <span class="nn">seqmml</span> <span class="k">import</span> <span class="n">GPEIOPT</span>
 
 <span class="n">sx</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
 <span class="n">dt</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_breast_cancer</span><span class="p">()</span>
@@ -273,9 +275,8 @@ maximizing the expected improvement. Let’s see a univariate example.</p>
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
 <div class="section" id="reference-list">
-<h2>Reference list<a class="headerlink" href="#reference-list" title="Permalink to this headline">¶</a></h2>
+<h3>Reference list<a class="headerlink" href="#reference-list" title="Permalink to this headline">¶</a></h3>
 <dl class="citation">
 <dt class="label" id="snoek2012"><span class="brackets"><a class="fn-backref" href="#id1">Snoek2012</a></span></dt>
 <dd><p>Jasper Snoek, Hugo Larochelle, and Ryan P Adams. Practical bayesian optimization of machine learning algorithms. In Advances in Neural Information Processing Systems, pages 2951–2959, 2012.</p>
@@ -287,6 +288,7 @@ maximizing the expected improvement. Let’s see a univariate example.</p>
 <dd><p>James S Bergstra, Rémi Bardenet, Yoshua Bengio, and Balázs Kégl. Algorithms for hyper-parameter optimization. In Advances in Neural Information Processing Systems, pages 2546–2554, 2011.</p>
 </dd>
 </dl>
+</div>
 </div>
 </div>
 

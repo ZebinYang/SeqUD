@@ -50,7 +50,7 @@ Grid Search::
         from sklearn import svm
         from sklearn import datasets
         from sklearn.model_selection import KFold
-        from seqmm import GridSearch
+        from seqmml import GridSearch
 
         iris = datasets.load_iris()
         ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
@@ -68,7 +68,7 @@ Random Search::
         from sklearn import svm
         from sklearn import datasets
         from sklearn.model_selection import KFold
-        from seqmm.pybatdoe import RandSearch
+        from seqmml import RandSearch
 
         iris = datasets.load_iris()
         ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
@@ -86,7 +86,7 @@ Latin Hypercube Sampling::
         from sklearn import svm
         from sklearn import datasets
         from sklearn.model_selection import KFold
-        from seqmm import LHSSearch
+        from seqmml import LHSSearch
 
         iris = datasets.load_iris()
         ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
@@ -105,7 +105,7 @@ Sobol Sequence::
         from sklearn import svm
         from sklearn import datasets
         from sklearn.model_selection import KFold
-        from seqmm import SobolSearch
+        from seqmml import SobolSearch
 
         iris = datasets.load_iris()
         ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 

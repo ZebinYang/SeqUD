@@ -7,7 +7,7 @@
 import sys
 import os
 
-sys.path.insert(0, os.path.abspath('../../seqmm/'))
+sys.path.insert(0, os.path.abspath('../../seqmml/'))
 
 extensions = ['sphinx.ext.autodoc']
 source_suffix = '.rst'

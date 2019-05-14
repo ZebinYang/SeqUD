@@ -59,7 +59,7 @@ Uniform Design::
         from sklearn import svm
         from sklearn import datasets
         from sklearn.model_selection import KFold
-        from seqmm import UDSearch
+        from seqmml import UDSearch
 
         iris = datasets.load_iris()
         ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
@@ -81,7 +81,7 @@ SVM for Classification::
         from sklearn.preprocessing import MinMaxScaler
         from sklearn.model_selection import cross_val_score
         from sklearn.metrics import make_scorer, accuracy_score
-        from seqmm.pysequd import SeqUDSklearn
+        from seqmml import SeqUD
 
         sx = MinMaxScaler()
         dt = datasets.load_breast_cancer()
@@ -109,7 +109,7 @@ Xgboost for Regression::
         from sklearn.model_selection import KFold 
         from sklearn.preprocessing import MinMaxScaler
         from sklearn.metrics import make_scorer, mean_squared_error
-        from seqmm.pysequd import SeqUDSklearn
+        from seqmml import SeqUD
 
         dt = datasets.load_diabetes()
         sx = MinMaxScaler()
@@ -146,7 +146,7 @@ Kmeans for Unsupervised Clustering::
         from sklearn.cluster import KMeans
         from sklearn.model_selection import KFold 
         from sklearn.preprocessing import MinMaxScaler
-        from seqmm.pysequd import SeqUDSklearn
+        from seqmml import SeqUD
 
         sx = MinMaxScaler()
         dt = datasets.load_iris()

@@ -190,7 +190,7 @@ Uniform designs is a frequently used spacefilling design method, first proposed 
 </div>
 <div class="section" id="a-simple-demo">
 <h2>A Simple Demo<a class="headerlink" href="#a-simple-demo" title="Permalink to this headline">¶</a></h2>
-<p>The figure below shows a two-stage example of the SeqUDHO approach in a 2-D space. The circle points represent the initial uniform design via <span class="math notranslate nohighlight">\(U_{20}(20^{2})\)</span>. The surrounding box serves as the subspace of interest centered on the optimal trial <span class="math notranslate nohighlight">\(\x^{*}_{1}\)</span> at the first stage, which is denoted by a square point in green. At the second stage, new trial points are augmented to form a <span class="math notranslate nohighlight">\(U_{20}(20^{2})\)</span>, denoted by the blue triangle points.</p>
+<p>The figure below shows a two-stage example of the SeqUDHO approach in a 2-D space. The circle points represent the initial uniform design via <span class="math notranslate nohighlight">\(U_{20}(20^{2})\)</span>. The surrounding box serves as the subspace of interest centered on the optimal trial <span class="math notranslate nohighlight">\(x^{*}_{1}\)</span> at the first stage, which is denoted by a square point in green. At the second stage, new trial points are augmented to form a <span class="math notranslate nohighlight">\(U_{20}(20^{2})\)</span>, denoted by the blue triangle points.</p>
 <a class="reference internal image-reference" href="_images/Demo_SeqUD.png"><img alt="_images/Demo_SeqUD.png" class="align-center" src="_images/Demo_SeqUD.png" style="width: 50%;" /></a>
 <p>The proposed approach is advantageous over the Bayesian optimization methods.</p>
 <ul class="simple">
@@ -206,7 +206,7 @@ Uniform designs is a frequently used spacefilling design method, first proposed 
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
-<span class="kn">from</span> <span class="nn">seqmm</span> <span class="k">import</span> <span class="n">UDSearch</span>
+<span class="kn">from</span> <span class="nn">seqmml</span> <span class="k">import</span> <span class="n">UDSearch</span>
 
 <span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 <span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
@@ -228,7 +228,7 @@ Uniform designs is a frequently used spacefilling design method, first proposed 
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">accuracy_score</span>
-<span class="kn">from</span> <span class="nn">seqmm.pysequd</span> <span class="k">import</span> <span class="n">SeqUDSklearn</span>
+<span class="kn">from</span> <span class="nn">seqmml</span> <span class="k">import</span> <span class="n">SeqUD</span>
 
 <span class="n">sx</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
 <span class="n">dt</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_breast_cancer</span><span class="p">()</span>
@@ -255,7 +255,7 @@ Uniform designs is a frequently used spacefilling design method, first proposed 
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">mean_squared_error</span>
-<span class="kn">from</span> <span class="nn">seqmm.pysequd</span> <span class="k">import</span> <span class="n">SeqUDSklearn</span>
+<span class="kn">from</span> <span class="nn">seqmml</span> <span class="k">import</span> <span class="n">SeqUD</span>
 
 <span class="n">dt</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">()</span>
 <span class="n">sx</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
@@ -291,7 +291,7 @@ Uniform designs is a frequently used spacefilling design method, first proposed 
 <span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">KMeans</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
-<span class="kn">from</span> <span class="nn">seqmm.pysequd</span> <span class="k">import</span> <span class="n">SeqUDSklearn</span>
+<span class="kn">from</span> <span class="nn">seqmml</span> <span class="k">import</span> <span class="n">SeqUD</span>
 
 <span class="n">sx</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
 <span class="n">dt</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>

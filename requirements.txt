@@ -10,5 +10,5 @@ smac==0.8.0
 hyperopt
 tqdm
 
-git+https://github.com/ZebinYang/pyUniDOE.git
+git+https://github.com/ZebinYang/pyunidoe.git
 git+https://github.com/ZebinYang/spearmint-lite.git

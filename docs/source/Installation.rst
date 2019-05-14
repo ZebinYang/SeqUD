@@ -3,7 +3,7 @@ Installation
 
 Prerequisite
 ___________________
-The required environment for SeqMM package:
+The required environment for SeqMML package:
 
 - Python 3
 - SWIG >= 3.0
@@ -36,7 +36,7 @@ Currently, we only support installation from our github repository. You can inst
 
 .. code-block::
 
-    pip install git+http://github.com/ZebinYang/SeqMM.git
+    pip install git+http://github.com/ZebinYang/seqmml.git
         
         
 Manual installation
@@ -44,7 +44,7 @@ ___________________
 Currently, we only support installation from our github repository. You can install the package by the following console command:
 
 
-- First, download the source codes from http://github.com/ZebinYang/SeqMM.git, unzip and switch to the root folder.
+- First, download the source codes from http://github.com/ZebinYang/seqmml.git, unzip and switch to the root folder.
 
 - Then, run the following shell commands to finish installation.
 

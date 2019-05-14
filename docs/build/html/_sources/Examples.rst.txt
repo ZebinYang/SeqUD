@@ -12,7 +12,7 @@ _________________________________
 
         import numpy as np 
         from matplotlib import pylab as plt
-        from seqmm import SeqUD
+        from seqmml import SeqUD
 
         def cliff(parameters):
             x1 = parameters['x1']
@@ -43,7 +43,7 @@ ___________________________________
         from sklearn.feature_selection import f_regression
         from sklearn.pipeline import Pipeline
 
-        from seqmm import SeqUD
+        from seqmml import SeqUD
 
         X, y = samples_generator.make_classification(
             n_informative=5, n_redundant=0, random_state=42)
@@ -73,7 +73,7 @@ _________________________
         from sklearn.model_selection import KFold 
         from sklearn.preprocessing import MinMaxScaler
         from sklearn.metrics import make_scorer, mean_squared_error
-        from seqmm import SeqUD, SeqRand, GPEIOPT, SMACOPT, TPEOPT,\
+        from seqmml import SeqUD, SeqRand, GPEIOPT, SMACOPT, TPEOPT,\
                     GridSearch, RandSearch, LHSSearch, SobolSearch, UDSearch
 
         dt = datasets.load_diabetes()
