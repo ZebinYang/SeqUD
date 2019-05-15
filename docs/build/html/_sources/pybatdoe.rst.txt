@@ -4,8 +4,10 @@ One-shot Batch Designs
 
 Introduction 
 ------------------
+
 Batch designs can generate all the experimental trials before conducting any experiments.
-Here, we introduce five simple strategies.
+
+**four simple strategies**.
 
 - Grid Search: exhaustive search over grid combinations
 
@@ -33,7 +35,7 @@ The figures (derived from [Zhang2019]_) present a demo of the four mentioned sam
    :width: 45%
 
 
-Advantage and Disadvantage of One Shot Batch Designs.
+**Advantage and Disadvantage**
 
 - Easy to be paralleled, trials can be generated without too much burden. 
 
@@ -41,10 +43,11 @@ Advantage and Disadvantage of One Shot Batch Designs.
 
 - To select an appropriate number of design points is always difficult, with potential over-sampling and under-sampling problems.
 
+
 Code Examples 
 --------------
 
-Grid Search::
+**Grid Search**::
 
         import numpy as np 
         from sklearn import svm
@@ -62,7 +65,7 @@ Grid Search::
         clf.fit(iris.data, iris.target)
         clf.plot_scores()
 
-Random Search::
+**Random Search**::
 
         import numpy as np 
         from sklearn import svm
@@ -80,7 +83,7 @@ Random Search::
         clf.fit(iris.data, iris.target)
         clf.plot_scores()
 
-Latin Hypercube Sampling::
+**Latin Hypercube Sampling**::
 
         import numpy as np 
         from sklearn import svm
@@ -99,7 +102,7 @@ Latin Hypercube Sampling::
         clf.plot_scores()
         
         
-Sobol Sequence::
+**Sobol Sequence**::
 
         import numpy as np 
         from sklearn import svm
@@ -118,9 +121,7 @@ Sobol Sequence::
         clf.plot_scores()        
 
         
-Reference list 
-_______________
-
+**Reference list**
 
 .. [Sobol967] Sobol,I.M. (1967), "Distribution of points in a cube and approximate evaluation of integrals". Zh. Vych. Mat. Mat. Fiz. 7: 784–802 (in Russian); U.S.S.R Comput. Maths. Math. Phys. 7: 86–112 (in English)
 

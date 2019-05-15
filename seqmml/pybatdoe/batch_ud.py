@@ -108,6 +108,7 @@ class UDSearch(BatchBase):
         self.rand_seed = rand_seed     
         self.level_number = level_number
         self.max_search_iter = max_search_iter
+        self.method = "UD Search"
         
     def _generate_init_design(self):
         """

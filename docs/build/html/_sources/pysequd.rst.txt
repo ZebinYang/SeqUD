@@ -14,10 +14,9 @@ Uniform designs is a frequently used spacefilling design method, first proposed 
 
 However, it is still an one-shot design method, which has similar limitations as grid search and random search. Therefore, we develop a sequential uniform design method, which enjoys the advantage of batch design and sequential strategy. 
 
-Algorithm 
-------------------
-- Define the search space by converting individual hyperparameters (upon necessary transformation) into unit hypercube :math:`[0,1]^d`: linear mapping if continuous/integer-valued, one-hot encoding if categorical.
+**Algorithm**
 
+- Define the search space by converting individual hyperparameters (upon necessary transformation) into unit hypercube :math:`[0,1]^d`: linear mapping if continuous/integer-valued, one-hot encoding if categorical.
 
 - Start with :math:`\theta \in \mbox{UD}` to train ML algorithm; obtain CV scores;  find :math:`\hat\theta_0^*` from :math:`\mbox{UD}`
 
@@ -32,8 +31,7 @@ Algorithm
 - Output the optimal :math:`\theta^*` from all trained    :math:`\{\theta, \mbox{CV}(\theta)\}`.
 
 
-A Simple Demo 
-----------------
+**A Simple Demo**
 
 The figure below shows a two-stage example of the SeqUDHO approach in a 2-D space. The circle points represent the initial uniform design via :math:`U_{20}(20^{2})`. The surrounding box serves as the subspace of interest centered on the optimal trial :math:`x^{*}_{1}` at the first stage, which is denoted by a square point in green. At the second stage, new trial points are augmented to form a :math:`U_{20}(20^{2})`, denoted by the blue triangle points.
 
@@ -53,7 +51,7 @@ The proposed approach is advantageous over the Bayesian optimization methods.
 Code Examples 
 --------------
 
-Uniform Design::
+**Uniform Design**::
 
         import numpy as np 
         from sklearn import svm
@@ -71,7 +69,8 @@ Uniform Design::
         clf.fit(iris.data, iris.target)
         clf.plot_scores()
         
-SVM for Classification::
+        
+**SVM for Classification**::
 
         import numpy as np
         from sklearn import svm
@@ -101,7 +100,7 @@ SVM for Classification::
         clf.plot_scores()
         
         
-Xgboost for Regression::
+**Xgboost for Regression**::
 
         import numpy as np
         import xgboost as xgb
@@ -139,7 +138,7 @@ Xgboost for Regression::
         clf.plot_scores()
 
 
-Kmeans for Unsupervised Clustering::
+**Kmeans for Unsupervised Clustering**::
 
         import numpy as np
         from sklearn import datasets
@@ -166,7 +165,6 @@ Kmeans for Unsupervised Clustering::
         clf.plot_scores()
         
         
-Reference list 
-_______________
+**Reference list**
 
 .. [Yang2019] Zebin Yang, Aijun Zhang and Ji Zhu. (2019) Hyperparameter Optimization via Sequential Uniform Designs. Submitted.

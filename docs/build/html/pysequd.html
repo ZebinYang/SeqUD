@@ -87,12 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Sequential Uniform Design</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#algorithm">Algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#a-simple-demo">A Simple Demo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#code-examples">Code Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#reference-list">Reference list</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#code-examples">Code Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Examples.html">More Examples</a></li>
@@ -170,9 +165,7 @@ Within CompExp framework, we propose a novel SeqUD approach for algorithm select
 Uniform designs is a frequently used spacefilling design method, first proposed in the 1980s by Prof. Fang and Prof. Yuan. It aims at covering the search space uniformly, as shown in the figure below.</p>
 <a class="reference internal image-reference" href="_images/Demo_UD.png"><img alt="_images/Demo_UD.png" class="align-center" src="_images/Demo_UD.png" style="width: 40%;" /></a>
 <p>However, it is still an one-shot design method, which has similar limitations as grid search and random search. Therefore, we develop a sequential uniform design method, which enjoys the advantage of batch design and sequential strategy.</p>
-</div>
-<div class="section" id="algorithm">
-<h2>Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h2>
+<p><strong>Algorithm</strong></p>
 <ul>
 <li><p>Define the search space by converting individual hyperparameters (upon necessary transformation) into unit hypercube <span class="math notranslate nohighlight">\([0,1]^d\)</span>: linear mapping if continuous/integer-valued, one-hot encoding if categorical.</p></li>
 <li><p>Start with <span class="math notranslate nohighlight">\(\theta \in \mbox{UD}\)</span> to train ML algorithm; obtain CV scores;  find <span class="math notranslate nohighlight">\(\hat\theta_0^*\)</span> from <span class="math notranslate nohighlight">\(\mbox{UD}\)</span></p></li>
@@ -187,9 +180,7 @@ Uniform designs is a frequently used spacefilling design method, first proposed 
 </li>
 <li><p>Output the optimal <span class="math notranslate nohighlight">\(\theta^*\)</span> from all trained    <span class="math notranslate nohighlight">\(\{\theta, \mbox{CV}(\theta)\}\)</span>.</p></li>
 </ul>
-</div>
-<div class="section" id="a-simple-demo">
-<h2>A Simple Demo<a class="headerlink" href="#a-simple-demo" title="Permalink to this headline">¶</a></h2>
+<p><strong>A Simple Demo</strong></p>
 <p>The figure below shows a two-stage example of the SeqUDHO approach in a 2-D space. The circle points represent the initial uniform design via <span class="math notranslate nohighlight">\(U_{20}(20^{2})\)</span>. The surrounding box serves as the subspace of interest centered on the optimal trial <span class="math notranslate nohighlight">\(x^{*}_{1}\)</span> at the first stage, which is denoted by a square point in green. At the second stage, new trial points are augmented to form a <span class="math notranslate nohighlight">\(U_{20}(20^{2})\)</span>, denoted by the blue triangle points.</p>
 <a class="reference internal image-reference" href="_images/Demo_SeqUD.png"><img alt="_images/Demo_SeqUD.png" class="align-center" src="_images/Demo_SeqUD.png" style="width: 50%;" /></a>
 <p>The proposed approach is advantageous over the Bayesian optimization methods.</p>
@@ -201,7 +192,7 @@ Uniform designs is a frequently used spacefilling design method, first proposed 
 </div>
 <div class="section" id="code-examples">
 <h2>Code Examples<a class="headerlink" href="#code-examples" title="Permalink to this headline">¶</a></h2>
-<p>Uniform Design:</p>
+<p><strong>Uniform Design</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
@@ -219,7 +210,7 @@ Uniform designs is a frequently used spacefilling design method, first proposed 
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>SVM for Classification:</p>
+<p><strong>SVM for Classification</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
@@ -248,7 +239,7 @@ Uniform designs is a frequently used spacefilling design method, first proposed 
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Xgboost for Regression:</p>
+<p><strong>Xgboost for Regression</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
@@ -285,7 +276,7 @@ Uniform designs is a frequently used spacefilling design method, first proposed 
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Kmeans for Unsupervised Clustering:</p>
+<p><strong>Kmeans for Unsupervised Clustering</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
 <span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="k">import</span> <span class="n">KMeans</span>
@@ -311,14 +302,12 @@ Uniform designs is a frequently used spacefilling design method, first proposed 
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="section" id="reference-list">
-<h3>Reference list<a class="headerlink" href="#reference-list" title="Permalink to this headline">¶</a></h3>
+<p><strong>Reference list</strong></p>
 <dl class="citation">
 <dt class="label" id="yang2019"><span class="brackets"><a class="fn-backref" href="#id1">Yang2019</a></span></dt>
 <dd><p>Zebin Yang, Aijun Zhang and Ji Zhu. (2019) Hyperparameter Optimization via Sequential Uniform Designs. Submitted.</p>
 </dd>
 </dl>
-</div>
 </div>
 </div>
 

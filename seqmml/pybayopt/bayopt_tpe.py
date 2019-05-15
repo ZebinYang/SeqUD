@@ -97,6 +97,7 @@ class TPEOPT(BayoptBase):
         self.scoring = scoring
         self.estimator = estimator        
         self.rand_seed = rand_seed
+        self.method = "TPE"
         
         self.space = []
         for item, values in self.para_space.items():

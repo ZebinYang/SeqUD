@@ -109,6 +109,7 @@ class SMACOPT(BayoptBase):
         self.scoring = scoring
         self.estimator = estimator        
         self.rand_seed = rand_seed
+        self.method = "SMAC"
         
         self.cs = ConfigurationSpace()
         for item, values in self.para_space.items():

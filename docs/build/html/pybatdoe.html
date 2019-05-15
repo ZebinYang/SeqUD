@@ -85,10 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">One-shot Batch Designs</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#code-examples">Code Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#reference-list">Reference list</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#code-examples">Code Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization</a></li>
@@ -163,8 +160,8 @@
 <h1>One-shot Batch Designs<a class="headerlink" href="#one-shot-batch-designs" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>Batch designs can generate all the experimental trials before conducting any experiments.
-Here, we introduce five simple strategies.</p>
+<p>Batch designs can generate all the experimental trials before conducting any experiments.</p>
+<p><strong>four simple strategies</strong>.</p>
 <ul class="simple">
 <li><p>Grid Search: exhaustive search over grid combinations</p></li>
 <li><p>Random Search:  more flexible than grid experiments, when not all hyperparameters are equally important. Furthermore, new trials can be added without adjustment and the experiments can also be stopped any time.  (<a class="reference internal" href="#bergstra2012" id="id1"><span>[Bergstra2012]</span></a>)</p></li>
@@ -173,7 +170,7 @@ Here, we introduce five simple strategies.</p>
 </ul>
 <p>The figures (derived from <a class="reference internal" href="#zhang2019" id="id4"><span>[Zhang2019]</span></a>) present a demo of the four mentioned sampling approach, including Grid search (top left), Random search (top right), Latin hypercube (bottom left) and Sobol Sequence (bottom right).</p>
 <p><a class="reference internal" href="_images/Demo_Grid.png"><img alt="pic1" src="_images/Demo_Grid.png" style="width: 45%;" /></a> <a class="reference internal" href="_images/Demo_Random.png"><img alt="pic2" src="_images/Demo_Random.png" style="width: 45%;" /></a> <a class="reference internal" href="_images/Demo_LHS.png"><img alt="pic3" src="_images/Demo_LHS.png" style="width: 45%;" /></a> <a class="reference internal" href="_images/Demo_Sobol.png"><img alt="pic4" src="_images/Demo_Sobol.png" style="width: 45%;" /></a></p>
-<p>Advantage and Disadvantage of One Shot Batch Designs.</p>
+<p><strong>Advantage and Disadvantage</strong></p>
 <ul class="simple">
 <li><p>Easy to be paralleled, trials can be generated without too much burden.</p></li>
 <li><p>However, the information of existing experiments is not utilized, which is not very efficient.</p></li>
@@ -182,7 +179,7 @@ Here, we introduce five simple strategies.</p>
 </div>
 <div class="section" id="code-examples">
 <h2>Code Examples<a class="headerlink" href="#code-examples" title="Permalink to this headline">¶</a></h2>
-<p>Grid Search:</p>
+<p><strong>Grid Search</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
@@ -200,7 +197,7 @@ Here, we introduce five simple strategies.</p>
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Random Search:</p>
+<p><strong>Random Search</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
@@ -218,7 +215,7 @@ Here, we introduce five simple strategies.</p>
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Latin Hypercube Sampling:</p>
+<p><strong>Latin Hypercube Sampling</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
@@ -236,7 +233,7 @@ Here, we introduce five simple strategies.</p>
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Sobol Sequence:</p>
+<p><strong>Sobol Sequence</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
@@ -254,8 +251,7 @@ Here, we introduce five simple strategies.</p>
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="section" id="reference-list">
-<h3>Reference list<a class="headerlink" href="#reference-list" title="Permalink to this headline">¶</a></h3>
+<p><strong>Reference list</strong></p>
 <dl class="citation">
 <dt class="label" id="sobol967"><span class="brackets"><a class="fn-backref" href="#id3">Sobol967</a></span></dt>
 <dd><p>Sobol,I.M. (1967), “Distribution of points in a cube and approximate evaluation of integrals”. Zh. Vych. Mat. Mat. Fiz. 7: 784–802 (in Russian); U.S.S.R Comput. Maths. Math. Phys. 7: 86–112 (in English)</p>
@@ -270,7 +266,6 @@ Here, we introduce five simple strategies.</p>
 <dd><p>Hyperparameter Tuning Methods in Automated Machine Learning. (In Chinese) Submitted.</p>
 </dd>
 </dl>
-</div>
 </div>
 </div>
 

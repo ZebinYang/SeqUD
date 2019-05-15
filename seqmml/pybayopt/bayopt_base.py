@@ -60,7 +60,7 @@ class BayoptBase():
         self.best_score_ = self.logs.loc[:,"score"].iloc[self.best_index_]
 
         if self.verbose:
-            print("Search completed in %.2f seconds."%self.search_time_consumed_)
+            print("%s completed in %.2f seconds."%(self.method, self.search_time_consumed_))
             print("The best score is: %.5f."%self.best_score_)
             print("The best configurations are:")
             print("\n".join("%-20s: %s"%(k, v if self.para_space[k]['Type']=="categorical" else round(v, 5))

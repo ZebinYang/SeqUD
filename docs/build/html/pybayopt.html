@@ -82,19 +82,16 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">One-shot Batch Designs</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Bayesian Optimization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#code-examples">Code Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#reference-list">Reference list</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#code-examples">Code Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Examples.html">More Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="APIs.html">APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">More Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apis.html">APIs</a></li>
 </ul>
 
             
@@ -163,22 +160,23 @@
 <h1>Bayesian Optimization<a class="headerlink" href="#bayesian-optimization" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>In classical Bayesian optimization, trials points are sequentially sampled one-point-at-a-time through
-maximizing the expected improvement. Let’s see a univariate example.</p>
-<a class="reference internal image-reference" href="_images/Demo_BO_eng.png"><img alt="_images/Demo_BO_eng.png" class="align-center" src="_images/Demo_BO_eng.png" style="width: 80%;" /></a>
-<p>The following three Bayesian optimization methods are most popular in AutoML area.</p>
+<p>In classical Bayesian optimization, trials are sequentially sampled one-point-at-a-time through
+maximizing the expected improvement (EI). Let’s see a univariate example.</p>
+<a class="reference internal image-reference" href="_images/Demo_BO_eng.png"><img alt="_images/Demo_BO_eng.png" class="align-center" src="_images/Demo_BO_eng.png" style="width: 90%;" /></a>
+<p><strong>Three popular Bayesian optimization methods</strong></p>
 <ul class="simple">
-<li><p>GP-EI (<a class="reference internal" href="#snoek2012" id="id1"><span>[Snoek2012]</span></a>): Gaussian process and expected improvement</p></li>
-<li><p>SMAC (<a class="reference internal" href="#hutter2011" id="id2"><span>[Hutter2011]</span></a>): It use random forest as surrogote model and EI and acquisition function.</p></li>
+<li><p>GP-EI (<a class="reference internal" href="#snoek2012" id="id1"><span>[Snoek2012]</span></a>): Use Gaussian process as surrogate model and EI as acquisition function.</p></li>
+<li><p>SMAC (<a class="reference internal" href="#hutter2011" id="id2"><span>[Hutter2011]</span></a>): Use random forest as surrogate model and EI and acquisition function.</p></li>
 <li><p>TPE (<a class="reference internal" href="#bergstra2011" id="id3"><span>[Bergstra2011]</span></a>): Tree-structured Parzen Estimator. It use non parametric method to model <span class="math notranslate nohighlight">\(p(x|y)\)</span> and <span class="math notranslate nohighlight">\(p(y)\)</span> (the prior is not of interest actually) instead of <span class="math notranslate nohighlight">\(p(y|x)\)</span>.</p></li>
 </ul>
-<p>Their corresponding python implementations can be found here.</p>
+<p><strong>Python Software</strong></p>
+<p>The corresponding python implementations can be found in the following git repositories.</p>
 <ul class="simple">
 <li><p>Spearmint (GP-EI) : <a class="reference external" href="https://github.com/JasperSnoek/spearmint">https://github.com/JasperSnoek/spearmint</a></p></li>
 <li><p>Hyperopt (TPE): <a class="reference external" href="https://github.com/hyperopt/hyperopt">https://github.com/hyperopt/hyperopt</a></p></li>
 <li><p>SMAC: <a class="reference external" href="https://github.com/automl/SMAC3">https://github.com/automl/SMAC3</a></p></li>
 </ul>
-<p>Potential limitations of Bayesian optimization:</p>
+<p><strong>Potential limitations</strong>:</p>
 <ul class="simple">
 <li><p>The meta-modeling and acquisition function optimization are difficult for high-dimentional problems.</p></li>
 <li><p>Lack uniformality considerations: algorithm can be trapped into local areas if without a good initialization.</p></li>
@@ -187,7 +185,7 @@ maximizing the expected improvement. Let’s see a univariate example.</p>
 </div>
 <div class="section" id="code-examples">
 <h2>Code Examples<a class="headerlink" href="#code-examples" title="Permalink to this headline">¶</a></h2>
-<p>GP-EI Xgboost:</p>
+<p><strong>GP-EI</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
@@ -219,7 +217,7 @@ maximizing the expected improvement. Let’s see a univariate example.</p>
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>SMAC:</p>
+<p><strong>SMAC</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
@@ -247,7 +245,7 @@ maximizing the expected improvement. Let’s see a univariate example.</p>
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>TPE:</p>
+<p><strong>TPE</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
@@ -275,8 +273,7 @@ maximizing the expected improvement. Let’s see a univariate example.</p>
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="section" id="reference-list">
-<h3>Reference list<a class="headerlink" href="#reference-list" title="Permalink to this headline">¶</a></h3>
+<p><strong>Reference list</strong></p>
 <dl class="citation">
 <dt class="label" id="snoek2012"><span class="brackets"><a class="fn-backref" href="#id1">Snoek2012</a></span></dt>
 <dd><p>Jasper Snoek, Hugo Larochelle, and Ryan P Adams. Practical bayesian optimization of machine learning algorithms. In Advances in Neural Information Processing Systems, pages 2951–2959, 2012.</p>
@@ -288,7 +285,6 @@ maximizing the expected improvement. Let’s see a univariate example.</p>
 <dd><p>James S Bergstra, Rémi Bardenet, Yoshua Bengio, and Balázs Kégl. Algorithms for hyper-parameter optimization. In Advances in Neural Information Processing Systems, pages 2546–2554, 2011.</p>
 </dd>
 </dl>
-</div>
 </div>
 </div>
 

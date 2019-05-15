@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Installation" href="Installation.html" /> 
+    <link rel="next" title="Installation" href="installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -81,12 +81,12 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">One-shot Batch Designs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Examples.html">More Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="APIs.html">APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">More Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apis.html">APIs</a></li>
 </ul>
 
             
@@ -153,29 +153,28 @@
             
   <div class="section" id="welcome-to-seqmml-s-documentation">
 <h1>Welcome to SeqMML’s documentation!<a class="headerlink" href="#welcome-to-seqmml-s-documentation" title="Permalink to this headline">¶</a></h1>
-<img alt="_images/AutoML_v1.png" src="_images/AutoML_v1.png" />
-<p>This is an open-source python package developed for automated machine learning, in particular for hyperparameter optimization problems. We provide an alternative approach to the well known Bayesian optimization methods, i.g., sequential uniform design-based hyperparameter optimization method.</p>
+<p>This is an open-source python package developed for automated machine learning, in particular for hyperparameter optimization problems. We propose a sequential uniform design method, as an alternative to the well known Bayesian optimization approach.</p>
+<p><strong>What is AutoML?</strong></p>
 <ul class="simple">
 <li><p>AutoML is to perform Automated Machine Learning model/algorithm selection and hyperparameter tuning.</p></li>
 <li><p>It also targets progressive automation of data preprocessing, feature extraction/transformation, postprocessing and interpretation.</p></li>
 <li><p>Hyperparameter optimization, a.k.a. (hyper) paramater tuning, plays a central role in AutoML pipelines.</p></li>
 </ul>
-<div class="section" id="however-it-is-not-easy">
-<h2>However, it is not easy.<a class="headerlink" href="#however-it-is-not-easy" title="Permalink to this headline">¶</a></h2>
+<img alt="_images/AutoML_v1.png" src="_images/AutoML_v1.png" />
+<p><strong>However, it is not easy.</strong></p>
 <ul class="simple">
-<li><p>Hyperparameters can be continuous, integer-valued or categorical,  e.g. regularization parameters, kernel bandwidths, learning rate, tree depth, batch size, number of layers, type of activation.</p></li>
-<li><p>Hyperparameter Optimization is of combinatorial nature, therefore a challenging problem with curse of dimensionality.</p></li>
-<li><p>Robustness and reproducibility of optimal hyperparameters depend not only on the specific algorithm, but also on the specific dataset.</p></li>
+<li><p>Hyperparameters can be continuous, integer-valued or categorical, e.g. regularization parameters, kernel bandwidths, learning rate, tree depth, batch size, number of layers, type of activation.</p></li>
+<li><p>AutoML is of combinatorial nature, therefore a challenging problem with curse of dimensionality.</p></li>
+<li><p>Robustness and reproducibility of optimal configuration depend not only on the specific algorithm, but also on the specific dataset.</p></li>
 </ul>
-</div>
 <div class="section" id="contents">
 <h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Installation.html#prerequisite">Prerequisite</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Installation.html#github-installation">Github installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Installation.html#manual-installation">Manual installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequisite">Prerequisite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#github-installation">Github installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#manual-installation">Manual installation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">One-shot Batch Designs</a><ul>
@@ -190,18 +189,16 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="pysequd.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pysequd.html#algorithm">Algorithm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pysequd.html#a-simple-demo">A Simple Demo</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pysequd.html#code-examples">Code Examples</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Examples.html">More Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Examples.html#sequd-for-function-optimization">SeqUD for function optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Examples.html#working-with-scikit-learn-pipeline">Working with Scikit-learn Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Examples.html#methods-comparison">Methods Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">More Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#sequd-for-function-optimization">SeqUD for function optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#working-with-scikit-learn-pipeline">Working with Scikit-learn Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#methods-comparison">Methods Comparison</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="APIs.html">APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apis.html">APIs</a></li>
 </ul>
 </div>
 </div>
@@ -215,7 +212,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>

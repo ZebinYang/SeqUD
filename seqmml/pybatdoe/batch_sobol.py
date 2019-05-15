@@ -105,7 +105,7 @@ class SobolSearch(BatchBase):
         self.scoring = scoring
         self.estimator = estimator        
         self.rand_seed = rand_seed     
-        
+        self.method = "Sobol Search"
         
     def _run(self, obj_func):
         """

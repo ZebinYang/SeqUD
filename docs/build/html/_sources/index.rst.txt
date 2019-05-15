@@ -6,9 +6,10 @@
 Welcome to SeqMML's documentation!
 ==========================================
 
-.. image:: ./images/AutoML_v1.png
+This is an open-source python package developed for automated machine learning, in particular for hyperparameter optimization problems. We propose a sequential uniform design method, as an alternative to the well known Bayesian optimization approach.
 
-This is an open-source python package developed for automated machine learning, in particular for hyperparameter optimization problems. We provide an alternative approach to the well known Bayesian optimization methods, i.g., sequential uniform design-based hyperparameter optimization method.
+
+**What is AutoML?** 
 
 - AutoML is to perform Automated Machine Learning model/algorithm selection and hyperparameter tuning.
 
@@ -16,25 +17,25 @@ This is an open-source python package developed for automated machine learning, 
 
 - Hyperparameter optimization, a.k.a. (hyper) paramater tuning, plays a central role in AutoML pipelines. 
 
+.. image:: ./images/AutoML_v1.png
 
-However, it is not easy. 
-----------------------------------
+**However, it is not easy.** 
 
-- Hyperparameters can be continuous, integer-valued or categorical,  e.g. regularization parameters, kernel bandwidths, learning rate, tree depth, batch size, number of layers, type of activation.
+- Hyperparameters can be continuous, integer-valued or categorical, e.g. regularization parameters, kernel bandwidths, learning rate, tree depth, batch size, number of layers, type of activation.
 
--  Hyperparameter Optimization is of combinatorial nature, therefore a challenging problem with curse of dimensionality.
+-  AutoML is of combinatorial nature, therefore a challenging problem with curse of dimensionality.
 
-- Robustness and reproducibility of optimal hyperparameters depend not only on the specific algorithm, but also on the specific dataset.
+- Robustness and reproducibility of optimal configuration depend not only on the specific algorithm, but also on the specific dataset.
 
 
 Contents:
-------------
+-------------
 .. toctree::
    :maxdepth: 2
 
-   Installation.rst
+   installation.rst
    pybatdoe.rst
    pybayopt.rst
    pysequd.rst
-   Examples.rst
-   APIs.rst
+   examples.rst
+   apis.rst

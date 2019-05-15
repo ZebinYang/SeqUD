@@ -1,5 +1,4 @@
 import time 
-import random 
 import numpy as np
 import pandas as pd 
 from joblib import Parallel
@@ -168,7 +167,7 @@ class SeqUD(object):
                               for j in range(self.logs.loc[:,self.para_names].shape[1])}
         self.best_score_ = self.logs.loc[:,"score"].iloc[self.best_index_]
         if self.verbose:
-            print("Search completed in %.2f seconds."%self.search_time_consumed_)
+            print("SeqUD completed in %.2f seconds."%self.search_time_consumed_)
             print("The best score is: %.5f."%self.best_score_)
             print("The best configurations are:")
             print("\n".join("%-20s: %s"%(k, v if self.para_space[k]['Type']=="categorical" else round(v, 5))

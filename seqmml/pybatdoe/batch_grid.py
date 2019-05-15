@@ -106,6 +106,7 @@ class GridSearch(BatchBase):
         self.scoring = scoring
         self.estimator = estimator        
         self.rand_seed = rand_seed     
+        self.method = "Grid Search"
         
     def _run(self, obj_func):
         """

@@ -5,23 +5,26 @@ Bayesian Optimization
 Introduction 
 ------------------
 
-In classical Bayesian optimization, trials points are sequentially sampled one-point-at-a-time through
-maximizing the expected improvement. Let's see a univariate example. 
+In classical Bayesian optimization, trials are sequentially sampled one-point-at-a-time through
+maximizing the expected improvement (EI). Let's see a univariate example. 
 
 .. image:: ./images/Demo_BO_eng.png
-    :width: 80%
+    :width: 90%
     :align: center
     
-The following three Bayesian optimization methods are most popular in AutoML area.
+    
+**Three popular Bayesian optimization methods**
 
-- GP-EI ([Snoek2012]_): Gaussian process and expected improvement
+- GP-EI ([Snoek2012]_): Use Gaussian process as surrogate model and EI as acquisition function.
 
-- SMAC ([Hutter2011]_): It use random forest as surrogote model and EI and acquisition function.
+- SMAC ([Hutter2011]_): Use random forest as surrogate model and EI and acquisition function.
 
 - TPE ([Bergstra2011]_): Tree-structured Parzen Estimator. It use non parametric method to model :math:`p(x|y)` and :math:`p(y)` (the prior is not of interest actually) instead of :math:`p(y|x)`.
 
 
-Their corresponding python implementations can be found here. 
+**Python Software**
+
+The corresponding python implementations can be found in the following git repositories. 
 
 - Spearmint (GP-EI) : https://github.com/JasperSnoek/spearmint
 
@@ -30,7 +33,7 @@ Their corresponding python implementations can be found here.
 - SMAC: https://github.com/automl/SMAC3
 
 
-Potential limitations of Bayesian optimization:
+**Potential limitations**:
 
 - The meta-modeling and acquisition function optimization are difficult for high-dimentional problems.
 
@@ -43,7 +46,7 @@ Potential limitations of Bayesian optimization:
 Code Examples 
 ---------------------------------------
 
-GP-EI Xgboost::
+**GP-EI**::
 
         import numpy as np
         import xgboost as xgb
@@ -76,7 +79,7 @@ GP-EI Xgboost::
         clf.plot_scores()        
         
 
-SMAC::
+**SMAC**::
   
         import numpy as np
         from sklearn import svm
@@ -106,7 +109,7 @@ SMAC::
         
         
         
-TPE::
+**TPE**::
 
         import numpy as np
         from sklearn import svm
@@ -135,8 +138,7 @@ TPE::
         clf.plot_scores()
         
         
-Reference list 
-________________
+**Reference list**
 
 .. [Snoek2012] Jasper Snoek, Hugo Larochelle, and Ryan P Adams. Practical bayesian optimization of machine learning algorithms. In Advances in Neural Information Processing Systems, pages 2951–2959, 2012.
 

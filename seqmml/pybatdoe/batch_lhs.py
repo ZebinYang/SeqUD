@@ -106,7 +106,7 @@ class LHSSearch(BatchBase):
         self.scoring = scoring
         self.estimator = estimator        
         self.rand_seed = rand_seed     
-        
+        self.method = "LHS Search"
 
     def _run(self, obj_func):
         """

@@ -121,6 +121,7 @@ class GPEIOPT(BayoptBase):
         self.estimator = estimator        
         self.rand_seed = rand_seed
         self.time_out = time_out
+        self.method = "GPEI"
         
         self.variables = {}
         for item, values in self.para_space.items():
