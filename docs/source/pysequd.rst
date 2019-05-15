@@ -51,6 +51,7 @@ The proposed approach is advantageous over the Bayesian optimization methods.
 
 - At each stage, the algorithm could be conducted in parallel.
 
+To generate such a augmented design, we have developed another package pyunidoe, which can be found in the git repository https://github.com/ZebinYang/pyunidoe.git. 
 
 Example Usage
 ----------------

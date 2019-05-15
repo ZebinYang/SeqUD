@@ -10,9 +10,6 @@ sys.path.insert(0, os.path.abspath('../../seqmml/'))
 
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'sphinx.ext.coverage',
-    'sphinx.ext.mathjax',
     'sphinx.ext.viewcode',
     'sphinx.ext.autosummary'
 ]
