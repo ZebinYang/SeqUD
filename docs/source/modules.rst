@@ -1,53 +1,5 @@
 Modules
 ================================
 
-
-GridSearch
------------
-.. automodule:: seqmml.pybatdoe.batch_grid
-  :members:
-
-RandSearch
------------
-.. automodule:: seqmml.pybatdoe.batch_rand
-  :members:
-
-LHSSearch
-----------
-.. automodule:: seqmml.pybatdoe.batch_lhs
-  :members:
-
-SobolSearch
-------------
-.. automodule:: seqmml.pybatdoe.batch_sobol
-  :members:
-
-UDSearch
----------
-.. automodule:: seqmml.pybatdoe.batch_ud
-  :members:
-  
-GPEIOPT
---------
-.. automodule:: seqmml.pybayopt.bayopt_gpei
-  :members:
-
-SMACOPT
---------
-.. automodule:: seqmml.pybayopt.bayopt_smac
-  :members:
-  
-TPEOPT
---------
-.. automodule:: seqmml.pybayopt.bayopt_tpe
-  :members:
-
-SeqRand
----------
-.. automodule:: seqmml.pysequd.seqrand
-  :members:  
-
-SeqUD
---------
-.. automodule:: seqmml.pysequd.sequd
-  :members:
+.. toctree::
+    apidoc.rst

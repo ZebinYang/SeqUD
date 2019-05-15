@@ -84,8 +84,8 @@ class SobolSearch(BatchBase):
     :vartype best_params\_: dict
     :ivar best_params\_: Parameters that reaches `best_score_`.
 
-    :vartype best_estimator\_: dict
-    :ivar best_params\_: The estimator refitted based on the `best_params_`. 
+    :vartype best_estimator\_: sklearn estimator 
+    :ivar best_estimator\_: The estimator refitted based on the `best_params_`. 
         Not available if estimator = None or `refit=False`.
 
     :vartype search_time_consumed\_: float

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>seqmml.pysequd.seqrand &mdash; SeqMML  documentation</title>
+  <title>pysequd.seqrand &mdash; SeqMML  documentation</title>
   
 
   
@@ -17,25 +17,25 @@
   
 
   
-  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
 
   
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" /> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home"> SeqMML
+            <a href="../../index.html" class="icon icon-home"> SeqMML
           
 
           
@@ -62,7 +62,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -80,13 +80,13 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../pybatdoe.html">One-shot Batch Designs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../pybayopt.html">Bayesian Optimization (BO)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../pysequd.html">Sequential Uniform Design (SeqUD)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">More Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pybatdoe.html">One-shot Batch Designs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pybayopt.html">Bayesian Optimization (BO)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pysequd.html">Sequential Uniform Design (SeqUD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">More Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
 </ul>
 
             
@@ -101,7 +101,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">SeqMML</a>
+          <a href="../../index.html">SeqMML</a>
         
       </nav>
 
@@ -130,11 +130,11 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
         
-      <li>seqmml.pysequd.seqrand</li>
+      <li>pysequd.seqrand</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -149,7 +149,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for seqmml.pysequd.seqrand</h1><div class="highlight"><pre>
+  <h1>Source code for pysequd.seqrand</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">time</span> 
 <span class="kn">import</span> <span class="nn">random</span> 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -161,7 +161,7 @@
 
 <span class="n">EPS</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
 
-<div class="viewcode-block" id="SeqRand"><a class="viewcode-back" href="../../../apidoc.html#seqmml.pysequd.seqrand.SeqRand">[docs]</a><span class="k">class</span> <span class="nc">SeqRand</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="SeqRand"><a class="viewcode-back" href="../../apidoc.html#pysequd.seqrand.SeqRand">[docs]</a><span class="k">class</span> <span class="nc">SeqRand</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Implementation of random search in sequential version.</span>
@@ -239,8 +239,8 @@
 <span class="sd">    :vartype best_params\_: dict</span>
 <span class="sd">    :ivar best_params\_: Parameters that reaches `best_score_`.</span>
 
-<span class="sd">    :vartype best_estimator\_: dict</span>
-<span class="sd">    :ivar best_params\_: The estimator refitted based on the `best_params_`. </span>
+<span class="sd">    :vartype best_estimator\_: sklearn estimator </span>
+<span class="sd">    :ivar best_estimator\_: The estimator refitted based on the `best_params_`. </span>
 <span class="sd">        Not available if estimator = None or `refit=False`.</span>
 
 <span class="sd">    :vartype search_time_consumed\_: float</span>
@@ -281,7 +281,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">para_ud_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">items</span><span class="o">+</span> <span class="s2">&quot;_UD&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable_number</span><span class="p">)</span>  
     
-<div class="viewcode-block" id="SeqRand.plot_scores"><a class="viewcode-back" href="../../../apidoc.html#seqmml.pysequd.seqrand.SeqRand.plot_scores">[docs]</a>    <span class="k">def</span> <span class="nf">plot_scores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SeqRand.plot_scores"><a class="viewcode-back" href="../../apidoc.html#pysequd.seqrand.SeqRand.plot_scores">[docs]</a>    <span class="k">def</span> <span class="nf">plot_scores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Visualize the scores history.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -481,7 +481,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">search_time_consumed_</span> <span class="o">=</span> <span class="n">search_end_time</span> <span class="o">-</span> <span class="n">search_start_time</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_summary</span><span class="p">()</span>
       
-<div class="viewcode-block" id="SeqRand.fmin"><a class="viewcode-back" href="../../../apidoc.html#seqmml.pysequd.seqrand.SeqRand.fmin">[docs]</a>    <span class="k">def</span> <span class="nf">fmin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrapper_func</span><span class="p">):</span>
+<div class="viewcode-block" id="SeqRand.fmin"><a class="viewcode-back" href="../../apidoc.html#pysequd.seqrand.SeqRand.fmin">[docs]</a>    <span class="k">def</span> <span class="nf">fmin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrapper_func</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Search the optimal value of a function. </span>
 <span class="sd">        </span>
@@ -498,7 +498,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_summary</span><span class="p">()</span></div>
 
         
-<div class="viewcode-block" id="SeqRand.fit"><a class="viewcode-back" href="../../../apidoc.html#seqmml.pysequd.seqrand.SeqRand.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="SeqRand.fit"><a class="viewcode-back" href="../../apidoc.html#pysequd.seqrand.SeqRand.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Run fit with all sets of parameters.</span>
 <span class="sd">        </span>

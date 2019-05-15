@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>seqmml.pybatdoe.batch_lhs &mdash; SeqMML  documentation</title>
+  <title>pybatdoe.batch_rand &mdash; SeqMML  documentation</title>
   
 
   
@@ -17,25 +17,25 @@
   
 
   
-  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
         <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
-    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
     
 
   
-  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" /> 
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home"> SeqMML
+            <a href="../../index.html" class="icon icon-home"> SeqMML
           
 
           
@@ -62,7 +62,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -80,13 +80,13 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../pybatdoe.html">One-shot Batch Designs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../pybayopt.html">Bayesian Optimization (BO)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../pysequd.html">Sequential Uniform Design (SeqUD)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">More Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pybatdoe.html">One-shot Batch Designs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pybayopt.html">Bayesian Optimization (BO)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pysequd.html">Sequential Uniform Design (SeqUD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">More Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
 </ul>
 
             
@@ -101,7 +101,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">SeqMML</a>
+          <a href="../../index.html">SeqMML</a>
         
       </nav>
 
@@ -130,11 +130,11 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
         
-      <li>seqmml.pybatdoe.batch_lhs</li>
+      <li>pybatdoe.batch_rand</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -149,7 +149,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for seqmml.pybatdoe.batch_lhs</h1><div class="highlight"><pre>
+  <h1>Source code for pybatdoe.batch_rand</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 
@@ -164,15 +164,14 @@
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="k">import</span> <span class="n">tqdm_notebook</span> <span class="k">as</span> <span class="n">tqdm</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_score</span>
 
-<span class="kn">from</span> <span class="nn">pyDOE</span> <span class="k">import</span> <span class="n">lhs</span>
 <span class="kn">from</span> <span class="nn">.batch_base</span> <span class="k">import</span> <span class="n">BatchBase</span>
 
-<div class="viewcode-block" id="LHSSearch"><a class="viewcode-back" href="../../../apidoc.html#seqmml.pybatdoe.batch_lhs.LHSSearch">[docs]</a><span class="k">class</span> <span class="nc">LHSSearch</span><span class="p">(</span><span class="n">BatchBase</span><span class="p">):</span>
+<div class="viewcode-block" id="RandSearch"><a class="viewcode-back" href="../../apidoc.html#pybatdoe.batch_rand.RandSearch">[docs]</a><span class="k">class</span> <span class="nc">RandSearch</span><span class="p">(</span><span class="n">BatchBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    Implementation of Latin Hypercube Sampling. </span>
+<span class="sd">    Implementation of Random Search. </span>
 
 <span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
+<span class="sd">    ----------    </span>
 <span class="sd">    :type  para_space: dict or list of dictionaries</span>
 <span class="sd">    :param para_space: It has three types:</span>
 <span class="sd">    </span>
@@ -198,7 +197,7 @@
 <span class="sd">    </span>
 <span class="sd">    :type  cv: cross-validation method, an sklearn object.</span>
 <span class="sd">    :param cv: e.g., `StratifiedKFold` and KFold` is used.</span>
-<span class="sd">    </span>
+
 <span class="sd">    :type scoring: string, callable, list/tuple, dict or None, optional, default = None</span>
 <span class="sd">    :param scoring: A sklearn type scoring function. </span>
 <span class="sd">        If None, the estimator&#39;s default scorer (if available) is used. See the package `sklearn` for details.</span>
@@ -217,14 +216,14 @@
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; from sklearn import svm</span>
 <span class="sd">    &gt;&gt;&gt; from sklearn import datasets</span>
-<span class="sd">    &gt;&gt;&gt; from seqmml import LHSSearch</span>
+<span class="sd">    &gt;&gt;&gt; from seqmml import RandSearch</span>
 <span class="sd">    &gt;&gt;&gt; from sklearn.model_selection import KFold</span>
 <span class="sd">    &gt;&gt;&gt; iris = datasets.load_iris()</span>
 <span class="sd">    &gt;&gt;&gt; ParaSpace = {&#39;C&#39;:{&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-6, 16], &#39;Wrapper&#39;: np.exp2}, </span>
 <span class="sd">               &#39;gamma&#39;: {&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-16, 6], &#39;Wrapper&#39;: np.exp2}}</span>
 <span class="sd">    &gt;&gt;&gt; estimator = svm.SVC()</span>
 <span class="sd">    &gt;&gt;&gt; cv = KFold(n_splits=5, random_state=0, shuffle=True)</span>
-<span class="sd">    &gt;&gt;&gt; clf = LHSSearch(ParaSpace, max_runs = 100, estimator = estimator, cv = cv, </span>
+<span class="sd">    &gt;&gt;&gt; clf = RandSearch(ParaSpace, max_runs = 100, estimator = estimator, cv = cv, </span>
 <span class="sd">                 scoring=None, n_jobs = None, refit=False, rand_seed = 0, verbose = False)</span>
 <span class="sd">    &gt;&gt;&gt; clf.fit(iris.data, iris.target)</span>
 
@@ -236,8 +235,8 @@
 <span class="sd">    :vartype best_params\_: dict</span>
 <span class="sd">    :ivar best_params\_: Parameters that reaches `best_score_`.</span>
 
-<span class="sd">    :vartype best_estimator\_: dict</span>
-<span class="sd">    :ivar best_params\_: The estimator refitted based on the `best_params_`. </span>
+<span class="sd">    :vartype best_estimator\_: sklearn estimator </span>
+<span class="sd">    :ivar best_estimator\_: The estimator refitted based on the `best_params_`. </span>
 <span class="sd">        Not available if estimator = None or `refit=False`.</span>
 
 <span class="sd">    :vartype search_time_consumed\_: float</span>
@@ -251,24 +250,29 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">para_space</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">estimator</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
                  <span class="n">scoring</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rand_seed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
 
-        <span class="nb">super</span><span class="p">(</span><span class="n">LHSSearch</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">para_space</span><span class="p">,</span> <span class="n">max_runs</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RandSearch</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">para_space</span><span class="p">,</span> <span class="n">max_runs</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">refit</span> <span class="o">=</span> <span class="n">refit</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scoring</span> <span class="o">=</span> <span class="n">scoring</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span>        
         <span class="bp">self</span><span class="o">.</span><span class="n">rand_seed</span> <span class="o">=</span> <span class="n">rand_seed</span>     
-        <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;LHS Search&quot;</span>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;Random Search&quot;</span>
+        
     <span class="k">def</span> <span class="nf">_run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_func</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Main loop for searching the best hyperparameters. </span>
 <span class="sd">        </span>
-<span class="sd">        &quot;&quot;&quot;</span>     
-        <span class="n">para_set_ud</span> <span class="o">=</span> <span class="n">lhs</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">,</span> <span class="n">samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s1">&#39;centermaximin&#39;</span><span class="p">)</span>
-        <span class="n">para_set_ud</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">para_set_ud</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">para_ud_names</span><span class="p">)</span>
-        <span class="n">para_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_para_mapping</span><span class="p">(</span><span class="n">para_set_ud</span><span class="p">)</span>
-        <span class="n">para_set_ud</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">para_ud_names</span>
+<span class="sd">        &quot;&quot;&quot;</span>  
+        <span class="n">para_set</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">para_space</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;categorical&quot;</span><span class="p">):</span>
+                <span class="n">para_set</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">)]</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;integer&quot;</span><span class="p">):</span>
+                <span class="n">para_set</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">)]</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;continuous&quot;</span><span class="p">):</span>
+                <span class="n">para_set</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Wrapper&#39;</span><span class="p">](</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Range&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Range&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">))</span>
+                
         <span class="n">candidate_params</span> <span class="o">=</span> <span class="p">[{</span><span class="n">para_set</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span> <span class="n">para_set</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> 
                              <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">para_set</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])}</span> 
                             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">para_set</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span> 
@@ -278,8 +282,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">out</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">obj_func</span><span class="p">)(</span><span class="n">parameters</span><span class="p">)</span>
                                 <span class="k">for</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">candidate_params</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">logs</span> <span class="o">=</span> <span class="n">para_set_ud</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">para_set</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logs</span> <span class="o">=</span> <span class="n">para_set</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
