@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to SeqMML’s documentation! &mdash; SeqMM  documentation</title>
+  <title>Welcome to SeqMML’s documentation! &mdash; SeqMML  documentation</title>
   
 
   
@@ -50,7 +50,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> SeqMM
+            <a href="#" class="icon icon-home"> SeqMML
           
 
           
@@ -83,10 +83,11 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">One-shot Batch Designs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization (BO)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design (SeqUD)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">More Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="apis.html">APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
 </ul>
 
             
@@ -101,7 +102,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">SeqMM</a>
+          <a href="#">SeqMML</a>
         
       </nav>
 
@@ -178,27 +179,48 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">One-shot Batch Designs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pybatdoe.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pybatdoe.html#code-examples">Code Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pybatdoe.html#simple-strategies">Simple Strategies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pybatdoe.html#pros-and-cons">Pros and Cons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pybatdoe.html#example-usage">Example Usage</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt.html#code-examples">Code Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization (BO)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pybayopt.html#classical-bo-methods">Classical BO Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pybayopt.html#pros-and-cons">Pros and Cons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pybayopt.html#example-usage">Example Usage</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pysequd.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pysequd.html#code-examples">Code Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design (SeqUD)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pysequd.html#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pysequd.html#sequd-algorithm">SeqUD Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pysequd.html#illustrative-demo">Illustrative Demo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pysequd.html#example-usage">Example Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">More Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="examples.html#sequd-for-function-optimization">SeqUD for function optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples.html#working-with-scikit-learn-pipeline">Working with Scikit-learn Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#methods-comparison">Methods Comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#different-types-of-hyperparameters">Different Types of Hyperparameters</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="apis.html">APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#module-pybatdoe.batch_grid">GridSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#module-pybatdoe.batch_rand">RandSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#module-pybatdoe.batch_lhs">LHSSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#module-pybatdoe.batch_sobol">SobolSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#module-pybatdoe.batch_ud">UDSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#module-pybayopt.bayopt_gpei">GPEIOPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#module-pybayopt.bayopt_smac">SMACOPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#module-pybayopt.bayopt_tpe">TPEOPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#module-pysequd.seqrand">SeqRand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#module-pysequd.sequd">SeqUD</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#external-software">External Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#reference">Reference</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>

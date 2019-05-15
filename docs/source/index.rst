@@ -29,7 +29,8 @@ This is an open-source python package developed for automated machine learning, 
 
 
 Contents:
--------------
+-----------
+
 .. toctree::
    :maxdepth: 2
 
@@ -38,4 +39,6 @@ Contents:
    pybayopt.rst
    pysequd.rst
    examples.rst
-   apis.rst
+   modules.rst
+   resources.rst
+

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; SeqMM  documentation</title>
+  <title>Installation &mdash; SeqMML  documentation</title>
   
 
   
@@ -51,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> SeqMM
+            <a href="index.html" class="icon icon-home"> SeqMML
           
 
           
@@ -89,10 +89,11 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">One-shot Batch Designs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization (BO)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design (SeqUD)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">More Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="apis.html">APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
 </ul>
 
             
@@ -107,7 +108,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">SeqMM</a>
+          <a href="index.html">SeqMML</a>
         
       </nav>
 
@@ -161,43 +162,44 @@
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="prerequisite">
 <h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this headline">¶</a></h2>
-<p>The required environment for SeqMML package:</p>
+<p>The following environments are required for SeqMML package:</p>
 <ul class="simple">
-<li><p>Python 3</p></li>
+<li><p>Python 3 (anaconda is preferable)</p></li>
 <li><p>SWIG &gt;= 3.0</p></li>
 <li><p>C++ compiler</p></li>
 </ul>
-<p>For different platform, the following commands may be helpful for installing the C++ compiler:</p>
+<p>The following commands can be helpful for installing the C++ compiler:</p>
 <ul class="simple">
-<li><p>For Linux</p></li>
+<li><p><strong>Linux</strong></p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">gxx_linux</span><span class="o">-</span><span class="mi">64</span> <span class="n">gcc_linux</span><span class="o">-</span><span class="mi">64</span> <span class="n">swig</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>For Mac</p></li>
+<li><p><strong>Mac</strong></p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">open</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Developer</span><span class="o">/</span><span class="n">CommandLineTools</span><span class="o">/</span><span class="n">Packages</span><span class="o">/</span><span class="n">macOS_SDK_headers_for_macOS_10</span><span class="o">.</span><span class="mf">14.</span><span class="n">pkg</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>For Windows</p></li>
+<li><p><strong>Windows</strong></p></li>
 </ul>
-<p>Microsoft Visual Studio 14.0 is required, see <a class="reference external" href="https://wiki.python.org/moin/WindowsCompilers#Microsoft_Visual_C.2B-.2B-_14.0_with_Visual_Studio_2015_.28x86.2C_x64.2C_ARM.29">a link</a> for details.</p>
+<p>Microsoft Visual Studio 14.0 is required, see <a class="reference external" href="https://wiki.python.org/moin/WindowsCompilers#Microsoft_Visual_C.2B-.2B-_14.0_with_Visual_Studio_2015_.28x86.2C_x64.2C_ARM.29">python windows compliers</a> for details.</p>
 </div>
 <div class="section" id="github-installation">
 <h2>Github installation<a class="headerlink" href="#github-installation" title="Permalink to this headline">¶</a></h2>
-<p>Currently, we only support installation from our github repository. You can install the package by the following console command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ZebinYang</span><span class="o">/</span><span class="n">seqmml</span><span class="o">.</span><span class="n">git</span>
+<p>You can install the package by the following console command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ZebinYang</span><span class="o">/</span><span class="n">seqmml</span><span class="o">.</span><span class="n">git</span><span class="o">.</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="manual-installation">
 <h2>Manual installation<a class="headerlink" href="#manual-installation" title="Permalink to this headline">¶</a></h2>
-<p>Currently, we only support installation from our github repository. You can install the package by the following console command:</p>
+<p>If git is not available, you can manually install the package by downloading the source codes and then compiling it by hand:</p>
 <ul class="simple">
-<li><p>First, download the source codes from <a class="reference external" href="http://github.com/ZebinYang/seqmml.git">http://github.com/ZebinYang/seqmml.git</a>, unzip and switch to the root folder.</p></li>
-<li><p>Then, run the following shell commands to finish installation.</p></li>
+<li><p>Download the source codes from <a class="reference external" href="http://github.com/ZebinYang/seqmml.git">http://github.com/ZebinYang/seqmml.git</a>.</p></li>
+<li><p>unzip and switch to the root folder.</p></li>
+<li><p>Run the following shell commands to finish installation.</p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
 <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>

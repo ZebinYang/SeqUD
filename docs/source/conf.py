@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.abspath('../../seqmml/'))
 extensions = ['sphinx.ext.autodoc']
 source_suffix = '.rst'
 master_doc = 'index'
-project = u'SeqMM'
+project = u'SeqMML'
 copyright = u'Zebin Yang, yangzebin2010@gmail.com'
 exclude_patterns = ['_build']
 pygments_style = 'sphinx'

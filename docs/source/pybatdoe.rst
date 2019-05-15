@@ -1,30 +1,28 @@
 One-shot Batch Designs
 ==============================
 
+Batch designs can generate all the experimental trials before conducting any experiments. See the following.
 
-Introduction 
+
+Simple Strategies 
 ------------------
 
-Batch designs can generate all the experimental trials before conducting any experiments.
+- **Grid Search (Grid)**: exhaustive search over grid combinations.
 
-**four simple strategies**.
+- **Random Search (Rand)**: it is more flexible than grid search, when not all hyperparameters are equally important. Furthermore, new trials can be added without adjustment and the experiments can also be stopped any time ([Bergstra2012]_).
 
-- Grid Search: exhaustive search over grid combinations
+- **Latin Hypercube Sampling (LHS)**: near-random sample ([McKay1978]_).
 
-- Random Search:  more flexible than grid experiments, when not all hyperparameters are equally important. Furthermore, new trials can be added without adjustment and the experiments can also be stopped any time.  ([Bergstra2012]_)
+- **Sobol Sequence (Sobol)**: quasi-random low-discrepancy sequence ([Sobol967]_).
 
-- Latin Hypercube Sampling: near-random sample (LHS; [McKay1978]_)
-
-- Sobol Sequence: quasi-random low-discrepancy sequence ([Sobol967]_)
-
-The figures (derived from [Zhang2019]_) present a demo of the four mentioned sampling approach, including Grid search (top left), Random search (top right), Latin hypercube (bottom left) and Sobol Sequence (bottom right).
+The figures below ([Zhang2019]_) present the demo sampling history of the four mentioned approaches, including Grid search (top left), Random search (top right), Latin hypercube (bottom left) and Sobol Sequence (bottom right).
 
 |pic1| |pic2| |pic3| |pic4|
 
 .. |pic1| image::  ./images/Demo_Grid.png 
    :width: 45%
 
-.. |pic2| image::  ./images/Demo_Random.png 
+.. |pic2| image::  ./images/Demo_Rand.png 
    :width: 45%
 
 
@@ -35,16 +33,17 @@ The figures (derived from [Zhang2019]_) present a demo of the four mentioned sam
    :width: 45%
 
 
-**Advantage and Disadvantage**
+Pros and Cons
+---------------------
 
 - Easy to be paralleled, trials can be generated without too much burden. 
 
-- However, the information of existing experiments is not utilized, which is not very efficient. 
+- The information of existing experiments is not utilized, which is not efficient. 
 
 - To select an appropriate number of design points is always difficult, with potential over-sampling and under-sampling problems.
 
 
-Code Examples 
+Example Usage 
 --------------
 
 **Grid Search**::
@@ -119,14 +118,3 @@ Code Examples
                     estimator = estimator, cv = cv, refit = True, verbose = True)
         clf.fit(iris.data, iris.target)
         clf.plot_scores()        
-
-        
-**Reference list**
-
-.. [Sobol967] Sobol,I.M. (1967), "Distribution of points in a cube and approximate evaluation of integrals". Zh. Vych. Mat. Mat. Fiz. 7: 784–802 (in Russian); U.S.S.R Comput. Maths. Math. Phys. 7: 86–112 (in English)
-
-.. [McKay1978] McKay, M.D., Beckman, R.J. and Conover, W.J., 1979. Comparison of three methods for selecting values of input variables in the analysis of output from a computer code. Technometrics, 21(2), pp.239-245.
-
-.. [Bergstra2012] James Bergstra and Yoshua Bengio. Random search for hyper-parameter optimization. Journal of Machine Learning Research, 13(Feb):281–305, 2012.
-
-.. [Zhang2019] Hyperparameter Tuning Methods in Automated Machine Learning. (In Chinese) Submitted.

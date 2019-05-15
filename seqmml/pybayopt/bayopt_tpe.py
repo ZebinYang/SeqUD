@@ -15,7 +15,7 @@ from .bayopt_base import BayoptBase
 
 class TPEOPT(BayoptBase):
     """ 
-    Interface of TPE (Bayesian Optimization). 
+    Interface of Hyperopt (Bayesian Optimization). 
 
     Parameters
     ----------
@@ -58,7 +58,7 @@ class TPEOPT(BayoptBase):
     >>> import numpy as np
     >>> from sklearn import svm
     >>> from sklearn import datasets
-    >>> from seqmm.pybayopt import TPEOPT
+    >>> from seqmml import TPEOPT
     >>> from sklearn.model_selection import KFold
     >>> iris = datasets.load_iris()
     >>> ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
@@ -70,22 +70,22 @@ class TPEOPT(BayoptBase):
 
     Attributes
     ----------
-    :ivar best_score_: float
-        The best average cv score among the evaluated trials.  
+    :vartype best_score\_: float
+    :ivar best_score\_: The best average cv score among the evaluated trials.  
+    
+    :vartype best_params\_: dict
+    :ivar best_params\_: Parameters that reaches `best_score_`.
 
-    :ivar best_params_: dict
-        Parameters that reaches `best_score_`.
+    :vartype best_estimator\_: dict
+    :ivar best_params\_: The estimator refitted based on the `best_params_`. 
+        Not available if estimator = None or `refit=False`.
 
-    :ivar best_estimator_: 
-        The estimator refitted based on the `best_params_`. 
-        Not available if `refit=False`.
+    :vartype search_time_consumed\_: float
+    :ivar search_time_consumed\_: Seconds used for whole searching procedure.
 
-    :ivar search_time_consumed_: float
-        Seconds used for whole searching procedure.
-
-    :ivar refit_time_: float
-        Seconds used for refitting the best model on the whole dataset.
-        Not available if `refit=False`.
+    :vartype refit_time\_: float
+    :ivar refit_time\_: Seconds used for refitting the best model on the whole dataset.
+        Not available if estimator = None or `refit=False`.
     """    
 
     def __init__(self, para_space, max_runs = 100, estimator = None, cv = None, 

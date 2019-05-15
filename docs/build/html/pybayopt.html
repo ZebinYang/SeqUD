@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Bayesian Optimization &mdash; SeqMM  documentation</title>
+  <title>Bayesian Optimization (BO) &mdash; SeqMML  documentation</title>
   
 
   
@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Sequential Uniform Design" href="pysequd.html" />
+    <link rel="next" title="Sequential Uniform Design (SeqUD)" href="pysequd.html" />
     <link rel="prev" title="One-shot Batch Designs" href="pybatdoe.html" /> 
 </head>
 
@@ -51,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> SeqMM
+            <a href="index.html" class="icon icon-home"> SeqMML
           
 
           
@@ -84,14 +84,16 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">One-shot Batch Designs</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Bayesian Optimization</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#code-examples">Code Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Bayesian Optimization (BO)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#classical-bo-methods">Classical BO Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pros-and-cons">Pros and Cons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-usage">Example Usage</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design (SeqUD)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">More Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="apis.html">APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
 </ul>
 
             
@@ -106,7 +108,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">SeqMM</a>
+          <a href="index.html">SeqMML</a>
         
       </nav>
 
@@ -137,7 +139,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Bayesian Optimization</li>
+      <li>Bayesian Optimization (BO)</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -156,63 +158,65 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="bayesian-optimization">
-<h1>Bayesian Optimization<a class="headerlink" href="#bayesian-optimization" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="bayesian-optimization-bo">
+<h1>Bayesian Optimization (BO)<a class="headerlink" href="#bayesian-optimization-bo" title="Permalink to this headline">¶</a></h1>
 <p>In classical Bayesian optimization, trials are sequentially sampled one-point-at-a-time through
 maximizing the expected improvement (EI). Let’s see a univariate example.</p>
 <a class="reference internal image-reference" href="_images/Demo_BO_eng.png"><img alt="_images/Demo_BO_eng.png" class="align-center" src="_images/Demo_BO_eng.png" style="width: 90%;" /></a>
-<p><strong>Three popular Bayesian optimization methods</strong></p>
+<div class="section" id="classical-bo-methods">
+<h2>Classical BO Methods<a class="headerlink" href="#classical-bo-methods" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>GP-EI (<a class="reference internal" href="#snoek2012" id="id1"><span>[Snoek2012]</span></a>): Use Gaussian process as surrogate model and EI as acquisition function.</p></li>
-<li><p>SMAC (<a class="reference internal" href="#hutter2011" id="id2"><span>[Hutter2011]</span></a>): Use random forest as surrogate model and EI and acquisition function.</p></li>
-<li><p>TPE (<a class="reference internal" href="#bergstra2011" id="id3"><span>[Bergstra2011]</span></a>): Tree-structured Parzen Estimator. It use non parametric method to model <span class="math notranslate nohighlight">\(p(x|y)\)</span> and <span class="math notranslate nohighlight">\(p(y)\)</span> (the prior is not of interest actually) instead of <span class="math notranslate nohighlight">\(p(y|x)\)</span>.</p></li>
+<li><p><strong>GP-EI</strong> (<a class="reference internal" href="resources.html#snoek2012" id="id1"><span>[Snoek2012]</span></a>): use Gaussian process as surrogate model and EI as acquisition function.</p></li>
+<li><p><strong>SMAC</strong> (<a class="reference internal" href="resources.html#hutter2011" id="id2"><span>[Hutter2011]</span></a>): use random forest as surrogate model and EI as acquisition function.</p></li>
+<li><p><strong>TPE</strong> (<a class="reference internal" href="resources.html#bergstra2011" id="id3"><span>[Bergstra2011]</span></a>): abbreviation of Tree-structured Parzen Estimator. It also uses EI as acquisition function but non-parametric method is employed to model <span class="math notranslate nohighlight">\(p(x|y)\)</span> and <span class="math notranslate nohighlight">\(p(y)\)</span> (the prior is not of interest actually) instead of <span class="math notranslate nohighlight">\(p(y|x)\)</span>.</p></li>
 </ul>
-<p><strong>Python Software</strong></p>
-<p>The corresponding python implementations can be found in the following git repositories.</p>
+<p>The corresponding python implementations:</p>
 <ul class="simple">
-<li><p>Spearmint (GP-EI) : <a class="reference external" href="https://github.com/JasperSnoek/spearmint">https://github.com/JasperSnoek/spearmint</a></p></li>
-<li><p>Hyperopt (TPE): <a class="reference external" href="https://github.com/hyperopt/hyperopt">https://github.com/hyperopt/hyperopt</a></p></li>
-<li><p>SMAC: <a class="reference external" href="https://github.com/automl/SMAC3">https://github.com/automl/SMAC3</a></p></li>
-</ul>
-<p><strong>Potential limitations</strong>:</p>
-<ul class="simple">
-<li><p>The meta-modeling and acquisition function optimization are difficult for high-dimentional problems.</p></li>
-<li><p>Lack uniformality considerations: algorithm can be trapped into local areas if without a good initialization.</p></li>
-<li><p>Bayesian optimization are designed to select trials one-by-one, which is unnatural to perform parallelization.</p></li>
+<li><p><strong>Spearmint (GP-EI)</strong>: <a class="reference external" href="https://github.com/JasperSnoek/spearmint">https://github.com/JasperSnoek/spearmint</a></p></li>
+<li><p><strong>Hyperopt (TPE)</strong>: <a class="reference external" href="https://github.com/hyperopt/hyperopt">https://github.com/hyperopt/hyperopt</a></p></li>
+<li><p><strong>SMAC</strong>: <a class="reference external" href="https://github.com/automl/SMAC3">https://github.com/automl/SMAC3</a></p></li>
 </ul>
 </div>
-<div class="section" id="code-examples">
-<h2>Code Examples<a class="headerlink" href="#code-examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pros-and-cons">
+<h2>Pros and Cons<a class="headerlink" href="#pros-and-cons" title="Permalink to this headline">¶</a></h2>
+<p><strong>Strength</strong></p>
+<ul class="simple">
+<li><p>New experiments can be easily added and the number or experiments does not need to be prespecified.</p></li>
+<li><p>Evaluation information can be utilized and thus make the optimization process more efficient as compared to one-shot batch designs.</p></li>
+<li><p>The commonly used acquisition function can balance the two goals of exploration and exploitation.</p></li>
+</ul>
+<p><strong>Limitation</strong></p>
+<ul class="simple">
+<li><p>The meta-modeling and acquisition function optimization are difficult for high-dimensional problems.</p></li>
+<li><p>Lack uniformity considerations: algorithm can be trapped into local areas if without a good initialization.</p></li>
+<li><p>Bayesian optimization are designed to select trials one-by-one, which is unnatural to perform parallelization (Note BO can be paralleled via proposing more than one trial at a time. However, these tricks, e.g., by assigning a average value to the pending trials, are not natural and may harm the optimization performance).</p></li>
+</ul>
+</div>
+<div class="section" id="example-usage">
+<h2>Example Usage<a class="headerlink" href="#example-usage" title="Permalink to this headline">¶</a></h2>
+<p>We provide an unified interface to call the GPEI, SMAC and TPE methods, base on their open source implementation of spearmint, hyperopt and smac3.</p>
 <p><strong>GP-EI</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">mean_squared_error</span>
-<span class="kn">from</span> <span class="nn">seqmml</span> <span class="k">import</span> <span class="n">SMACOPT</span>
-<span class="n">dt</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">()</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">seqmml</span> <span class="k">import</span> <span class="n">GPEIOPT</span>
+
 <span class="n">sx</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
-<span class="n">sy</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_breast_cancer</span><span class="p">()</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">sx</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
-<span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;booster&#39;</span><span class="p">:</span>          <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;categorical&#39;</span><span class="p">,</span> <span class="s1">&#39;Mapping&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;gbtree&#39;</span><span class="p">,</span> <span class="s1">&#39;gblinear&#39;</span><span class="p">]},</span>
-             <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span>        <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>     <span class="s1">&#39;Mapping&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">9</span><span class="p">)},</span>
-             <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span>     <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>     <span class="s1">&#39;Mapping&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">500</span><span class="p">,</span><span class="mi">401</span><span class="p">)},</span>
-             <span class="s1">&#39;min_child_weight&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>     <span class="s1">&#39;Mapping&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)},</span>
-             <span class="s1">&#39;subsample&#39;</span><span class="p">:</span>        <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">},</span>
-             <span class="s1">&#39;colsample_bytree&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">},</span>
-             <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span>    <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">10</span><span class="o">**</span><span class="n">x</span><span class="p">},</span>
-             <span class="s1">&#39;gamma&#39;</span><span class="p">:</span>            <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">10</span><span class="o">**</span><span class="n">x</span><span class="p">},</span>
-             <span class="s1">&#39;reg_lambda&#39;</span><span class="p">:</span>       <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">10</span><span class="o">**</span><span class="n">x</span><span class="p">},</span>
-             <span class="s1">&#39;reg_alpha&#39;</span><span class="p">:</span>         <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">10</span><span class="o">**</span><span class="n">x</span><span class="p">}}</span>
-<span class="n">estimator</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">()</span>
-<span class="n">score_metric</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">target</span>
+
+<span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span>     <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
+             <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">}}</span>
+
+<span class="n">estimator</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="n">score_metric</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">clf</span> <span class="o">=</span> <span class="n">SMACOPT</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="n">score_metric</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">GPEIOPT</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="n">score_metric</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
@@ -226,7 +230,7 @@ maximizing the expected improvement (EI). Let’s see a univariate example.</p>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">accuracy_score</span>
-<span class="kn">from</span> <span class="nn">seqmml</span> <span class="k">import</span> <span class="n">GPEIOPT</span>
+<span class="kn">from</span> <span class="nn">seqmml</span> <span class="k">import</span> <span class="n">SMACOPT</span>
 
 <span class="n">sx</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
 <span class="n">dt</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_breast_cancer</span><span class="p">()</span>
@@ -240,7 +244,7 @@ maximizing the expected improvement (EI). Let’s see a univariate example.</p>
 <span class="n">score_metric</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">clf</span> <span class="o">=</span> <span class="n">GPEIOPT</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="n">score_metric</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SMACOPT</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="n">score_metric</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
@@ -254,7 +258,7 @@ maximizing the expected improvement (EI). Let’s see a univariate example.</p>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">accuracy_score</span>
-<span class="kn">from</span> <span class="nn">seqmml</span> <span class="k">import</span> <span class="n">GPEIOPT</span>
+<span class="kn">from</span> <span class="nn">seqmml</span> <span class="k">import</span> <span class="n">TPEOPT</span>
 
 <span class="n">sx</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
 <span class="n">dt</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_breast_cancer</span><span class="p">()</span>
@@ -268,23 +272,11 @@ maximizing the expected improvement (EI). Let’s see a univariate example.</p>
 <span class="n">score_metric</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">clf</span> <span class="o">=</span> <span class="n">GPEIOPT</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="n">score_metric</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">TPEOPT</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="n">score_metric</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Reference list</strong></p>
-<dl class="citation">
-<dt class="label" id="snoek2012"><span class="brackets"><a class="fn-backref" href="#id1">Snoek2012</a></span></dt>
-<dd><p>Jasper Snoek, Hugo Larochelle, and Ryan P Adams. Practical bayesian optimization of machine learning algorithms. In Advances in Neural Information Processing Systems, pages 2951–2959, 2012.</p>
-</dd>
-<dt class="label" id="hutter2011"><span class="brackets"><a class="fn-backref" href="#id2">Hutter2011</a></span></dt>
-<dd><p>Frank Hutter, Holger H Hoos, and Kevin Leyton-Brown. Sequential model-based optimization for general algorithm configuration. In International Conference on Learning and Intelligent Optimization, pages 507–523. Springer, 2011.</p>
-</dd>
-<dt class="label" id="bergstra2011"><span class="brackets"><a class="fn-backref" href="#id3">Bergstra2011</a></span></dt>
-<dd><p>James S Bergstra, Rémi Bardenet, Yoshua Bengio, and Balázs Kégl. Algorithms for hyper-parameter optimization. In Advances in Neural Information Processing Systems, pages 2546–2554, 2011.</p>
-</dd>
-</dl>
 </div>
 </div>
 
@@ -296,7 +288,7 @@ maximizing the expected improvement (EI). Let’s see a univariate example.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="pysequd.html" class="btn btn-neutral float-right" title="Sequential Uniform Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="pysequd.html" class="btn btn-neutral float-right" title="Sequential Uniform Design (SeqUD)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="pybatdoe.html" class="btn btn-neutral float-left" title="One-shot Batch Designs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

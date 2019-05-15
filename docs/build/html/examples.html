@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>More Examples &mdash; SeqMM  documentation</title>
+  <title>More Examples &mdash; SeqMML  documentation</title>
   
 
   
@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="APIs" href="apis.html" />
-    <link rel="prev" title="Sequential Uniform Design" href="pysequd.html" /> 
+    <link rel="next" title="Modules" href="modules.html" />
+    <link rel="prev" title="Sequential Uniform Design (SeqUD)" href="pysequd.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -51,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> SeqMM
+            <a href="index.html" class="icon icon-home"> SeqMML
           
 
           
@@ -84,15 +84,16 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">One-shot Batch Designs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization (BO)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design (SeqUD)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">More Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#sequd-for-function-optimization">SeqUD for function optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#working-with-scikit-learn-pipeline">Working with Scikit-learn Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#methods-comparison">Methods Comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#different-types-of-hyperparameters">Different Types of Hyperparameters</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="apis.html">APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
 </ul>
 
             
@@ -107,7 +108,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">SeqMM</a>
+          <a href="index.html">SeqMML</a>
         
       </nav>
 
@@ -159,12 +160,9 @@
             
   <div class="section" id="more-examples">
 <h1>More Examples<a class="headerlink" href="#more-examples" title="Permalink to this headline">¶</a></h1>
-<p>Here we give several examples to show the usage of this package.</p>
+<p>Here we give more example usage of this package.</p>
 <div class="section" id="sequd-for-function-optimization">
 <h2>SeqUD for function optimization<a class="headerlink" href="#sequd-for-function-optimization" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Example 1: Cliff-Shaped function</p></li>
-</ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pylab</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">from</span> <span class="nn">seqmml</span> <span class="k">import</span> <span class="n">SeqUD</span>
@@ -177,7 +175,6 @@
     <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">term1</span> <span class="o">+</span> <span class="n">term2</span><span class="p">)</span>
     <span class="k">return</span>  <span class="n">y</span>
 
-<span class="n">Level_Number</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">},</span>
              <span class="s1">&#39;x2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">}}</span>
 <span class="n">clf</span> <span class="o">=</span> <span class="n">SeqUD</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">level_number</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
@@ -216,8 +213,8 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="methods-comparison">
-<h2>Methods Comparison<a class="headerlink" href="#methods-comparison" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="different-types-of-hyperparameters">
+<h2>Different Types of Hyperparameters<a class="headerlink" href="#different-types-of-hyperparameters" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">datasets</span>
@@ -225,8 +222,7 @@
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">MinMaxScaler</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">mean_squared_error</span>
-<span class="kn">from</span> <span class="nn">seqmml</span> <span class="k">import</span> <span class="n">SeqUD</span><span class="p">,</span> <span class="n">SeqRand</span><span class="p">,</span> <span class="n">GPEIOPT</span><span class="p">,</span> <span class="n">SMACOPT</span><span class="p">,</span> <span class="n">TPEOPT</span><span class="p">,</span>\
-            <span class="n">GridSearch</span><span class="p">,</span> <span class="n">RandSearch</span><span class="p">,</span> <span class="n">LHSSearch</span><span class="p">,</span> <span class="n">SobolSearch</span><span class="p">,</span> <span class="n">UDSearch</span>
+<span class="kn">from</span> <span class="nn">seqmml</span> <span class="k">import</span> <span class="n">SeqUD</span>
 
 <span class="n">dt</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">()</span>
 <span class="n">sx</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
@@ -235,32 +231,19 @@
 <span class="n">y</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
 
 <span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;booster&#39;</span><span class="p">:</span>          <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;categorical&#39;</span><span class="p">,</span> <span class="s1">&#39;Mapping&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;gbtree&#39;</span><span class="p">,</span> <span class="s1">&#39;gblinear&#39;</span><span class="p">]},</span>
-             <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span>        <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>     <span class="s1">&#39;Mapping&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">7</span><span class="p">)},</span>
-             <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span>     <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>     <span class="s1">&#39;Mapping&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="mi">201</span><span class="p">)},</span>
-             <span class="s1">&#39;min_child_weight&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>     <span class="s1">&#39;Mapping&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)},</span>
-             <span class="s1">&#39;subsample&#39;</span><span class="p">:</span>        <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">},</span>
+             <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span>        <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>     <span class="s1">&#39;Mapping&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span><span class="p">)},</span>
+             <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span>     <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">,</span>     <span class="s1">&#39;Mapping&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">500</span><span class="p">,</span><span class="mi">401</span><span class="p">)},</span>
              <span class="s1">&#39;colsample_bytree&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">},</span>
              <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span>    <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">10</span><span class="o">**</span><span class="n">x</span><span class="p">},</span>
              <span class="s1">&#39;gamma&#39;</span><span class="p">:</span>            <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">10</span><span class="o">**</span><span class="n">x</span><span class="p">},</span>
              <span class="s1">&#39;reg_lambda&#39;</span><span class="p">:</span>       <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">10</span><span class="o">**</span><span class="n">x</span><span class="p">},</span>
-             <span class="s1">&#39;reg_alpha&#39;</span><span class="p">:</span>         <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">10</span><span class="o">**</span><span class="n">x</span><span class="p">}}</span>
+             <span class="s1">&#39;reg_alpha&#39;</span><span class="p">:</span>        <span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span>  <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">10</span><span class="o">**</span><span class="n">x</span><span class="p">}}</span>
 
 <span class="n">estimator</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">()</span>
-<span class="n">score_metric</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">seq_model_zoo</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;SeqUD&quot;</span><span class="p">:</span> <span class="n">SeqUD</span><span class="p">,</span>
-          <span class="s2">&quot;SeqRand&quot;</span><span class="p">:</span> <span class="n">SeqRand</span><span class="p">,</span>
-          <span class="s2">&quot;GPEI&quot;</span><span class="p">:</span> <span class="n">GPEIOPT</span><span class="p">,</span>
-          <span class="s2">&quot;SMAC&quot;</span><span class="p">:</span> <span class="n">SMACOPT</span><span class="p">,</span>
-          <span class="s2">&quot;TPE&quot;</span><span class="p">:</span> <span class="n">TPEOPT</span><span class="p">}</span>
-<span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">seq_model_zoo</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fitting model: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span> <span class="n">item</span><span class="p">)</span>
-    <span class="n">clf</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span>  <span class="n">score_metric</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The best score is </span><span class="si">%0.5f</span><span class="s2">: ,time cost: </span><span class="si">%0.2f</span><span class="s2">:&quot;</span><span class="o">%</span> <span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">best_score_</span><span class="p">,</span><span class="n">clf</span><span class="o">.</span><span class="n">search_time_consumed_</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cummax</span><span class="p">())</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">seq_model_zoo</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">sequd_clf</span> <span class="o">=</span> <span class="n">SeqUD</span><span class="p">(</span><span class="n">ParaSpace</span><span class="p">,</span> <span class="n">level_number</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">max_search_iter</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+         <span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span><span class="p">,</span> <span class="n">refit</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">sequd_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -274,10 +257,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="apis.html" class="btn btn-neutral float-right" title="APIs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="Modules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="pysequd.html" class="btn btn-neutral float-left" title="Sequential Uniform Design" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="pysequd.html" class="btn btn-neutral float-left" title="Sequential Uniform Design (SeqUD)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
