@@ -294,7 +294,7 @@ class SeqUD(object):
             unique = np.unique(x0[:,i])
             for j in range(len(unique)):
                 xx_loc=np.where(x0[:,i]==unique[j])[0].tolist()
-                keep_list.extend(random.sample(xx_loc, 1))
+                keep_list.extend(np.random.choice(xx_loc, 1))
             x0 = x0[keep_list,:].reshape([-1,self.extend_factor_number])
 
         # Return if the maximum run has reached.
