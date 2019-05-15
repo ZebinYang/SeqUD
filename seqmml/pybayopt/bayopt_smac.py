@@ -162,7 +162,6 @@ class SMACOPT(BayoptBase):
                          "deterministic": "true",
                          "output_dir": file_dir,
                          "abort_on_first_run_crash":False})
-
         self.smac = SMAC(scenario=scenario, rng=np.random.seed(self.rand_seed), tae_runner=self.obj_func)
         self.smac.solver.intensifier.tae_runner.use_pynisher = False # turn off the limit for resources
         incumbent = self.smac.optimize()

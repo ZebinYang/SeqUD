@@ -6,14 +6,24 @@
 
 import sys
 import os
+import seqmml 
 
-sys.path.insert(0, os.path.abspath('../../seqmml/'))
+sys.path.insert(0, os.path.abspath('../../'))
 
-extensions = ['sphinx.ext.autodoc']
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.doctest',
+    'sphinx.ext.coverage',
+    'sphinx.ext.mathjax',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.autosummary'
+]
 source_suffix = '.rst'
 master_doc = 'index'
 project = u'SeqMML'
-copyright = u'Zebin Yang, yangzebin2010@gmail.com'
+author = seqmml.__author__
+version = seqmml.__version__
+copyright = u'Zebin Yang'
 exclude_patterns = ['_build']
 pygments_style = 'sphinx'
 html_theme = 'sphinx_rtd_theme'

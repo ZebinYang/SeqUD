@@ -14,8 +14,7 @@ class SeqUD(object):
     
     """ 
     Implementation of sequential uniform design.
-. 
-    
+
     Parameters
     ----------
     :type  para_space: dict or list of dictionaries
