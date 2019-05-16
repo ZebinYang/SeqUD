@@ -1,8 +1,6 @@
-# Sequential Meta Machine Learning
+# SeqMM
 
 [![Build Status](https://travis-ci.com/ZebinYang/seqmml.svg?branch=master)](https://travis-ci.com/ZebinYang/seqmml.svg?branch=master)
-
-SeqMML is an open-source python package developed for automated machine learning (AutoML) with focus on hyperparameter optimization.
 
 # Installation
 
@@ -57,6 +55,9 @@ clf.fmin(octopus)
 plot_trajectory([0,1], [0,1], octopus, clf, "SeqUD")
 ```
 
+![demo octopus results](https://github.com/ZebinYang/seqmml/tree/master/docs/source/images/octopus_demo.png)
+
+
 - Tuning sklearn hyperparameters
 ```python
 import numpy as np
@@ -107,7 +108,7 @@ plt.figure(figsize = (6, 4.5))
 plot_trajectory(Z, clf, "SeqUD")
 ```
 
-https://github.com/linwh8/ModernWebPrograming/raw/master/My_image/mole.png
+![demo svm results](https://github.com/ZebinYang/seqmml/tree/master/docs/source/images/svm_demo.png)
 
 
 More examples can be referred to the documentation (URL)
