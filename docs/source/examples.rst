@@ -1,4 +1,4 @@
-More Examples
+Examples
 ===============
 Here we give more example usage of this package.
 

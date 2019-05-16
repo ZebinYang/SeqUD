@@ -1,7 +1,7 @@
 build/*
 dist/*
 *.pyc
-*checkpoints/*
+examples/checkpoints/*
 examples/temp/*
 spearmint/*
 

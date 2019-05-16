@@ -1,7 +1,8 @@
-One-shot Batch Designs
+Batch methods
+
 ==============================
 
-Batch designs can generate all the experimental trials before conducting any experiments. See the following.
+Batch methods can generate all the experimental trials before conducting any experiments. See the following.
 
 
 Simple Strategies 

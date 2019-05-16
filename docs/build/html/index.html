@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to SeqMML’s documentation! &mdash; SeqMML  documentation</title>
+  <title>Sequential Meta Machine Learning &mdash; SeqMML  documentation</title>
   
 
   
@@ -82,10 +82,12 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">One-shot Batch Designs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization (BO)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design (SeqUD)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">More Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">Simple Strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html#pros-and-cons">Pros and Cons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html#example-usage">Example Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization (BO)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
 </ul>
@@ -133,7 +135,7 @@
     
       <li><a href="#">Docs</a> &raquo;</li>
         
-      <li>Welcome to SeqMML’s documentation!</li>
+      <li>Sequential Meta Machine Learning</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -152,9 +154,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-seqmml-s-documentation">
-<h1>Welcome to SeqMML’s documentation!<a class="headerlink" href="#welcome-to-seqmml-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>This is an open-source python package developed for automated machine learning, in particular for hyperparameter optimization problems. We propose a sequential uniform design method, as an alternative to the well known Bayesian optimization approach.</p>
+  <div class="section" id="sequential-meta-machine-learning">
+<h1>Sequential Meta Machine Learning<a class="headerlink" href="#sequential-meta-machine-learning" title="Permalink to this headline">¶</a></h1>
+<p>SeqMML is an open-source python package developed for automated machine learning (AutoML) with focus on hyperparameter optimization. Unlike traditional Batch or Bayesian optimization methods, we propose to use the sequential uniform designs for the following advantages:</p>
+<ul class="simple">
+<li><p>Representative sampling of hyperparameter space:</p></li>
+<li><p>Free surrogate modeling: …</p></li>
+<li><p>Parallel computing: ….</p></li>
+</ul>
 <p><strong>What is AutoML?</strong></p>
 <ul class="simple">
 <li><p>AutoML is to perform Automated Machine Learning model/algorithm selection and hyperparameter tuning.</p></li>
@@ -178,18 +185,6 @@
 <li class="toctree-l2"><a class="reference internal" href="installation.html#manual-installation">Manual installation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">One-shot Batch Designs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pybatdoe.html#simple-strategies">Simple Strategies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pybatdoe.html#pros-and-cons">Pros and Cons</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pybatdoe.html#example-usage">Example Usage</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization (BO)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt.html#classical-bo-methods">Classical BO Methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt.html#pros-and-cons">Pros and Cons</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pybayopt.html#example-usage">Example Usage</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design (SeqUD)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="pysequd.html#motivation">Motivation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pysequd.html#sequd-algorithm">SeqUD Algorithm</a></li>
@@ -197,7 +192,16 @@
 <li class="toctree-l2"><a class="reference internal" href="pysequd.html#example-usage">Example Usage</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">More Examples</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">Simple Strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html#pros-and-cons">Pros and Cons</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybatdoe.html#example-usage">Example Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization (BO)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pybayopt.html#classical-bo-methods">Classical BO Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pybayopt.html#pros-and-cons">Pros and Cons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pybayopt.html#example-usage">Example Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="examples.html#sequd-for-function-optimization">SeqUD for function optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples.html#working-with-scikit-learn-pipeline">Working with Scikit-learn Pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples.html#different-types-of-hyperparameters">Different Types of Hyperparameters</a></li>

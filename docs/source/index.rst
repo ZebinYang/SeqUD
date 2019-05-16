@@ -3,10 +3,16 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to SeqMML's documentation!
+Sequential Meta Machine Learning
 ==========================================
 
-This is an open-source python package developed for automated machine learning, in particular for hyperparameter optimization problems. We propose a sequential uniform design method, as an alternative to the well known Bayesian optimization approach.
+SeqMML is an open-source python package developed for automated machine learning (AutoML) with focus on hyperparameter optimization. Unlike traditional Batch or Bayesian optimization methods, we propose to use the sequential uniform designs for the following advantages:
+
+- Representative sampling of hyperparameter space:  
+
+- Free surrogate modeling: ...
+
+- Parallel computing: ....
 
 
 **What is AutoML?** 
@@ -35,10 +41,9 @@ Contents:
    :maxdepth: 2
 
    installation.rst
+   pysequd.rst
    pybatdoe.rst
    pybayopt.rst
-   pysequd.rst
    examples.rst
    modules.rst
    resources.rst
-
