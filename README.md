@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.com/ZebinYang/seqmml.svg?branch=master)](https://travis-ci.com/ZebinYang/seqmml.svg?branch=master)
 
+SeqMML is an open-source python package developed for automated machine learning (AutoML) with focus on hyperparameter optimization.
+
 # Installation
 
 - Enviroment: Linux + Python 3
