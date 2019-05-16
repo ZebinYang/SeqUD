@@ -2,6 +2,9 @@
 
 [![Build Status](https://travis-ci.com/ZebinYang/seqmml.svg?branch=master)](https://travis-ci.com/ZebinYang/seqmml.svg?branch=master)
 
+ ![recipe1](https://github.com/linwh8/ModernWebPrograming/raw/master/My_image/recipe.png)
+ ![index](https://github.com/ZebinYang/seqmml/blob/master/docs/source/images/octopus_demo.png)
+
 # Installation
 
 - Enviroment: Linux + Python 3
