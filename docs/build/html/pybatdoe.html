@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Simple Strategies &mdash; SeqMML  documentation</title>
+  <title>Batch methods &mdash; SeqMML  documentation</title>
   
 
   
@@ -84,9 +84,12 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design (SeqUD)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Simple Strategies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#pros-and-cons">Pros and Cons</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#example-usage">Example Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Batch methods</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#simple-strategies">Simple Strategies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pros-and-cons">Pros and Cons</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-usage">Example Usage</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization (BO)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a></li>
@@ -136,7 +139,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Simple Strategies</li>
+      <li>Batch methods</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -155,11 +158,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <p>Batch methods</p>
-<hr class="docutils" />
+  <div class="section" id="batch-methods">
+<h1>Batch methods<a class="headerlink" href="#batch-methods" title="Permalink to this headline">¶</a></h1>
 <p>Batch methods can generate all the experimental trials before conducting any experiments. See the following.</p>
 <div class="section" id="simple-strategies">
-<h1>Simple Strategies<a class="headerlink" href="#simple-strategies" title="Permalink to this headline">¶</a></h1>
+<h2>Simple Strategies<a class="headerlink" href="#simple-strategies" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><strong>Grid Search (Grid)</strong>: exhaustive search over grid combinations.</p></li>
 <li><p><strong>Random Search (Rand)</strong>: it is more flexible than grid search, when not all hyperparameters are equally important. Furthermore, new trials can be added without adjustment and the experiments can also be stopped any time (<a class="reference internal" href="resources.html#bergstra2012" id="id1"><span>[Bergstra2012]</span></a>).</p></li>
@@ -170,7 +173,7 @@
 <p><a class="reference internal" href="_images/Demo_Grid.png"><img alt="pic1" src="_images/Demo_Grid.png" style="width: 45%;" /></a> <a class="reference internal" href="_images/Demo_Rand.png"><img alt="pic2" src="_images/Demo_Rand.png" style="width: 45%;" /></a> <a class="reference internal" href="_images/Demo_LHS.png"><img alt="pic3" src="_images/Demo_LHS.png" style="width: 45%;" /></a> <a class="reference internal" href="_images/Demo_Sobol.png"><img alt="pic4" src="_images/Demo_Sobol.png" style="width: 45%;" /></a></p>
 </div>
 <div class="section" id="pros-and-cons">
-<h1>Pros and Cons<a class="headerlink" href="#pros-and-cons" title="Permalink to this headline">¶</a></h1>
+<h2>Pros and Cons<a class="headerlink" href="#pros-and-cons" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Easy to be paralleled, trials can be generated without too much burden.</p></li>
 <li><p>The information of existing experiments is not utilized, which is not efficient.</p></li>
@@ -178,7 +181,7 @@
 </ul>
 </div>
 <div class="section" id="example-usage">
-<h1>Example Usage<a class="headerlink" href="#example-usage" title="Permalink to this headline">¶</a></h1>
+<h2>Example Usage<a class="headerlink" href="#example-usage" title="Permalink to this headline">¶</a></h2>
 <p><strong>Grid Search</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">svm</span>
@@ -250,6 +253,7 @@
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
+</div>
 </div>
 </div>
 

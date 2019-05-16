@@ -1,5 +1,4 @@
 Batch methods
-
 ==============================
 
 Batch methods can generate all the experimental trials before conducting any experiments. See the following.
