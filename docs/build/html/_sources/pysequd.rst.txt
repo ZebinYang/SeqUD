@@ -1,4 +1,4 @@
-Sequential Uniform Design (SeqUD)
+Sequential Uniform Design
 ==========================================
 
 We advocate to reformulate AutoML as a kind of Computer Experiment for the purpose of maximizing ML prediction accuracy ([Yang2019]_).

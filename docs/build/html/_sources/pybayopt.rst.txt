@@ -1,4 +1,4 @@
-Bayesian Optimization (BO)
+Bayesian Optimization
 ==========================================
 
 In classical Bayesian optimization, trials are sequentially sampled one-point-at-a-time through

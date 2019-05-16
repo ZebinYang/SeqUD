@@ -82,9 +82,9 @@
             
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design (SeqUD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pybatdoe.html">Batch methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization (BO)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
@@ -156,9 +156,9 @@
 <h1>Sequential Meta Machine Learning<a class="headerlink" href="#sequential-meta-machine-learning" title="Permalink to this headline">¶</a></h1>
 <p>SeqMML is an open-source python package developed for automated machine learning (AutoML) with focus on hyperparameter optimization. Unlike traditional Batch or Bayesian optimization methods, we propose to use the sequential uniform designs for the following advantages:</p>
 <ul class="simple">
-<li><p>Representative sampling of hyperparameter space:</p></li>
-<li><p>Free surrogate modeling: …</p></li>
-<li><p>Parallel computing: ….</p></li>
+<li><p>Representative sampling of hyperparameter space: uniformly distributed trials tend to have a better exploration of the hyperparameter space and avoids being trapped into local optima.</p></li>
+<li><p>Free surrogate modeling: it is free from the meta-model estimation and acquisition optimization procedures, where Bayesian optimization may suffer especially for high-dimensional problems.</p></li>
+<li><p>Parallel computing: at each stage, the expensive model evaluation procedure could be conducted in parallel</p></li>
 </ul>
 <p><strong>What is AutoML?</strong></p>
 <ul class="simple">
@@ -183,7 +183,7 @@
 <li class="toctree-l2"><a class="reference internal" href="installation.html#manual-installation">Manual installation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design (SeqUD)</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="pysequd.html#motivation">Motivation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pysequd.html#sequd-algorithm">SeqUD Algorithm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pysequd.html#illustrative-demo">Illustrative Demo</a></li>
@@ -196,7 +196,7 @@
 <li class="toctree-l2"><a class="reference internal" href="pybatdoe.html#example-usage">Example Usage</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization (BO)</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="pybayopt.html">Bayesian Optimization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="pybayopt.html#classical-bo-methods">Classical BO Methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pybayopt.html#pros-and-cons">Pros and Cons</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pybayopt.html#example-usage">Example Usage</a></li>
