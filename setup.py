@@ -10,4 +10,13 @@ setup(name='seqmml',
       install_requires=['joblib', 'numpy', 'pandas', 'scikit-learn', 'tqdm', 'hyperopt','smac', 'pyDOE', 'sobol_seq',
                    'pyunidoe @ git+https://github.com/ZebinYang/pyunidoe.git',
                    'spearmint @ git+https://github.com/ZebinYang/spearmint-lite.git'],
+      classifiers=[
+          'Development Status :: 4 - Beta',
+          'Environment :: Console',
+          'License :: OSI Approved :: BSD License',
+          'Operating System :: MacOS :: MacOS X',
+          'Operating System :: Microsoft :: Windows',
+          'Operating System :: POSIX',
+          'Programming Language :: Python',
+          ],
       zip_safe=False)
