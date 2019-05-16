@@ -18,10 +18,9 @@ More details can be found in [documentation](https://zebinyang.github.io/seqmml/
 
 # Examples
 
-- Function optimization
+### Function optimization
 
-The following codes can maximize a function. The configuration is quite simple: define the function, parameter space, and then call 
-the fmin function in the SeqUD module. 
+The following codes can perform function maximization. The configuration is quite simple: define the function, parameter space, and then call the fmin function in the SeqUD module. 
 
 ```python 
 import numpy as np 
@@ -69,7 +68,7 @@ plot_trajectory([0,1], [0,1], octopus, clf, "SeqUD")
  ![octopus_demo](https://github.com/ZebinYang/seqmml/blob/master/docs/source/images/octopus_demo.png)
 
 
-- Tuning sklearn hyperparameters
+### Tuning sklearn hyperparameters
 
 To optimize the hyperparameters in sklearn is similar to that of function optimization. 
 ```python
@@ -124,7 +123,7 @@ plt.figure(figsize = (6, 4.5))
 plot_trajectory(Z, clf, "SeqUD")
 ```
 
- ![svm_demo](https://github.com/ZebinYang/seqmml/blob/master/docs/source/images/svm_demo.png)
+ ![svm_demo](https://github.com/ZebinYang/seqmml/blob/master/docs/source/images/svm_demo.png).
 
 More examples can be referred to the [documentation](https://zebinyang.github.io/seqmml/build/html/examples.html)
 
