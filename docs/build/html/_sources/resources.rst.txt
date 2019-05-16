@@ -2,9 +2,12 @@ Resources
 ==========
 
 
-External Software
+Software
 --------------------
 
+- Spearmint (GP-EI): https://github.com/JasperSnoek/spearmint
+- Hyperopt (TPE): https://github.com/hyperopt/hyperopt
+- SMAC: https://github.com/automl/SMAC3
 - TPOP (AutoML based on genetic programming): https://github.com/EpistasisLab/tpot
 - Bayesian optimization in PyTorch: https://github.com/pytorch/botorch
 - HPOlib (another common interface to three BO methods): https://github.com/automl/HPOlib

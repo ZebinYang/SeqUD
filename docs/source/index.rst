@@ -6,7 +6,7 @@
 Sequential Meta Machine Learning
 ==========================================
 
-SeqMML is an open-source python package developed for automated machine learning (AutoML) with focus on hyperparameter optimization. Unlike traditional Batch or Bayesian optimization methods, we propose to use the sequential uniform designs for the following advantages:
+SeqMML is an open-source python package developed for automated machine learning (AutoML) with focus on hyperparameter optimization. Unlike traditional Batch or Bayesian optimization methods, we propose to use the sequential uniform designs with the following advantages:
 
 - Representative sampling of hyperparameter space: uniformly distributed trials tend to have a better exploration of the hyperparameter space. 
 
