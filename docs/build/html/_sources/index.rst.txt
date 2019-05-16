@@ -24,7 +24,9 @@ SeqMML is an open-source python package developed for automated machine learning
 - Hyperparameter optimization, a.k.a. (hyper) paramater tuning, plays a central role in AutoML pipelines. 
 
 .. image:: ./images/AutoML_v1.png
-
+    :width: 80%
+    :align: center
+    
 **However, it is not easy.** 
 
 - Hyperparameters can be continuous, integer-valued or categorical, e.g. regularization parameters, kernel bandwidths, learning rate, tree depth, batch size, number of layers, type of activation.
