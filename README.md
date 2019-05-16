@@ -136,6 +136,8 @@ Hyperopt: https://github.com/hyperopt/hyperopt
 
 SMAC: https://github.com/automl/SMAC3
 
+# Contact:
+If you find any bugs or have any suggestions, please contact us via email: yangzebin2010@gmail.com or ajzhang@hku.hk.
 
 # Reference:
 Zebin Yang, Aijun Zhang and Ji Zhu. (2019) Hyperparameter Optimization via Sequential Uniform Designs. Submitted. 
