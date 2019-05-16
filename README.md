@@ -2,9 +2,6 @@
 
 [![Build Status](https://travis-ci.com/ZebinYang/seqmml.svg?branch=master)](https://travis-ci.com/ZebinYang/seqmml.svg?branch=master)
 
- ![recipe1](https://github.com/linwh8/ModernWebPrograming/raw/master/My_image/recipe.png)
- ![index](https://github.com/ZebinYang/seqmml/blob/master/docs/source/images/octopus_demo.png)
-
 # Installation
 
 - Enviroment: Linux + Python 3
@@ -57,7 +54,7 @@ clf.fmin(octopus)
 
 plot_trajectory([0,1], [0,1], octopus, clf, "SeqUD")
 ```
- ![index](https://github.com/ZebinYang/seqmml/tree/master/docs/source/images/octopus_demo.png)
+ ![octopus_demo](https://github.com/ZebinYang/seqmml/blob/master/docs/source/images/octopus_demo.png)
 
 - Tuning sklearn hyperparameters
 ```python
@@ -109,8 +106,7 @@ plt.figure(figsize = (6, 4.5))
 plot_trajectory(Z, clf, "SeqUD")
 ```
 
-[![demo svm results](https://github.com/ZebinYang/seqmml/tree/master/docs/source/images/svm_demo.png)](https://github.com/ZebinYang/seqmml/tree/master/docs/source/images/svm_demo.png)
-
+ ![svm_demo](https://github.com/ZebinYang/seqmml/blob/master/docs/source/images/svm_demo.png)
 
 More examples can be referred to the documentation (URL)
 
