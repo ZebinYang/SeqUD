@@ -54,8 +54,7 @@ clf.fmin(octopus)
 
 plot_trajectory([0,1], [0,1], octopus, clf, "SeqUD")
 ```
-[![demo octopus results](https://github.com/ZebinYang/seqmml/tree/master/docs/source/images/svm_demo.png)](https://github.com/ZebinYang/seqmml/tree/master/docs/source/images/octopus_demo.png)
-
+ ![index](https://github.com/ZebinYang/seqmml/tree/master/docs/source/images/octopus_demo.png)
 
 - Tuning sklearn hyperparameters
 ```python
