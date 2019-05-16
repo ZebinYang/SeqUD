@@ -4,15 +4,24 @@
 
 # Installation
 
-- Enviroment: Linux + Python 3
-
+- Enviroment: 
+    - Python 3
+    - C++ compiler
+    - swig 3
+    
+Assume you have figured out the above environment, the most convenient way for installation is via the pip command. 
 ```sheel
 pip install git+https://github.com/ZebinYang/seqmml.git
 ```
 
+More details can be found in [documentation](https://zebinyang.github.io/seqmml/build/html/installation.html)
+
 # Examples
 
 - Function optimization
+
+The following codes can maximize a function. The configuration is quite simple: define the function, parameter space, and then call 
+the fmin function in the SeqUD module. 
 
 ```python 
 import numpy as np 
@@ -25,6 +34,16 @@ def octopus(parameters):
     y = 2*np.cos(10*x1)*np.sin(10*x2)+np.sin(10*x1*x2)
     return  y
 
+Level_Number = 20
+ParaSpace = {'x1': {'Type': 'continuous', 'Range': [0,1], 'Wrapper': lambda x: x}, 
+             'x2': {'Type': 'continuous', 'Range': [0,1], 'Wrapper': lambda x: x}}
+
+clf = SeqUD(ParaSpace, max_runs = 100, rand_seed = 1, verbose = True)
+clf.fmin(octopus)
+```
+
+Let's visualize the trials points.
+```python
 def plot_trajectory(xlim, ylim, func, clf, title):
     grid_num = 25
     xlist = np.linspace(xlim[0], xlim[1], grid_num)
@@ -44,19 +63,15 @@ def plot_trajectory(xlim, ylim, func, clf, title):
     plt.xlabel('x1')
     plt.ylabel('x2')
     plt.title(title)
-
-Level_Number = 20
-ParaSpace = {'x1': {'Type': 'continuous', 'Range': [0,1], 'Wrapper': lambda x: x}, 
-             'x2': {'Type': 'continuous', 'Range': [0,1], 'Wrapper': lambda x: x}}
-
-clf = SeqUD(ParaSpace, max_runs = 100, rand_seed = 1, verbose = True)
-clf.fmin(octopus)
-
+    
 plot_trajectory([0,1], [0,1], octopus, clf, "SeqUD")
 ```
  ![octopus_demo](https://github.com/ZebinYang/seqmml/blob/master/docs/source/images/octopus_demo.png)
 
+
 - Tuning sklearn hyperparameters
+
+To optimize the hyperparameters in sklearn is similar to that of function optimization. 
 ```python
 import numpy as np
 from sklearn import svm
@@ -66,16 +81,6 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import make_scorer, accuracy_score
 from sklearn.model_selection import cross_val_score
 from seqmml import SeqUD
-
-def plot_trajectory(Z, clf, title):
-    levels = [0.2, 0.4, 0.8, 0.9, 0.92, 0.94, 0.96, 0.98, 1.0]
-    cp = plt.contourf(X, Y, Z, levels)
-    plt.colorbar(cp)
-    plt.xlabel('Log2_C')
-    plt.ylabel('Log2_gamma')
-    plt.scatter(np.log2(clf.logs.loc[:,['C']]), 
-                np.log2(clf.logs.loc[:,['gamma']]), color = "red")
-    plt.title(title)
 
 sx = MinMaxScaler()
 dt = datasets.load_breast_cancer()
@@ -91,6 +96,19 @@ cv = KFold(n_splits=5, random_state=0, shuffle=True)
 
 clf = SeqUD(ParaSpace, level_number = 20, n_jobs = 10, estimator = estimator, cv = cv, scoring = score_metric, refit = True, verbose = True)
 clf.fit(x, y)
+```
+
+```python
+
+def plot_trajectory(Z, clf, title):
+    levels = [0.2, 0.4, 0.8, 0.9, 0.92, 0.94, 0.96, 0.98, 1.0]
+    cp = plt.contourf(X, Y, Z, levels)
+    plt.colorbar(cp)
+    plt.xlabel('Log2_C')
+    plt.ylabel('Log2_gamma')
+    plt.scatter(np.log2(clf.logs.loc[:,['C']]), 
+                np.log2(clf.logs.loc[:,['gamma']]), color = "red")
+    plt.title(title)
 
 grid_num = 25
 xlist = np.linspace(-6, 16, grid_num)
@@ -108,7 +126,7 @@ plot_trajectory(Z, clf, "SeqUD")
 
  ![svm_demo](https://github.com/ZebinYang/seqmml/blob/master/docs/source/images/svm_demo.png)
 
-More examples can be referred to the documentation (URL)
+More examples can be referred to the [documentation](https://zebinyang.github.io/seqmml/build/html/examples.html)
 
 
 # Benchmark Methods:
