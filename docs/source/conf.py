@@ -13,10 +13,12 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.autosummary'
 ]
+
 source_suffix = '.rst'
 master_doc = 'index'
 project = u'SeqMML'
 author = u'Zebin Yang and Aijun Zhang' 
+copyright = '2019, Zebin Yang and Aijun Zhang'
 exclude_patterns = ['_build']
 pygments_style = 'sphinx'
 html_theme = 'sphinx_rtd_theme'
