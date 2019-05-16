@@ -16,7 +16,7 @@ extensions = [
 
 source_suffix = '.rst'
 master_doc = 'index'
-project = u'SeqMML'
+project = u'seqmml'
 author = u'Zebin Yang and Aijun Zhang' 
 copyright = '2019, Zebin Yang and Aijun Zhang'
 exclude_patterns = ['_build']
