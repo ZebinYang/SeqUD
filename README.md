@@ -1,4 +1,4 @@
-# SeqMM
+# SeqMML
 
 [![Build Status](https://travis-ci.com/ZebinYang/seqmml.svg?branch=master)](https://travis-ci.com/ZebinYang/seqmml.svg?branch=master)
 
