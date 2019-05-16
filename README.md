@@ -54,8 +54,7 @@ clf.fmin(octopus)
 
 plot_trajectory([0,1], [0,1], octopus, clf, "SeqUD")
 ```
-
-![demo octopus results](https://github.com/ZebinYang/seqmml/tree/master/docs/source/images/octopus_demo.png)
+[![demo octopus results](https://github.com/ZebinYang/seqmml/tree/master/docs/source/images/svm_demo.png)](https://github.com/ZebinYang/seqmml/tree/master/docs/source/images/octopus_demo.png)
 
 
 - Tuning sklearn hyperparameters
@@ -108,7 +107,7 @@ plt.figure(figsize = (6, 4.5))
 plot_trajectory(Z, clf, "SeqUD")
 ```
 
-![demo svm results](https://github.com/ZebinYang/seqmml/tree/master/docs/source/images/svm_demo.png)
+[![demo svm results](https://github.com/ZebinYang/seqmml/tree/master/docs/source/images/svm_demo.png)](https://github.com/ZebinYang/seqmml/tree/master/docs/source/images/svm_demo.png)
 
 
 More examples can be referred to the documentation (URL)
