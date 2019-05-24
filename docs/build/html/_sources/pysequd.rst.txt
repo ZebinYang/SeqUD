@@ -7,7 +7,7 @@ Within Computer Experiment framework, we propose a novel SeqUD approach for algo
 Motivation 
 ---------------
 
-Uniform designs is a frequently used space-filling design method, first proposed in the 1980s by Prof. Fang and Prof. Wang. It aims at covering the search space uniformly, as shown in the figure below. 
+Uniform design is a typical space-filling design for computer experiments, as proposed by [Fang1980]_ and [Wang1981]_. It aims at scattering design points into the search space as evenly as possible, as shown in the figure below. 
 
 .. image:: ./images/Demo_UD.png
     :width: 40%
