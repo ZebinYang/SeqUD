@@ -1,19 +1,13 @@
-import warnings
-warnings.filterwarnings("ignore")
-
-import os
 import time
-import shutil
 import numpy as np
 import pandas as pd
-from joblib import Parallel
-from joblib import delayed
 from matplotlib import pylab as plt
 from tqdm import tqdm_notebook as tqdm
 
+from abc import ABC, abstractmethod
 from sklearn.model_selection import cross_val_score
 
-class BayoptBase():
+class BayoptBase(ABC):
     """ 
     Abstract Batch design class for Sklearn Hyperparameter optimization. 
 
@@ -66,12 +60,13 @@ class BayoptBase():
             print("\n".join("%-20s: %s"%(k, v if self.para_space[k]['Type']=="categorical" else round(v, 5))
                             for k, v in self.best_params_.items()))
         
+    @abstractmethod
     def _run(self):
         """
         Main loop for searching the best hyperparameters. 
         
         """        
-        raise NotImplementedError
+        pass
                     
             
     def fmin(self, wrapper_func):

@@ -1,21 +1,13 @@
-import warnings
-warnings.filterwarnings("ignore")
-
 import os
 import time
 import shutil
 import numpy as np
 import pandas as pd
-from matplotlib import pylab as plt
-from tqdm import tqdm_notebook as tqdm
-from sklearn.model_selection import cross_val_score
 
 from smac.configspace import ConfigurationSpace
 from ConfigSpace.hyperparameters import CategoricalHyperparameter, \
     UniformFloatHyperparameter, UniformIntegerHyperparameter
 
-# Import SMAC-utilities
-from smac.tae.execute_func import ExecuteTAFuncDict
 from smac.scenario.scenario import Scenario
 from smac.facade.smac_facade import SMAC
 

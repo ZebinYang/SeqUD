@@ -1,21 +1,12 @@
-import warnings
-warnings.filterwarnings("ignore")
-
-import os
 import time
-import shutil
 import numpy as np
 import pandas as pd
-from joblib import Parallel
-from joblib import delayed
 from matplotlib import pylab as plt
-from tqdm import tqdm_notebook as tqdm
 
+from abc import ABC, abstractmethod
 from sklearn.model_selection import cross_val_score
 
-from pyDOE import lhs
-
-class BatchBase():
+class BatchBase(ABC):
     """ 
     Abstract Batch design class for Sklearn Hyperparameter optimization. 
 
@@ -113,12 +104,13 @@ class BatchBase():
                 para_set[item] = np.array(values['Mapping'])[col_index]
         return para_set  
 
+    @abstractmethod
     def _run(self, obj_func):
         """
         Main loop for searching the best hyperparameters. 
         
         """        
-        raise NotImplementedError
+        pass
 
     def fmin(self, wrapper_func):
         """

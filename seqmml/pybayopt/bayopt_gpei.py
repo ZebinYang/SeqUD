@@ -5,12 +5,9 @@ import shutil
 import numpy as np
 import pandas as pd
 from collections import OrderedDict
-from matplotlib import pylab as plt
-from tqdm import tqdm_notebook as tqdm
 
 from spearmint.ExperimentGrid import GridMap
 from spearmint.chooser import GPEIOptChooser as module
-from sklearn.model_selection import cross_val_score
 from .bayopt_base import BayoptBase
 
 grid_size = 20000

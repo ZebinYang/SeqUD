@@ -1,15 +1,6 @@
-import warnings
-warnings.filterwarnings("ignore")
-
-import os
-import time
-import shutil
 import numpy as np
 import pandas as pd
-from matplotlib import pylab as plt
-from tqdm import tqdm_notebook as tqdm
-from sklearn.model_selection import cross_val_score
-from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
+from hyperopt import fmin, hp, Trials
 
 from .bayopt_base import BayoptBase
 
