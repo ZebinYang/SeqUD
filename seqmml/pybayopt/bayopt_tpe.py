@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from hyperopt import fmin, hp, Trials
+from hyperopt import fmin, tpe, hp, Trials
 
 from .bayopt_base import BayoptBase
 
