@@ -58,6 +58,12 @@ ______________________________
 .. automodule:: pysequd.seqrand
   :members:  
 
+seqmml\.pysequd\.snto
+______________________________
+
+.. automodule:: pysequd.snto
+  :members:
+  
 seqmml\.pysequd\.sequd
 ______________________________
 

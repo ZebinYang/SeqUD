@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pysequd.sequd &mdash; seqmml  documentation</title>
+  <title>pysequd.snto &mdash; seqmml  documentation</title>
   
 
   
@@ -134,7 +134,7 @@
         
           <li><a href="../index.html">Module code</a> &raquo;</li>
         
-      <li>pysequd.sequd</li>
+      <li>pysequd.snto</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -149,7 +149,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for pysequd.sequd</h1><div class="highlight"><pre>
+  <h1>Source code for pysequd.snto</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -162,10 +162,10 @@
 
 <span class="n">EPS</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
 
-<div class="viewcode-block" id="SeqUD"><a class="viewcode-back" href="../../apidoc.html#pysequd.sequd.SeqUD">[docs]</a><span class="k">class</span> <span class="nc">SeqUD</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="SNTO"><a class="viewcode-back" href="../../apidoc.html#pysequd.snto.SNTO">[docs]</a><span class="k">class</span> <span class="nc">SNTO</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Implementation of sequential uniform design.</span>
+<span class="sd">    Implementation of SNTO.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -220,7 +220,7 @@
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; from sklearn import svm</span>
 <span class="sd">    &gt;&gt;&gt; from sklearn import datasets</span>
-<span class="sd">    &gt;&gt;&gt; from seqmml import SeqUD</span>
+<span class="sd">    &gt;&gt;&gt; from seqmml import SNTO</span>
 <span class="sd">    &gt;&gt;&gt; from sklearn.model_selection import KFold</span>
 <span class="sd">    &gt;&gt;&gt; iris = datasets.load_iris()</span>
 <span class="sd">    &gt;&gt;&gt; ParaSpace = {&#39;C&#39;:{&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-6, 16], &#39;Wrapper&#39;: np.exp2},</span>
@@ -228,7 +228,7 @@
 <span class="sd">    &gt;&gt;&gt; Level_Number = 20</span>
 <span class="sd">    &gt;&gt;&gt; estimator = svm.SVC()</span>
 <span class="sd">    &gt;&gt;&gt; cv = KFold(n_splits=5, random_state=1, shuffle=True)</span>
-<span class="sd">    &gt;&gt;&gt; clf = SeqUD(ParaSpace, level_number = 20, max_runs = 100, max_search_iter = 100, n_jobs=None,</span>
+<span class="sd">    &gt;&gt;&gt; clf = SNTO(ParaSpace, level_number = 20, max_runs = 100, max_search_iter = 100, n_jobs=None,</span>
 <span class="sd">                 estimator = None, cv = None, scoring = None, refit = None, rand_seed = 0, verbose = False)</span>
 <span class="sd">    &gt;&gt;&gt; clf.fit(iris.data, iris.target)</span>
 
@@ -284,7 +284,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">para_ud_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">items</span> <span class="o">+</span> <span class="s2">&quot;_UD&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable_number</span><span class="p">)</span>
 
-<div class="viewcode-block" id="SeqUD.plot_scores"><a class="viewcode-back" href="../../apidoc.html#pysequd.sequd.SeqUD.plot_scores">[docs]</a>    <span class="k">def</span> <span class="nf">plot_scores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SNTO.plot_scores"><a class="viewcode-back" href="../../apidoc.html#pysequd.snto.SNTO.plot_scores">[docs]</a>    <span class="k">def</span> <span class="nf">plot_scores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Visualize the scores history.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -320,7 +320,7 @@
                              <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">para_names</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">best_score_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">best_index_</span><span class="p">]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SeqUD completed in </span><span class="si">%.2f</span><span class="s2"> seconds.&quot;</span> <span class="o">%</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SNTO completed in </span><span class="si">%.2f</span><span class="s2"> seconds.&quot;</span> <span class="o">%</span>
                   <span class="bp">self</span><span class="o">.</span><span class="n">search_time_consumed_</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The best score is: </span><span class="si">%.5f</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The best configurations are:&quot;</span><span class="p">)</span>
@@ -387,7 +387,7 @@
         <span class="k">if</span> <span class="n">base_ud</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">base_ud</span> <span class="o">=</span> <span class="n">pydoe</span><span class="o">.</span><span class="n">gen_ud_ms</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">level_number</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">level_number</span><span class="p">,</span> <span class="n">crit</span><span class="o">=</span><span class="s2">&quot;CD2&quot;</span><span class="p">,</span>
                                       <span class="n">maxiter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_search_iter</span><span class="p">,</span> <span class="n">rand_seed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rand_seed</span><span class="p">,</span> <span class="n">nshoot</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-
+            
         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">base_ud</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Uniform design is not correctly constructed!&#39;</span><span class="p">)</span>
 
@@ -398,6 +398,7 @@
             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">loc_min</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">loc_max</span><span class="p">)):</span>
                 <span class="n">para_set_ud</span><span class="p">[:,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">ud_space</span><span class="p">[</span><span class="n">base_ud</span><span class="p">[:,</span> <span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
         <span class="n">para_set_ud</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">para_set_ud</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">para_ud_names</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_ud</span> <span class="o">=</span> <span class="n">base_ud</span>
         <span class="k">return</span> <span class="n">para_set_ud</span>
 
     <span class="k">def</span> <span class="nf">_generate_augment_design</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ud_center</span><span class="p">):</span>
@@ -436,30 +437,6 @@
                 <span class="n">ub</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ud_center</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">right_radius</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
             <span class="n">ud_space</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">lb</span><span class="p">,</span> <span class="n">ub</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_number</span><span class="p">)</span>
 
-        <span class="c1"># 2. Map existing Runs&#39; Parameters to UD Levels &quot;x0&quot; (1 - level_number)</span>
-        <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">):</span>
-            <span class="n">flag</span> <span class="o">=</span> <span class="n">flag</span> <span class="o">&amp;</span> <span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">para_ud_names</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">ud_space</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">EPS</span><span class="p">))</span>
-            <span class="n">flag</span> <span class="o">=</span> <span class="n">flag</span> <span class="o">&amp;</span> <span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">para_ud_names</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">ud_space</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">EPS</span><span class="p">))</span>
-        <span class="n">x0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">flag</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">para_ud_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-                <span class="n">x0</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x0</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">ud_space</span><span class="p">[:,</span> <span class="n">j</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">EPS</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-        <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-        <span class="c1"># 3. Delete existing UD points on the same levels grids</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">):</span>
-            <span class="n">keep_list</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="n">unique</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">x0</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">unique</span><span class="p">)):</span>
-                <span class="n">xx_loc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x0</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">unique</span><span class="p">[</span><span class="n">j</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-                <span class="n">keep_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">xx_loc</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-            <span class="n">x0</span> <span class="o">=</span> <span class="n">x0</span><span class="p">[</span><span class="n">keep_list</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">])</span>
-
         <span class="c1"># Return if the maximum run has been reached.</span>
         <span class="k">if</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_number</span> <span class="o">-</span>
              <span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">):</span>
@@ -475,21 +452,13 @@
             <span class="k">return</span>
 
         <span class="c1"># 4. Generate Sequential UD</span>
-        <span class="n">base_ud</span> <span class="o">=</span> <span class="n">pydoe</span><span class="o">.</span><span class="n">gen_aud_ms</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">level_number</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">level_number</span><span class="p">,</span> <span class="n">crit</span><span class="o">=</span><span class="s2">&quot;CD2&quot;</span><span class="p">,</span>
-                                   <span class="n">maxiter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_search_iter</span><span class="p">,</span> <span class="n">rand_seed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rand_seed</span><span class="p">,</span> <span class="n">nshoot</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">base_ud</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Uniform design is not correctly constructed!&#39;</span><span class="p">)</span>
-
-        <span class="n">base_ud_aug</span> <span class="o">=</span> <span class="n">base_ud</span><span class="p">[(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span><span class="n">base_ud</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                              <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">])</span>
-
         <span class="n">para_set_ud</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
-            <span class="p">(</span><span class="n">base_ud_aug</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">))</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_ud</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">factor_number</span><span class="p">):</span>
             <span class="n">loc_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable_number</span><span class="p">[:(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)])</span>
             <span class="n">loc_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable_number</span><span class="p">[:(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)])</span>
             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">loc_min</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">loc_max</span><span class="p">)):</span>
-                <span class="n">para_set_ud</span><span class="p">[:,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">ud_space</span><span class="p">[</span><span class="n">base_ud_aug</span><span class="p">[:,</span> <span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
+                <span class="n">para_set_ud</span><span class="p">[:,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">ud_space</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">base_ud</span><span class="p">[:,</span> <span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
         <span class="n">para_set_ud</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">para_set_ud</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">para_ud_names</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">para_set_ud</span>
 
@@ -547,7 +516,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">break</span>
 
-<div class="viewcode-block" id="SeqUD.fmin"><a class="viewcode-back" href="../../apidoc.html#pysequd.sequd.SeqUD.fmin">[docs]</a>    <span class="k">def</span> <span class="nf">fmin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrapper_func</span><span class="p">):</span>
+<div class="viewcode-block" id="SNTO.fmin"><a class="viewcode-back" href="../../apidoc.html#pysequd.snto.SNTO.fmin">[docs]</a>    <span class="k">def</span> <span class="nf">fmin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrapper_func</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Search the optimal value of a function.</span>
 
@@ -563,7 +532,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">search_time_consumed_</span> <span class="o">=</span> <span class="n">search_end_time</span> <span class="o">-</span> <span class="n">search_start_time</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_summary</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="SeqUD.fit"><a class="viewcode-back" href="../../apidoc.html#pysequd.sequd.SeqUD.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="SNTO.fit"><a class="viewcode-back" href="../../apidoc.html#pysequd.snto.SNTO.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Run fit with all sets of parameters.</span>
 

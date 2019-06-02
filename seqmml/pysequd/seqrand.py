@@ -216,9 +216,6 @@ class SeqRand(object):
         """
         
         self.logs = pd.DataFrame()
-        ud_space = np.repeat(np.linspace(1/(2*self.n_iter_per_stage), 1-1/(2*self.n_iter_per_stage), self.n_iter_per_stage).reshape([-1,1]),
-                             self.extend_factor_number, axis=1)
-
         para_set_ud = np.zeros((self.n_iter_per_stage, self.extend_factor_number))
         for i in range(self.extend_factor_number):
             para_set_ud[:,i] = np.random.uniform(0, 1, self.n_iter_per_stage)
@@ -258,7 +255,7 @@ class SeqRand(object):
             else:
                 lb = max(ud_center[i]-left_radius,0)
                 ub = min(ud_center[i]+right_radius,1)
-            para_set_ud[:,i] = np.linspace(lb, ub, self.n_iter_per_stage)
+            para_set_ud[:,i] = np.random.uniform(lb, ub, self.n_iter_per_stage)
         para_set_ud = pd.DataFrame(para_set_ud, columns = self.para_ud_names)
         return para_set_ud
     

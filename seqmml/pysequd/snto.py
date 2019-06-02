@@ -10,10 +10,10 @@ import pyunidoe as pydoe
 
 EPS = 10**(-10)
 
-class SeqUD(object):
+class SNTO(object):
 
     """
-    Implementation of sequential uniform design.
+    Implementation of SNTO.
 
     Parameters
     ----------
@@ -68,7 +68,7 @@ class SeqUD(object):
     >>> import numpy as np
     >>> from sklearn import svm
     >>> from sklearn import datasets
-    >>> from seqmml import SeqUD
+    >>> from seqmml import SNTO
     >>> from sklearn.model_selection import KFold
     >>> iris = datasets.load_iris()
     >>> ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2},
@@ -76,7 +76,7 @@ class SeqUD(object):
     >>> Level_Number = 20
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=1, shuffle=True)
-    >>> clf = SeqUD(ParaSpace, level_number = 20, max_runs = 100, max_search_iter = 100, n_jobs=None,
+    >>> clf = SNTO(ParaSpace, level_number = 20, max_runs = 100, max_search_iter = 100, n_jobs=None,
                  estimator = None, cv = None, scoring = None, refit = None, rand_seed = 0, verbose = False)
     >>> clf.fit(iris.data, iris.target)
 
@@ -168,7 +168,7 @@ class SeqUD(object):
                              for j in range(self.logs.loc[:, self.para_names].shape[1])}
         self.best_score_ = self.logs.loc[:, "score"].iloc[self.best_index_]
         if self.verbose:
-            print("SeqUD completed in %.2f seconds." %
+            print("SNTO completed in %.2f seconds." %
                   self.search_time_consumed_)
             print("The best score is: %.5f." % self.best_score_)
             print("The best configurations are:")
@@ -235,7 +235,7 @@ class SeqUD(object):
         if base_ud is None:
             base_ud = pydoe.gen_ud_ms(n=self.level_number, s=self.extend_factor_number, q=self.level_number, crit="CD2",
                                       maxiter=self.max_search_iter, rand_seed=self.rand_seed, nshoot=5)
-
+            
         if (not isinstance(base_ud, np.ndarray)):
             raise ValueError('Uniform design is not correctly constructed!')
 
@@ -246,6 +246,7 @@ class SeqUD(object):
             for k in range(int(loc_min), int(loc_max)):
                 para_set_ud[:, k] = ud_space[base_ud[:, k] - 1, k]
         para_set_ud = pd.DataFrame(para_set_ud, columns=self.para_ud_names)
+        self.base_ud = base_ud
         return para_set_ud
 
     def _generate_augment_design(self, ud_center):
@@ -284,30 +285,6 @@ class SeqUD(object):
                 ub = min(ud_center[i] + right_radius, 1)
             ud_space[:, i] = np.linspace(lb, ub, self.level_number)
 
-        # 2. Map existing Runs' Parameters to UD Levels "x0" (1 - level_number)
-        flag = True
-        for i in range(self.extend_factor_number):
-            flag = flag & (
-                self.logs.loc[:, self.para_ud_names].iloc[:, i] >= (ud_space[0, i] - EPS))
-            flag = flag & (
-                self.logs.loc[:, self.para_ud_names].iloc[:, i] <= (ud_space[-1, i] + EPS))
-        x0 = self.logs.loc[flag, self.para_ud_names].values
-
-        for i in range(x0.shape[0]):
-            for j in range(x0.shape[1]):
-                x0[i, j] = (
-                    np.where(abs(x0[i, j] - ud_space[:, j]) <= EPS)[0][0] + 1)
-
-        x0 = np.round(x0).astype(int)
-        # 3. Delete existing UD points on the same levels grids
-        for i in range(self.extend_factor_number):
-            keep_list = []
-            unique = np.unique(x0[:, i])
-            for j in range(len(unique)):
-                xx_loc = np.where(x0[:, i] == unique[j])[0].tolist()
-                keep_list.extend(np.random.choice(xx_loc, 1))
-            x0 = x0[keep_list, :].reshape([-1, self.extend_factor_number])
-
         # Return if the maximum run has been reached.
         if ((self.logs.shape[0] + self.level_number -
              x0.shape[0]) > self.max_runs):
@@ -323,21 +300,13 @@ class SeqUD(object):
             return
 
         # 4. Generate Sequential UD
-        base_ud = pydoe.gen_aud_ms(x0, n=self.level_number, s=self.extend_factor_number, q=self.level_number, crit="CD2",
-                                   maxiter=self.max_search_iter, rand_seed=self.rand_seed, nshoot=5)
-        if (not isinstance(base_ud, np.ndarray)):
-            raise ValueError('Uniform design is not correctly constructed!')
-
-        base_ud_aug = base_ud[(1 + x0.shape[0]):base_ud.shape[0],
-                              :].reshape([-1, self.extend_factor_number])
-
         para_set_ud = np.zeros(
-            (base_ud_aug.shape[0], self.extend_factor_number))
+            (self.base_ud.shape[0], self.extend_factor_number))
         for i in range(self.factor_number):
             loc_min = np.sum(self.variable_number[:(i + 1)])
             loc_max = np.sum(self.variable_number[:(i + 2)])
             for k in range(int(loc_min), int(loc_max)):
-                para_set_ud[:, k] = ud_space[base_ud_aug[:, k] - 1, k]
+                para_set_ud[:, k] = ud_space[self.base_ud[:, k] - 1, k]
         para_set_ud = pd.DataFrame(para_set_ud, columns=self.para_ud_names)
         return para_set_ud
 

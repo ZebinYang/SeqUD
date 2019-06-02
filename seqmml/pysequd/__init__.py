@@ -1,4 +1,5 @@
 from .sequd import SeqUD
-from .seqrand import *
+from .snto import SNTO
+from .seqrand import SeqRand
 
-__all__ =  ["SeqUD", "SeqRand"]
+__all__ =  ["SeqUD", "SNTO", "SeqRand"]

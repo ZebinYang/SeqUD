@@ -150,24 +150,16 @@
            <div itemprop="articleBody">
             
   <h1>Source code for pybayopt.bayopt_smac</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">warnings</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-
-<span class="kn">import</span> <span class="nn">os</span>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pylab</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">from</span> <span class="nn">tqdm</span> <span class="k">import</span> <span class="n">tqdm_notebook</span> <span class="k">as</span> <span class="n">tqdm</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">cross_val_score</span>
 
 <span class="kn">from</span> <span class="nn">smac.configspace</span> <span class="k">import</span> <span class="n">ConfigurationSpace</span>
 <span class="kn">from</span> <span class="nn">ConfigSpace.hyperparameters</span> <span class="k">import</span> <span class="n">CategoricalHyperparameter</span><span class="p">,</span> \
     <span class="n">UniformFloatHyperparameter</span><span class="p">,</span> <span class="n">UniformIntegerHyperparameter</span>
 
-<span class="c1"># Import SMAC-utilities</span>
-<span class="kn">from</span> <span class="nn">smac.tae.execute_func</span> <span class="k">import</span> <span class="n">ExecuteTAFuncDict</span>
 <span class="kn">from</span> <span class="nn">smac.scenario.scenario</span> <span class="k">import</span> <span class="n">Scenario</span>
 <span class="kn">from</span> <span class="nn">smac.facade.smac_facade</span> <span class="k">import</span> <span class="n">SMAC</span>
 
