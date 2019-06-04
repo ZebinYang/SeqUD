@@ -32,7 +32,7 @@ Microsoft Visual Studio 14.0 is required, see `python windows compliers`_ for de
 
 
 
-Github installation
+Github Installation
 ---------------------
 
 You can install the package by the following console command:
@@ -42,7 +42,7 @@ You can install the package by the following console command:
     pip install git+http://github.com/ZebinYang/seqmml.git.
         
         
-Manual installation
+Manual Installation
 ---------------------
 
 If git is not available, you can manually install the package by downloading the source codes and then compiling it by hand:
