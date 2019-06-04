@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from joblib import Parallel
 from joblib import delayed
+from itertools import product
 from tqdm import tqdm_notebook as tqdm
 
 from .batch_base import BatchBase
@@ -9,7 +10,7 @@ from .batch_base import BatchBase
 class GridSearch(BatchBase):
     """ 
     Implementation of grid search.
-
+    
     
     Parameters
     ----------
@@ -86,6 +87,12 @@ class GridSearch(BatchBase):
     :vartype refit_time\_: float
     :ivar refit_time\_: Seconds used for refitting the best model on the whole dataset.
         Not available if estimator = None or `refit=False`.
+        
+    Note
+    ----------
+    grid search is not recommend for high dimensional hyperparameter tunning. 
+    As it is limited by the max_run specified by the user, the grid points may be badly distributed. 
+
     """    
 
     def __init__(self, para_space, max_runs = 100, estimator = None, cv = None, 
@@ -121,7 +128,7 @@ class GridSearch(BatchBase):
             if (values['Type']=="integer"):
                 grid_para[item] = np.round(np.linspace(min(values['Mapping']),max(values['Mapping']),grid_number)).astype(int)
         # generate grid
-        para_set = pd.DataFrame([item for item in product(*grid_para.values())], columns = self.para_names)
+        para_set = pd.DataFrame([item for item in product(*grid_para.values())], columns = grid_para.keys())
         para_set = para_set.iloc[:self.max_runs,:]
         candidate_params = [{para_set.columns[j]: para_set.iloc[i,j] 
                              for j in range(para_set.shape[1])} 

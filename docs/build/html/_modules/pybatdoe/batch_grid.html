@@ -154,6 +154,7 @@
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">joblib</span> <span class="k">import</span> <span class="n">Parallel</span>
 <span class="kn">from</span> <span class="nn">joblib</span> <span class="k">import</span> <span class="n">delayed</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="k">import</span> <span class="n">tqdm_notebook</span> <span class="k">as</span> <span class="n">tqdm</span>
 
 <span class="kn">from</span> <span class="nn">.batch_base</span> <span class="k">import</span> <span class="n">BatchBase</span>
@@ -161,7 +162,7 @@
 <div class="viewcode-block" id="GridSearch"><a class="viewcode-back" href="../../apidoc.html#pybatdoe.batch_grid.GridSearch">[docs]</a><span class="k">class</span> <span class="nc">GridSearch</span><span class="p">(</span><span class="n">BatchBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">    Implementation of grid search.</span>
-
+<span class="sd">    </span>
 <span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -238,6 +239,12 @@
 <span class="sd">    :vartype refit_time\_: float</span>
 <span class="sd">    :ivar refit_time\_: Seconds used for refitting the best model on the whole dataset.</span>
 <span class="sd">        Not available if estimator = None or `refit=False`.</span>
+<span class="sd">        </span>
+<span class="sd">    Note</span>
+<span class="sd">    ----------</span>
+<span class="sd">    grid search is not recommend for high dimensional hyperparameter tunning. </span>
+<span class="sd">    As it is limited by the max_run specified by the user, the grid points may be badly distributed. </span>
+
 <span class="sd">    &quot;&quot;&quot;</span>    
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">para_space</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">estimator</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
@@ -273,7 +280,7 @@
             <span class="k">if</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;integer&quot;</span><span class="p">):</span>
                 <span class="n">grid_para</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">]),</span><span class="nb">max</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">]),</span><span class="n">grid_number</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
         <span class="c1"># generate grid</span>
-        <span class="n">para_set</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">grid_para</span><span class="o">.</span><span class="n">values</span><span class="p">())],</span> <span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">para_names</span><span class="p">)</span>
+        <span class="n">para_set</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">grid_para</span><span class="o">.</span><span class="n">values</span><span class="p">())],</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">grid_para</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="n">para_set</span> <span class="o">=</span> <span class="n">para_set</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">,:]</span>
         <span class="n">candidate_params</span> <span class="o">=</span> <span class="p">[{</span><span class="n">para_set</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span> <span class="n">para_set</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> 
                              <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">para_set</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])}</span> 
