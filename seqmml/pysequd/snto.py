@@ -10,6 +10,7 @@ import pyunidoe as pydoe
 
 EPS = 10**(-10)
 
+
 class SNTO(object):
 
     """
@@ -139,7 +140,7 @@ class SNTO(object):
 
         if self.logs.shape[0] > 0:
             cum_best_score = self.logs["score"].cummax()
-            fig = plt.figure(figsize=(6, 4))
+            plt.figure(figsize=(6, 4))
             plt.plot(cum_best_score)
             plt.xlabel('# of Runs')
             plt.ylabel('Best Scores')
@@ -203,10 +204,9 @@ class SNTO(object):
             elif (values['Type'] == "integer"):
                 temp = np.linspace(0, 1, len(values['Mapping']) + 1)
                 for j in range(1, len(temp)):
-                    para_set.loc[(para_set_ud[item + "_UD"] >= temp[j - 1]) &
-                                 (para_set_ud[item + "_UD"] < temp[j]), item] = values['Mapping'][j - 1]
-                para_set.loc[para_set_ud[item + "_UD"] ==
-                             1, item] = values['Mapping'][-1]
+                    para_set.loc[(para_set_ud[item + "_UD"] >= temp[j - 1])
+                                 & (para_set_ud[item + "_UD"] < temp[j]), item] = values['Mapping'][j - 1]
+                para_set.loc[para_set_ud[item + "_UD"] == 1, item] = values['Mapping'][-1]
                 para_set[item] = para_set[item].round().astype(int)
             elif (values['Type'] == "categorical"):
                 column_bool = [
@@ -235,7 +235,7 @@ class SNTO(object):
         if base_ud is None:
             base_ud = pydoe.gen_ud_ms(n=self.level_number, s=self.extend_factor_number, q=self.level_number, crit="CD2",
                                       maxiter=self.max_search_iter, rand_seed=self.rand_seed, nshoot=5)
-            
+
         if (not isinstance(base_ud, np.ndarray)):
             raise ValueError('Uniform design is not correctly constructed!')
 
@@ -270,8 +270,7 @@ class SNTO(object):
         ud_space = np.zeros((self.level_number, self.extend_factor_number))
         ud_grid_size = 1.0 / (self.level_number * 2**(self.stage - 1))
         left_radius = np.floor((self.level_number - 1) / 2) * ud_grid_size
-        right_radius = (self.level_number -
-                        np.floor((self.level_number - 1) / 2) - 1) * ud_grid_size
+        right_radius = ud_grid_size * (self.level_number - np.floor((self.level_number - 1) / 2) - 1)
         for i in range(self.extend_factor_number):
             if ((ud_center[i] - left_radius) < 0):
                 lb = 0
@@ -284,20 +283,6 @@ class SNTO(object):
                 lb = max(ud_center[i] - left_radius, 0)
                 ub = min(ud_center[i] + right_radius, 1)
             ud_space[:, i] = np.linspace(lb, ub, self.level_number)
-
-        # Return if the maximum run has been reached.
-        if ((self.logs.shape[0] + self.level_number -
-             x0.shape[0]) > self.max_runs):
-            self.stop_flag = True
-            if self.verbose:
-                print("Maximum number of runs reached, stop!")
-            return
-
-        if (x0.shape[0] >= self.level_number):
-            self.stop_flag = True
-            if self.verbose:
-                print("Search space already full, stop!")
-            return
 
         # 4. Generate Sequential UD
         para_set_ud = np.zeros(
@@ -358,10 +343,14 @@ class SNTO(object):
             ud_center = self.logs.sort_values(
                 "score", ascending=False).loc[:, self.para_ud_names].values[0, :]
             para_set_ud = self._generate_augment_design(ud_center)
-            if not self.stop_flag:
+
+            # Return if the maximum run has been reached.
+            if ((self.logs.shape[0] + para_set_ud.shape[0]) <= self.max_runs):
                 self._evaluate_runs(obj_func, para_set_ud)
                 self.stage += 1
             else:
+                if self.verbose:
+                    print("Maximum number of runs reached, stop!")
                 break
 
     def fmin(self, wrapper_func):

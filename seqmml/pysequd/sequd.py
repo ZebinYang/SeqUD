@@ -10,6 +10,7 @@ import pyunidoe as pydoe
 
 EPS = 10**(-10)
 
+
 class SeqUD(object):
 
     """
@@ -139,7 +140,7 @@ class SeqUD(object):
 
         if self.logs.shape[0] > 0:
             cum_best_score = self.logs["score"].cummax()
-            fig = plt.figure(figsize=(6, 4))
+            plt.figure(figsize=(6, 4))
             plt.plot(cum_best_score)
             plt.xlabel('# of Runs')
             plt.ylabel('Best Scores')
@@ -203,10 +204,9 @@ class SeqUD(object):
             elif (values['Type'] == "integer"):
                 temp = np.linspace(0, 1, len(values['Mapping']) + 1)
                 for j in range(1, len(temp)):
-                    para_set.loc[(para_set_ud[item + "_UD"] >= temp[j - 1]) &
-                                 (para_set_ud[item + "_UD"] < temp[j]), item] = values['Mapping'][j - 1]
-                para_set.loc[para_set_ud[item + "_UD"] ==
-                             1, item] = values['Mapping'][-1]
+                    para_set.loc[(para_set_ud[item + "_UD"] >= temp[j - 1])
+                                 & (para_set_ud[item + "_UD"] < temp[j]), item] = values['Mapping'][j - 1]
+                para_set.loc[para_set_ud[item + "_UD"] == 1, item] = values['Mapping'][-1]
                 para_set[item] = para_set[item].round().astype(int)
             elif (values['Type'] == "categorical"):
                 column_bool = [
@@ -269,8 +269,7 @@ class SeqUD(object):
         ud_space = np.zeros((self.level_number, self.extend_factor_number))
         ud_grid_size = 1.0 / (self.level_number * 2**(self.stage - 1))
         left_radius = np.floor((self.level_number - 1) / 2) * ud_grid_size
-        right_radius = (self.level_number -
-                        np.floor((self.level_number - 1) / 2) - 1) * ud_grid_size
+        right_radius = (self.level_number - np.floor((self.level_number - 1) / 2) - 1) * ud_grid_size
         for i in range(self.extend_factor_number):
             if ((ud_center[i] - left_radius) < 0):
                 lb = 0
@@ -309,8 +308,7 @@ class SeqUD(object):
             x0 = x0[keep_list, :].reshape([-1, self.extend_factor_number])
 
         # Return if the maximum run has been reached.
-        if ((self.logs.shape[0] + self.level_number -
-             x0.shape[0]) > self.max_runs):
+        if ((self.logs.shape[0] + self.level_number - x0.shape[0]) > self.max_runs):
             self.stop_flag = True
             if self.verbose:
                 print("Maximum number of runs reached, stop!")
