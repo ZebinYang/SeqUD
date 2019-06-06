@@ -164,63 +164,65 @@
 
 <span class="n">grid_size</span> <span class="o">=</span> <span class="mi">20000</span>
 
+
 <span class="k">def</span> <span class="nf">set_timeout</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="n">signum</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span> 
+    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="n">signum</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">RuntimeError</span>
 
     <span class="k">def</span> <span class="nf">to_do</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGALRM</span><span class="p">,</span> <span class="n">handle</span><span class="p">)</span>  
-            <span class="n">signal</span><span class="o">.</span><span class="n">alarm</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">time_out</span><span class="p">)</span>   
+            <span class="n">signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGALRM</span><span class="p">,</span> <span class="n">handle</span><span class="p">)</span>
+            <span class="n">signal</span><span class="o">.</span><span class="n">alarm</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">time_out</span><span class="p">)</span>
             <span class="n">r</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="n">signal</span><span class="o">.</span><span class="n">alarm</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>   
+            <span class="n">signal</span><span class="o">.</span><span class="n">alarm</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">r</span>
-        <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">to_do</span>
-    
+
+
 <div class="viewcode-block" id="GPEIOPT"><a class="viewcode-back" href="../../apidoc.html#pybayopt.bayopt_gpei.GPEIOPT">[docs]</a><span class="k">class</span> <span class="nc">GPEIOPT</span><span class="p">(</span><span class="n">BayoptBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    Interface of Gaussian Process - Expected Improvement (Bayesian Optimization). </span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Interface of Gaussian Process - Expected Improvement (Bayesian Optimization).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    :type  para_space: dict or list of dictionaries</span>
 <span class="sd">    :param para_space: It has three types:</span>
-<span class="sd">    </span>
-<span class="sd">        Continuous: </span>
+
+<span class="sd">        Continuous:</span>
 <span class="sd">            Specify `Type` as `continuous`, and include the keys of `Range` (a list with lower-upper elements pair) and</span>
-<span class="sd">            `Wrapper`, a callable function for wrapping the values.  </span>
+<span class="sd">            `Wrapper`, a callable function for wrapping the values.</span>
 <span class="sd">        Integer:</span>
 <span class="sd">            Specify `Type` as `integer`, and include the keys of `Mapping` (a list with all the sortted integer elements).</span>
 <span class="sd">        Categorical:</span>
 <span class="sd">            Specify `Type` as `categorical`, and include the keys of `Mapping` (a list with all the possible categories).</span>
-<span class="sd">    </span>
-<span class="sd">    :type max_runs: int, optional, default = 100</span>
-<span class="sd">    :param max_runs: The maximum number of trials to be evaluated. When this values is reached, </span>
-<span class="sd">        then the algorithm will stop. </span>
-<span class="sd">    </span>
-<span class="sd">    :type time_out: float, optional, default = 10</span>
-<span class="sd">    :param time_out: The time out threshold (in seconds) for generating the next run. </span>
-<span class="sd">    </span>
+
+<span class="sd">    :type max_runs: int, optional, default=100</span>
+<span class="sd">    :param max_runs: The maximum number of trials to be evaluated. When this values is reached,</span>
+<span class="sd">        then the algorithm will stop.</span>
+
+<span class="sd">    :type time_out: float, optional, default=10</span>
+<span class="sd">    :param time_out: The time out threshold (in seconds) for generating the next run.</span>
+
 <span class="sd">    :type  estimator: estimator object</span>
 <span class="sd">    :param estimator: This is assumed to implement the scikit-learn estimator interface.</span>
-<span class="sd">    </span>
+
 <span class="sd">    :type  cv: cross-validation method, an sklearn object.</span>
 <span class="sd">    :param cv: e.g., `StratifiedKFold` and KFold` is used.</span>
-<span class="sd">    </span>
+
 <span class="sd">    :type scoring: string, callable, list/tuple, dict or None, optional, default = None</span>
-<span class="sd">    :param scoring: A sklearn type scoring function. </span>
+<span class="sd">    :param scoring: A sklearn type scoring function.</span>
 <span class="sd">        If None, the estimator&#39;s default scorer (if available) is used. See the package `sklearn` for details.</span>
-<span class="sd">    </span>
-<span class="sd">    :type refit: boolean, or string, optional, default = True</span>
+
+<span class="sd">    :type refit: boolean, or string, optional, default=True</span>
 <span class="sd">    :param refit: It controls whether to refit an estimator using the best found parameters on the whole dataset.</span>
-<span class="sd">    </span>
-<span class="sd">    :type rand_seed: int, optional, default = 0</span>
+
+<span class="sd">    :type rand_seed: int, optional, default=0</span>
 <span class="sd">    :param rand_seed: The random seed for optimization.</span>
-<span class="sd">    </span>
-<span class="sd">    :type verbose: boolean, optional, default = False</span>
-<span class="sd">    :param verbose: It controls whether the searching history will be printed. </span>
+
+<span class="sd">    :type verbose: boolean, optional, default=False</span>
+<span class="sd">    :param verbose: It controls whether the searching history will be printed.</span>
 
 
 <span class="sd">    Examples</span>
@@ -231,24 +233,24 @@
 <span class="sd">    &gt;&gt;&gt; from seqmml import GPEIOPT</span>
 <span class="sd">    &gt;&gt;&gt; from sklearn.model_selection import KFold</span>
 <span class="sd">    &gt;&gt;&gt; iris = datasets.load_iris()</span>
-<span class="sd">    &gt;&gt;&gt; ParaSpace = {&#39;C&#39;:{&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-6, 16], &#39;Wrapper&#39;: np.exp2}, </span>
+<span class="sd">    &gt;&gt;&gt; ParaSpace = {&#39;C&#39;:{&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-6, 16], &#39;Wrapper&#39;: np.exp2},</span>
 <span class="sd">               &#39;gamma&#39;: {&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-16, 6], &#39;Wrapper&#39;: np.exp2}}</span>
 <span class="sd">    &gt;&gt;&gt; estimator = svm.SVC()</span>
 <span class="sd">    &gt;&gt;&gt; cv = KFold(n_splits=5, random_state=0, shuffle=True)</span>
-<span class="sd">    &gt;&gt;&gt; clf = GPEIOPT(ParaSpace, max_runs = 100, time_out = 10, </span>
-<span class="sd">                estimator = estimator, cv = cv, scoring = None, refit = None, rand_seed = 0, verbose = False)</span>
+<span class="sd">    &gt;&gt;&gt; clf = GPEIOPT(ParaSpace, max_runs=100, time_out=10,</span>
+<span class="sd">                estimator=estimator, cv=cv, scoring=None, refit=None, rand_seed=0, verbose=False)</span>
 <span class="sd">    &gt;&gt;&gt; clf.fit(iris.data, iris.target)</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
 <span class="sd">    :vartype best_score\_: float</span>
-<span class="sd">    :ivar best_score\_: The best average cv score among the evaluated trials.  </span>
-<span class="sd">    </span>
+<span class="sd">    :ivar best_score\_: The best average cv score among the evaluated trials.</span>
+
 <span class="sd">    :vartype best_params\_: dict</span>
 <span class="sd">    :ivar best_params\_: Parameters that reaches `best_score_`.</span>
 
-<span class="sd">    :vartype best_estimator\_: sklearn estimator </span>
-<span class="sd">    :ivar best_estimator\_: The estimator refitted based on the `best_params_`. </span>
+<span class="sd">    :vartype best_estimator\_: sklearn estimator</span>
+<span class="sd">    :ivar best_estimator\_: The estimator refitted based on the `best_params_`.</span>
 <span class="sd">        Not available if estimator = None or `refit=False`.</span>
 
 <span class="sd">    :vartype search_time_consumed\_: float</span>
@@ -256,47 +258,47 @@
 
 <span class="sd">    :vartype refit_time\_: float</span>
 <span class="sd">    :ivar refit_time\_: Seconds used for refitting the best model on the whole dataset.</span>
-<span class="sd">        Not available if estimator = None or `refit=False`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>    
+<span class="sd">        Not available if estimator=None or `refit=False`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">para_space</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">time_out</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">estimator</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
-                 <span class="n">scoring</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rand_seed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">para_space</span><span class="p">,</span> <span class="n">max_runs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">time_out</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">estimator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">scoring</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rand_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 
-        <span class="nb">super</span><span class="p">(</span><span class="n">GPEIOPT</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">para_space</span><span class="p">,</span> <span class="n">max_runs</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
-        
+        <span class="nb">super</span><span class="p">(</span><span class="n">GPEIOPT</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">para_space</span><span class="p">,</span> <span class="n">max_runs</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">refit</span> <span class="o">=</span> <span class="n">refit</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scoring</span> <span class="o">=</span> <span class="n">scoring</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rand_seed</span> <span class="o">=</span> <span class="n">rand_seed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">time_out</span> <span class="o">=</span> <span class="n">time_out</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;GPEI&quot;</span>
-        
+
         <span class="bp">self</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">para_space</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;continuous&quot;</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span>  <span class="n">OrderedDict</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">,</span> 
-                                 <span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="s1">&#39;float&#39;</span><span class="p">,</span>
-                                 <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Range&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
-                                 <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Range&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
-                                 <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
-            <span class="k">elif</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;integer&quot;</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">,</span> 
-                                 <span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="s1">&#39;int&#39;</span><span class="p">,</span>
-                                 <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">]),</span>
-                                 <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="nb">max</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">]),</span>
-                                 <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
-            <span class="k">elif</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;categorical&quot;</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">,</span> 
-                                 <span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="s1">&#39;enum&#39;</span><span class="p">,</span>
-                                 <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">],</span>
-                                 <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span> 
-    
-    <span class="nd">@set_timeout</span> 
+            <span class="k">if</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;continuous&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">,</span>
+                                                    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;float&#39;</span><span class="p">,</span>
+                                                    <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Range&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                                                    <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Range&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                                                    <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;integer&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">,</span>
+                                                    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">,</span>
+                                                    <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">]),</span>
+                                                    <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="nb">max</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">]),</span>
+                                                    <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;categorical&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">,</span>
+                                                    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;enum&#39;</span><span class="p">,</span>
+                                                    <span class="s1">&#39;options&#39;</span><span class="p">:</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">],</span>
+                                                    <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+
+    <span class="nd">@set_timeout</span>
     <span class="k">def</span> <span class="nf">_spmint_opt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chooser</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">grid_status</span><span class="p">):</span>
 
-        <span class="c1">## The status of jobs, 0 - candidate, 1 - pending, 2 - complete. </span>
-        <span class="c1">## Here we only have two status: 0 or 2 available. </span>
+        <span class="c1"># The status of jobs, 0 - candidate, 1 - pending, 2 - complete.</span>
+        <span class="c1"># Here we only have two status: 0 or 2 available.</span>
         <span class="n">job_id</span> <span class="o">=</span> <span class="n">chooser</span><span class="o">.</span><span class="n">next</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">values</span><span class="p">),</span> <span class="p">[],</span>
                               <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">grid_status</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
                               <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">grid_status</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
@@ -304,61 +306,59 @@
         <span class="k">return</span> <span class="n">job_id</span>
 
     <span class="k">def</span> <span class="nf">obj_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cfg</span><span class="p">):</span>
-        <span class="n">next_params</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">cfg</span><span class="p">]),</span> <span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">para_names</span><span class="p">)</span>
+        <span class="n">next_params</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">cfg</span><span class="p">]),</span> <span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">para_names</span><span class="p">)</span>
         <span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">para_space</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;continuous&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;continuous&quot;</span><span class="p">):</span>
                 <span class="n">parameters</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Wrapper&#39;</span><span class="p">](</span><span class="nb">float</span><span class="p">(</span><span class="n">next_params</span><span class="p">[</span><span class="n">item</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-            <span class="k">elif</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;integer&quot;</span><span class="p">):</span>
-                <span class="n">parameters</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">next_params</span><span class="p">[</span><span class="n">item</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> 
-            <span class="k">elif</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;categorical&quot;</span><span class="p">):</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;integer&quot;</span><span class="p">):</span>
+                <span class="n">parameters</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">next_params</span><span class="p">[</span><span class="n">item</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;categorical&quot;</span><span class="p">):</span>
                 <span class="n">parameters</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">next_params</span><span class="p">[</span><span class="n">item</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-                
+
         <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wrapper_func</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
         <span class="n">logs_aug</span> <span class="o">=</span> <span class="n">parameters</span>
-        <span class="n">logs_aug</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;score&quot;</span><span class="p">:</span><span class="n">score</span><span class="p">})</span>
-        <span class="n">logs_aug</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">logs_aug</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">iteration</span><span class="p">])</span>
+        <span class="n">logs_aug</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="n">score</span><span class="p">})</span>
+        <span class="n">logs_aug</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">logs_aug</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">iteration</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">,</span> <span class="n">logs_aug</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">iteration</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="s2">&quot;Iteration </span><span class="si">%d</span><span class="s2">:&quot;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">iteration</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pbar</span><span class="o">.</span><span class="n">set_postfix_str</span><span class="p">(</span><span class="s2">&quot;Current Best Score = </span><span class="si">%.5f</span><span class="s2">&quot;</span><span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="s2">&quot;Iteration </span><span class="si">%d</span><span class="s2">:&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteration</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pbar</span><span class="o">.</span><span class="n">set_postfix_str</span><span class="p">(</span><span class="s2">&quot;Current Best Score = </span><span class="si">%.5f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
         <span class="k">return</span> <span class="o">-</span><span class="n">score</span>
 
     <span class="k">def</span> <span class="nf">_run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrapper_func</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Main loop for searching the best hyperparameters. </span>
-<span class="sd">        </span>
-<span class="sd">        &quot;&quot;&quot;</span>      
-        <span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">param_unit</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="sd">        Main loop for searching the best hyperparameters.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">file_dir</span> <span class="o">=</span> <span class="s2">&quot;./temp/&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">file_dir</span><span class="p">)</span>
-        
+
         <span class="bp">self</span><span class="o">.</span><span class="n">wrapper_func</span> <span class="o">=</span> <span class="n">wrapper_func</span>
         <span class="n">chooser</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">file_dir</span><span class="p">,</span> <span class="s2">&quot;mcmc_iters=10&quot;</span><span class="p">)</span>
         <span class="n">vkeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">]</span>
         <span class="n">gmap</span> <span class="o">=</span> <span class="n">GridMap</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">vkeys</span><span class="p">],</span> <span class="n">grid_size</span><span class="p">)</span>
-        <span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gmap</span><span class="o">.</span><span class="n">hypercube_grid</span><span class="p">(</span><span class="n">grid_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> 
+        <span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gmap</span><span class="o">.</span><span class="n">hypercube_grid</span><span class="p">(</span><span class="n">grid_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
         <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">grid_size</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
         <span class="n">grid_status</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">)):</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">job_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spmint_opt</span><span class="p">(</span><span class="n">chooser</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">grid_status</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Time Out, Spearmint Early Stop!&#39;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Spearmint Early Stop!&#39;</span><span class="p">)</span>
                 <span class="k">break</span>
 
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">job_id</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
                 <span class="p">(</span><span class="n">job_id</span><span class="p">,</span> <span class="n">candidate</span><span class="p">)</span> <span class="o">=</span> <span class="n">job_id</span>
                 <span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">grid</span><span class="p">,</span> <span class="n">candidate</span><span class="p">))</span>
                 <span class="n">grid_status</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grid_status</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-                <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
-                <span class="n">job_id</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span>
+                <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+                <span class="n">job_id</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">candidate</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="n">job_id</span><span class="p">,:]</span>
+                <span class="n">candidate</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="n">job_id</span><span class="p">,</span> <span class="p">:]</span>
                 <span class="n">grid_status</span><span class="p">[</span><span class="n">job_id</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
 
             <span class="n">next_params</span> <span class="o">=</span> <span class="n">gmap</span><span class="o">.</span><span class="n">unit_to_list</span><span class="p">(</span><span class="n">candidate</span><span class="p">)</span>

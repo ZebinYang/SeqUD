@@ -156,45 +156,46 @@
 
 <span class="kn">from</span> <span class="nn">.bayopt_base</span> <span class="k">import</span> <span class="n">BayoptBase</span>
 
+
 <div class="viewcode-block" id="TPEOPT"><a class="viewcode-back" href="../../apidoc.html#pybayopt.bayopt_tpe.TPEOPT">[docs]</a><span class="k">class</span> <span class="nc">TPEOPT</span><span class="p">(</span><span class="n">BayoptBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    Interface of Hyperopt (Bayesian Optimization). </span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Interface of Hyperopt (Bayesian Optimization).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    :type  para_space: dict or list of dictionaries</span>
 <span class="sd">    :param para_space: It has three types:</span>
-<span class="sd">    </span>
-<span class="sd">        Continuous: </span>
+
+<span class="sd">        Continuous:</span>
 <span class="sd">            Specify `Type` as `continuous`, and include the keys of `Range` (a list with lower-upper elements pair) and</span>
-<span class="sd">            `Wrapper`, a callable function for wrapping the values.  </span>
+<span class="sd">            `Wrapper`, a callable function for wrapping the values.</span>
 <span class="sd">        Integer:</span>
 <span class="sd">            Specify `Type` as `integer`, and include the keys of `Mapping` (a list with all the sortted integer elements).</span>
 <span class="sd">        Categorical:</span>
 <span class="sd">            Specify `Type` as `categorical`, and include the keys of `Mapping` (a list with all the possible categories).</span>
-<span class="sd">    </span>
-<span class="sd">    :type max_runs: int, optional, default = 100</span>
-<span class="sd">    :param max_runs: The maximum number of trials to be evaluated. When this values is reached, </span>
-<span class="sd">        then the algorithm will stop. </span>
-<span class="sd">        </span>
+
+<span class="sd">    :type max_runs: int, optional, default=100</span>
+<span class="sd">    :param max_runs: The maximum number of trials to be evaluated. When this values is reached,</span>
+<span class="sd">        then the algorithm will stop.</span>
+
 <span class="sd">    :type  estimator: estimator object</span>
 <span class="sd">    :param estimator: This is assumed to implement the scikit-learn estimator interface.</span>
-<span class="sd">    </span>
+
 <span class="sd">    :type  cv: cross-validation method, an sklearn object.</span>
 <span class="sd">    :param cv: e.g., `StratifiedKFold` and KFold` is used.</span>
-<span class="sd">    </span>
-<span class="sd">    :type scoring: string, callable, list/tuple, dict or None, optional, default = None</span>
-<span class="sd">    :param scoring: A sklearn type scoring function. </span>
+
+<span class="sd">    :type scoring: string, callable, list/tuple, dict or None, optional, default=None</span>
+<span class="sd">    :param scoring: A sklearn type scoring function.</span>
 <span class="sd">        If None, the estimator&#39;s default scorer (if available) is used. See the package `sklearn` for details.</span>
-<span class="sd">    </span>
-<span class="sd">    :type refit: boolean, or string, optional, default = True</span>
+
+<span class="sd">    :type refit: boolean, or string, optional, default=True</span>
 <span class="sd">    :param refit: It controls whether to refit an estimator using the best found parameters on the whole dataset.</span>
-<span class="sd">    </span>
-<span class="sd">    :type rand_seed: int, optional, default = 0</span>
+
+<span class="sd">    :type rand_seed: int, optional, default=0</span>
 <span class="sd">    :param rand_seed: The random seed for optimization.</span>
-<span class="sd">    </span>
-<span class="sd">    :type verbose: boolean, optional, default = False</span>
-<span class="sd">    :param verbose: It controls whether the searching history will be printed. </span>
+
+<span class="sd">    :type verbose: boolean, optional, default=False</span>
+<span class="sd">    :param verbose: It controls whether the searching history will be printed.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ----------</span>
@@ -204,23 +205,23 @@
 <span class="sd">    &gt;&gt;&gt; from seqmml import TPEOPT</span>
 <span class="sd">    &gt;&gt;&gt; from sklearn.model_selection import KFold</span>
 <span class="sd">    &gt;&gt;&gt; iris = datasets.load_iris()</span>
-<span class="sd">    &gt;&gt;&gt; ParaSpace = {&#39;C&#39;:{&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-6, 16], &#39;Wrapper&#39;: np.exp2}, </span>
+<span class="sd">    &gt;&gt;&gt; ParaSpace = {&#39;C&#39;:{&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-6, 16], &#39;Wrapper&#39;: np.exp2},</span>
 <span class="sd">               &#39;gamma&#39;: {&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-16, 6], &#39;Wrapper&#39;: np.exp2}}</span>
 <span class="sd">    &gt;&gt;&gt; estimator = svm.SVC()</span>
 <span class="sd">    &gt;&gt;&gt; cv = KFold(n_splits=5, random_state=0, shuffle=True)</span>
-<span class="sd">    &gt;&gt;&gt; clf = TPEOPT(ParaSpace, max_runs = 100, estimator = estimator, cv = cv, scoring = None, refit = None, rand_seed = 0, verbose = False)</span>
+<span class="sd">    &gt;&gt;&gt; clf = TPEOPT(ParaSpace, max_runs=100, estimator=estimator, cv=cv, scoring=None, refit=None, rand_seed=0, verbose=False)</span>
 <span class="sd">    &gt;&gt;&gt; clf.fit(iris.data, iris.target)</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
 <span class="sd">    :vartype best_score\_: float</span>
-<span class="sd">    :ivar best_score\_: The best average cv score among the evaluated trials.  </span>
-<span class="sd">    </span>
+<span class="sd">    :ivar best_score\_: The best average cv score among the evaluated trials.</span>
+
 <span class="sd">    :vartype best_params\_: dict</span>
 <span class="sd">    :ivar best_params\_: Parameters that reaches `best_score_`.</span>
 
-<span class="sd">    :vartype best_estimator\_: sklearn estimator </span>
-<span class="sd">    :ivar best_estimator\_: The estimator refitted based on the `best_params_`. </span>
+<span class="sd">    :vartype best_estimator\_: sklearn estimator</span>
+<span class="sd">    :ivar best_estimator\_: The estimator refitted based on the `best_params_`.</span>
 <span class="sd">        Not available if estimator = None or `refit=False`.</span>
 
 <span class="sd">    :vartype search_time_consumed\_: float</span>
@@ -228,67 +229,67 @@
 
 <span class="sd">    :vartype refit_time\_: float</span>
 <span class="sd">    :ivar refit_time\_: Seconds used for refitting the best model on the whole dataset.</span>
-<span class="sd">        Not available if estimator = None or `refit=False`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>    
+<span class="sd">        Not available if estimator=None or `refit=False`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">para_space</span><span class="p">,</span> <span class="n">max_runs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">estimator</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
-                 <span class="n">scoring</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rand_seed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">para_space</span><span class="p">,</span> <span class="n">max_runs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">estimator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">scoring</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rand_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 
-        <span class="nb">super</span><span class="p">(</span><span class="n">TPEOPT</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">para_space</span><span class="p">,</span> <span class="n">max_runs</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TPEOPT</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">para_space</span><span class="p">,</span> <span class="n">max_runs</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">refit</span> <span class="o">=</span> <span class="n">refit</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scoring</span> <span class="o">=</span> <span class="n">scoring</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rand_seed</span> <span class="o">=</span> <span class="n">rand_seed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;TPE&quot;</span>
-        
+
         <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">para_space</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;continuous&quot;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Range&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Range&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span> 
+                <span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hp</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Range&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Range&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
             <span class="k">elif</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;integer&quot;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">]),</span> <span class="nb">max</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">]),</span> 
-                                                <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span> 
+                <span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hp</span><span class="o">.</span><span class="n">quniform</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">]),</span> <span class="nb">max</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">]),</span>
+                                              <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
             <span class="k">elif</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;categorical&quot;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hp</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">])))</span> 
+                <span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hp</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">])))</span>
 
     <span class="k">def</span> <span class="nf">obj_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cfg</span><span class="p">):</span>
-        <span class="n">next_params</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">cfg</span><span class="p">],</span> <span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">para_names</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">next_params</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">cfg</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">para_names</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">para_space</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;continuous&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;continuous&quot;</span><span class="p">):</span>
                 <span class="n">parameters</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Wrapper&#39;</span><span class="p">](</span><span class="nb">float</span><span class="p">(</span><span class="n">next_params</span><span class="p">[</span><span class="n">item</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-            <span class="k">elif</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;integer&quot;</span><span class="p">):</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;integer&quot;</span><span class="p">):</span>
                 <span class="n">parameters</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">next_params</span><span class="p">[</span><span class="n">item</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="k">elif</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;categorical&quot;</span><span class="p">):</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;categorical&quot;</span><span class="p">):</span>
                 <span class="n">parameters</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="s1">&#39;Mapping&#39;</span><span class="p">][</span><span class="n">next_params</span><span class="p">[</span><span class="n">item</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
 
         <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wrapper_func</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
 
         <span class="n">logs_aug</span> <span class="o">=</span> <span class="n">parameters</span>
-        <span class="n">logs_aug</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;score&quot;</span><span class="p">:</span><span class="n">score</span><span class="p">})</span>
-        <span class="n">logs_aug</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">logs_aug</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">iteration</span><span class="p">])</span>
+        <span class="n">logs_aug</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="n">score</span><span class="p">})</span>
+        <span class="n">logs_aug</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">logs_aug</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">iteration</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="p">,</span> <span class="n">logs_aug</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">iteration</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="s2">&quot;Iteration </span><span class="si">%d</span><span class="s2">:&quot;</span> <span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">iteration</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pbar</span><span class="o">.</span><span class="n">set_postfix_str</span><span class="p">(</span><span class="s2">&quot;Current Best Score = </span><span class="si">%.5f</span><span class="s2">&quot;</span><span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;loss&quot;</span><span class="p">:</span><span class="o">-</span><span class="n">score</span><span class="p">,</span> <span class="s2">&quot;para&quot;</span><span class="p">:</span><span class="n">parameters</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">}</span>
-            
+            <span class="bp">self</span><span class="o">.</span><span class="n">pbar</span><span class="o">.</span><span class="n">set_description</span><span class="p">(</span><span class="s2">&quot;Iteration </span><span class="si">%d</span><span class="s2">:&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteration</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pbar</span><span class="o">.</span><span class="n">set_postfix_str</span><span class="p">(</span><span class="s2">&quot;Current Best Score = </span><span class="si">%.5f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="o">-</span><span class="n">score</span><span class="p">,</span> <span class="s2">&quot;para&quot;</span><span class="p">:</span> <span class="n">parameters</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">}</span>
+
     <span class="k">def</span> <span class="nf">_run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrapper_func</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Main loop for searching the best hyperparameters. </span>
-<span class="sd">        </span>
-<span class="sd">        &quot;&quot;&quot;</span>    
+<span class="sd">        Main loop for searching the best hyperparameters.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wrapper_func</span> <span class="o">=</span> <span class="n">wrapper_func</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trials</span> <span class="o">=</span> <span class="n">Trials</span><span class="p">()</span>
-        <span class="n">best</span> <span class="o">=</span> <span class="n">fmin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj_func</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="p">,</span>
-                  <span class="n">algo</span><span class="o">=</span><span class="n">tpe</span><span class="o">.</span><span class="n">suggest</span><span class="p">,</span>
-                  <span class="n">max_evals</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">,</span>
-                  <span class="n">trials</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trials</span><span class="p">,</span>
-                  <span class="n">rstate</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rand_seed</span><span class="p">))</span></div>
+        <span class="n">fmin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj_func</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="p">,</span>
+             <span class="n">algo</span><span class="o">=</span><span class="n">tpe</span><span class="o">.</span><span class="n">suggest</span><span class="p">,</span>
+             <span class="n">max_evals</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">,</span>
+             <span class="n">trials</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trials</span><span class="p">,</span>
+             <span class="n">rstate</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rand_seed</span><span class="p">))</span></div>
 </pre></div>
 
            </div>
