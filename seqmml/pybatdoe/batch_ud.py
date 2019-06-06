@@ -25,11 +25,11 @@ class UDSearch(BatchBase):
         Categorical:
             Specify `Type` as `categorical`, and include the keys of `Mapping` (a list with all the possible categories).
 
-    :type max_runs: int, optional, default = 100
+    :type max_runs: int, optional, default=100
     :param max_runs: The maximum number of trials to be evaluated. When this values is reached,
         then the algorithm will stop.
 
-    :type n_jobs: int or None, optional, optional, default = None
+    :type n_jobs: int or None, optional, optional, default=None
     :param n_jobs: Number of jobs to run in parallel.
         If -1 all CPUs are used. If 1 is given, no parallel computing code
         is used at all, which is useful for debugging. See the package `joblib` for details.
@@ -40,17 +40,17 @@ class UDSearch(BatchBase):
     :type  cv: cross-validation method, an sklearn object.
     :param cv: e.g., `StratifiedKFold` and KFold` is used.
 
-    :type scoring: string, callable, list/tuple, dict or None, optional, default = None
+    :type scoring: string, callable, list/tuple, dict or None, optional, default=None
     :param scoring: A sklearn type scoring function.
         If None, the estimator's default scorer (if available) is used. See the package `sklearn` for details.
 
-    :type refit: boolean, or string, optional, default = True
+    :type refit: boolean, or string, optional, default=True
     :param refit: It controls whether to refit an estimator using the best found parameters on the whole dataset.
 
-    :type rand_seed: int, optional, default = 0
+    :type rand_seed: int, optional, default=0
     :param rand_seed: The random seed for optimization.
 
-    :type verbose: boolean, optional, default = False
+    :type verbose: boolean, optional, default=False
     :param verbose: It controls whether the searching history will be printed.
 
     Examples
@@ -65,8 +65,8 @@ class UDSearch(BatchBase):
                'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=0, shuffle=True)
-    >>> clf = UDSearch(ParaSpace, max_runs = 100, level_number = 20, max_search_iter = 100, estimator = estimator, cv = cv,
-                 scoring=None, n_jobs = None, refit=False, rand_seed = 0, verbose = False)
+    >>> clf = UDSearch(ParaSpace, max_runs=100, level_number=20, max_search_iter=100, estimator=estimator, cv=cv,
+                 scoring=None, n_jobs=None, refit=False, rand_seed=0, verbose=False)
     >>> clf.fit(iris.data, iris.target)
 
     Attributes
@@ -86,7 +86,7 @@ class UDSearch(BatchBase):
 
     :vartype refit_time\_: float
     :ivar refit_time\_: Seconds used for refitting the best model on the whole dataset.
-        Not available if estimator = None or `refit=False`.
+        Not available if estimator=None or `refit=False`.
     """
 
     def __init__(self, para_space, max_runs=100, level_number=20, max_search_iter=100, estimator=None, cv=None,

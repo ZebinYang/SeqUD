@@ -29,17 +29,17 @@ class SNTO(object):
         Categorical:
             Specify `Type` as `categorical`, and include the keys of `Mapping` (a list with all the possible categories).
 
-    :type level_number: int, optional, default = 20
+    :type level_number: int, optional, default=20
     :param level_number: The positive integer which represent the number of levels in generating uniform design.
 
-    :type max_runs: int, optional, default = 100
+    :type max_runs: int, optional, default=100
     :param max_runs: The maximum number of trials to be evaluated. When this values is reached,
         then the algorithm will stop.
 
-    :type max_search_iter: int, optional, default = 100
+    :type max_search_iter: int, optional, default=100
     :param max_search_iter: The maximum number of iterations used to generate uniform design or augmented uniform design.
 
-    :type n_jobs: int or None, optional, optional, default = None
+    :type n_jobs: int or None, optional, optional, default=None
     :param n_jobs: Number of jobs to run in parallel.
         If -1 all CPUs are used. If 1 is given, no parallel computing code
         is used at all, which is useful for debugging. See the package `joblib` for details.
@@ -54,13 +54,13 @@ class SNTO(object):
     :param scoring: A sklearn type scoring function.
         If None, the estimator's default scorer (if available) is used. See the package `sklearn` for details.
 
-    :type refit: boolean, or string, optional, default = True
+    :type refit: boolean, or string, optional, default=True
     :param refit: It controls whether to refit an estimator using the best found parameters on the whole dataset.
 
     :type rand_seed: int, optional, default=0
     :param rand_seed: The random seed for optimization.
 
-    :type verbose: boolean, optional, default = False
+    :type verbose: boolean, optional, default=False
     :param verbose: It controls whether the searching history will be printed.
 
 
@@ -77,8 +77,8 @@ class SNTO(object):
     >>> Level_Number = 20
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=1, shuffle=True)
-    >>> clf = SNTO(ParaSpace, level_number = 20, max_runs = 100, max_search_iter = 100, n_jobs=None,
-                 estimator = None, cv = None, scoring = None, refit = None, rand_seed = 0, verbose = False)
+    >>> clf = SNTO(ParaSpace, level_number=20, max_runs=100, max_search_iter=100, n_jobs=None,
+                 estimator=None, cv=None, scoring=None, refit=None, rand_seed=0, verbose=False)
     >>> clf.fit(iris.data, iris.target)
 
     Attributes
@@ -98,7 +98,7 @@ class SNTO(object):
 
     :vartype refit_time\_: float
     :ivar refit_time\_: Seconds used for refitting the best model on the whole dataset.
-        Not available if estimator = None or `refit=False`.
+        Not available if estimator=None or `refit=False`.
     """
 
     def __init__(self, para_space, level_number=20, max_runs=100, max_search_iter=100, n_jobs=None,
