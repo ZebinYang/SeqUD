@@ -96,8 +96,9 @@ class BatchBase(ABC):
             elif (values['Type'] == "integer"):
                 temp = np.linspace(0, 1, len(values['Mapping']) + 1)
                 for j in range(1, len(temp)):
-                    para_set.loc[(para_set_ud[item + "_UD"] >= temp[j - 1]) & (para_set_ud[item + "_UD"] < temp[j]), item] = values['Mapping'][j - 1]
-                para_set.loc[para_set_ud[item + "_UD"] == 1, item] = values['Mapping'][-1]
+                    para_set.loc[(para_set_ud[item + "_UD"] >= (temp[j - 1] - EPS))
+                                 & (para_set_ud[item + "_UD"] < (temp[j] + EPS)), item] = values['Mapping'][j - 1]
+                para_set.loc[np.abs(para_set_ud[item + "_UD"] - 1) <= EPS, item] = values['Mapping'][-1]
                 para_set[item] = para_set[item].round().astype(int)
             elif (values['Type'] == "categorical"):
                 column_bool = [item in para_name for para_name in self.para_ud_names]

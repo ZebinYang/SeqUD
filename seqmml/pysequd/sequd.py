@@ -204,9 +204,9 @@ class SeqUD(object):
             elif (values['Type'] == "integer"):
                 temp = np.linspace(0, 1, len(values['Mapping']) + 1)
                 for j in range(1, len(temp)):
-                    para_set.loc[(para_set_ud[item + "_UD"] >= temp[j - 1])
-                                 & (para_set_ud[item + "_UD"] < temp[j]), item] = values['Mapping'][j - 1]
-                para_set.loc[para_set_ud[item + "_UD"] == 1, item] = values['Mapping'][-1]
+                    para_set.loc[(para_set_ud[item + "_UD"] >= (temp[j - 1] - EPS))
+                                 & (para_set_ud[item + "_UD"] < (temp[j] + EPS)), item] = values['Mapping'][j - 1]
+                para_set.loc[np.abs(para_set_ud[item + "_UD"] - 1) <= EPS, item] = values['Mapping'][-1]
                 para_set[item] = para_set[item].round().astype(int)
             elif (values['Type'] == "categorical"):
                 column_bool = [
@@ -271,10 +271,10 @@ class SeqUD(object):
         left_radius = np.floor((self.level_number - 1) / 2) * ud_grid_size
         right_radius = (self.level_number - np.floor((self.level_number - 1) / 2) - 1) * ud_grid_size
         for i in range(self.extend_factor_number):
-            if ((ud_center[i] - left_radius) < 0):
+            if ((ud_center[i] - left_radius) < (0 + EPS)):
                 lb = 0
                 ub = ud_center[i] + right_radius - (ud_center[i] - left_radius)
-            elif ((ud_center[i] + right_radius) > 1):
+            elif ((ud_center[i] + right_radius) > (1 - EPS)):
                 ub = 1
                 lb = ud_center[i] - left_radius - \
                     (ud_center[i] + right_radius - 1)
@@ -303,7 +303,7 @@ class SeqUD(object):
             keep_list = []
             unique = np.unique(x0[:, i])
             for j in range(len(unique)):
-                xx_loc = np.where(x0[:, i] == unique[j])[0].tolist()
+                xx_loc = np.where(np.abs(x0[:, i] - unique[j]) <= EPS)[0].tolist()
                 keep_list.extend(np.random.choice(xx_loc, 1))
             x0 = x0[keep_list, :].reshape([-1, self.extend_factor_number])
 
