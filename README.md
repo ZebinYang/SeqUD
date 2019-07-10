@@ -14,7 +14,7 @@ Assume you have figured out the above environment, the most convenient way for i
 pip install git+https://github.com/ZebinYang/seqmml.git
 ```
 
-More details can be found in [documentation](https://zebinyang.github.io/seqmml/build/html/installation.html).
+More details can be found in [documentation](https://zebinyang.github.io/seqmml/build/html/index.html).
 
 # Examples
 
