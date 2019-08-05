@@ -39,5 +39,3 @@ Reference
 
 .. [Yang2019] Zebin Yang, Aijun Zhang and Ji Zhu. (2019) Hyperparameter Optimization via Sequential Uniform Designs. Submitted.
 
-.. [Zhang2019] Zhang A.J. and Yang Z.B. (2019). Hyperparameter Tuning Methods in Automated Machine Learning. (In Chinese) Submitted.
-

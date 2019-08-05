@@ -8,7 +8,7 @@ from sklearn.model_selection import cross_val_score
 
 import pyunidoe as pydoe
 
-EPS = 10**(-10)
+EPS = 10**(-8)
 
 
 class SeqUD(object):
@@ -271,10 +271,10 @@ class SeqUD(object):
         left_radius = np.floor((self.level_number - 1) / 2) * ud_grid_size
         right_radius = (self.level_number - np.floor((self.level_number - 1) / 2) - 1) * ud_grid_size
         for i in range(self.extend_factor_number):
-            if ((ud_center[i] - left_radius) < (0 + EPS)):
+            if ((ud_center[i] - left_radius) < (0 - EPS)):
                 lb = 0
                 ub = ud_center[i] + right_radius - (ud_center[i] - left_radius)
-            elif ((ud_center[i] + right_radius) > (1 - EPS)):
+            elif ((ud_center[i] + right_radius) > (1 + EPS)):
                 ub = 1
                 lb = ud_center[i] - left_radius - \
                     (ud_center[i] + right_radius - 1)

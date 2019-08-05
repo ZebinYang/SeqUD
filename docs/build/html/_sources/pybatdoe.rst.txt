@@ -15,7 +15,7 @@ Simple Strategies
 
 - **Sobol Sequence (Sobol)**: quasi-random low-discrepancy sequence ([Sobol967]_).
 
-The figures below ([Zhang2019]_) present the demo sampling history of the four mentioned approaches, including Grid search (top left), Random search (top right), Latin hypercube (bottom left) and Sobol Sequence (bottom right).
+The figures below present the demo sampling history of the four mentioned approaches, including Grid search (top left), Random search (top right), Latin hypercube (bottom left) and Sobol Sequence (bottom right).
 
 |pic1| |pic2| |pic3| |pic4|
 
