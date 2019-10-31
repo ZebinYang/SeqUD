@@ -195,7 +195,7 @@ class GPEIOPT(BayoptBase):
         for i in range(np.int(self.max_runs)):
             try:
                 job_id = self._spmint_opt(chooser, grid, values, grid_status)
-            except RuntimeError:
+            except Exception:
                 print('Spearmint Early Stop!')
                 break
 
