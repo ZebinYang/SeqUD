@@ -81,7 +81,7 @@ class TPEOPT(BayoptBase):
     """
 
     def __init__(self, para_space, max_runs=100, estimator=None, cv=None,
-                 scoring=None, refit=False, rand_seed=0, verbose=False):
+                 scoring=None, refit=True, rand_seed=0, verbose=False):
 
         super(TPEOPT, self).__init__(para_space, max_runs, verbose)
         self.cv = cv

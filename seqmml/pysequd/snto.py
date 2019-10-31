@@ -102,7 +102,7 @@ class SNTO(object):
     """
 
     def __init__(self, para_space, level_number=20, max_runs=100, max_search_iter=100, n_jobs=None,
-                 estimator=None, cv=None, scoring=None, refit=None, rand_seed=0, verbose=False):
+                 estimator=None, cv=None, scoring=None, refit=True, rand_seed=0, verbose=False):
 
         self.para_space = para_space
         self.level_number = level_number

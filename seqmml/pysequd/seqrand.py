@@ -100,7 +100,7 @@ class SeqRand(object):
     """
 
     def __init__(self, para_space, n_iter_per_stage=20, max_runs=100, n_jobs=None,
-                 estimator=None, cv=None, scoring=None, refit=None, rand_seed=0, verbose=False):
+                 estimator=None, cv=None, scoring=None, refit=True, rand_seed=0, verbose=False):
 
         self.para_space = para_space
         self.n_iter_per_stage = n_iter_per_stage
