@@ -39,7 +39,7 @@ You can install the package by the following console command:
 
 .. code-block::
 
-    pip install git+http://github.com/ZebinYang/seqmml.git.
+    pip install git+http://github.com/ZebinYang/seqmml.git
         
         
 Manual Installation

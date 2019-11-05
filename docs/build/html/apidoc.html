@@ -185,7 +185,7 @@
 <span id="seqmml-pybatdoe-batch-grid"></span><h2>seqmml.pybatdoe.batch_grid<a class="headerlink" href="#module-pybatdoe.batch_grid" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pybatdoe.batch_grid.GridSearch">
-<em class="property">class </em><code class="descclassname">pybatdoe.batch_grid.</code><code class="descname">GridSearch</code><span class="sig-paren">(</span><em>para_space</em>, <em>max_runs=100</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_grid.html#GridSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybatdoe.batch_grid.GridSearch" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pybatdoe.batch_grid.</code><code class="descname">GridSearch</code><span class="sig-paren">(</span><em>para_space</em>, <em>max_runs=100</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=True</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_grid.html#GridSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybatdoe.batch_grid.GridSearch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of grid search.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -253,7 +253,7 @@ As it is limited by the max_run specified by the user, the grid points may be ba
 <span id="seqmml-pybatdoe-batch-rand"></span><h2>seqmml.pybatdoe.batch_rand<a class="headerlink" href="#module-pybatdoe.batch_rand" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pybatdoe.batch_rand.RandSearch">
-<em class="property">class </em><code class="descclassname">pybatdoe.batch_rand.</code><code class="descname">RandSearch</code><span class="sig-paren">(</span><em>para_space</em>, <em>max_runs=100</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_rand.html#RandSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybatdoe.batch_rand.RandSearch" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pybatdoe.batch_rand.</code><code class="descname">RandSearch</code><span class="sig-paren">(</span><em>para_space</em>, <em>max_runs=100</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=True</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_rand.html#RandSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybatdoe.batch_rand.RandSearch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of Random Search.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -319,7 +319,7 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 <span id="seqmml-pybatdoe-batch-lhs"></span><h2>seqmml.pybatdoe.batch_lhs<a class="headerlink" href="#module-pybatdoe.batch_lhs" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pybatdoe.batch_lhs.LHSSearch">
-<em class="property">class </em><code class="descclassname">pybatdoe.batch_lhs.</code><code class="descname">LHSSearch</code><span class="sig-paren">(</span><em>para_space</em>, <em>max_runs=100</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_lhs.html#LHSSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybatdoe.batch_lhs.LHSSearch" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pybatdoe.batch_lhs.</code><code class="descname">LHSSearch</code><span class="sig-paren">(</span><em>para_space</em>, <em>max_runs=100</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=True</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_lhs.html#LHSSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybatdoe.batch_lhs.LHSSearch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of Latin Hypercube Sampling.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -385,7 +385,7 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 <span id="seqmml-pybatdoe-batch-sobol"></span><h2>seqmml.pybatdoe.batch_sobol<a class="headerlink" href="#module-pybatdoe.batch_sobol" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pybatdoe.batch_sobol.SobolSearch">
-<em class="property">class </em><code class="descclassname">pybatdoe.batch_sobol.</code><code class="descname">SobolSearch</code><span class="sig-paren">(</span><em>para_space</em>, <em>max_runs=100</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_sobol.html#SobolSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybatdoe.batch_sobol.SobolSearch" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pybatdoe.batch_sobol.</code><code class="descname">SobolSearch</code><span class="sig-paren">(</span><em>para_space</em>, <em>max_runs=100</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=True</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_sobol.html#SobolSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybatdoe.batch_sobol.SobolSearch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of Sobol Sequence.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -451,7 +451,7 @@ Not available if estimator = None or <cite>refit=False</cite>.</p></li>
 <span id="seqmml-pybatdoe-batch-ud"></span><h2>seqmml.pybatdoe.batch_ud<a class="headerlink" href="#module-pybatdoe.batch_ud" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pybatdoe.batch_ud.UDSearch">
-<em class="property">class </em><code class="descclassname">pybatdoe.batch_ud.</code><code class="descname">UDSearch</code><span class="sig-paren">(</span><em>para_space</em>, <em>max_runs=100</em>, <em>level_number=20</em>, <em>max_search_iter=100</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_ud.html#UDSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybatdoe.batch_ud.UDSearch" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pybatdoe.batch_ud.</code><code class="descname">UDSearch</code><span class="sig-paren">(</span><em>para_space</em>, <em>max_runs=100</em>, <em>level_number=20</em>, <em>max_search_iter=100</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>n_jobs=None</em>, <em>refit=True</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_ud.html#UDSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybatdoe.batch_ud.UDSearch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of Uniform Design.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -520,7 +520,7 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 <span id="seqmml-pybayopt-bayopt-gpei"></span><h2>seqmml.pybayopt.bayopt_gpei<a class="headerlink" href="#module-pybayopt.bayopt_gpei" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pybayopt.bayopt_gpei.GPEIOPT">
-<em class="property">class </em><code class="descclassname">pybayopt.bayopt_gpei.</code><code class="descname">GPEIOPT</code><span class="sig-paren">(</span><em>para_space</em>, <em>max_runs=100</em>, <em>time_out=10</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybayopt/bayopt_gpei.html#GPEIOPT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybayopt.bayopt_gpei.GPEIOPT" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pybayopt.bayopt_gpei.</code><code class="descname">GPEIOPT</code><span class="sig-paren">(</span><em>para_space</em>, <em>max_runs=100</em>, <em>time_out=10</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>refit=True</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybayopt/bayopt_gpei.html#GPEIOPT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybayopt.bayopt_gpei.GPEIOPT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interface of Gaussian Process - Expected Improvement (Bayesian Optimization).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -584,7 +584,7 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 <span id="seqmml-pybayopt-bayopt-smac"></span><h2>seqmml.pybayopt.bayopt_smac<a class="headerlink" href="#module-pybayopt.bayopt_smac" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pybayopt.bayopt_smac.SMACOPT">
-<em class="property">class </em><code class="descclassname">pybayopt.bayopt_smac.</code><code class="descname">SMACOPT</code><span class="sig-paren">(</span><em>para_space</em>, <em>max_runs=100</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybayopt/bayopt_smac.html#SMACOPT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybayopt.bayopt_smac.SMACOPT" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pybayopt.bayopt_smac.</code><code class="descname">SMACOPT</code><span class="sig-paren">(</span><em>para_space</em>, <em>max_runs=100</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>refit=True</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybayopt/bayopt_smac.html#SMACOPT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybayopt.bayopt_smac.SMACOPT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interface of SMAC (Bayesian Optimization).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -647,7 +647,7 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 <span id="seqmml-pybayopt-bayopt-tpe"></span><h2>seqmml.pybayopt.bayopt_tpe<a class="headerlink" href="#module-pybayopt.bayopt_tpe" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pybayopt.bayopt_tpe.TPEOPT">
-<em class="property">class </em><code class="descclassname">pybayopt.bayopt_tpe.</code><code class="descname">TPEOPT</code><span class="sig-paren">(</span><em>para_space</em>, <em>max_runs=100</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>refit=False</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybayopt/bayopt_tpe.html#TPEOPT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybayopt.bayopt_tpe.TPEOPT" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pybayopt.bayopt_tpe.</code><code class="descname">TPEOPT</code><span class="sig-paren">(</span><em>para_space</em>, <em>max_runs=100</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>refit=True</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybayopt/bayopt_tpe.html#TPEOPT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybayopt.bayopt_tpe.TPEOPT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interface of Hyperopt (Bayesian Optimization).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -712,7 +712,7 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 <span id="seqmml-pysequd-seqrand"></span><h2>seqmml.pysequd.seqrand<a class="headerlink" href="#module-pysequd.seqrand" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pysequd.seqrand.SeqRand">
-<em class="property">class </em><code class="descclassname">pysequd.seqrand.</code><code class="descname">SeqRand</code><span class="sig-paren">(</span><em>para_space</em>, <em>n_iter_per_stage=20</em>, <em>max_runs=100</em>, <em>n_jobs=None</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>refit=None</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/seqrand.html#SeqRand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysequd.seqrand.SeqRand" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pysequd.seqrand.</code><code class="descname">SeqRand</code><span class="sig-paren">(</span><em>para_space</em>, <em>n_iter_per_stage=20</em>, <em>max_runs=100</em>, <em>n_jobs=None</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>refit=True</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/seqrand.html#SeqRand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysequd.seqrand.SeqRand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of random search in sequential version.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -812,7 +812,7 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 <span id="seqmml-pysequd-snto"></span><h2>seqmml.pysequd.snto<a class="headerlink" href="#module-pysequd.snto" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pysequd.snto.SNTO">
-<em class="property">class </em><code class="descclassname">pysequd.snto.</code><code class="descname">SNTO</code><span class="sig-paren">(</span><em>para_space</em>, <em>level_number=20</em>, <em>max_runs=100</em>, <em>max_search_iter=100</em>, <em>n_jobs=None</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>refit=None</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/snto.html#SNTO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysequd.snto.SNTO" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pysequd.snto.</code><code class="descname">SNTO</code><span class="sig-paren">(</span><em>para_space</em>, <em>level_number=20</em>, <em>max_runs=100</em>, <em>max_search_iter=100</em>, <em>n_jobs=None</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>refit=True</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/snto.html#SNTO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysequd.snto.SNTO" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of SNTO.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -912,7 +912,7 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 <span id="seqmml-pysequd-sequd"></span><h2>seqmml.pysequd.sequd<a class="headerlink" href="#module-pysequd.sequd" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="pysequd.sequd.SeqUD">
-<em class="property">class </em><code class="descclassname">pysequd.sequd.</code><code class="descname">SeqUD</code><span class="sig-paren">(</span><em>para_space</em>, <em>level_number=20</em>, <em>max_runs=100</em>, <em>max_search_iter=100</em>, <em>n_jobs=None</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>refit=None</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/sequd.html#SeqUD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysequd.sequd.SeqUD" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">pysequd.sequd.</code><code class="descname">SeqUD</code><span class="sig-paren">(</span><em>para_space</em>, <em>level_number=20</em>, <em>max_runs=100</em>, <em>max_search_iter=100</em>, <em>n_jobs=None</em>, <em>estimator=None</em>, <em>cv=None</em>, <em>scoring=None</em>, <em>refit=True</em>, <em>rand_seed=0</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/sequd.html#SeqUD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysequd.sequd.SeqUD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of sequential uniform design.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
