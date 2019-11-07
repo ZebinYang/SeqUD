@@ -31,6 +31,15 @@ Microsoft Visual Studio 14.0 is required, see `python windows compliers`_ for de
 .. _python windows compliers: https://wiki.python.org/moin/WindowsCompilers#Microsoft_Visual_C.2B-.2B-_14.0_with_Visual_Studio_2015_.28x86.2C_x64.2C_ARM.29
 
 
+- **Colab**
+
+Run the following codes in Colab notebook: 
+
+.. code-block::
+
+    !apt-get install swig3.0
+    !ln -s /usr/bin/swig3.0 /usr/bin/swig
+    !pip install git+https://github.com/ZebinYang/seqmml.git
 
 Github Installation
 ---------------------
