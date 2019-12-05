@@ -55,7 +55,7 @@ Working with Scikit-learn Pipeline
                     }
 
         cv = KFold(n_splits=5, random_state=0, shuffle=True)
-        clf = SeqUD(ParaSpace, estimator = anova_svm, cv = cv, verbose = True)
+        clf = SeqUD(ParaSpace, estimator=anova_svm, cv=cv, verbose=True)
         clf.fit(X, y)
 
 

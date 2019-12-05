@@ -30,14 +30,14 @@ from seqmml import SeqUD
 def octopus(parameters):
     x1 = parameters['x1']
     x2 = parameters['x2']
-    y = 2*np.cos(10*x1)*np.sin(10*x2)+np.sin(10*x1*x2)
+    y = 2 * np.cos(10*  x1) * np.sin(10 * x2) + np.sin(10 * x1 * x2)
     return  y
 
 Level_Number = 20
-ParaSpace = {'x1': {'Type': 'continuous', 'Range': [0,1], 'Wrapper': lambda x: x}, 
-             'x2': {'Type': 'continuous', 'Range': [0,1], 'Wrapper': lambda x: x}}
+ParaSpace = {'x1': {'Type': 'continuous', 'Range': [0, 1], 'Wrapper': lambda x: x}, 
+             'x2': {'Type': 'continuous', 'Range': [0, 1], 'Wrapper': lambda x: x}}
 
-clf = SeqUD(ParaSpace, max_runs = 100, rand_seed = 1, verbose = True)
+clf = SeqUD(ParaSpace, max_runs=100, rand_seed=1, verbose=True)
 clf.fmin(octopus)
 ```
 
@@ -51,19 +51,19 @@ def plot_trajectory(xlim, ylim, func, clf, title):
     Z = np.zeros((grid_num,grid_num))
     for i, x1 in enumerate(xlist):
         for j, x2 in enumerate(ylist):
-            Z[j,i] = func({"x1": x1, "x2": x2})
+            Z[j, i] = func({"x1": x1, "x2": x2})
 
     cp = plt.contourf(X, Y, Z)
-    plt.scatter(clf.logs.loc[:,['x1']], 
-                clf.logs.loc[:,['x2']], color = "red")
-    plt.xlim(xlim[0],xlim[1])
-    plt.ylim(ylim[0],ylim[1])
+    plt.scatter(clf.logs.loc[:, ['x1']], 
+                clf.logs.loc[:, ['x2']], color = "red")
+    plt.xlim(xlim[0], xlim[1])
+    plt.ylim(ylim[0], ylim[1])
     plt.colorbar(cp)
     plt.xlabel('x1')
     plt.ylabel('x2')
     plt.title(title)
-    
-plot_trajectory([0,1], [0,1], octopus, clf, "SeqUD")
+
+plot_trajectory([0, 1], [0, 1], octopus, clf, "SeqUD")
 ```
  ![octopus_demo](https://github.com/ZebinYang/seqmml/blob/master/docs/source/images/octopus_demo.png)
 
@@ -93,7 +93,7 @@ estimator = svm.SVC()
 score_metric = make_scorer(accuracy_score, True)
 cv = KFold(n_splits=5, random_state=0, shuffle=True)
 
-clf = SeqUD(ParaSpace, level_number = 20, n_jobs = 10, estimator = estimator, cv = cv, scoring = score_metric, refit = True, verbose = True)
+clf = SeqUD(ParaSpace, level_number=20, n_jobs=10, estimator=estimator, cv=cv, scoring=score_metric, refit=True, verbose=True)
 clf.fit(x, y)
 ```
 
@@ -105,8 +105,8 @@ def plot_trajectory(Z, clf, title):
     plt.colorbar(cp)
     plt.xlabel('Log2_C')
     plt.ylabel('Log2_gamma')
-    plt.scatter(np.log2(clf.logs.loc[:,['C']]), 
-                np.log2(clf.logs.loc[:,['gamma']]), color = "red")
+    plt.scatter(np.log2(clf.logs.loc[:, ['C']]), 
+                np.log2(clf.logs.loc[:, ['gamma']]), color="red")
     plt.title(title)
 
 grid_num = 25
@@ -116,9 +116,9 @@ X, Y = np.meshgrid(xlist, ylist)
 Z = np.zeros((grid_num,grid_num))
 for i, C in enumerate(xlist):
     for j, gamma in enumerate(ylist):
-        estimator = svm.SVC(C=2**C,gamma = 2**gamma)
-        out = cross_val_score(estimator, x, y, cv = cv, scoring = score_metric)
-        Z[j,i] = np.mean(out)
+        estimator = svm.SVC(C=2 ** C, gamma=2 ** gamma)
+        out = cross_val_score(estimator, x, y, cv=cv, scoring=score_metric)
+        Z[j, i] = np.mean(out)
 plt.figure(figsize = (6, 4.5))
 plot_trajectory(Z, clf, "SeqUD")
 ```
@@ -140,4 +140,4 @@ SMAC: https://github.com/automl/SMAC3
 If you find any bugs or have any suggestions, please contact us via email: yangzb2010@hku.hk or ajzhang@hku.hk.
 
 # Reference:
-Zebin Yang, Aijun Zhang and Ji Zhu. (2019) Hyperparameter Optimization via Sequential Uniform Designs. Submitted. 
+Zebin Yang and Aijun Zhang. (2019) Hyperparameter Optimization via Sequential Uniform Designs. Submitted. 

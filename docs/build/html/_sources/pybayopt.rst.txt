@@ -74,7 +74,7 @@ We provide an unified interface to call the GPEI, SMAC and TPE methods, base on 
         score_metric = make_scorer(accuracy_score, True)
         cv = KFold(n_splits=5, random_state=0, shuffle=True)
 
-        clf = GPEIOPT(ParaSpace, max_runs = 100, estimator = estimator, cv = cv, refit = True, scoring = score_metric, verbose = True)
+        clf = GPEIOPT(ParaSpace, max_runs=100, estimator=estimator, cv=cv, refit=True, scoring=score_metric, verbose=True)
         clf.fit(x, y)
         clf.plot_scores()        
         
@@ -103,7 +103,7 @@ We provide an unified interface to call the GPEI, SMAC and TPE methods, base on 
         score_metric = make_scorer(accuracy_score, True)
         cv = KFold(n_splits=5, random_state=0, shuffle=True)
 
-        clf = SMACOPT(ParaSpace, max_runs = 100, estimator = estimator, cv = cv, refit = True, scoring = score_metric, verbose = True)
+        clf = SMACOPT(ParaSpace, max_runs=100, estimator=estimator, cv=cv, refit=True, scoring=score_metric, verbose=True)
         clf.fit(x, y)
         clf.plot_scores()
         
@@ -133,6 +133,6 @@ We provide an unified interface to call the GPEI, SMAC and TPE methods, base on 
         score_metric = make_scorer(accuracy_score, True)
         cv = KFold(n_splits=5, random_state=0, shuffle=True)
 
-        clf = TPEOPT(ParaSpace, max_runs = 100, estimator = estimator, cv = cv, refit = True, scoring = score_metric, verbose = True)
+        clf = TPEOPT(ParaSpace, max_runs=100, estimator=estimator, cv=cv, refit=True, scoring=score_metric, verbose=True)
         clf.fit(x, y)
         clf.plot_scores()

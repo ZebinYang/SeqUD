@@ -80,8 +80,8 @@ Example Usage
         score_metric = make_scorer(accuracy_score, True)
         cv = KFold(n_splits=5, random_state=0, shuffle=True)
 
-        clf = SeqUD(ParaSpace, level_number = 20, max_runs = 100, max_search_iter = 30, n_jobs = 10, 
-                  estimator = estimator, cv = cv, refit = True, verbose = True)
+        clf = SeqUD(ParaSpace, level_number=20, max_runs=100, max_search_iter=30, n_jobs=10, 
+                  estimator=estimator, cv=cv, refit=True, verbose=True)
         clf.fit(x, y)
         clf.plot_scores()
         

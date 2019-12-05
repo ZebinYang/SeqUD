@@ -59,8 +59,8 @@ Example Usage
                'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
         estimator = svm.SVC()
         cv = KFold(n_splits=5, random_state=1, shuffle=True)
-        clf = GridSearch(ParaSpace, max_runs = 100, n_jobs = 10, 
-                    estimator = estimator, cv = cv, refit = True, verbose = True)
+        clf = GridSearch(ParaSpace, max_runs=100, n_jobs=10, 
+                    estimator=estimator, cv=cv, refit=True, verbose=True)
         clf.fit(iris.data, iris.target)
         clf.plot_scores()
 
@@ -77,8 +77,8 @@ Example Usage
                'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
         estimator = svm.SVC()
         cv = KFold(n_splits=5, random_state=1, shuffle=True)
-        clf = RandSearch(ParaSpace, max_runs = 100, n_jobs = 10, 
-                    estimator = estimator, cv = cv, refit = True, verbose = True)
+        clf = RandSearch(ParaSpace, max_runs=100, n_jobs=10, 
+                    estimator=estimator, cv=cv, refit=True, verbose=True)
         clf.fit(iris.data, iris.target)
         clf.plot_scores()
 
@@ -95,8 +95,8 @@ Example Usage
                'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
         estimator = svm.SVC()
         cv = KFold(n_splits=5, random_state=1, shuffle=True)
-        clf = LHSSearch(ParaSpace, max_runs = 100, n_jobs = 10, 
-                    estimator = estimator, cv = cv, refit = True, verbose = True)
+        clf = LHSSearch(ParaSpace, max_runs=100, n_jobs=10, 
+                    estimator=estimator, cv=cv, refit=True, verbose=True)
         clf.fit(iris.data, iris.target)
         clf.plot_scores()
         
@@ -114,7 +114,7 @@ Example Usage
                'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
         estimator = svm.SVC()
         cv = KFold(n_splits=5, random_state=1, shuffle=True)
-        clf = SobolSearch(ParaSpace, max_runs = 100, n_jobs = 10, 
-                    estimator = estimator, cv = cv, refit = True, verbose = True)
+        clf = SobolSearch(ParaSpace, max_runs=100, n_jobs=10, 
+                    estimator=estimator, cv=cv, refit=True, verbose=True)
         clf.fit(iris.data, iris.target)
         clf.plot_scores()        
