@@ -122,7 +122,7 @@ class GridSearch(BatchBase):
                 discrete_runs = discrete_runs * len(values['Mapping'])
                 discrete_count = discrete_count + 1
 
-        grid_number = np.ceil((self.max_runs / discrete_runs)**(1 / (self.factor_number - discrete_count)))
+        grid_number = np.ceil((self.max_runs / discrete_runs)**(1 / (self.factor_number - discrete_count))).astype(int)
         for item, values in self.para_space.items():
             if (values['Type'] == "continuous"):
                 grid_para[item] = values['Wrapper'](np.linspace(values['Range'][0], values['Range'][1], grid_number))

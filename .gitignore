@@ -4,4 +4,4 @@ dist/*
 examples/*checkpoints/*
 examples/temp/*
 spearmint/*
-
+scripts/*

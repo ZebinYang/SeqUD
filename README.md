@@ -55,7 +55,7 @@ def plot_trajectory(xlim, ylim, func, clf, title):
 
     cp = plt.contourf(X, Y, Z)
     plt.scatter(clf.logs.loc[:, ['x1']], 
-                clf.logs.loc[:, ['x2']], color = "red")
+                clf.logs.loc[:, ['x2']], color="red")
     plt.xlim(xlim[0], xlim[1])
     plt.ylim(ylim[0], ylim[1])
     plt.colorbar(cp)
