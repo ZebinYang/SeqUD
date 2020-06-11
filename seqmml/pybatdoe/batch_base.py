@@ -130,6 +130,10 @@ class BatchBase(ABC):
         search_end_time = time.time()
         self.search_time_consumed_ = search_end_time - search_start_time
 
+        self._summary()
+        if self.verbose:
+            self.pbar.close()
+
     def fit(self, x, y=None):
         """
         Run fit with all sets of parameters.
