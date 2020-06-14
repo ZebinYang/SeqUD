@@ -6,6 +6,7 @@ from matplotlib import pylab as plt
 from abc import ABC, abstractmethod
 from sklearn.model_selection import cross_val_score
 
+EPS = 1e-8
 
 class BatchBase(ABC):
     """
