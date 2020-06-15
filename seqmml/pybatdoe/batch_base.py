@@ -126,6 +126,9 @@ class BatchBase(ABC):
 
         """
         np.random.seed(self.rand_seed)
+        if self.verbose:
+            self.pbar = tqdm(total=self.max_runs)
+
         search_start_time = time.time()
         self._run(wrapper_func)
         search_end_time = time.time()
