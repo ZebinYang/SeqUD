@@ -384,6 +384,7 @@ class SNTO(object):
         """
         def sklearn_wrapper(parameters):
             self.estimator.set_params(**parameters)
+            self.estimator.set_params(**{"random_state":self.random_state})
             out = cross_val_score(self.estimator, x, y,
                                   cv=self.cv, scoring=self.scoring)
             score = np.mean(out)
