@@ -328,6 +328,7 @@ class SeqRand(object):
         :param func: the function to be optimized.
 
         """
+        self.stage = 1
         np.random.seed(self.random_state)
         search_start_time = time.time()
         self._run(wrapper_func)
