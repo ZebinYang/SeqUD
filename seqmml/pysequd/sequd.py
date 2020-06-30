@@ -377,9 +377,6 @@ class SeqUD(object):
         obj_func: A callable function. It takes the values stored in each trial as input parameters, and
                output the corresponding scores.
         """
-        np.random.seed(self.random_state)
-        self.stage = 1
-        self.logs = pd.DataFrame()
         para_set_ud = self._generate_init_design()
         self._evaluate_runs(obj_func, para_set_ud)
         self.stage += 1
@@ -403,6 +400,7 @@ class SeqUD(object):
         :param func: the function to be optimized.
 
         """
+        np.random.seed(self.random_state)
         search_start_time = time.time()
         self._run(wrapper_func)
         search_end_time = time.time()
@@ -429,6 +427,8 @@ class SeqUD(object):
             score = np.mean(out)
             return score
 
+        self.stage = 1
+        self.logs = pd.DataFrame()
         np.random.seed(self.random_state)
         index = np.where(["random_state" in param for param in list(self.estimator.get_params().keys())])[0]
         for idx in index:

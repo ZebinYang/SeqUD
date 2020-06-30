@@ -360,6 +360,7 @@ class SNTO(object):
         :param func: the function to be optimized.
 
         """
+        np.random.seed(self.random_state)
         search_start_time = time.time()
         self._run(wrapper_func)
         search_end_time = time.time()
