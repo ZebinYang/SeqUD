@@ -46,8 +46,8 @@ class LHSSearch(BatchBase):
     :type refit: boolean, or string, optional, default=True
     :param refit: It controls whether to refit an estimator using the best found parameters on the whole dataset.
 
-    :type rand_seed: int, optional, default=0
-    :param rand_seed: The random seed for optimization.
+    :type random_state: int, optional, default=0
+    :param random_state: The random seed for optimization.
 
     :type verbose: boolean, optional, default=False
     :param verbose: It controls whether the searching history will be printed.
@@ -65,7 +65,7 @@ class LHSSearch(BatchBase):
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=0, shuffle=True)
     >>> clf = LHSSearch(ParaSpace, max_runs=100, estimator=estimator, cv=cv,
-                 scoring=None, n_jobs=None, refit=False, rand_seed=0, verbose=False)
+                 scoring=None, n_jobs=None, refit=False, random_state=0, verbose=False)
     >>> clf.fit(iris.data, iris.target)
 
     Attributes
@@ -89,7 +89,7 @@ class LHSSearch(BatchBase):
     """
 
     def __init__(self, para_space, max_runs=100, estimator=None, cv=None,
-                 scoring=None, n_jobs=None, refit=True, rand_seed=0, verbose=False):
+                 scoring=None, n_jobs=None, refit=True, random_state=0, verbose=False):
 
         super(LHSSearch, self).__init__(para_space, max_runs, n_jobs, verbose)
 
@@ -97,7 +97,7 @@ class LHSSearch(BatchBase):
         self.refit = refit
         self.scoring = scoring
         self.estimator = estimator
-        self.rand_seed = rand_seed
+        self.random_state = random_state
         self.method = "LHS Search"
 
     def _run(self, obj_func):

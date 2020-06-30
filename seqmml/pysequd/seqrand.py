@@ -55,8 +55,8 @@ class SeqRand(object):
     :type refit: boolean, or string, optional, default=True
     :param refit: It controls whether to refit an estimator using the best found parameters on the whole dataset.
 
-    :type rand_seed: int, optional, default=0
-    :param rand_seed: The random seed for optimization.
+    :type random_state: int, optional, default=0
+    :param random_state: The random seed for optimization.
 
     :type verbose: boolean, optional, default=False
     :param verbose: It controls whether the searching history will be printed.
@@ -76,7 +76,7 @@ class SeqRand(object):
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=1, shuffle=True)
     >>> clf = SeqRand(ParaSpace, n_iter_per_stage=20, max_runs=100, n_jobs=None,
-                 estimator=None, cv=None, scoring=None, refit=None, rand_seed=0, verbose=False)
+                 estimator=None, cv=None, scoring=None, refit=None, random_state=0, verbose=False)
     >>> clf.fit(iris.data, iris.target)
 
     Attributes
@@ -100,13 +100,13 @@ class SeqRand(object):
     """
 
     def __init__(self, para_space, n_iter_per_stage=20, max_runs=100, n_jobs=None,
-                 estimator=None, cv=None, scoring=None, refit=True, rand_seed=0, verbose=False):
+                 estimator=None, cv=None, scoring=None, refit=True, random_state=0, verbose=False):
 
         self.para_space = para_space
         self.n_iter_per_stage = n_iter_per_stage
         self.max_runs = max_runs
         self.n_jobs = n_jobs
-        self.rand_seed = rand_seed
+        self.random_state = random_state
         self.verbose = verbose
 
         self.cv = cv
@@ -305,7 +305,7 @@ class SeqRand(object):
         obj_func: A callable function. It takes the values stored in each trial as input parameters, and
                output the corresponding scores.
         """
-        np.random.seed(self.rand_seed)
+        np.random.seed(self.random_state)
         self.stage = 1
         self.logs = pd.DataFrame()
         search_start_time = time.time()

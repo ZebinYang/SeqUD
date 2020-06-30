@@ -39,8 +39,8 @@ class TPEOPT(BayoptBase):
     :type refit: boolean, or string, optional, default=True
     :param refit: It controls whether to refit an estimator using the best found parameters on the whole dataset.
 
-    :type rand_seed: int, optional, default=0
-    :param rand_seed: The random seed for optimization.
+    :type random_state: int, optional, default=0
+    :param random_state: The random seed for optimization.
 
     :type verbose: boolean, optional, default=False
     :param verbose: It controls whether the searching history will be printed.
@@ -57,7 +57,7 @@ class TPEOPT(BayoptBase):
                'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=0, shuffle=True)
-    >>> clf = TPEOPT(ParaSpace, max_runs=100, estimator=estimator, cv=cv, scoring=None, refit=None, rand_seed=0, verbose=False)
+    >>> clf = TPEOPT(ParaSpace, max_runs=100, estimator=estimator, cv=cv, scoring=None, refit=None, random_state=0, verbose=False)
     >>> clf.fit(iris.data, iris.target)
 
     Attributes
@@ -81,14 +81,14 @@ class TPEOPT(BayoptBase):
     """
 
     def __init__(self, para_space, max_runs=100, estimator=None, cv=None,
-                 scoring=None, refit=True, rand_seed=0, verbose=False):
+                 scoring=None, refit=True, random_state=0, verbose=False):
 
         super(TPEOPT, self).__init__(para_space, max_runs, verbose)
         self.cv = cv
         self.refit = refit
         self.scoring = scoring
         self.estimator = estimator
-        self.rand_seed = rand_seed
+        self.random_state = random_state
         self.method = "TPE"
 
         self.space = []
@@ -137,4 +137,4 @@ class TPEOPT(BayoptBase):
              algo=tpe.suggest,
              max_evals=self.max_runs,
              trials=self.trials,
-             rstate=np.random.RandomState(self.rand_seed))
+             rstate=np.random.RandomState(self.random_state))

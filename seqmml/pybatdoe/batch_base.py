@@ -125,7 +125,7 @@ class BatchBase(ABC):
         :param func: the function to be optimized.
 
         """
-        np.random.seed(self.rand_seed)
+        np.random.seed(self.random_state)
         if self.verbose:
             self.pbar = tqdm(total=self.max_runs)
 
@@ -152,11 +152,12 @@ class BatchBase(ABC):
         """
         def sklearn_wrapper(parameters):
             self.estimator.set_params(**parameters)
+            self.estimator.set_params(**{"random_state":self.random_state})
             out = cross_val_score(self.estimator, x, y, cv=self.cv, scoring=self.scoring)
             score = np.mean(out)
             return score
 
-        np.random.seed(self.rand_seed)
+        np.random.seed(self.random_state)
         search_start_time = time.time()
         self._run(sklearn_wrapper)
         search_end_time = time.time()

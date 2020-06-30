@@ -47,8 +47,8 @@ class UDSearch(BatchBase):
     :type refit: boolean, or string, optional, default=True
     :param refit: It controls whether to refit an estimator using the best found parameters on the whole dataset.
 
-    :type rand_seed: int, optional, default=0
-    :param rand_seed: The random seed for optimization.
+    :type random_state: int, optional, default=0
+    :param random_state: The random seed for optimization.
 
     :type verbose: boolean, optional, default=False
     :param verbose: It controls whether the searching history will be printed.
@@ -66,7 +66,7 @@ class UDSearch(BatchBase):
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=0, shuffle=True)
     >>> clf = UDSearch(ParaSpace, max_runs=100, level_number=20, max_search_iter=100, estimator=estimator, cv=cv,
-                 scoring=None, n_jobs=None, refit=False, rand_seed=0, verbose=False)
+                 scoring=None, n_jobs=None, refit=False, random_state=0, verbose=False)
     >>> clf.fit(iris.data, iris.target)
 
     Attributes
@@ -90,7 +90,7 @@ class UDSearch(BatchBase):
     """
 
     def __init__(self, para_space, max_runs=100, level_number=20, max_search_iter=100, estimator=None, cv=None,
-                 scoring=None, n_jobs=None, refit=True, rand_seed=0, verbose=False):
+                 scoring=None, n_jobs=None, refit=True, random_state=0, verbose=False):
 
         super(UDSearch, self).__init__(para_space, max_runs, n_jobs, verbose)
 
@@ -98,7 +98,7 @@ class UDSearch(BatchBase):
         self.refit = refit
         self.scoring = scoring
         self.estimator = estimator
-        self.rand_seed = rand_seed
+        self.random_state = random_state
         self.level_number = level_number
         self.max_search_iter = max_search_iter
         self.method = "UD Search"
@@ -120,7 +120,7 @@ class UDSearch(BatchBase):
                                      q=self.level_number, crit="CD2", show_crit=False)
         if base_ud is None:
             base_ud = pydoe.gen_ud_ms(n=self.max_runs, s=self.extend_factor_number, q=self.level_number, crit="CD2",
-                                      maxiter=self.max_search_iter, rand_seed=self.rand_seed, nshoot=5)
+                                      maxiter=self.max_search_iter, random_state=self.random_state, nshoot=5)
 
         if (not isinstance(base_ud, np.ndarray)):
             raise ValueError('Uniform design is not correctly constructed!')

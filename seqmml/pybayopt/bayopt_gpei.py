@@ -66,8 +66,8 @@ class GPEIOPT(BayoptBase):
     :type refit: boolean, or string, optional, default=True
     :param refit: It controls whether to refit an estimator using the best found parameters on the whole dataset.
 
-    :type rand_seed: int, optional, default=0
-    :param rand_seed: The random seed for optimization.
+    :type random_state: int, optional, default=0
+    :param random_state: The random seed for optimization.
 
     :type verbose: boolean, optional, default=False
     :param verbose: It controls whether the searching history will be printed.
@@ -86,7 +86,7 @@ class GPEIOPT(BayoptBase):
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=0, shuffle=True)
     >>> clf = GPEIOPT(ParaSpace, max_runs=100, time_out=10,
-                estimator=estimator, cv=cv, scoring=None, refit=None, rand_seed=0, verbose=False)
+                estimator=estimator, cv=cv, scoring=None, refit=None, random_state=0, verbose=False)
     >>> clf.fit(iris.data, iris.target)
 
     Attributes
@@ -110,7 +110,7 @@ class GPEIOPT(BayoptBase):
     """
 
     def __init__(self, para_space, max_runs=100, time_out=10, estimator=None, cv=None,
-                 scoring=None, refit=True, rand_seed=0, verbose=False):
+                 scoring=None, refit=True, random_state=0, verbose=False):
 
         super(GPEIOPT, self).__init__(para_space, max_runs, verbose)
 
@@ -118,7 +118,7 @@ class GPEIOPT(BayoptBase):
         self.refit = refit
         self.scoring = scoring
         self.estimator = estimator
-        self.rand_seed = rand_seed
+        self.random_state = random_state
         self.time_out = time_out
         self.method = "GPEI"
 

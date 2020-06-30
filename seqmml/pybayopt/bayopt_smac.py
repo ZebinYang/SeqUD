@@ -48,8 +48,8 @@ class SMACOPT(BayoptBase):
     :type refit: boolean, or string, optional, default=True
     :param refit: It controls whether to refit an estimator using the best found parameters on the whole dataset.
 
-    :type rand_seed: int, optional, default=0
-    :param rand_seed: The random seed for optimization.
+    :type random_state: int, optional, default=0
+    :param random_state: The random seed for optimization.
 
     :type verbose: boolean, optional, default=False
     :param verbose: It controls whether the searching history will be printed.
@@ -68,7 +68,7 @@ class SMACOPT(BayoptBase):
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=0, shuffle=True)
     >>> clf = SMACOPT(ParaSpace, max_runs=100,
-                estimator=estimator, cv=cv, scoring=None, refit=None, rand_seed=0, verbose=False)
+                estimator=estimator, cv=cv, scoring=None, refit=None, random_state=0, verbose=False)
     >>> clf.fit(iris.data, iris.target)
 
     Attributes
@@ -92,7 +92,7 @@ class SMACOPT(BayoptBase):
     """
 
     def __init__(self, para_space, max_runs=100, estimator=None, cv=None,
-                 scoring=None, refit=True, rand_seed=0, verbose=False):
+                 scoring=None, refit=True, random_state=0, verbose=False):
 
         super(SMACOPT, self).__init__(para_space, max_runs, verbose)
 
@@ -100,7 +100,7 @@ class SMACOPT(BayoptBase):
         self.refit = refit
         self.scoring = scoring
         self.estimator = estimator
-        self.rand_seed = rand_seed
+        self.random_state = random_state
         self.method = "SMAC"
 
         self.cs = ConfigurationSpace()
@@ -154,7 +154,7 @@ class SMACOPT(BayoptBase):
                              "deterministic": "true",
                              "output_dir": file_dir,
                              "abort_on_first_run_crash": False})
-        self.smac = SMAC(scenario=scenario, rng=np.random.seed(self.rand_seed), tae_runner=self.obj_func)
+        self.smac = SMAC(scenario=scenario, rng=np.random.seed(self.random_state), tae_runner=self.obj_func)
         self.smac.solver.intensifier.tae_runner.use_pynisher = False  # turn off the limit for resources
         self.smac.optimize()
         shutil.rmtree(file_dir)

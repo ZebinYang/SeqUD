@@ -79,7 +79,7 @@ class BayoptBase(ABC):
         :param func: the function to be optimized.
 
         """
-        np.random.seed(self.rand_seed)
+        np.random.seed(self.random_state)
         self.iteration = 0
         self.logs = pd.DataFrame()
         if self.verbose:
@@ -109,6 +109,7 @@ class BayoptBase(ABC):
 
         def sklearn_wrapper(parameters):
             self.estimator.set_params(**parameters)
+            self.estimator.set_params(**{"random_state":self.random_state})
             out = cross_val_score(self.estimator, x, y, cv=self.cv, scoring=self.scoring)
             score = np.mean(out)
             return score
@@ -116,7 +117,7 @@ class BayoptBase(ABC):
         if self.verbose:
             self.pbar = tqdm(total=self.max_runs)
 
-        np.random.seed(self.rand_seed)
+        np.random.seed(self.random_state)
         self.iteration = 0
         self.logs = pd.DataFrame()
         search_start_time = time.time()
