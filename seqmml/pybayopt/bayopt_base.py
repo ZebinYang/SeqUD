@@ -109,7 +109,6 @@ class BayoptBase(ABC):
 
         def sklearn_wrapper(parameters):
             self.estimator.set_params(**parameters)
-            self.estimator.set_params(**{"random_state":self.random_state})
             out = cross_val_score(self.estimator, x, y, cv=self.cv, scoring=self.scoring)
             score = np.mean(out)
             return score
@@ -117,9 +116,13 @@ class BayoptBase(ABC):
         if self.verbose:
             self.pbar = tqdm(total=self.max_runs)
 
-        np.random.seed(self.random_state)
         self.iteration = 0
         self.logs = pd.DataFrame()
+        np.random.seed(self.random_state)
+        index = np.where(["random_state" in param for param in list(self.estimator.get_params().keys())])[0]
+        for idx in index:
+            self.estimator.set_params(**{list(self.estimator.get_params().keys())[idx]:self.random_state})
+
         search_start_time = time.time()
         self._run(sklearn_wrapper)
         search_end_time = time.time()

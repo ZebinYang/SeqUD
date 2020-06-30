@@ -333,9 +333,6 @@ class SNTO(object):
         obj_func: A callable function. It takes the values stored in each trial as input parameters, and
                output the corresponding scores.
         """
-        np.random.seed(self.random_state)
-        self.stage = 1
-        self.logs = pd.DataFrame()
         para_set_ud = self._generate_init_design()
         self._evaluate_runs(obj_func, para_set_ud)
         self.stage += 1
@@ -384,11 +381,17 @@ class SNTO(object):
         """
         def sklearn_wrapper(parameters):
             self.estimator.set_params(**parameters)
-            self.estimator.set_params(**{"random_state":self.random_state})
             out = cross_val_score(self.estimator, x, y,
                                   cv=self.cv, scoring=self.scoring)
             score = np.mean(out)
             return score
+
+        self.stage = 1
+        self.logs = pd.DataFrame()
+        np.random.seed(self.random_state)
+        index = np.where(["random_state" in param for param in list(self.estimator.get_params().keys())])[0]
+        for idx in index:
+            self.estimator.set_params(**{list(self.estimator.get_params().keys())[idx]:self.random_state})
 
         search_start_time = time.time()
         self._run(sklearn_wrapper)
@@ -397,8 +400,7 @@ class SNTO(object):
         self._summary()
 
         if self.refit:
-            self.best_estimator_ = self.estimator.set_params(
-                **self.best_params_)
+            self.best_estimator_ = self.estimator.set_params(**self.best_params_)
             refit_start_time = time.time()
             if y is not None:
                 self.best_estimator_.fit(x, y)
