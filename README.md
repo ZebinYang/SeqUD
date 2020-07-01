@@ -37,7 +37,7 @@ Level_Number = 20
 ParaSpace = {'x1': {'Type': 'continuous', 'Range': [0, 1], 'Wrapper': lambda x: x}, 
              'x2': {'Type': 'continuous', 'Range': [0, 1], 'Wrapper': lambda x: x}}
 
-clf = SeqUD(ParaSpace, max_runs=100, rand_seed=1, verbose=True)
+clf = SeqUD(ParaSpace, max_runs=100, random_state=1, verbose=True)
 clf.fmin(octopus)
 ```
 
