@@ -137,4 +137,5 @@ class TPEOPT(BayoptBase):
              algo=tpe.suggest,
              max_evals=self.max_runs,
              trials=self.trials,
+             show_progressbar=False,
              rstate=np.random.RandomState(self.random_state))
