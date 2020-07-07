@@ -117,11 +117,23 @@ class RandSearch(BatchBase):
                              for j in range(para_set.shape[1])}
                             for i in range(para_set.shape[0])]
         if self.verbose:
-            out = Parallel(n_jobs=self.n_jobs)(delayed(obj_func)(parameters)
-                                               for parameters in tqdm(candidate_params))
+            if self.n_jobs > 1:
+                out = Parallel(n_jobs=self.n_jobs)(delayed(obj_func)(parameters) for parameters in tqdm(candidate_params))
+            else:
+                out = []
+                for parameters in tqdm(candidate_params):
+                    out.append(obj_func(parameters))
+                out = np.array(out)
+
         else:
-            out = Parallel(n_jobs=self.n_jobs)(delayed(obj_func)(parameters)
-                                               for parameters in candidate_params)
+            if self.n_jobs > 1:
+                out = Parallel(n_jobs=self.n_jobs)(delayed(obj_func)(parameters) for parameters in candidate_params)
+            else:
+                out = []
+                for parameters in candidate_params:
+                    out.append(obj_func(parameters))
+                out = np.array(out)
+
         self.logs = para_set.to_dict()
         self.logs.update(pd.DataFrame(out, columns=["score"]))
         self.logs = pd.DataFrame(self.logs).reset_index(drop=True)

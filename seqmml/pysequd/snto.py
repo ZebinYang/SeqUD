@@ -108,7 +108,7 @@ class SNTO(object):
         self.level_number = level_number
         self.max_runs = max_runs
         self.max_search_iter = max_search_iter
-        self.n_jobs = n_jobs
+        self.n_jobs = n_jobs if isinstance(n_jobs, int) else 1
         self.random_state = random_state
         self.verbose = verbose
 
@@ -312,8 +312,14 @@ class SNTO(object):
         candidate_params = [{para_set.columns[j]: para_set.iloc[i, j]
                              for j in range(para_set.shape[1])}
                             for i in range(para_set.shape[0])]
-        out = Parallel(n_jobs=self.n_jobs)(delayed(obj_func)(parameters)
-                                           for parameters in candidate_params)
+        if self.n_jobs > 1:
+            out = Parallel(n_jobs=self.n_jobs)(delayed(obj_func)(parameters) for parameters in candidate_params)
+        else:
+            out = []
+            for parameters in candidate_params:
+                out.append(obj_func(parameters))
+            out = np.array(out)
+
         logs_aug = para_set_ud.to_dict()
         logs_aug.update(para_set)
         logs_aug.update(pd.DataFrame(out, columns=["score"]))
@@ -384,7 +390,7 @@ class SNTO(object):
         def sklearn_wrapper(parameters):
             self.estimator.set_params(**parameters)
             out = cross_val_score(self.estimator, x, y,
-                                  cv=self.cv, scoring=self.scoring)
+                                  cv=self.cv, scoring=self.scoring, n_jobs=-1)
             score = np.mean(out)
             return score
 

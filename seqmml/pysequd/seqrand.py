@@ -105,7 +105,7 @@ class SeqRand(object):
         self.para_space = para_space
         self.n_iter_per_stage = n_iter_per_stage
         self.max_runs = max_runs
-        self.n_jobs = n_jobs
+        self.n_jobs = n_jobs if isinstance(n_jobs, int) else 1
         self.random_state = random_state
         self.verbose = verbose
 
@@ -284,8 +284,14 @@ class SeqRand(object):
                 print("Maximum number of runs reached, stop!")
             return
 
-        out = Parallel(n_jobs=self.n_jobs)(delayed(obj_func)(parameters)
-                                           for parameters in candidate_params)
+        if self.n_jobs > 1:
+            out = Parallel(n_jobs=self.n_jobs)(delayed(obj_func)(parameters) for parameters in candidate_params)
+        else:
+            out = []
+            for parameters in candidate_params:
+                out.append(obj_func(parameters))
+            out = np.array(out)
+
         logs_aug = para_set_ud.to_dict()
         logs_aug.update(para_set)
         logs_aug.update(pd.DataFrame(out, columns=["score"]))
@@ -351,7 +357,7 @@ class SeqRand(object):
         """
         def sklearn_wrapper(parameters):
             self.estimator.set_params(**parameters)
-            out = cross_val_score(self.estimator, x, y, cv=self.cv, scoring=self.scoring)
+            out = cross_val_score(self.estimator, x, y, cv=self.cv, scoring=self.scoring, n_jobs=-1)
             score = np.mean(out)
             return score
 

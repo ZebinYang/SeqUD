@@ -18,7 +18,7 @@ class BatchBase(ABC):
 
         self.para_space = para_space
         self.max_runs = max_runs
-        self.n_jobs = n_jobs
+        self.n_jobs = n_jobs if isinstance(n_jobs, int) else 1
         self.verbose = verbose
 
         self.para_ud_names = []
@@ -152,7 +152,7 @@ class BatchBase(ABC):
         """
         def sklearn_wrapper(parameters):
             self.estimator.set_params(**parameters)
-            out = cross_val_score(self.estimator, x, y, cv=self.cv, scoring=self.scoring)
+            out = cross_val_score(self.estimator, x, y, cv=self.cv, scoring=self.scoring, n_jobs=-1)
             score = np.mean(out)
             return score
 
