@@ -390,7 +390,7 @@ class SNTO(object):
         def sklearn_wrapper(parameters):
             self.estimator.set_params(**parameters)
             out = cross_val_score(self.estimator, x, y,
-                                  cv=self.cv, scoring=self.scoring, n_jobs=-1)
+                                  cv=self.cv, scoring=self.scoring)
             score = np.mean(out)
             return score
 

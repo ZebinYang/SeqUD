@@ -108,7 +108,7 @@ class SeqUD(object):
         self.level_number = level_number
         self.max_runs = max_runs
         self.max_search_iter = max_search_iter
-        self.n_jobs = n_jobs if isinstance(n_jobs, int) else 1
+        self.n_jobs = n_jobs 
         self.random_state = random_state
         self.verbose = verbose
 
@@ -431,7 +431,7 @@ class SeqUD(object):
         def sklearn_wrapper(parameters):
             self.estimator.set_params(**parameters)
             out = cross_val_score(self.estimator, x, y,
-                                  cv=self.cv, scoring=self.scoring, n_jobs=-1)
+                           cv=self.cv, scoring=self.scoring)
             score = np.mean(out)
             return score
 
