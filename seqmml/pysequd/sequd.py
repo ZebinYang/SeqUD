@@ -108,7 +108,7 @@ class SeqUD(object):
         self.level_number = level_number
         self.max_runs = max_runs
         self.max_search_iter = max_search_iter
-        self.n_jobs = n_jobs 
+        self.n_jobs = n_jobs if isinstance(n_jobs, int) else 1
         self.random_state = random_state
         self.verbose = verbose
 
