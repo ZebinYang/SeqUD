@@ -191,8 +191,8 @@
 <span class="sd">    :type refit: boolean, or string, optional, default=True</span>
 <span class="sd">    :param refit: It controls whether to refit an estimator using the best found parameters on the whole dataset.</span>
 
-<span class="sd">    :type rand_seed: int, optional, default=0</span>
-<span class="sd">    :param rand_seed: The random seed for optimization.</span>
+<span class="sd">    :type random_state: int, optional, default=0</span>
+<span class="sd">    :param random_state: The random seed for optimization.</span>
 
 <span class="sd">    :type verbose: boolean, optional, default=False</span>
 <span class="sd">    :param verbose: It controls whether the searching history will be printed.</span>
@@ -209,7 +209,7 @@
 <span class="sd">               &#39;gamma&#39;: {&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-16, 6], &#39;Wrapper&#39;: np.exp2}}</span>
 <span class="sd">    &gt;&gt;&gt; estimator = svm.SVC()</span>
 <span class="sd">    &gt;&gt;&gt; cv = KFold(n_splits=5, random_state=0, shuffle=True)</span>
-<span class="sd">    &gt;&gt;&gt; clf = TPEOPT(ParaSpace, max_runs=100, estimator=estimator, cv=cv, scoring=None, refit=None, rand_seed=0, verbose=False)</span>
+<span class="sd">    &gt;&gt;&gt; clf = TPEOPT(ParaSpace, max_runs=100, estimator=estimator, cv=cv, scoring=None, refit=None, random_state=0, verbose=False)</span>
 <span class="sd">    &gt;&gt;&gt; clf.fit(iris.data, iris.target)</span>
 
 <span class="sd">    Attributes</span>
@@ -233,14 +233,14 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">para_space</span><span class="p">,</span> <span class="n">max_runs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">estimator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">scoring</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rand_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                 <span class="n">scoring</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 
         <span class="nb">super</span><span class="p">(</span><span class="n">TPEOPT</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">para_space</span><span class="p">,</span> <span class="n">max_runs</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">refit</span> <span class="o">=</span> <span class="n">refit</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scoring</span> <span class="o">=</span> <span class="n">scoring</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rand_seed</span> <span class="o">=</span> <span class="n">rand_seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">random_state</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;TPE&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">=</span> <span class="p">[]</span>
@@ -289,7 +289,8 @@
              <span class="n">algo</span><span class="o">=</span><span class="n">tpe</span><span class="o">.</span><span class="n">suggest</span><span class="p">,</span>
              <span class="n">max_evals</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">,</span>
              <span class="n">trials</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">trials</span><span class="p">,</span>
-             <span class="n">rstate</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rand_seed</span><span class="p">))</span></div>
+             <span class="n">show_progressbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+             <span class="n">rstate</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">))</span></div>
 </pre></div>
 
            </div>

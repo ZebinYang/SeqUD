@@ -181,10 +181,8 @@
 <span class="sd">    :param max_runs: The maximum number of trials to be evaluated. When this values is reached,</span>
 <span class="sd">        then the algorithm will stop.</span>
 
-<span class="sd">    :type n_jobs: int or None, optional, optional, default=None</span>
-<span class="sd">    :param n_jobs: Number of jobs to run in parallel.</span>
-<span class="sd">        If -1 all CPUs are used. If 1 is given, no parallel computing code</span>
-<span class="sd">        is used at all, which is useful for debugging. See the package `joblib` for details.</span>
+<span class="sd">    :type max_search_iter: int, optional, default=100</span>
+<span class="sd">    :param max_search_iter: The maximum number of iterations used to generate uniform design or augmented uniform design.</span>
 
 <span class="sd">    :type  estimator: estimator object</span>
 <span class="sd">    :param estimator: This is assumed to implement the scikit-learn estimator interface.</span>
@@ -199,8 +197,13 @@
 <span class="sd">    :type refit: boolean, or string, optional, default=True</span>
 <span class="sd">    :param refit: It controls whether to refit an estimator using the best found parameters on the whole dataset.</span>
 
-<span class="sd">    :type rand_seed: int, optional, default=0</span>
-<span class="sd">    :param rand_seed: The random seed for optimization.</span>
+<span class="sd">    :type n_jobs: int or None, optional, optional, default=None</span>
+<span class="sd">    :param n_jobs: Number of jobs to run in parallel.</span>
+<span class="sd">        If -1 all CPUs are used. If 1 is given, no parallel computing code</span>
+<span class="sd">        is used at all, which is useful for debugging. See the package `joblib` for details.</span>
+
+<span class="sd">    :type random_state: int, optional, default=0</span>
+<span class="sd">    :param random_state: The random seed for optimization.</span>
 
 <span class="sd">    :type verbose: boolean, optional, default=False</span>
 <span class="sd">    :param verbose: It controls whether the searching history will be printed.</span>
@@ -217,8 +220,8 @@
 <span class="sd">               &#39;gamma&#39;: {&#39;Type&#39;: &#39;continuous&#39;, &#39;Range&#39;: [-16, 6], &#39;Wrapper&#39;: np.exp2}}</span>
 <span class="sd">    &gt;&gt;&gt; estimator = svm.SVC()</span>
 <span class="sd">    &gt;&gt;&gt; cv = KFold(n_splits=5, random_state=0, shuffle=True)</span>
-<span class="sd">    &gt;&gt;&gt; clf = UDSearch(ParaSpace, max_runs=100, level_number=20, max_search_iter=100, estimator=estimator, cv=cv,</span>
-<span class="sd">                 scoring=None, n_jobs=None, refit=False, rand_seed=0, verbose=False)</span>
+<span class="sd">    &gt;&gt;&gt; clf = UDSearch(ParaSpace, max_runs=100, max_search_iter=100, estimator=estimator, cv=cv,</span>
+<span class="sd">                 scoring=None, n_jobs=None, refit=False, random_state=0, verbose=False)</span>
 <span class="sd">    &gt;&gt;&gt; clf.fit(iris.data, iris.target)</span>
 
 <span class="sd">    Attributes</span>
@@ -241,8 +244,8 @@
 <span class="sd">        Not available if estimator=None or `refit=False`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">para_space</span><span class="p">,</span> <span class="n">max_runs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">level_number</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">max_search_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">estimator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">scoring</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rand_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">para_space</span><span class="p">,</span> <span class="n">max_runs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">max_search_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">estimator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">scoring</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 
         <span class="nb">super</span><span class="p">(</span><span class="n">UDSearch</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">para_space</span><span class="p">,</span> <span class="n">max_runs</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
 
@@ -250,8 +253,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">refit</span> <span class="o">=</span> <span class="n">refit</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scoring</span> <span class="o">=</span> <span class="n">scoring</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rand_seed</span> <span class="o">=</span> <span class="n">rand_seed</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">level_number</span> <span class="o">=</span> <span class="n">level_number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">random_state</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_search_iter</span> <span class="o">=</span> <span class="n">max_search_iter</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;UD Search&quot;</span>
 
@@ -265,14 +267,14 @@
 <span class="sd">                and columns are used to represent variables.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">ud_space</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_number</span><span class="p">),</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_number</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">level_number</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+        <span class="n">ud_space</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">),</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
                              <span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
         <span class="n">base_ud</span> <span class="o">=</span> <span class="n">pydoe</span><span class="o">.</span><span class="n">design_query</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">,</span>
-                                     <span class="n">q</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">level_number</span><span class="p">,</span> <span class="n">crit</span><span class="o">=</span><span class="s2">&quot;CD2&quot;</span><span class="p">,</span> <span class="n">show_crit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                                     <span class="n">q</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">,</span> <span class="n">crit</span><span class="o">=</span><span class="s2">&quot;CD2&quot;</span><span class="p">,</span> <span class="n">show_crit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">base_ud</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">base_ud</span> <span class="o">=</span> <span class="n">pydoe</span><span class="o">.</span><span class="n">gen_ud_ms</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">level_number</span><span class="p">,</span> <span class="n">crit</span><span class="o">=</span><span class="s2">&quot;CD2&quot;</span><span class="p">,</span>
-                                      <span class="n">maxiter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_search_iter</span><span class="p">,</span> <span class="n">rand_seed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rand_seed</span><span class="p">,</span> <span class="n">nshoot</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+            <span class="n">base_ud</span> <span class="o">=</span> <span class="n">pydoe</span><span class="o">.</span><span class="n">gen_ud_ms</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">,</span> <span class="n">crit</span><span class="o">=</span><span class="s2">&quot;CD2&quot;</span><span class="p">,</span>
+                                      <span class="n">maxiter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_search_iter</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">,</span> <span class="n">nshoot</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">base_ud</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Uniform design is not correctly constructed!&#39;</span><span class="p">)</span>
@@ -298,11 +300,23 @@
                              <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">para_set</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])}</span>
                             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">para_set</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
-            <span class="n">out</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">obj_func</span><span class="p">)(</span><span class="n">parameters</span><span class="p">)</span>
-                                               <span class="k">for</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">candidate_params</span><span class="p">))</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">obj_func</span><span class="p">)(</span><span class="n">parameters</span><span class="p">)</span> <span class="k">for</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">candidate_params</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">candidate_params</span><span class="p">):</span>
+                    <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj_func</span><span class="p">(</span><span class="n">parameters</span><span class="p">))</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">out</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">obj_func</span><span class="p">)(</span><span class="n">parameters</span><span class="p">)</span>
-                                               <span class="k">for</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">candidate_params</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">obj_func</span><span class="p">)(</span><span class="n">parameters</span><span class="p">)</span> <span class="k">for</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">candidate_params</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">candidate_params</span><span class="p">:</span>
+                    <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj_func</span><span class="p">(</span><span class="n">parameters</span><span class="p">))</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">logs</span> <span class="o">=</span> <span class="n">para_set_ud</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">para_set</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]))</span>

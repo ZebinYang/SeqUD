@@ -22,7 +22,7 @@ SeqUD for function optimization
 
         ParaSpace = {'x1': {'Type': 'continuous', 'Range': [-20, 20], 'Wrapper': lambda x: x}, 
                      'x2': {'Type': 'continuous', 'Range': [-10, 5], 'Wrapper': lambda x: x}}
-        clf = SeqUD(ParaSpace, level_number=20, max_runs=100, verbose=True)
+        clf = SeqUD(ParaSpace, n_runs_per_stage=20, max_runs=100, verbose=True)
         clf.fmin(cliff)
 
 
@@ -90,6 +90,6 @@ Different Types of Hyperparameters
 
         estimator = xgb.XGBRegressor()
         cv = KFold(n_splits=5, random_state=0, shuffle=True)
-        sequd_clf = SeqUD(ParaSpace, level_number=20, max_runs=100, max_search_iter=100, n_jobs=10, 
+        sequd_clf = SeqUD(ParaSpace, n_runs_per_stage=20, max_runs=100, n_jobs=1, 
                  estimator=estimator, cv=cv, refit=None, verbose=True)
         sequd_clf.fit(x, y)

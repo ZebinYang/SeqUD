@@ -179,15 +179,12 @@
 <span class="sd">        Categorical:</span>
 <span class="sd">            Specify `Type` as `categorical`, and include the keys of `Mapping` (a list with all the possible categories).</span>
 
-<span class="sd">    :type level_number: int, optional, default=20</span>
-<span class="sd">    :param level_number: The positive integer which represent the number of levels in generating uniform design.</span>
+<span class="sd">    :type n_runs_per_stage: int, optional, default=20</span>
+<span class="sd">    :param n_runs_per_stage: The positive integer which represent the number of levels in generating uniform design.</span>
 
 <span class="sd">    :type max_runs: int, optional, default=100</span>
 <span class="sd">    :param max_runs: The maximum number of trials to be evaluated. When this values is reached,</span>
 <span class="sd">        then the algorithm will stop.</span>
-
-<span class="sd">    :type max_search_iter: int, optional, default=100</span>
-<span class="sd">    :param max_search_iter: The maximum number of iterations used to generate uniform design or augmented uniform design.</span>
 
 <span class="sd">    :type n_jobs: int or None, optional, optional, default=None</span>
 <span class="sd">    :param n_jobs: Number of jobs to run in parallel.</span>
@@ -207,8 +204,8 @@
 <span class="sd">    :type refit: boolean, or string, optional, default=True</span>
 <span class="sd">    :param refit: It controls whether to refit an estimator using the best found parameters on the whole dataset.</span>
 
-<span class="sd">    :type rand_seed: int, optional, default=0</span>
-<span class="sd">    :param rand_seed: The random seed for optimization.</span>
+<span class="sd">    :type random_state: int, optional, default=0</span>
+<span class="sd">    :param random_state: The random seed for optimization.</span>
 
 <span class="sd">    :type verbose: boolean, optional, default=False</span>
 <span class="sd">    :param verbose: It controls whether the searching history will be printed.</span>
@@ -227,8 +224,8 @@
 <span class="sd">    &gt;&gt;&gt; Level_Number = 20</span>
 <span class="sd">    &gt;&gt;&gt; estimator = svm.SVC()</span>
 <span class="sd">    &gt;&gt;&gt; cv = KFold(n_splits=5, random_state=1, shuffle=True)</span>
-<span class="sd">    &gt;&gt;&gt; clf = SeqRand(ParaSpace, n_iter_per_stage=20, max_runs=100, n_jobs=None,</span>
-<span class="sd">                 estimator=None, cv=None, scoring=None, refit=None, rand_seed=0, verbose=False)</span>
+<span class="sd">    &gt;&gt;&gt; clf = SeqRand(ParaSpace, n_runs_per_stage=20, max_runs=100, n_jobs=None,</span>
+<span class="sd">                 estimator=None, cv=None, scoring=None, refit=None, random_state=0, verbose=False)</span>
 <span class="sd">    &gt;&gt;&gt; clf.fit(iris.data, iris.target)</span>
 
 <span class="sd">    Attributes</span>
@@ -251,14 +248,14 @@
 <span class="sd">        Not available if estimator=None or `refit=False`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">para_space</span><span class="p">,</span> <span class="n">n_iter_per_stage</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">max_runs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">estimator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rand_seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">para_space</span><span class="p">,</span> <span class="n">n_runs_per_stage</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">max_runs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">estimator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">refit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">para_space</span> <span class="o">=</span> <span class="n">para_space</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">n_iter_per_stage</span> <span class="o">=</span> <span class="n">n_iter_per_stage</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_runs_per_stage</span> <span class="o">=</span> <span class="n">n_runs_per_stage</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span> <span class="o">=</span> <span class="n">max_runs</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span> <span class="o">=</span> <span class="n">n_jobs</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rand_seed</span> <span class="o">=</span> <span class="n">rand_seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span> <span class="o">=</span> <span class="n">n_jobs</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n_jobs</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">random_state</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">cv</span> <span class="o">=</span> <span class="n">cv</span>
@@ -370,9 +367,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">logs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-        <span class="n">para_set_ud</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">n_iter_per_stage</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">))</span>
+        <span class="n">para_set_ud</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">n_runs_per_stage</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">):</span>
-            <span class="n">para_set_ud</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_iter_per_stage</span><span class="p">)</span>
+            <span class="n">para_set_ud</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_runs_per_stage</span><span class="p">)</span>
 
         <span class="n">para_set_ud</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">para_set_ud</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">para_ud_names</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">para_set_ud</span>
@@ -397,7 +394,7 @@
         <span class="c1"># 1. Transform the existing Parameters to Standardized Horizon (0-1)</span>
         <span class="n">left_radius</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
         <span class="n">right_radius</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
-        <span class="n">para_set_ud</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">n_iter_per_stage</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">))</span>
+        <span class="n">para_set_ud</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">n_runs_per_stage</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extend_factor_number</span><span class="p">):</span>
             <span class="k">if</span> <span class="p">((</span><span class="n">ud_center</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">left_radius</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">0</span> <span class="o">+</span> <span class="n">EPS</span><span class="p">)):</span>
                 <span class="n">lb</span> <span class="o">=</span> <span class="mi">0</span>
@@ -408,7 +405,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">lb</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ud_center</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">left_radius</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
                 <span class="n">ub</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ud_center</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">right_radius</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="n">para_set_ud</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">lb</span><span class="p">,</span> <span class="n">ub</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_iter_per_stage</span><span class="p">)</span>
+            <span class="n">para_set_ud</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">lb</span><span class="p">,</span> <span class="n">ub</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_runs_per_stage</span><span class="p">)</span>
         <span class="n">para_set_ud</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">para_set_ud</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">para_ud_names</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">para_set_ud</span>
 
@@ -430,14 +427,20 @@
                             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">para_set</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
 
         <span class="c1"># Return if the maximum run has reached.</span>
-        <span class="k">if</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_iter_per_stage</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">logs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_runs_per_stage</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">stop_flag</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maximum number of runs reached, stop!&quot;</span><span class="p">)</span>
             <span class="k">return</span>
 
-        <span class="n">out</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">obj_func</span><span class="p">)(</span><span class="n">parameters</span><span class="p">)</span>
-                                           <span class="k">for</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">candidate_params</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">obj_func</span><span class="p">)(</span><span class="n">parameters</span><span class="p">)</span> <span class="k">for</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">candidate_params</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">candidate_params</span><span class="p">:</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obj_func</span><span class="p">(</span><span class="n">parameters</span><span class="p">))</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+
         <span class="n">logs_aug</span> <span class="o">=</span> <span class="n">para_set_ud</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
         <span class="n">logs_aug</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">para_set</span><span class="p">)</span>
         <span class="n">logs_aug</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]))</span>
@@ -457,10 +460,7 @@
 <span class="sd">        obj_func: A callable function. It takes the values stored in each trial as input parameters, and</span>
 <span class="sd">               output the corresponding scores.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rand_seed</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">logs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-        <span class="n">search_start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
         <span class="n">para_set_ud</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_init_design</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_evaluate_runs</span><span class="p">(</span><span class="n">obj_func</span><span class="p">,</span> <span class="n">para_set_ud</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -472,9 +472,6 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">break</span>
-        <span class="n">search_end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">search_time_consumed_</span> <span class="o">=</span> <span class="n">search_end_time</span> <span class="o">-</span> <span class="n">search_start_time</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_summary</span><span class="p">()</span>
 
 <div class="viewcode-block" id="SeqRand.fmin"><a class="viewcode-back" href="../../apidoc.html#pysequd.seqrand.SeqRand.fmin">[docs]</a>    <span class="k">def</span> <span class="nf">fmin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrapper_func</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -486,6 +483,8 @@
 <span class="sd">        :param func: the function to be optimized.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">)</span>
         <span class="n">search_start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="n">wrapper_func</span><span class="p">)</span>
         <span class="n">search_end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
@@ -505,13 +504,24 @@
 <span class="sd">        :param y: target variable.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">def</span> <span class="nf">obj_func</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">sklearn_wrapper</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="o">**</span><span class="n">parameters</span><span class="p">)</span>
             <span class="n">out</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">estimator</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">scoring</span><span class="p">)</span>
             <span class="n">score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">score</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="n">obj_func</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stage</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">)</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">([</span><span class="s2">&quot;random_state&quot;</span> <span class="ow">in</span> <span class="n">param</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">())])[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">index</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="n">idx</span><span class="p">]:</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">})</span>
+
+        <span class="n">search_start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="n">sklearn_wrapper</span><span class="p">)</span>
+        <span class="n">search_end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_time_consumed_</span> <span class="o">=</span> <span class="n">search_end_time</span> <span class="o">-</span> <span class="n">search_start_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_summary</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">refit</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">best_estimator_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimator</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
