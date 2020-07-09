@@ -29,11 +29,6 @@ class SobolSearch(BatchBase):
     :param max_runs: The maximum number of trials to be evaluated. When this values is reached,
         then the algorithm will stop.
 
-    :type n_jobs: int or None, optional, optional, default=None
-    :param n_jobs: Number of jobs to run in parallel.
-        If -1 all CPUs are used. If 1 is given, no parallel computing code
-        is used at all, which is useful for debugging. See the package `joblib` for details.
-
     :type  estimator: estimator object
     :param estimator: This is assumed to implement the scikit-learn estimator interface.
 
@@ -46,6 +41,11 @@ class SobolSearch(BatchBase):
 
     :type refit: boolean, or string, optional, default=True
     :param refit: It controls whether to refit an estimator using the best found parameters on the whole dataset.
+
+    :type n_jobs: int or None, optional, optional, default=None
+    :param n_jobs: Number of jobs to run in parallel.
+        If -1 all CPUs are used. If 1 is given, no parallel computing code
+        is used at all, which is useful for debugging. See the package `joblib` for details.
 
     :type random_state: int, optional, default=0
     :param random_state: The random seed for optimization.
@@ -89,7 +89,7 @@ class SobolSearch(BatchBase):
         Not available if estimator = None or `refit=False`.
     """
     def __init__(self, para_space, max_runs=100, estimator=None, cv=None,
-                 scoring=None, n_jobs=None, refit=True, random_state=0, verbose=False):
+                 scoring=None, refit=True, n_jobs=None, random_state=0, verbose=False):
 
         super(SobolSearch, self).__init__(para_space, max_runs, n_jobs, verbose)
 

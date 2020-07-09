@@ -29,8 +29,8 @@ class SNTO(object):
         Categorical:
             Specify `Type` as `categorical`, and include the keys of `Mapping` (a list with all the possible categories).
 
-    :type level_number: int, optional, default=20
-    :param level_number: The positive integer which represent the number of levels in generating uniform design.
+    :type n_runs_per_stage: int, optional, default=20
+    :param n_runs_per_stage: The positive integer which represent the number of levels in generating uniform design.
 
     :type max_runs: int, optional, default=100
     :param max_runs: The maximum number of trials to be evaluated. When this values is reached,
@@ -74,10 +74,9 @@ class SNTO(object):
     >>> iris = datasets.load_iris()
     >>> ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2},
                'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
-    >>> Level_Number = 20
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=1, shuffle=True)
-    >>> clf = SNTO(ParaSpace, level_number=20, max_runs=100, max_search_iter=100, n_jobs=None,
+    >>> clf = SNTO(ParaSpace, n_runs_per_stage=20, max_runs=100, max_search_iter=100, n_jobs=None,
                  estimator=None, cv=None, scoring=None, refit=None, random_state=0, verbose=False)
     >>> clf.fit(iris.data, iris.target)
 
@@ -101,11 +100,11 @@ class SNTO(object):
         Not available if estimator=None or `refit=False`.
     """
 
-    def __init__(self, para_space, level_number=20, max_runs=100, max_search_iter=100, n_jobs=None,
+    def __init__(self, para_space, n_runs_per_stage=20, max_runs=100, max_search_iter=100, n_jobs=None,
                  estimator=None, cv=None, scoring=None, refit=True, random_state=0, verbose=False):
 
         self.para_space = para_space
-        self.level_number = level_number
+        self.n_runs_per_stage = n_runs_per_stage
         self.max_runs = max_runs
         self.max_search_iter = max_search_iter
         self.n_jobs = n_jobs if isinstance(n_jobs, int) else 1
@@ -227,19 +226,20 @@ class SNTO(object):
         """
 
         self.logs = pd.DataFrame()
-        ud_space = np.repeat(np.linspace(1 / (2 * self.level_number), 1 - 1 / (2 * self.level_number), self.level_number).reshape([-1, 1]),
+        ud_space = np.repeat(np.linspace(1 / (2 * self.n_runs_per_stage), 1 - 1 / (2 * self.n_runs_per_stage),
+                              self.n_runs_per_stage).reshape([-1, 1]),
                              self.extend_factor_number, axis=1)
 
-        base_ud = pydoe.design_query(n=self.level_number, s=self.extend_factor_number,
-                                     q=self.level_number, crit="CD2", show_crit=False)
+        base_ud = pydoe.design_query(n=self.n_runs_per_stage, s=self.extend_factor_number,
+                                     q=self.n_runs_per_stage, crit="CD2", show_crit=False)
         if base_ud is None:
-            base_ud = pydoe.gen_ud_ms(n=self.level_number, s=self.extend_factor_number, q=self.level_number, crit="CD2",
+            base_ud = pydoe.gen_ud_ms(n=self.n_runs_per_stage, s=self.extend_factor_number, q=self.n_runs_per_stage, crit="CD2",
                                       maxiter=self.max_search_iter, random_state=self.random_state, nshoot=5)
 
         if (not isinstance(base_ud, np.ndarray)):
             raise ValueError('Uniform design is not correctly constructed!')
 
-        para_set_ud = np.zeros((self.level_number, self.extend_factor_number))
+        para_set_ud = np.zeros((self.n_runs_per_stage, self.extend_factor_number))
         for i in range(self.factor_number):
             loc_min = np.sum(self.variable_number[:(i + 1)])
             loc_max = np.sum(self.variable_number[:(i + 2)])
@@ -267,10 +267,10 @@ class SNTO(object):
         """
 
         # 1. Transform the existing Parameters to Standardized Horizon (0-1)
-        ud_space = np.zeros((self.level_number, self.extend_factor_number))
-        ud_grid_size = 1.0 / (self.level_number * 2**(self.stage - 1))
-        left_radius = np.floor((self.level_number - 1) / 2) * ud_grid_size
-        right_radius = ud_grid_size * (self.level_number - np.floor((self.level_number - 1) / 2) - 1)
+        ud_space = np.zeros((self.n_runs_per_stage, self.extend_factor_number))
+        ud_grid_size = 1.0 / (self.n_runs_per_stage * 2**(self.stage - 1))
+        left_radius = np.floor((self.n_runs_per_stage - 1) / 2) * ud_grid_size
+        right_radius = ud_grid_size * (self.n_runs_per_stage - np.floor((self.n_runs_per_stage - 1) / 2) - 1)
         for i in range(self.extend_factor_number):
             if ((ud_center[i] - left_radius) < 0 + EPS):
                 lb = 0
@@ -282,7 +282,7 @@ class SNTO(object):
             else:
                 lb = max(ud_center[i] - left_radius, 0)
                 ub = min(ud_center[i] + right_radius, 1)
-            ud_space[:, i] = np.linspace(lb, ub, self.level_number)
+            ud_space[:, i] = np.linspace(lb, ub, self.n_runs_per_stage)
 
         # 4. Generate Sequential UD
         para_set_ud = np.zeros(

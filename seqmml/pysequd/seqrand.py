@@ -27,15 +27,12 @@ class SeqRand(object):
         Categorical:
             Specify `Type` as `categorical`, and include the keys of `Mapping` (a list with all the possible categories).
 
-    :type level_number: int, optional, default=20
-    :param level_number: The positive integer which represent the number of levels in generating uniform design.
+    :type n_runs_per_stage: int, optional, default=20
+    :param n_runs_per_stage: The positive integer which represent the number of levels in generating uniform design.
 
     :type max_runs: int, optional, default=100
     :param max_runs: The maximum number of trials to be evaluated. When this values is reached,
         then the algorithm will stop.
-
-    :type max_search_iter: int, optional, default=100
-    :param max_search_iter: The maximum number of iterations used to generate uniform design or augmented uniform design.
 
     :type n_jobs: int or None, optional, optional, default=None
     :param n_jobs: Number of jobs to run in parallel.
@@ -75,7 +72,7 @@ class SeqRand(object):
     >>> Level_Number = 20
     >>> estimator = svm.SVC()
     >>> cv = KFold(n_splits=5, random_state=1, shuffle=True)
-    >>> clf = SeqRand(ParaSpace, n_iter_per_stage=20, max_runs=100, n_jobs=None,
+    >>> clf = SeqRand(ParaSpace, n_runs_per_stage=20, max_runs=100, n_jobs=None,
                  estimator=None, cv=None, scoring=None, refit=None, random_state=0, verbose=False)
     >>> clf.fit(iris.data, iris.target)
 
@@ -99,11 +96,11 @@ class SeqRand(object):
         Not available if estimator=None or `refit=False`.
     """
 
-    def __init__(self, para_space, n_iter_per_stage=20, max_runs=100, n_jobs=None,
+    def __init__(self, para_space, n_runs_per_stage=20, max_runs=100, n_jobs=None,
                  estimator=None, cv=None, scoring=None, refit=True, random_state=0, verbose=False):
 
         self.para_space = para_space
-        self.n_iter_per_stage = n_iter_per_stage
+        self.n_runs_per_stage = n_runs_per_stage
         self.max_runs = max_runs
         self.n_jobs = n_jobs if isinstance(n_jobs, int) else 1
         self.random_state = random_state
@@ -218,9 +215,9 @@ class SeqRand(object):
         """
 
         self.logs = pd.DataFrame()
-        para_set_ud = np.zeros((self.n_iter_per_stage, self.extend_factor_number))
+        para_set_ud = np.zeros((self.n_runs_per_stage, self.extend_factor_number))
         for i in range(self.extend_factor_number):
-            para_set_ud[:, i] = np.random.uniform(0, 1, self.n_iter_per_stage)
+            para_set_ud[:, i] = np.random.uniform(0, 1, self.n_runs_per_stage)
 
         para_set_ud = pd.DataFrame(para_set_ud, columns=self.para_ud_names)
         return para_set_ud
@@ -245,7 +242,7 @@ class SeqRand(object):
         # 1. Transform the existing Parameters to Standardized Horizon (0-1)
         left_radius = 1.0 / (2**(self.stage - 1))
         right_radius = 1.0 / (2**(self.stage - 1))
-        para_set_ud = np.zeros((self.n_iter_per_stage, self.extend_factor_number))
+        para_set_ud = np.zeros((self.n_runs_per_stage, self.extend_factor_number))
         for i in range(self.extend_factor_number):
             if ((ud_center[i] - left_radius) < (0 + EPS)):
                 lb = 0
@@ -256,7 +253,7 @@ class SeqRand(object):
             else:
                 lb = max(ud_center[i] - left_radius, 0)
                 ub = min(ud_center[i] + right_radius, 1)
-            para_set_ud[:, i] = np.random.uniform(lb, ub, self.n_iter_per_stage)
+            para_set_ud[:, i] = np.random.uniform(lb, ub, self.n_runs_per_stage)
         para_set_ud = pd.DataFrame(para_set_ud, columns=self.para_ud_names)
         return para_set_ud
 
@@ -278,7 +275,7 @@ class SeqRand(object):
                             for i in range(para_set.shape[0])]
 
         # Return if the maximum run has reached.
-        if ((self.logs.shape[0] + self.n_iter_per_stage) > self.max_runs):
+        if ((self.logs.shape[0] + self.n_runs_per_stage) > self.max_runs):
             self.stop_flag = True
             if self.verbose:
                 print("Maximum number of runs reached, stop!")
