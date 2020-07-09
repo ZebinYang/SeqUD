@@ -33,7 +33,6 @@ def octopus(parameters):
     y = 2 * np.cos(10*  x1) * np.sin(10 * x2) + np.sin(10 * x1 * x2)
     return  y
 
-Level_Number = 20
 ParaSpace = {'x1': {'Type': 'continuous', 'Range': [0, 1], 'Wrapper': lambda x: x}, 
              'x2': {'Type': 'continuous', 'Range': [0, 1], 'Wrapper': lambda x: x}}
 
@@ -93,7 +92,7 @@ estimator = svm.SVC()
 score_metric = make_scorer(accuracy_score, True)
 cv = KFold(n_splits=5, random_state=0, shuffle=True)
 
-clf = SeqUD(ParaSpace, level_number=20, n_jobs=10, estimator=estimator, cv=cv, scoring=score_metric, refit=True, verbose=True)
+clf = SeqUD(ParaSpace, n_runs_per_stage=20, n_jobs=1, estimator=estimator, cv=cv, scoring=score_metric, refit=True, verbose=True)
 clf.fit(x, y)
 ```
 
