@@ -25,7 +25,7 @@ The following codes can perform function maximization. The configuration is quit
 ```python 
 import numpy as np 
 from matplotlib import pylab as plt
-from seqmml import SeqUD
+from sequd import SeqUD
 
 def octopus(parameters):
     x1 = parameters['x1']
@@ -78,7 +78,7 @@ from sklearn.model_selection import KFold
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import make_scorer, accuracy_score
 from sklearn.model_selection import cross_val_score
-from seqmml import SeqUD
+from sequd import SeqUD
 
 sx = MinMaxScaler()
 dt = datasets.load_breast_cancer()
