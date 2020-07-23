@@ -1,6 +1,4 @@
-# SeqMML
-
-[![Build Status](https://travis-ci.com/ZebinYang/seqmml.svg?branch=master)](https://travis-ci.com/ZebinYang/seqmml.svg?branch=master)
+# Sequential Uniform Design
 
 # Installation
 
@@ -11,10 +9,10 @@
     
 Assume you have figured out the above environment, the most convenient way for installation is via the pip command. 
 ```sheel
-pip install git+https://github.com/ZebinYang/seqmml.git
+pip install git+https://github.com/ZebinYang/SeqUD.git
 ```
 
-More details can be found in [documentation](https://zebinyang.github.io/seqmml/build/html/index.html).
+More details can be found in [documentation](https://zebinyang.github.io/SeqUD/build/html/index.html).
 
 # Examples
 
@@ -122,9 +120,9 @@ plt.figure(figsize = (6, 4.5))
 plot_trajectory(Z, clf, "SeqUD")
 ```
 
- ![svm_demo](https://github.com/ZebinYang/seqmml/blob/master/docs/source/images/svm_demo.png).
+ ![svm_demo](https://github.com/ZebinYang/sequd/blob/master/docs/source/images/svm_demo.png).
 
-More examples can be referred to the [documentation](https://zebinyang.github.io/seqmml/build/html/examples.html)
+More examples can be referred to the [documentation](https://zebinyang.github.io/sequd/build/html/examples.html)
 
 
 # Benchmark Methods:
@@ -139,4 +137,4 @@ SMAC: https://github.com/automl/SMAC3
 If you find any bugs or have any suggestions, please contact us via email: yangzb2010@hku.hk or ajzhang@hku.hk.
 
 # Reference:
-Zebin Yang and Aijun Zhang. (2019) Hyperparameter Optimization via Sequential Uniform Designs. Submitted. 
+Zebin Yang and Aijun Zhang. (2020) Hyperparameter Optimization via Sequential Uniform Designs. Submitted. 
