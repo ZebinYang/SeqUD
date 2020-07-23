@@ -407,6 +407,7 @@ class SeqUD(object):
         :param func: the function to be optimized.
 
         """
+
         self.stage = 1
         np.random.seed(self.random_state)
         search_start_time = time.time()
@@ -429,6 +430,7 @@ class SeqUD(object):
         :param y: target variable.
 
         """
+
         def sklearn_wrapper(parameters):
             self.estimator.set_params(**parameters)
             out = cross_val_score(self.estimator, x, y,
