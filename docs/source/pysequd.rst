@@ -66,7 +66,7 @@ Example Usage
         from sklearn.preprocessing import MinMaxScaler
         from sklearn.model_selection import cross_val_score
         from sklearn.metrics import make_scorer, accuracy_score
-        from seqmml import SeqUD
+        from sequd import SeqUD
 
         sx = MinMaxScaler()
         dt = datasets.load_breast_cancer()

@@ -1,12 +1,12 @@
 from setuptools import setup
 
-setup(name='seqmml',
+setup(name='sequd',
       version='0.1',
       description='Hyperparameter Optimization based on Sequential Meta Machine Learning.',
       author='Zebin Yang and Aijun Zhang',
       author_email='yangzb2010@hku.hk, ajzhang@hku.hk',
       license='BSD',
-      packages=['seqmml', 'seqmml.pybayopt', 'seqmml.pysequd', 'seqmml.pybatdoe'],
+      packages=['sequd', 'sequd.pybayopt', 'sequd.pysequd', 'sequd.pybatdoe'],
       install_requires=['joblib', 'numpy', 'pandas', 'scikit-learn', 'tqdm', 'hyperopt', 'smac==0.10.0', 'pyDOE', 'sobol_seq',
                         'pyunidoe @ git+https://github.com/ZebinYang/pyunidoe.git',
                         'spearmint @ git+https://github.com/ZebinYang/spearmint-lite.git'],

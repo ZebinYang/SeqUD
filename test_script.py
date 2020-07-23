@@ -6,10 +6,10 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import KFold
 from sklearn.metrics import make_scorer, accuracy_score
 
-from seqmml import SeqUD
-from seqmml import GPEIOPT
-from seqmml import SMACOPT
-from seqmml import TPEOPT
+from sequd import SeqUD
+from sequd import GPEIOPT
+from sequd import SMACOPT
+from sequd import TPEOPT
 
 sx = MinMaxScaler()
 dt = datasets.load_breast_cancer()
@@ -24,9 +24,9 @@ score_metric = make_scorer(accuracy_score, True)
 cv = KFold(n_splits=5, random_state=0, shuffle=True)
 
 
-class TestSeqMML(unittest.TestCase):
+class TestSeqUD(unittest.TestCase):
     """
-    SeqMML test class.
+    SeqUD test class.
     """
     def setUp(self):
         """ Initialise test suite - no-op. """
