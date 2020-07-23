@@ -375,7 +375,7 @@ class SeqUD(object):
                   % (self.stage, self.logs.shape[0], self.max_runs, self.logs["score"].max()))
 
     def _run(self, obj_func):
-         """
+        """
         This function controls the procedures for implementing the sequential uniform design method.
 
         Parameters
@@ -383,6 +383,7 @@ class SeqUD(object):
         obj_func: A callable function. It takes the values stored in each trial as input parameters, and
                output the corresponding scores.
         """
+
         para_set_ud = self._generate_init_design()
         self._evaluate_runs(obj_func, para_set_ud)
         self.stage += 1
@@ -415,7 +416,7 @@ class SeqUD(object):
         self._summary()
 
     def fit(self, x, y=None):
-        
+
         """
         Run fit with all sets of parameters.
 
