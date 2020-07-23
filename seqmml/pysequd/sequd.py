@@ -163,8 +163,7 @@ class SeqUD(object):
         """
         self.best_index_ = self.logs.loc[:, "score"].idxmax()
         self.best_params_ = {self.logs.loc[:, self.para_names].columns[j]:
-                             self.logs.loc[:,
-                                           self.para_names].iloc[self.best_index_, j]
+                             self.logs.loc[:, self.para_names].iloc[self.best_index_, j]
                              for j in range(self.logs.loc[:, self.para_names].shape[1])}
         self.best_score_ = self.logs.loc[:, "score"].iloc[self.best_index_]
         if self.verbose:
@@ -376,7 +375,7 @@ class SeqUD(object):
                   % (self.stage, self.logs.shape[0], self.max_runs, self.logs["score"].max()))
 
     def _run(self, obj_func):
-        """
+         """
         This function controls the procedures for implementing the sequential uniform design method.
 
         Parameters
@@ -398,7 +397,7 @@ class SeqUD(object):
                 break
 
     def fmin(self, wrapper_func):
-        """
+         """
         Search the optimal value of a function.
 
         Parameters
@@ -416,6 +415,7 @@ class SeqUD(object):
         self._summary()
 
     def fit(self, x, y=None):
+        
         """
         Run fit with all sets of parameters.
 
