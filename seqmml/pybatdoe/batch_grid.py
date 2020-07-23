@@ -131,7 +131,7 @@ class GridSearch(BatchBase):
             grid_number = np.ceil(self.max_runs / grid_number).astype(int)
         # generate grid
         para_set = pd.DataFrame([item for item in product(*grid_para.values())], columns=grid_para.keys())
-        para_set = para_set.iloc[:clf.max_runs]
+        para_set = para_set.iloc[:self.max_runs]
         candidate_params = [{para_set.columns[j]: para_set.iloc[i, j]
                              for j in range(para_set.shape[1])}
                             for i in range(para_set.shape[0])]
