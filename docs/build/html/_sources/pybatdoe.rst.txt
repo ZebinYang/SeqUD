@@ -52,7 +52,7 @@ Example Usage
         from sklearn import svm
         from sklearn import datasets
         from sklearn.model_selection import KFold
-        from seqmml import GridSearch
+        from sequd import GridSearch
 
         iris = datasets.load_iris()
         ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
@@ -70,7 +70,7 @@ Example Usage
         from sklearn import svm
         from sklearn import datasets
         from sklearn.model_selection import KFold
-        from seqmml import RandSearch
+        from sequd import RandSearch
 
         iris = datasets.load_iris()
         ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
@@ -88,7 +88,7 @@ Example Usage
         from sklearn import svm
         from sklearn import datasets
         from sklearn.model_selection import KFold
-        from seqmml import LHSSearch
+        from sequd import LHSSearch
 
         iris = datasets.load_iris()
         ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 
@@ -107,7 +107,7 @@ Example Usage
         from sklearn import svm
         from sklearn import datasets
         from sklearn.model_selection import KFold
-        from seqmml import SobolSearch
+        from sequd import SobolSearch
 
         iris = datasets.load_iris()
         ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2}, 

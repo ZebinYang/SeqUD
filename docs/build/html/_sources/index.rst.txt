@@ -3,10 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Sequential Meta Machine Learning
+Sequential Uniform Design
 ==========================================
 
-SeqMML is an open-source python package developed for automated machine learning (AutoML) with focus on hyperparameter optimization. Unlike traditional Batch or Bayesian optimization methods, we propose to use the sequential uniform designs with the following advantages:
+SeqUD is an open-source python package developed for automated machine learning (AutoML) with focus on hyperparameter optimization. Unlike traditional Batch or Bayesian optimization methods, we propose to use the sequential uniform designs with the following advantages:
 
 - Representative sampling of hyperparameter space: uniformly distributed trials tend to have a better exploration of the hyperparameter space. 
 

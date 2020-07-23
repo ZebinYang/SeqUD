@@ -4,7 +4,7 @@ Installation
 Prerequisite
 ----------------
 
-The following environments are required for SeqMML package:
+The following environments are required for SeqUD package:
 
 - Python 3 (anaconda is preferable)
 - SWIG >= 3.0
@@ -39,7 +39,7 @@ Run the following codes in Colab notebook:
 
     !apt-get install swig3.0
     !ln -s /usr/bin/swig3.0 /usr/bin/swig
-    !pip install git+https://github.com/ZebinYang/seqmml.git
+    !pip install git+https://github.com/ZebinYang/SeqUD.git
 
 Github Installation
 ---------------------
@@ -48,7 +48,7 @@ You can install the package by the following console command:
 
 .. code-block::
 
-    pip install git+http://github.com/ZebinYang/seqmml.git
+    pip install git+http://github.com/ZebinYang/SeqUD.git
         
         
 Manual Installation
@@ -56,7 +56,7 @@ Manual Installation
 
 If git is not available, you can manually install the package by downloading the source codes and then compiling it by hand:
 
-- Download the source codes from http://github.com/ZebinYang/seqmml.git.
+- Download the source codes from http://github.com/ZebinYang/SeqUD.git.
 
 - unzip and switch to the root folder.
 

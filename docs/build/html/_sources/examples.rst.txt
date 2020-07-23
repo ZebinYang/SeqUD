@@ -10,7 +10,7 @@ SeqUD for function optimization
 
         import numpy as np 
         from matplotlib import pylab as plt
-        from seqmml import SeqUD
+        from sequd import SeqUD
 
         def cliff(parameters):
             x1 = parameters['x1']
@@ -40,7 +40,7 @@ Working with Scikit-learn Pipeline
         from sklearn.feature_selection import f_regression
         from sklearn.pipeline import Pipeline
 
-        from seqmml import SeqUD
+        from sequd import SeqUD
 
         X, y = samples_generator.make_classification(
             n_informative=5, n_redundant=0, random_state=42)
@@ -71,7 +71,7 @@ Different Types of Hyperparameters
         from sklearn.model_selection import KFold 
         from sklearn.preprocessing import MinMaxScaler
         from sklearn.metrics import make_scorer, mean_squared_error
-        from seqmml import SeqUD
+        from sequd import SeqUD
 
         dt = datasets.load_diabetes()
         sx = MinMaxScaler()

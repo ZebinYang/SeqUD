@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>pybatdoe.batch_grid &mdash; seqmml  documentation</title>
+  <title>pybatdoe.batch_grid &mdash; sequd  documentation</title>
   
 
   
@@ -49,7 +49,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home"> seqmml
+            <a href="../../index.html" class="icon icon-home"> sequd
           
 
           
@@ -101,7 +101,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">seqmml</a>
+          <a href="../../index.html">sequd</a>
         
       </nav>
 
@@ -283,7 +283,7 @@
             <span class="n">grid_number</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span> <span class="o">/</span> <span class="n">grid_number</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
         <span class="c1"># generate grid</span>
         <span class="n">para_set</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">grid_para</span><span class="o">.</span><span class="n">values</span><span class="p">())],</span> <span class="n">columns</span><span class="o">=</span><span class="n">grid_para</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-        <span class="n">para_set</span> <span class="o">=</span> <span class="n">para_set</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">)</span>
+        <span class="n">para_set</span> <span class="o">=</span> <span class="n">para_set</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">max_runs</span><span class="p">]</span>
         <span class="n">candidate_params</span> <span class="o">=</span> <span class="p">[{</span><span class="n">para_set</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span> <span class="n">para_set</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
                              <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">para_set</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])}</span>
                             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">para_set</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
