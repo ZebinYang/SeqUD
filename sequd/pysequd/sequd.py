@@ -325,7 +325,7 @@ class SeqUD(object):
         if (not isinstance(base_ud, np.ndarray)):
             raise ValueError('Uniform design is not correctly constructed!')
 
-        base_ud_aug = base_ud[(1 + x0.shape[0]):base_ud.shape[0],
+        base_ud_aug = base_ud[(x0.shape[0]):base_ud.shape[0],
                               :].reshape([-1, self.extend_factor_number])
 
         para_set_ud = np.zeros(
