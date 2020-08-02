@@ -233,7 +233,7 @@ class SeqUD(object):
                                      q=self.n_runs_per_stage, crit="CD2", show_crit=False)
         if base_ud is None:
             base_ud = pydoe.gen_ud_ms(n=self.n_runs_per_stage, s=self.extend_factor_number, q=self.n_runs_per_stage, crit="CD2",
-                                      maxiter=self.max_search_iter, random_state=self.random_state, nshoot=5)
+                              maxiter=self.max_search_iter, random_state=self.random_state, n_jobs=-1, nshoot=5)
 
         if (not isinstance(base_ud, np.ndarray)):
             raise ValueError('Uniform design is not correctly constructed!')
@@ -321,7 +321,7 @@ class SeqUD(object):
 
         # 4. Generate Sequential UD
         base_ud = pydoe.gen_aud_ms(x0, n=self.n_runs_per_stage, s=self.extend_factor_number, q=self.n_runs_per_stage, crit="CD2",
-                                   maxiter=self.max_search_iter, random_state=self.random_state, nshoot=5)
+                                   maxiter=self.max_search_iter, random_state=self.random_state, n_jobs=-1, nshoot=5)
         if (not isinstance(base_ud, np.ndarray)):
             raise ValueError('Uniform design is not correctly constructed!')
 
