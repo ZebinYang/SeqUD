@@ -209,7 +209,7 @@ class GPEIOPT(BayoptBase):
                 candidate = grid[job_id, :]
                 grid_status[job_id] = 2
 
-            next_params = gmap.unit_to_list(candidate)
+            next_params = gmap.unit_to_list(np.clip(candidate, 0, 1))
             values[job_id] = self.obj_func(next_params)
 
         shutil.rmtree(file_dir)
