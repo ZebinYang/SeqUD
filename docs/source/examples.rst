@@ -80,15 +80,15 @@ Different Types of Hyperparameters
         y = sy.fit_transform(dt.target.reshape([-1, 1]))
 
         ParaSpace = {'booster':          {'Type': 'categorical', 'Mapping': ['gbtree', 'gblinear']},
-                     'max_depth':        {'Type': 'integer',     'Mapping': np.linspace(2, 9, 8)}, 
+                     'max_depth':        {'Type': 'integer',     'Mapping': np.linspace(1, 8, 8)}, 
                      'n_estimators':     {'Type': 'integer',     'Mapping': np.linspace(100, 500, 401)},
-                     'colsample_bytree': {'Type': 'continuous',  'Range': [0, 1],  'Wrapper': lambda x:x},
+                     'colsample_bytree': {'Type': 'continuous',  'Range': [0.5, 1],  'Wrapper': lambda x:x},
                      'learning_rate':    {'Type': 'continuous',  'Range': [-5, 0], 'Wrapper': lambda x: 10**x},
                      'gamma':            {'Type': 'continuous',  'Range': [-5, 0], 'Wrapper': lambda x: 10**x},
                      'reg_lambda':       {'Type': 'continuous',  'Range': [-5, 0], 'Wrapper': lambda x: 10**x},
                      'reg_alpha':        {'Type': 'continuous',  'Range': [-5, 0], 'Wrapper': lambda x: 10**x}}
 
-        estimator = xgb.XGBRegressor()
+        estimator = xgb.XGBRegressor(verbosity=0, silent=True)
         cv = KFold(n_splits=5, random_state=0, shuffle=True)
         sequd_clf = SeqUD(ParaSpace, n_runs_per_stage=20, max_runs=100, n_jobs=1, 
                  estimator=estimator, cv=cv, refit=None, verbose=True)
