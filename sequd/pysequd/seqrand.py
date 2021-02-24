@@ -321,7 +321,7 @@ class SeqRand(object):
             else:
                 break
 
-    def fmin(self, wrapper_func):
+    def fmax(self, wrapper_func):
         """
         Search the optimal value of a function.
 

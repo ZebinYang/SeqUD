@@ -23,7 +23,7 @@ SeqUD for function optimization
         ParaSpace = {'x1': {'Type': 'continuous', 'Range': [-20, 20], 'Wrapper': lambda x: x}, 
                      'x2': {'Type': 'continuous', 'Range': [-10, 5], 'Wrapper': lambda x: x}}
         clf = SeqUD(ParaSpace, n_runs_per_stage=20, max_runs=100, verbose=True)
-        clf.fmin(cliff)
+        clf.fmax(cliff)
 
 
 Working with Scikit-learn Pipeline

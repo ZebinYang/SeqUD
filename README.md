@@ -18,7 +18,7 @@ More details can be found in [documentation](https://zebinyang.github.io/SeqUD/b
 
 ### Function optimization
 
-The following codes can perform function maximization. The configuration is quite simple: define the function, parameter space, and then call the fmin function in the SeqUD module. 
+The following codes can perform function maximization. The configuration is quite simple: define the function, parameter space, and then call the fmaxfunction in the SeqUD module. 
 
 ```python 
 import numpy as np 
@@ -35,7 +35,7 @@ ParaSpace = {'x1': {'Type': 'continuous', 'Range': [0, 1], 'Wrapper': lambda x: 
              'x2': {'Type': 'continuous', 'Range': [0, 1], 'Wrapper': lambda x: x}}
 
 clf = SeqUD(ParaSpace, max_runs=100, random_state=1, verbose=True)
-clf.fmin(octopus)
+clf.fmax(octopus)
 ```
 
 Let's visualize the trials points.
