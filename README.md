@@ -136,5 +136,14 @@ SMAC: https://github.com/automl/SMAC3
 # Contact:
 If you find any bugs or have any suggestions, please contact us via email: yangzb2010@hku.hk or ajzhang@hku.hk.
 
-# Reference:
-Zebin Yang and Aijun Zhang. (2021) Hyperparameter Optimization via Sequential Uniform Designs. Journal of Machine Learning Research, Accepted. 
+# Citations:
+@article{yang2021hyperparameter,
+	author  = {Zebin Yang and Aijun Zhang},
+	title   = {Hyperparameter Optimization via Sequential Uniform Designs},
+	journal = {Journal of Machine Learning Research},
+	year    = {2021},
+	volume  = {22},
+	number  = {149},
+	pages   = {1-47},
+	url     = {http://jmlr.org/papers/v22/20-058.html}
+}
