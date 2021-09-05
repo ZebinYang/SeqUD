@@ -137,6 +137,7 @@ SMAC: https://github.com/automl/SMAC3
 If you find any bugs or have any suggestions, please contact us via email: yangzb2010@hku.hk or ajzhang@hku.hk.
 
 # Citations:
+```latex
 @article{yang2021hyperparameter,
 	author  = {Zebin Yang and Aijun Zhang},
 	title   = {Hyperparameter Optimization via Sequential Uniform Designs},
@@ -147,3 +148,4 @@ If you find any bugs or have any suggestions, please contact us via email: yangz
 	pages   = {1-47},
 	url     = {http://jmlr.org/papers/v22/20-058.html}
 }
+```
