@@ -64,7 +64,7 @@ class SeqRand(object):
     >>> import numpy as np
     >>> from sklearn import svm
     >>> from sklearn import datasets
-    >>> from seqmm import SeqRand
+    >>> from sequd import SeqRand
     >>> from sklearn.model_selection import KFold
     >>> iris = datasets.load_iris()
     >>> ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2},
