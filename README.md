@@ -139,7 +139,7 @@ If you find any bugs or have any suggestions, please contact us via email: yangz
 # Citations:
 ```latex
 @article{yang2021hyperparameter,
-	author  = {Zebin Yang and Aijun Zhang},
+	author  = {Yang, Zebin and Zhang, Aijun},
 	title   = {Hyperparameter Optimization via Sequential Uniform Designs},
 	journal = {Journal of Machine Learning Research},
 	year    = {2021},
