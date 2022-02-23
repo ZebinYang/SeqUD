@@ -64,7 +64,7 @@ class SeqRand(object):
     >>> import numpy as np
     >>> from sklearn import svm
     >>> from sklearn import datasets
-    >>> from seqmm import SeqRand
+    >>> from sequd import SeqRand
     >>> from sklearn.model_selection import KFold
     >>> iris = datasets.load_iris()
     >>> ParaSpace = {'C':{'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2},
@@ -199,7 +199,7 @@ class SeqRand(object):
                 para_set.loc[np.abs(para_set_ud[item + "_UD"] - 1) <= EPS, item] = values['Mapping'][-1]
                 para_set[item] = para_set[item].round().astype(int)
             elif (values['Type'] == "categorical"):
-                column_bool = [item in para_name for para_name in self.para_ud_names]
+                column_bool = [item == para_name[::-1].split("_DU_", maxsplit=1)[1][::-1] for para_name in self.para_ud_names]
                 col_index = np.argmax(para_set_ud.loc[:, column_bool].values, axis=1).tolist()
                 para_set[item] = np.array(values['Mapping'])[col_index]
         return para_set

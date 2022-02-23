@@ -1,39 +1,44 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>sequd.pybatdoe &mdash; sequd  documentation</title>
   
 
   
-  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Resources" href="resources.html" />
@@ -74,6 +79,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -116,6 +122,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -150,11 +157,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="modules.html">Modules</a> &raquo;</li>
         
@@ -163,7 +172,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             
               <a href="https://github.com/ZebinYang/sequd/blob/master/docs/source/apidoc.rst" class="fa fa-github"> Edit on GitHub</a>
             
@@ -183,9 +192,9 @@
 <h1>sequd.pybatdoe<a class="headerlink" href="#sequd-pybatdoe" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-pybatdoe.batch_grid">
 <span id="sequd-pybatdoe-batch-grid"></span><h2>sequd.pybatdoe.batch_grid<a class="headerlink" href="#module-pybatdoe.batch_grid" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pybatdoe.batch_grid.GridSearch">
-<em class="property">class </em><code class="sig-prename descclassname">pybatdoe.batch_grid.</code><code class="sig-name descname">GridSearch</code><span class="sig-paren">(</span><em class="sig-param">para_space</em>, <em class="sig-param">max_runs=100</em>, <em class="sig-param">estimator=None</em>, <em class="sig-param">cv=None</em>, <em class="sig-param">scoring=None</em>, <em class="sig-param">refit=True</em>, <em class="sig-param">n_jobs=None</em>, <em class="sig-param">random_state=0</em>, <em class="sig-param">verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_grid.html#GridSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybatdoe.batch_grid.GridSearch" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="pybatdoe.batch_grid.GridSearch">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pybatdoe.batch_grid.</span></span><span class="sig-name descname"><span class="pre">GridSearch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">para_space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_grid.html#GridSearch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pybatdoe.batch_grid.GridSearch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of grid search.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -216,10 +225,10 @@ is used at all, which is useful for debugging. See the package <cite>joblib</cit
 </ul>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmml</span> <span class="kn">import</span> <span class="n">GridSearch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sequd</span> <span class="kn">import</span> <span class="n">GridSearch</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
@@ -251,9 +260,9 @@ As it is limited by the max_run specified by the user, the grid points may be ba
 </div>
 <div class="section" id="module-pybatdoe.batch_rand">
 <span id="sequd-pybatdoe-batch-rand"></span><h2>sequd.pybatdoe.batch_rand<a class="headerlink" href="#module-pybatdoe.batch_rand" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pybatdoe.batch_rand.RandSearch">
-<em class="property">class </em><code class="sig-prename descclassname">pybatdoe.batch_rand.</code><code class="sig-name descname">RandSearch</code><span class="sig-paren">(</span><em class="sig-param">para_space</em>, <em class="sig-param">max_runs=100</em>, <em class="sig-param">estimator=None</em>, <em class="sig-param">cv=None</em>, <em class="sig-param">scoring=None</em>, <em class="sig-param">refit=True</em>, <em class="sig-param">n_jobs=None</em>, <em class="sig-param">random_state=0</em>, <em class="sig-param">verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_rand.html#RandSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybatdoe.batch_rand.RandSearch" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="pybatdoe.batch_rand.RandSearch">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pybatdoe.batch_rand.</span></span><span class="sig-name descname"><span class="pre">RandSearch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">para_space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_rand.html#RandSearch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pybatdoe.batch_rand.RandSearch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of Random Search.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -284,10 +293,10 @@ is used at all, which is useful for debugging. See the package <cite>joblib</cit
 </ul>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmml</span> <span class="kn">import</span> <span class="n">RandSearch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sequd</span> <span class="kn">import</span> <span class="n">RandSearch</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
@@ -317,9 +326,9 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 </div>
 <div class="section" id="module-pybatdoe.batch_lhs">
 <span id="sequd-pybatdoe-batch-lhs"></span><h2>sequd.pybatdoe.batch_lhs<a class="headerlink" href="#module-pybatdoe.batch_lhs" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pybatdoe.batch_lhs.LHSSearch">
-<em class="property">class </em><code class="sig-prename descclassname">pybatdoe.batch_lhs.</code><code class="sig-name descname">LHSSearch</code><span class="sig-paren">(</span><em class="sig-param">para_space</em>, <em class="sig-param">max_runs=100</em>, <em class="sig-param">estimator=None</em>, <em class="sig-param">cv=None</em>, <em class="sig-param">scoring=None</em>, <em class="sig-param">refit=True</em>, <em class="sig-param">n_jobs=None</em>, <em class="sig-param">random_state=0</em>, <em class="sig-param">verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_lhs.html#LHSSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybatdoe.batch_lhs.LHSSearch" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="pybatdoe.batch_lhs.LHSSearch">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pybatdoe.batch_lhs.</span></span><span class="sig-name descname"><span class="pre">LHSSearch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">para_space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_lhs.html#LHSSearch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pybatdoe.batch_lhs.LHSSearch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of Latin Hypercube Sampling.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -350,10 +359,10 @@ is used at all, which is useful for debugging. See the package <cite>joblib</cit
 </ul>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmml</span> <span class="kn">import</span> <span class="n">LHSSearch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sequd</span> <span class="kn">import</span> <span class="n">LHSSearch</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
@@ -383,9 +392,9 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 </div>
 <div class="section" id="module-pybatdoe.batch_sobol">
 <span id="sequd-pybatdoe-batch-sobol"></span><h2>sequd.pybatdoe.batch_sobol<a class="headerlink" href="#module-pybatdoe.batch_sobol" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pybatdoe.batch_sobol.SobolSearch">
-<em class="property">class </em><code class="sig-prename descclassname">pybatdoe.batch_sobol.</code><code class="sig-name descname">SobolSearch</code><span class="sig-paren">(</span><em class="sig-param">para_space</em>, <em class="sig-param">max_runs=100</em>, <em class="sig-param">estimator=None</em>, <em class="sig-param">cv=None</em>, <em class="sig-param">scoring=None</em>, <em class="sig-param">refit=True</em>, <em class="sig-param">n_jobs=None</em>, <em class="sig-param">random_state=0</em>, <em class="sig-param">verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_sobol.html#SobolSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybatdoe.batch_sobol.SobolSearch" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="pybatdoe.batch_sobol.SobolSearch">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pybatdoe.batch_sobol.</span></span><span class="sig-name descname"><span class="pre">SobolSearch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">para_space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_sobol.html#SobolSearch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pybatdoe.batch_sobol.SobolSearch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of Sobol Sequence.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -416,10 +425,10 @@ is used at all, which is useful for debugging. See the package <cite>joblib</cit
 </ul>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmml</span> <span class="kn">import</span> <span class="n">SobolSearch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sequd</span> <span class="kn">import</span> <span class="n">SobolSearch</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
@@ -449,9 +458,9 @@ Not available if estimator = None or <cite>refit=False</cite>.</p></li>
 </div>
 <div class="section" id="module-pybatdoe.batch_ud">
 <span id="sequd-pybatdoe-batch-ud"></span><h2>sequd.pybatdoe.batch_ud<a class="headerlink" href="#module-pybatdoe.batch_ud" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pybatdoe.batch_ud.UDSearch">
-<em class="property">class </em><code class="sig-prename descclassname">pybatdoe.batch_ud.</code><code class="sig-name descname">UDSearch</code><span class="sig-paren">(</span><em class="sig-param">para_space</em>, <em class="sig-param">max_runs=100</em>, <em class="sig-param">max_search_iter=100</em>, <em class="sig-param">estimator=None</em>, <em class="sig-param">cv=None</em>, <em class="sig-param">scoring=None</em>, <em class="sig-param">refit=True</em>, <em class="sig-param">n_jobs=None</em>, <em class="sig-param">random_state=0</em>, <em class="sig-param">verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_ud.html#UDSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybatdoe.batch_ud.UDSearch" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="pybatdoe.batch_ud.UDSearch">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pybatdoe.batch_ud.</span></span><span class="sig-name descname"><span class="pre">UDSearch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">para_space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_search_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybatdoe/batch_ud.html#UDSearch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pybatdoe.batch_ud.UDSearch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of Uniform Design.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -483,10 +492,10 @@ is used at all, which is useful for debugging. See the package <cite>joblib</cit
 </ul>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmml</span> <span class="kn">import</span> <span class="n">UDSearch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sequd</span> <span class="kn">import</span> <span class="n">UDSearch</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
@@ -519,9 +528,9 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 <h1>sequd.pybayopt<a class="headerlink" href="#sequd-pybayopt" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-pybayopt.bayopt_gpei">
 <span id="sequd-pybayopt-bayopt-gpei"></span><h2>sequd.pybayopt.bayopt_gpei<a class="headerlink" href="#module-pybayopt.bayopt_gpei" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pybayopt.bayopt_gpei.GPEIOPT">
-<em class="property">class </em><code class="sig-prename descclassname">pybayopt.bayopt_gpei.</code><code class="sig-name descname">GPEIOPT</code><span class="sig-paren">(</span><em class="sig-param">para_space</em>, <em class="sig-param">max_runs=100</em>, <em class="sig-param">time_out=10</em>, <em class="sig-param">estimator=None</em>, <em class="sig-param">cv=None</em>, <em class="sig-param">scoring=None</em>, <em class="sig-param">refit=True</em>, <em class="sig-param">random_state=0</em>, <em class="sig-param">verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybayopt/bayopt_gpei.html#GPEIOPT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybayopt.bayopt_gpei.GPEIOPT" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="pybayopt.bayopt_gpei.GPEIOPT">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pybayopt.bayopt_gpei.</span></span><span class="sig-name descname"><span class="pre">GPEIOPT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">para_space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybayopt/bayopt_gpei.html#GPEIOPT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pybayopt.bayopt_gpei.GPEIOPT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interface of Gaussian Process - Expected Improvement (Bayesian Optimization).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -550,10 +559,10 @@ If None, the estimator’s default scorer (if available) is used. See the packag
 </ul>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmml</span> <span class="kn">import</span> <span class="n">GPEIOPT</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sequd</span> <span class="kn">import</span> <span class="n">GPEIOPT</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
@@ -583,9 +592,9 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 </div>
 <div class="section" id="module-pybayopt.bayopt_smac">
 <span id="sequd-pybayopt-bayopt-smac"></span><h2>sequd.pybayopt.bayopt_smac<a class="headerlink" href="#module-pybayopt.bayopt_smac" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pybayopt.bayopt_smac.SMACOPT">
-<em class="property">class </em><code class="sig-prename descclassname">pybayopt.bayopt_smac.</code><code class="sig-name descname">SMACOPT</code><span class="sig-paren">(</span><em class="sig-param">para_space</em>, <em class="sig-param">max_runs=100</em>, <em class="sig-param">estimator=None</em>, <em class="sig-param">cv=None</em>, <em class="sig-param">scoring=None</em>, <em class="sig-param">refit=True</em>, <em class="sig-param">random_state=0</em>, <em class="sig-param">verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybayopt/bayopt_smac.html#SMACOPT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybayopt.bayopt_smac.SMACOPT" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="pybayopt.bayopt_smac.SMACOPT">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pybayopt.bayopt_smac.</span></span><span class="sig-name descname"><span class="pre">SMACOPT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">para_space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybayopt/bayopt_smac.html#SMACOPT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pybayopt.bayopt_smac.SMACOPT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interface of SMAC (Bayesian Optimization).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -613,10 +622,10 @@ If None, the estimator’s default scorer (if available) is used. See the packag
 </ul>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmml</span> <span class="kn">import</span> <span class="n">SMACOPT</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sequd</span> <span class="kn">import</span> <span class="n">SMACOPT</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
@@ -646,9 +655,9 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 </div>
 <div class="section" id="module-pybayopt.bayopt_tpe">
 <span id="sequd-pybayopt-bayopt-tpe"></span><h2>sequd.pybayopt.bayopt_tpe<a class="headerlink" href="#module-pybayopt.bayopt_tpe" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pybayopt.bayopt_tpe.TPEOPT">
-<em class="property">class </em><code class="sig-prename descclassname">pybayopt.bayopt_tpe.</code><code class="sig-name descname">TPEOPT</code><span class="sig-paren">(</span><em class="sig-param">para_space</em>, <em class="sig-param">max_runs=100</em>, <em class="sig-param">estimator=None</em>, <em class="sig-param">cv=None</em>, <em class="sig-param">scoring=None</em>, <em class="sig-param">refit=True</em>, <em class="sig-param">random_state=0</em>, <em class="sig-param">verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybayopt/bayopt_tpe.html#TPEOPT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pybayopt.bayopt_tpe.TPEOPT" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="pybayopt.bayopt_tpe.TPEOPT">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pybayopt.bayopt_tpe.</span></span><span class="sig-name descname"><span class="pre">TPEOPT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">para_space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pybayopt/bayopt_tpe.html#TPEOPT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pybayopt.bayopt_tpe.TPEOPT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interface of Hyperopt (Bayesian Optimization).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -676,10 +685,10 @@ If None, the estimator’s default scorer (if available) is used. See the packag
 </ul>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmml</span> <span class="kn">import</span> <span class="n">TPEOPT</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sequd</span> <span class="kn">import</span> <span class="n">TPEOPT</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
@@ -711,9 +720,9 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 <h1>sequd.pysequd<a class="headerlink" href="#sequd-pysequd" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-pysequd.seqrand">
 <span id="sequd-pysequd-seqrand"></span><h2>sequd.pysequd.seqrand<a class="headerlink" href="#module-pysequd.seqrand" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pysequd.seqrand.SeqRand">
-<em class="property">class </em><code class="sig-prename descclassname">pysequd.seqrand.</code><code class="sig-name descname">SeqRand</code><span class="sig-paren">(</span><em class="sig-param">para_space</em>, <em class="sig-param">n_runs_per_stage=20</em>, <em class="sig-param">max_runs=100</em>, <em class="sig-param">n_jobs=None</em>, <em class="sig-param">estimator=None</em>, <em class="sig-param">cv=None</em>, <em class="sig-param">scoring=None</em>, <em class="sig-param">refit=True</em>, <em class="sig-param">random_state=0</em>, <em class="sig-param">verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/seqrand.html#SeqRand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysequd.seqrand.SeqRand" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="pysequd.seqrand.SeqRand">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pysequd.seqrand.</span></span><span class="sig-name descname"><span class="pre">SeqRand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">para_space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_runs_per_stage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/seqrand.html#SeqRand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysequd.seqrand.SeqRand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of random search in sequential version.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -745,10 +754,10 @@ If None, the estimator’s default scorer (if available) is used. See the packag
 </ul>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmm</span> <span class="kn">import</span> <span class="n">SeqRand</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sequd</span> <span class="kn">import</span> <span class="n">SeqRand</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
@@ -774,9 +783,9 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="method">
-<dt id="pysequd.seqrand.SeqRand.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/seqrand.html#SeqRand.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysequd.seqrand.SeqRand.fit" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="pysequd.seqrand.SeqRand.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/seqrand.html#SeqRand.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysequd.seqrand.SeqRand.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run fit with all sets of parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -788,9 +797,9 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="pysequd.seqrand.SeqRand.fmax">
-<code class="sig-name descname">fmax</code><span class="sig-paren">(</span><em class="sig-param">wrapper_func</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/seqrand.html#SeqRand.fmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysequd.seqrand.SeqRand.fmax" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="pysequd.seqrand.SeqRand.fmax">
+<span class="sig-name descname"><span class="pre">fmax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wrapper_func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/seqrand.html#SeqRand.fmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysequd.seqrand.SeqRand.fmax" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search the optimal value of a function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -799,9 +808,9 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="pysequd.seqrand.SeqRand.plot_scores">
-<code class="sig-name descname">plot_scores</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/seqrand.html#SeqRand.plot_scores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysequd.seqrand.SeqRand.plot_scores" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="pysequd.seqrand.SeqRand.plot_scores">
+<span class="sig-name descname"><span class="pre">plot_scores</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/seqrand.html#SeqRand.plot_scores"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysequd.seqrand.SeqRand.plot_scores" title="Permalink to this definition">¶</a></dt>
 <dd><p>Visualize the scores history.</p>
 </dd></dl>
 
@@ -810,9 +819,9 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 </div>
 <div class="section" id="module-pysequd.snto">
 <span id="sequd-pysequd-snto"></span><h2>sequd.pysequd.snto<a class="headerlink" href="#module-pysequd.snto" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pysequd.snto.SNTO">
-<em class="property">class </em><code class="sig-prename descclassname">pysequd.snto.</code><code class="sig-name descname">SNTO</code><span class="sig-paren">(</span><em class="sig-param">para_space</em>, <em class="sig-param">n_runs_per_stage=20</em>, <em class="sig-param">max_runs=100</em>, <em class="sig-param">max_search_iter=100</em>, <em class="sig-param">n_jobs=None</em>, <em class="sig-param">estimator=None</em>, <em class="sig-param">cv=None</em>, <em class="sig-param">scoring=None</em>, <em class="sig-param">refit=True</em>, <em class="sig-param">random_state=0</em>, <em class="sig-param">verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/snto.html#SNTO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysequd.snto.SNTO" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="pysequd.snto.SNTO">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pysequd.snto.</span></span><span class="sig-name descname"><span class="pre">SNTO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">para_space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_runs_per_stage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_search_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/snto.html#SNTO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysequd.snto.SNTO" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of SNTO.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -845,10 +854,10 @@ If None, the estimator’s default scorer (if available) is used. See the packag
 </ul>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmml</span> <span class="kn">import</span> <span class="n">SNTO</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sequd</span> <span class="kn">import</span> <span class="n">SNTO</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
@@ -873,9 +882,9 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="method">
-<dt id="pysequd.snto.SNTO.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/snto.html#SNTO.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysequd.snto.SNTO.fit" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="pysequd.snto.SNTO.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/snto.html#SNTO.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysequd.snto.SNTO.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run fit with all sets of parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -887,9 +896,9 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="pysequd.snto.SNTO.fmax">
-<code class="sig-name descname">fmax</code><span class="sig-paren">(</span><em class="sig-param">wrapper_func</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/snto.html#SNTO.fmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysequd.snto.SNTO.fmax" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="pysequd.snto.SNTO.fmax">
+<span class="sig-name descname"><span class="pre">fmax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wrapper_func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/snto.html#SNTO.fmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysequd.snto.SNTO.fmax" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search the optimal value of a function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -898,9 +907,9 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="pysequd.snto.SNTO.plot_scores">
-<code class="sig-name descname">plot_scores</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/snto.html#SNTO.plot_scores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysequd.snto.SNTO.plot_scores" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="pysequd.snto.SNTO.plot_scores">
+<span class="sig-name descname"><span class="pre">plot_scores</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/snto.html#SNTO.plot_scores"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysequd.snto.SNTO.plot_scores" title="Permalink to this definition">¶</a></dt>
 <dd><p>Visualize the scores history.</p>
 </dd></dl>
 
@@ -909,9 +918,9 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 </div>
 <div class="section" id="module-pysequd.sequd">
 <span id="sequd-pysequd-sequd"></span><h2>sequd.pysequd.sequd<a class="headerlink" href="#module-pysequd.sequd" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="pysequd.sequd.SeqUD">
-<em class="property">class </em><code class="sig-prename descclassname">pysequd.sequd.</code><code class="sig-name descname">SeqUD</code><span class="sig-paren">(</span><em class="sig-param">para_space</em>, <em class="sig-param">n_runs_per_stage=20</em>, <em class="sig-param">max_runs=100</em>, <em class="sig-param">max_search_iter=100</em>, <em class="sig-param">n_jobs=None</em>, <em class="sig-param">estimator=None</em>, <em class="sig-param">cv=None</em>, <em class="sig-param">scoring=None</em>, <em class="sig-param">refit=True</em>, <em class="sig-param">random_state=0</em>, <em class="sig-param">verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/sequd.html#SeqUD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysequd.sequd.SeqUD" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="pysequd.sequd.SeqUD">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pysequd.sequd.</span></span><span class="sig-name descname"><span class="pre">SeqUD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">para_space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_runs_per_stage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_runs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_search_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/sequd.html#SeqUD"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysequd.sequd.SeqUD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implementation of sequential uniform design.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -944,10 +953,10 @@ If None, the estimator’s default scorer (if available) is used. See the packag
 </ul>
 </dd>
 </dl>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">seqmml</span> <span class="kn">import</span> <span class="n">SeqUD</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sequd</span> <span class="kn">import</span> <span class="n">SeqUD</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ParaSpace</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;continuous&#39;</span><span class="p">,</span> <span class="s1">&#39;Range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s1">&#39;Wrapper&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp2</span><span class="p">},</span>
@@ -972,9 +981,9 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="method">
-<dt id="pysequd.sequd.SeqUD.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/sequd.html#SeqUD.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysequd.sequd.SeqUD.fit" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="pysequd.sequd.SeqUD.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/sequd.html#SeqUD.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysequd.sequd.SeqUD.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run fit with all sets of parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -986,9 +995,9 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="pysequd.sequd.SeqUD.fmax">
-<code class="sig-name descname">fmax</code><span class="sig-paren">(</span><em class="sig-param">wrapper_func</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/sequd.html#SeqUD.fmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysequd.sequd.SeqUD.fmax" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="pysequd.sequd.SeqUD.fmax">
+<span class="sig-name descname"><span class="pre">fmax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wrapper_func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/sequd.html#SeqUD.fmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysequd.sequd.SeqUD.fmax" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search the optimal value of a function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -997,9 +1006,9 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="pysequd.sequd.SeqUD.plot_scores">
-<code class="sig-name descname">plot_scores</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/sequd.html#SeqUD.plot_scores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysequd.sequd.SeqUD.plot_scores" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="pysequd.sequd.SeqUD.plot_scores">
+<span class="sig-name descname"><span class="pre">plot_scores</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysequd/sequd.html#SeqUD.plot_scores"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysequd.sequd.SeqUD.plot_scores" title="Permalink to this definition">¶</a></dt>
 <dd><p>Visualize the scores history.</p>
 </dd></dl>
 
@@ -1013,29 +1022,29 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="resources.html" class="btn btn-neutral float-right" title="Resources" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="modules.html" class="btn btn-neutral float-left" title="Modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="resources.html" class="btn btn-neutral float-right" title="Resources" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="modules.html" class="btn btn-neutral float-left" title="Modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Zebin Yang and Aijun Zhang
+        &#169; Copyright 2019, Zebin Yang and Aijun Zhang.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -1043,7 +1052,6 @@ Not available if estimator=None or <cite>refit=False</cite>.</p></li>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
