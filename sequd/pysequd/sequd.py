@@ -208,7 +208,7 @@ class SeqUD(object):
                 para_set[item] = para_set[item].round().astype(int)
             elif (values['Type'] == "categorical"):
                 column_bool = [
-                    item == para_name[::-1].split("_DU_", maxsplit=1)[1][::-1] for para_name in self.para_ud_names]
+                    item == para_name[::-1].split("DU_", maxsplit=1)[1][::-1] for para_name in self.para_ud_names]
                 col_index = np.argmax(
                     para_set_ud.loc[:, column_bool].values, axis=1).tolist()
                 para_set[item] = np.array(values['Mapping'])[col_index]
