@@ -134,12 +134,12 @@ Hyperopt: https://github.com/hyperopt/hyperopt
 SMAC: https://github.com/automl/SMAC3
 
 # Contact:
-If you find any bugs or have any suggestions, please contact us via email: yangzb2010@hku.hk or ajzhang@hku.hk.
+If you find any bugs or have any suggestions, please contact us via email: yangzb2010@connect.hku.hk or ajzhang@umich.edu.
 
 # Citations:
 ```latex
 @article{yang2021hyperparameter,
-	author  = {Zebin Yang and Aijun Zhang},
+	author  = {Yang, Zebin and Zhang, Aijun},
 	title   = {Hyperparameter Optimization via Sequential Uniform Designs},
 	journal = {Journal of Machine Learning Research},
 	year    = {2021},

@@ -1,74 +1,35 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Bayesian Optimization &mdash; sequd  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Examples" href="examples.html" />
     <link rel="prev" title="Batch methods" href="pybatdoe.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="index.html" class="icon icon-home"> sequd
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -76,18 +37,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pysequd.html">Sequential Uniform Design</a></li>
@@ -103,80 +53,37 @@
 <li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">sequd</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Bayesian Optimization</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
-            
               <a href="https://github.com/ZebinYang/sequd/blob/master/docs/source/pybayopt.rst" class="fa fa-github"> Edit on GitHub</a>
-            
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="bayesian-optimization">
-<h1>Bayesian Optimization<a class="headerlink" href="#bayesian-optimization" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="bayesian-optimization">
+<h1>Bayesian Optimization<a class="headerlink" href="#bayesian-optimization" title="Permalink to this headline"></a></h1>
 <p>In classical Bayesian optimization, trials are sequentially sampled one-point-at-a-time through
 maximizing the expected improvement (EI). Let’s see a univariate example.</p>
 <a class="reference internal image-reference" href="_images/Demo_BO_eng.png"><img alt="_images/Demo_BO_eng.png" class="align-center" src="_images/Demo_BO_eng.png" style="width: 90%;" /></a>
-<div class="section" id="classical-bo-methods">
-<h2>Classical BO Methods<a class="headerlink" href="#classical-bo-methods" title="Permalink to this headline">¶</a></h2>
+<section id="classical-bo-methods">
+<h2>Classical BO Methods<a class="headerlink" href="#classical-bo-methods" title="Permalink to this headline"></a></h2>
 <ul class="simple">
 <li><p><strong>GP-EI</strong> (<a class="reference internal" href="resources.html#snoek2012" id="id1"><span>[Snoek2012]</span></a>): use Gaussian process as surrogate model and EI as acquisition function.</p></li>
 <li><p><strong>SMAC</strong> (<a class="reference internal" href="resources.html#hutter2011" id="id2"><span>[Hutter2011]</span></a>): use random forest as surrogate model and EI as acquisition function.</p></li>
@@ -188,9 +95,9 @@ maximizing the expected improvement (EI). Let’s see a univariate example.</p>
 <li><p><strong>Hyperopt (TPE)</strong>: <a class="reference external" href="https://github.com/hyperopt/hyperopt">https://github.com/hyperopt/hyperopt</a></p></li>
 <li><p><strong>SMAC</strong>: <a class="reference external" href="https://github.com/automl/SMAC3">https://github.com/automl/SMAC3</a></p></li>
 </ul>
-</div>
-<div class="section" id="pros-and-cons">
-<h2>Pros and Cons<a class="headerlink" href="#pros-and-cons" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="pros-and-cons">
+<h2>Pros and Cons<a class="headerlink" href="#pros-and-cons" title="Permalink to this headline"></a></h2>
 <p><strong>Strength</strong></p>
 <ul class="simple">
 <li><p>New experiments can be easily added and the number or experiments does not need to be prespecified.</p></li>
@@ -203,9 +110,9 @@ maximizing the expected improvement (EI). Let’s see a univariate example.</p>
 <li><p>Lack uniformity considerations: algorithm can be trapped into local areas if without a good initialization.</p></li>
 <li><p>Bayesian optimization are designed to select trials one-by-one, which is unnatural to perform parallelization (Note BO can be paralleled via proposing more than one trial at a time. However, these tricks, e.g., by assigning a average value to the pending trials, are not natural and may harm the optimization performance).</p></li>
 </ul>
-</div>
-<div class="section" id="example-usage">
-<h2>Example Usage<a class="headerlink" href="#example-usage" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="example-usage">
+<h2>Example Usage<a class="headerlink" href="#example-usage" title="Permalink to this headline"></a></h2>
 <p>We provide an unified interface to call the GPEI, SMAC and TPE methods, base on their open source implementation of spearmint, hyperopt and smac3.</p>
 <p><strong>GP-EI</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -289,55 +196,38 @@ maximizing the expected improvement (EI). Let’s see a univariate example.</p>
 <span class="n">clf</span><span class="o">.</span><span class="n">plot_scores</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="pybatdoe.html" class="btn btn-neutral float-left" title="Batch methods" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2019, Zebin Yang and Aijun Zhang.
-
-    </p>
+    <p>&#169; Copyright 2019, Zebin Yang and Aijun Zhang.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

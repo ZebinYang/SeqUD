@@ -37,4 +37,4 @@ Reference
 
 .. [Wang1981] Wang, Y. and Fang, K.T. (1981). A note on uniform distribution and experimental design. Kexue Tongbao 26, 485-489.
 
-.. [Yang2019] Yang Z. B. and Zhang A.J. (2019). Hyperparameter Optimization via Sequential Uniform Designs. Submitted.
+.. [Yang2019] Yang Z. B. and Zhang A.J. (2021). Hyperparameter Optimization via Sequential Uniform Designs. Journal of Machine Learning Research, 22(149), pp.1-47.
