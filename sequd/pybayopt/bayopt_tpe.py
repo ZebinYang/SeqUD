@@ -138,4 +138,4 @@ class TPEOPT(BayoptBase):
              max_evals=self.max_runs,
              trials=self.trials,
              show_progressbar=False,
-             rstate=np.random.RandomState(self.random_state))
+             rstate=np.random.default_rng(self.random_state))
