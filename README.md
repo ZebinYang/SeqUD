@@ -1,5 +1,7 @@
 # Sequential Uniform Design
 
+[![Build Status](https://travis-ci.com/ZebinYang/SeqUD.svg?branch=master)](https://travis-ci.org/joerick/cibuildwheel)
+
 # Installation
 
 - Enviroment: 
