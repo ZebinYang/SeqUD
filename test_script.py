@@ -20,7 +20,7 @@ ParaSpace = {'C': {'Type': 'continuous', 'Range': [-6, 16], 'Wrapper': np.exp2},
              'gamma': {'Type': 'continuous', 'Range': [-16, 6], 'Wrapper': np.exp2}}
 
 estimator = svm.SVC()
-score_metric = make_scorer(accuracy_score, True)
+score_metric = make_scorer(accuracy_score, greater_is_better=True)
 cv = KFold(n_splits=5, random_state=0, shuffle=True)
 
 
