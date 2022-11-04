@@ -39,7 +39,7 @@ class TestSeqUD(unittest.TestCase):
     def test_SeqUD(self):
         """ Test SeqUD. """
 
-        clf = SeqUD(ParaSpace, level_number=20, max_runs=10, estimator=estimator, cv=cv,
+        clf = SeqUD(ParaSpace, n_runs_per_stage=20, max_runs=10, estimator=estimator, cv=cv,
                     scoring=score_metric, n_jobs=1, refit=True, verbose=False)
         clf.fit(x, y)
 
